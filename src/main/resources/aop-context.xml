@@ -15,6 +15,7 @@
 		<constructor-arg value="#{settings['encryption.key']}" />
 	</bean>
 
+
 	<!-- advice -->
 	<bean id="encryptAdvice" class="kr.go.seoul.democracy.common.EncryptAdvice">
 		<constructor-arg value="encryptionTemplate" />
