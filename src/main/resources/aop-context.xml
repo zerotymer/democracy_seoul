@@ -15,16 +15,16 @@
 		<constructor-arg value="#{settings['encryption.key']}" />
 	</bean>
 
-
 	<!-- advice -->
 	<bean id="encryptAdvice" class="kr.go.seoul.democracy.common.EncryptAdvice">
 		<constructor-arg value="encryptionTemplate" />
 	</bean>
+
 	<!-- config -->
 	<aop:config>
 		<!-- PointCut -->
-		<aop:pointcut id="memberPointCut" expression="execution(* kr.go.seoul.democracy..*ServiceImpl.*Member(kr..Member))"/>
-		<aop:pointcut id="memberHashPointCut" expression="execution(* kr.go.seoul.democracy..*ServiceImpl.*Member(java..HashMap))"/>
+		<aop:pointcut id="memberPointCut" expression="execution(* kr.go.seoul..service.*.*Member(kr..Member))"/>
+		<aop:pointcut id="memberHashPointCut" expression="execution(* kr.go.seoul..service.*.*Member(java..HashMap))"/>
 		<!-- aspect -->
 
 	</aop:config>
