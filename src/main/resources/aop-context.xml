@@ -2,11 +2,30 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
+	<!-- Load Resources -->
+	<util:properties id="settings" location="classpath:/settings.properties" />
+
+	<!-- Encription Template -->
+	<bean id="encryptionTemplate" class="kr.go.seoul.common.EncryptionTemplate">
+		<constructor-arg value="#{settings['encryption.method']}" />
+		<constructor-arg value="#{settings['encryption.key']}" />
+	</bean>
+
 	<!-- advice -->
-	
+	<bean id="encryptAdvice" class="kr.go.seoul.democracy.common.EncryptAdvice">
+		<constructor-arg value="encryptionTemplate" />
+	</bean>
 	<!-- config -->
+	<aop:config>
+		<!-- PointCut -->
+		<aop:pointcut id="memberPointCut" expression="execution(* kr.go.seoul.democracy..*ServiceImpl.*Member(kr..Member))"/>
+		<aop:pointcut id="memberHashPointCut" expression="execution(* kr.go.seoul.democracy..*ServiceImpl.*Member(java..HashMap))"/>
+		<!-- aspect -->
+
+	</aop:config>
 	
 </beans>
