@@ -23,8 +23,8 @@
 	<!-- config -->
 	<aop:config>
 		<!-- PointCut -->
-		<aop:pointcut id="memberPointCut" expression="execution(* kr.go.seoul..service.*.*Member(kr..Member))"/>
-		<aop:pointcut id="memberHashPointCut" expression="execution(* kr.go.seoul..service.*.*Member(java..HashMap))"/>
+		<aop:pointcut id="memberEncryptionPointCut" expression="execution(* kr.go.seoul..service.*.*Member(kr..Member))"/>
+		<aop:pointcut id="memberHashMapPointCut" expression="execution(* kr.go.seoul..service.*.*Member(java..HashMap))"/>
 		<!-- aspect -->
 
 	</aop:config>
