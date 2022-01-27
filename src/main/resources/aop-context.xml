@@ -4,7 +4,8 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- Load Resources -->
 	<util:properties id="settings" location="classpath:/settings.properties" />
@@ -17,7 +18,7 @@
 
 	<!-- advice -->
 	<bean id="encryptAdvice" class="kr.go.seoul.democracy.common.EncryptAdvice">
-		<constructor-arg value="encryptionTemplate" />
+		<constructor-arg ref="encryptionTemplate" />
 	</bean>
 
 	<!-- config -->
