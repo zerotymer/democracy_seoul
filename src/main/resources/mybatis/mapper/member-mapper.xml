@@ -3,5 +3,22 @@
 <mapper namespace="member">
 	<!-- SQL QUERYS -->
 	
+		<!-- SQL QUERYS -->
+	<select id="selectLoginMember" parameterType="member" resultType="member">
+		SELECT
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			NICK as nick.
+			EMAIL as email,
+			enrollDate as enrollDate,
+			end_yn as endYN,
+			USERGRADE as userGrade
+		FROM
+			member
+		WHERE userid = #{userId} and userpwd = #{userPwd} and end_yn='N'
+	</select>	
+	
+	
 </mapper>
 	
