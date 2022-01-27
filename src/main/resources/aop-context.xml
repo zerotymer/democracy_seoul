@@ -25,8 +25,14 @@
 		<!-- PointCut -->
 		<aop:pointcut id="memberEncryptionPointCut" expression="execution(* kr.go.seoul..service.*.*Member(kr..Member))"/>
 		<aop:pointcut id="memberHashMapPointCut" expression="execution(* kr.go.seoul..service.*.*Member(java..HashMap))"/>
+		
 		<!-- aspect -->
-
+		<aop:aspect ref="encryptAdvice">
+			<aop:before method="encryptPasswordForMember" pointcut-ref="memberEncryptionPointCut" />
+		</aop:aspect>
+		<aop:aspect ref="encryptAdvice">
+			<aop:before method="encryptPasswordForHashMap" pointcut-ref="memberHashMapPointCut" />
+		</aop:aspect>
 	</aop:config>
 	
 </beans>
