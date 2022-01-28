@@ -11,7 +11,7 @@
 	<util:properties id="settings" location="classpath:/settings.properties" />
 
 	<!-- Encription Template -->
-	<bean id="encryptionTemplate" class="kr.go.seoul.common.EncryptionTemplate">
+	<bean id="encryptionTemplate" class="kr.go.seoul.democracy.common.EncryptionTemplate">
 		<constructor-arg value="#{settings['encryption.method']}" />
 		<constructor-arg value="#{settings['encryption.key']}" />
 	</bean>
