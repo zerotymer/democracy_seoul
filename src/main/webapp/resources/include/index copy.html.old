@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/main-content.css">
+    <link rel="stylesheet" href="/card-container.css">
+    <link rel="stylesheet" href="/footer.css">
+</head>
+
+<body>
+    <header>
+        <div class="noticebar">
+            <div class="wrapper">
+                서울특별시
+            </div>
+        </div>
+        <nav id="gnb" class="gnb">
+            <div class="logo">
+                <h4>민주주의 서울</h4>
+            </div>
+
+            <!-- include Menu -->
+            <ul class="menu">
+                <li class="menuitem">
+                    <a href="">참여하기</a>
+                    <ul class="submenu">
+                        <li><a href=""></a>시민제안</li>
+                        <li><a href=""></a>시민토론</li>
+                        <li><a href=""></a>서울시가 묻습니다</li>
+                    </ul>
+                </li>
+                <li class="menuitem">
+                    <a href="">결과보기</a>
+                    <ul class="submenu">
+                        <li><a href="">제안결과</a></li>
+                        <li><a href="">공론결과</a></li>
+                    </ul>
+                </li>
+                <li class="menuitem">
+                    <a href="">알아보기</a>
+                    <ul class="submenu">
+                        <li><a href="">민주주의 서울 <wbr/>소개</a></li>
+                        <li><a href="" style="font-size: 13px;">민주주의 서울 <wbr/>이야기</a></li>
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="">자료실</a></li>
+                        <li><a href="">행사일정</a></li>
+                    </ul>
+                </li>
+                <li class="menuitem">
+                    <a href="">서울시민회의</a>
+                    <ul class="submenu">
+                        <li><a href="">서울시민회의 <wbr/>소개</a></li>
+                        <li><a href="">서울시민회의 <wbr/>소식</a></li>
+                    </ul>
+                </li>
+                <li class="menuitem">
+                    <a href="">시민참여예산</a>
+                </li>
+            </ul>
+
+            <ul class="icons">
+                <li class="search">
+                    <button class="btn searchbtn invert"></button>
+                </li>
+                <li class="login">
+                    <button class="btn loginbtn invert"></button>
+                </li>
+                <li class="menubtn">
+                    <button id="menubtn" class="btn menubtn invert"></button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="header-gap">
+    </div>
+
+    <content>
+        <div>
+
+        </div>
+        <div class="card-container">
+            <div class="card-item suggest">
+                <div class="category">제안</div>
+                <div class="title">제목입니다1</div>
+                <div class="content">제안내용입니다.그렇습니다.</div>
+                <div class="icons">
+                    <object class="icon heart"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item suggest">
+                <div class="category">제안</div>
+                <div class="title">제목2</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon heart"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item suggest">
+                <div class="category">제안</div>
+                <div class="title">제목3</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon heart"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item suggest">
+                <div class="category">제안</div>
+                <div class="title">제목4</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon heart"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item discussion">
+                <div class="category">토론</div>
+                <div class="title">제목5</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon thumb-up"></object>
+                    <span>11</span>
+                    <object class="icon thumb-down"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item discussion">
+                <div class="category">토론</div>
+                <div class="title">제목6</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon thumb-up"></object>
+                    <span>11</span>
+                    <object class="icon thumb-down"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item survey">
+                <div class="category">설문</div>
+                <div class="title">제목7</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon survey"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item survey">
+                <div class="category">설문</div>
+                <div class="title">제목8</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon survey"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+        </div>
+    </content>
+
+    <div class="footer-gap">
+
+    </div>
+
+    <footer>
+        <nav id="FNB" class="fnb">
+            <ul>
+                <li><a>개인정보처리방침</a></li>
+                <li><a>자주묻는 질문</a></li>
+                <li><a>사이트맵</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <ul>
+                <li class="logo">
+                    <img src="/images/foot_logo.png" alt="서울로고">
+                </li>
+                <li class="address">
+                    (04514) 서울특별시 중구 서소문로 124 씨티스퀘어빌딩 10층<br>
+                    대표전화 02-120 / 민주주의 서울 홈페이지 시스템 문의 : 02-2133-6939
+                </li>
+                <li class="sns">
+                    <ul>
+                        <li>
+                            <a class="icon youtube" target="_blank" href="https://www.youtube.com/channel/UCG4xe68a2ndg69x91jL0x2g/featured" title="유튜브 이동(새창)">유튜브</a>
+                        </li>
+                        <li>
+                            <a class="icon facebook" target="_blank" href="https://www.facebook.com/democracyseoul/" title="페이스북 이동(새창)">페이스북</a>
+                        </li>
+                        <li>
+                            <a class="icon twitter" target="_blank" href="https://twitter.com/seoulmania" title="트위터 이동(새창)">트위터</a>
+                        </li>
+                        <li>
+                            <a class="icon instagram" target="_blank" href="https://www.instagram.com/democracyseoul/" title="인스타그램 이동(새창)">인스타그램</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    
+    <script src="/include.js"></script>
+    <script src="/header.js"></script>
+    <script>includeHTML();</script>
+</body>
+</html>

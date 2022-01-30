@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/resources/style/header.css">
+    <link rel="stylesheet" href="/resources/style/footer.css">
+    <link rel="stylesheet" href="/resources/style/color.css">
+    <link rel="stylesheet" href="/resources/style/card-container.css">
+    <style>
+        body {
+            background-color: var(--COLOR-WHITE);
+            margin: 0;
+
+            /* no Scrollbar */
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera*/
+        }
+
+        header {
+            z-index: 10;
+        }
+
+        content {
+            position: relative;
+            width: 100%;
+            min-height: 90vh;
+            overflow: scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- include Header -->
+    <header include-html="/resources/include/header.html">
+    </header>
+
+    <div class="header-gap">
+    </div>
+
+    <content>
+        <div>
+
+        </div>
+        <div class="card-container">
+            <div class="card-item suggest">
+                <div class="category">제안</div>
+                <div class="title">제목입니다1</div>
+                <div class="content">제안내용입니다.그렇습니다.</div>
+                <div class="icons">
+                    <object class="icon heart"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item suggest">
+                <div class="category">제안</div>
+                <div class="title">제목2</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon heart"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item suggest">
+                <div class="category">제안</div>
+                <div class="title">제목3</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon heart"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item suggest">
+                <div class="category">제안</div>
+                <div class="title">제목4</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon heart"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item discussion">
+                <div class="category">토론</div>
+                <div class="title">제목5</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon thumb-up"></object>
+                    <span>11</span>
+                    <object class="icon thumb-down"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item discussion">
+                <div class="category">토론</div>
+                <div class="title">제목6</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon thumb-up"></object>
+                    <span>11</span>
+                    <object class="icon thumb-down"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item survey">
+                <div class="category">설문</div>
+                <div class="title">제목7</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon survey"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+            <div class="card-item survey">
+                <div class="category">설문</div>
+                <div class="title">제목8</div>
+                <div class="content">내용</div>
+                <div class="icons">
+                    <object class="icon survey"></object>
+                    <span>11</span>
+                    <object class="icon comment"></object>
+                    <span>12</span>
+                </div>
+            </div>
+        </div>
+    </content>
+
+    <div class="footer-gap">
+
+    </div>
+
+    <!-- include footer -->
+    <footer include-html="/resources/include/footer.html">
+    </footer>
+    
+    <script src="/resources/script/header.js"></script>
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        // include HTML
+        $(function() {
+            var $includes = $('[include-html]');
+            $includes.each( (index, item) => {
+                $(item).load($(item).attr('include-html'))
+            });
+        });
+    </script>
+</body>
+</html>
