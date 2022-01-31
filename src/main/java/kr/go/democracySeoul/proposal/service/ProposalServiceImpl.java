@@ -1,5 +1,15 @@
 package kr.go.democracySeoul.proposal.service;
 
-public class ProposalServiceImpl implements ProposalService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import kr.go.democracySeoul.proposal.dao.ProposalDAO;
+
+@Service
+public class ProposalServiceImpl implements ProposalService {
+	
+	@Autowired
+	private ProposalDAO pDAO;
+	
+	
 }
