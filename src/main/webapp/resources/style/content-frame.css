@@ -37,7 +37,8 @@ section {
 .frame-image {
     position: relative;
     height: 200px;
-    background-color: skyblue;
+    /* background-color: skyblue; */
+    background-image: url('/resources/images/bg_visual_sub.jpg');
 }
 .frame-image h2 {
     position: absolute;
