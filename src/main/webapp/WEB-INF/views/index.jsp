@@ -49,17 +49,21 @@
 
         </div>
         <div class="card-container">
-            <div class="card-item suggest">
+            <div class="card-item suggest expand">
                 <div class="category">제안</div>
                 <div class="title">제목입니다1</div>
-                <details class="content">
-                    <summary>제안내용입니다.그렇습니다.</summary>
-                </details>
+                <div class="content">
+                    제안내용입니다.그렇습니다.
+                </div>
                 <div class="icons">
+                    <object class="icon hits auto-hidden"></object>
+                    <span>212</span>
                     <object class="icon heart"></object>
                     <span>11</span>
                     <object class="icon comment"></object>
                     <span>12</span>
+                    <object class="icon calendar auto-hidden"></object>
+                    <span>2022-01-31 ~ 2022-02-16</span>
                 </div>
             </div>
             <div class="card-item suggest">
@@ -76,10 +80,14 @@
                     서로 믿을 수 있는 주민들의 경제적이고 합리적인 소비자물가의 안정에 도움이 될 것 같아요??? <br>
                 </div>
                 <div class="icons">
+                    <object class="icon hits auto-hidden"></object>
+                    <span>212</span>
                     <object class="icon heart"></object>
                     <span>11</span>
                     <object class="icon comment"></object>
                     <span>12</span>
+                    <object class="icon calendar auto-hidden"></object>
+                    <span>2022-01-31 ~ 2022-02-16</span>
                 </div>
             </div>
             <div class="card-item suggest">
@@ -87,10 +95,14 @@
                 <div class="title">제목3</div>
                 <div class="content">내용</div>
                 <div class="icons">
+                    <object class="icon hits auto-hidden"></object>
+                    <span>212</span>
                     <object class="icon heart"></object>
                     <span>11</span>
                     <object class="icon comment"></object>
                     <span>12</span>
+                    <object class="icon calendar auto-hidden"></object>
+                    <span>2022-01-31 ~ 2022-02-16</span>
                 </div>
             </div>
             <div class="card-item suggest">
@@ -98,10 +110,14 @@
                 <div class="title">제목4</div>
                 <div class="content">내용</div>
                 <div class="icons">
+                    <object class="icon hits auto-hidden"></object>
+                    <span>212</span>
                     <object class="icon heart"></object>
                     <span>11</span>
                     <object class="icon comment"></object>
                     <span>12</span>
+                    <object class="icon calendar auto-hidden"></object>
+                    <span>2022-01-31 ~ 2022-02-16</span>
                 </div>
             </div>
             <div class="card-item discussion">
@@ -109,10 +125,14 @@
                 <div class="title">제목5</div>
                 <div class="content">내용</div>
                 <div class="icons">
-                    <object class="icon thumb-up"></object>
+                    <object class="icon hits auto-hidden"></object>
+                    <span>212</span>
+                    <object class="icon heart"></object>
                     <span>11</span>
-                    <object class="icon thumb-down"></object>
+                    <object class="icon comment"></object>
                     <span>12</span>
+                    <object class="icon calendar auto-hidden"></object>
+                    <span>2022-01-31 ~ 2022-02-16</span>
                 </div>
             </div>
             <div class="card-item discussion">
@@ -120,10 +140,14 @@
                 <div class="title">제목6</div>
                 <div class="content">내용</div>
                 <div class="icons">
-                    <object class="icon thumb-up"></object>
+                    <object class="icon hits auto-hidden"></object>
+                    <span>212</span>
+                    <object class="icon heart"></object>
                     <span>11</span>
-                    <object class="icon thumb-down"></object>
+                    <object class="icon comment"></object>
                     <span>12</span>
+                    <object class="icon calendar auto-hidden"></object>
+                    <span>2022-01-31 ~ 2022-02-16</span>
                 </div>
             </div>
             <div class="card-item survey">
@@ -131,10 +155,14 @@
                 <div class="title">제목7</div>
                 <div class="content">내용</div>
                 <div class="icons">
-                    <object class="icon survey"></object>
+                    <object class="icon hits auto-hidden"></object>
+                    <span>212</span>
+                    <object class="icon heart"></object>
                     <span>11</span>
                     <object class="icon comment"></object>
                     <span>12</span>
+                    <object class="icon calendar auto-hidden"></object>
+                    <span>2022-01-31 ~ 2022-02-16</span>
                 </div>
             </div>
             <div class="card-item survey">
@@ -142,10 +170,14 @@
                 <div class="title">제목8</div>
                 <div class="content">내용</div>
                 <div class="icons">
-                    <object class="icon survey"></object>
+                    <object class="icon hits auto-hidden"></object>
+                    <span>212</span>
+                    <object class="icon heart"></object>
                     <span>11</span>
                     <object class="icon comment"></object>
                     <span>12</span>
+                    <object class="icon calendar auto-hidden"></object>
+                    <span>2022-01-31 ~ 2022-02-16</span>
                 </div>
             </div>
         </div>
@@ -159,5 +191,6 @@
     </footer>
     
     <script src="/resources/script/header.js"></script>
+    <script src="/resources/script/card-container.js"></script>
 </body>
 </html>

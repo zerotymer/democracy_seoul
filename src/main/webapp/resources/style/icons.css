@@ -21,6 +21,12 @@
 .icon.survey {
     background: url('/resources/icons/person-check.svg');
 }
+.icon.hits {
+    background: url('/resources/icons/book-open.svg');
+}
+.icon.calendar {
+    background: url('/resources/icons/calendar-multiselect.svg');
+}
 
 .icon.youtube {
     background: url('/resources/icons/youtube.svg');
