@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>민주주의 서울</title>
     <link rel="stylesheet" href="/resources/style/header.css">
     <link rel="stylesheet" href="/resources/style/footer.css">
     <link rel="stylesheet" href="/resources/style/color.css">
@@ -44,7 +44,7 @@
     <div class="header-gap">
     </div>
 
-    <content>
+    <section>
         <div>
 
         </div>
@@ -181,7 +181,7 @@
                 </div>
             </div>
         </div>
-    </content>
+    </section>
 
     <div class="footer-gap">
     </div>

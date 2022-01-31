@@ -13,6 +13,16 @@ body {
     padding: 0;
 }
 
+section {
+    padding-top: var(--HEIGHT-HEADER);
+}
+
+@media screen and (max-width: 1024px) {
+    section {
+        padding-top: var(--HEIGHT-HEADER-SMALL);
+    }
+}
+
 /* common */
 .inner {
     width: 1180px;
@@ -22,14 +32,13 @@ body {
 .content-frame {
     margin: 0;
     padding: 0;
+    min-height: 800px;
 }
-
 .frame-image {
     position: relative;
     height: 200px;
     background-color: skyblue;
 }
-
 .frame-image h2 {
     position: absolute;
     bottom: 40px;
@@ -43,7 +52,6 @@ body {
     border-bottom: 1px solid var(--COLOR-GRAY);
     box-sizing: border-box;
 }
-
 .frame-menu .menubar {
     display: flex;
     flex-flow: row nowrap;
@@ -68,11 +76,9 @@ body {
 .frame-menu .menubar > ul > li {
     border-right: 1px solid var(--COLOR-GRAY);
 }
-
 .frame-menu .menubar-icon {
     /* border-right: 1px solid black;; */
 }
-
 .frame-menu .menubar-list {
     display: inline-block;
     flex: 0 0 200px;
@@ -83,15 +89,12 @@ body {
     text-align: center;
     text-decoration: none;    
 }
-
 .frame-menu .menubar-list {
     /* text-align: center; */
 }
-
 .frame-menu .menubar-list .menu {
     display: none;
 }
-
 .frame-menu .menubar-list .menuitem {
     position: relative;
     top: -1px;
@@ -103,8 +106,6 @@ body {
     text-align: center;
     line-height: 60px;
 }
-
-
 .frame-menu .menubar-list .submenu {
     border-top: 1px solid var(--COLOR-GRAY);
     display: none;
@@ -127,7 +128,6 @@ body {
     height: 24px;
     margin: 18px;
 }
-
 .frame-menu .menuitem:hover .submenu {
     display: flex;
     flex-flow: column nowrap;
@@ -136,7 +136,6 @@ body {
     top: -1px;
     left: 200px;
 }
-
 .frame-menu .menuitem:hover .submenu li {
     display: inline-block;
     width: 200px;

@@ -32,4 +32,9 @@ public class TestController {
     public String test1() {
         return "test/test1";
     }
+
+    @RequestMapping("/test/content.do")
+    public String test2() {
+        return "test/content-frame";
+    }
 }
