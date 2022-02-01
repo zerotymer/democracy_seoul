@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
     <link rel="stylesheet" href="/resources/style/content-frame.css">
-    <link rel="stylesheet" href="/resources/style/proposal/post.css">
+    <link rel="stylesheet" href="/resources/style/proposal/post-write.css">
 </head>
 <body>
-	<div class="content-frame">
+    <div class="content-frame">
         <div class="frame-image">
             <div class="inner">
                 <h2>제안결과</h2>
@@ -64,7 +64,7 @@
                         </ul>
                     </li>
                     <li class="menubar-list">
-                        <h3>서브메뉴<span class="slick-arrow"></span></h3>
+                        <h3>서브메뉴<span class="slick-arrow"></span></h3>                        
                         <ul class="menu">
                             <li class="menuitem">
                                 <a href="">시민제안</a>
@@ -77,70 +77,36 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+                </ul>                
             </div>
         </div>
     </div>
-    <content>
-
-        <div class="inner">
-            <!-- DHH -->
-
-            <div class="container">
-                <div class="contentTitle">
-                    <br><br>
-                    <span class="title">
-                        <h2>서울시가 묻습니다.</h2>
-                    </span>
-                    <div class="detail">투표기간:
-                        <span class="date">
-                            2022.12.25~2011.12.25
-                        </span>
-                    </div>
-                    <div class="hashtag">#동네책방 #동네책방</div>
-                </div>
-                <br><br>
-                <hr>
-                <article class="view_content">
-                    내용입니다.
-                    내용입니다.
-                    내용입니다.
+    <section>
+        
+        <div class="container" >
+            <!-- DHH: 다흐ㅎ흐 -->
+            <br>
+            <h1 style="text-align: center;">글쓰기</h1><br><br><br><br>
+                <div style="text-align:center;">
+                    <input type="text" name="title" class="title" placeholder="제목을 입력하세요" >    
                     <br>
+                    <hr width="800px">
+                      
+                         <textarea id="editor4" class="editor4" name="editor4" placeholder="내용" ></textarea> 
+                        <script>CKEDITOR.replace('editor4');</script>
+           <br>
+            
+               
+               <button type="submit" class="commit" style="float: right;  background-color: white; border:1px; ">
+                글작성
+            </button>
 
-                    <button class="survey" style="border: 0;">
-                        설문조사
-                    </button>
-
-                </article>
-
-                <div class="sug">당신의 의견을 전달해주세요</div>
-
-                <div class="comment">
-                    <input type="hidden" name="bno" class="bno" value="">
-                    <div class="userNick">김떙땡</div>
-                    <input type="hidden" name="bno" class="bno" value="">
-                    <input type="hidden" name="name" value="">
-                    <div class="today">2022.01.22</div>
-                    <textarea class="ccontent" style="width: 99%; border:0;"></textarea>
-                    <button value="reg" style="float: right;  border: 0; background-color: white;">등록</button>
-                </div>
-
-                <hr style="color: #CCCCC">
-
-
-                <div id="replyList">
-                    <tr>
-                        <td>유저이름</td>
-                        <td>날짜</td>
-                        <br>
-
-                    </tr>
-                </div>
-
-
-            </div>
-        </div>
-    </content>
+        		<br><br><br><br><br><br>
+            
+            
+           </div>
+         </div>
+    </section>
     <script src="/resources/script/content-frame.js"></script>
 </body>
 </html>
