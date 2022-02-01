@@ -15,6 +15,11 @@
     min-width: 200px;
 
 }
+
+.inner {
+    max-width: 1180px;
+    width: 100%;
+}
    
 .contentTitle{
     margin-left: 50px;  

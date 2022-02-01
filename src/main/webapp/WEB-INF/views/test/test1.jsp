@@ -141,6 +141,6 @@
             </div>
         </div>
     </content>
-    <script src="/content-frame.js"></script>
+    <script src="/resources/script/content-frame.js"></script>
 </body>
 </html>

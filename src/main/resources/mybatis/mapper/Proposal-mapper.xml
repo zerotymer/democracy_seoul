@@ -3,5 +3,20 @@
 <mapper namespace="mybatis">
 	<!-- SQL QUERYS -->
 	
+	<select id="selectAllList" resultType="proposal">
+	SELECT 
+			proposal_no as proposalNo,
+ 		 	proposal_title as proposanlTitle,
+ 		 	proposal_content as proposalContent,
+ 		 	proposal_date as proposalDate,
+ 		 	proposal_start as proposalStart,
+ 		 	proposal_end as proposalEnd,
+ 		 	proposal_del_YN as proposalDelYN,
+ 		 	proposal_thumbnail as proposal_Thumbnail
+ 		 	proposal_thumbnail_path as proposal_ThumbnailPath
+	FROM 
+		PROPOSAL
+	</select>
+	
 </mapper>
 	
