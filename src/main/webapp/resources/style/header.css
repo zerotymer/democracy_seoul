@@ -5,9 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 :root {
-    --HEIGHT-LARGE: 100px;
-    --HEIGHT-SMALL: 80px;
-    --HEIGHT-HEADER-GAP: 200px;
+    --HEIGHT-HEADER: 160px;
+    --HEIGHT-HEADER-SMALL: 80px;
+    --HEIGHT-GAP: 20px;
     --HEIGHT-GNB: 112px;
 
     --TABLET-SCREEN: 1024px;
@@ -22,38 +22,37 @@
 }
 
 
-/* Header */
-.header-gap {
-    height: var(--HEIGHT-HEADER-GAP);
-}
-
 header {
     display: block;
     position: fixed;
     
     width: 100vw;
-    height: 160px;
+    height: var(--HEIGHT-HEADER);
     
     background-color: var(--COLOR-DARK);
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 18px;
     color: white;
-}
 
+    z-index: 100;
+}
 header * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-@media screen and (max-width: 1024px) {
-    .header-gap {
-        height: 0;
-    }
+section {
+    padding-top: calc(var(--HEIGHT-HEADER) + var(--HEIGHT-GAP));
+}
 
+@media screen and (max-width: 1024px) {
     header {
-        height: 80px;
-    }   
+        height: var(--HEIGHT-HEADER-SMALL);
+    }
+    section {
+        padding-top: calc(var(--HEIGHT-HEADER-SMALL) + var(--HEIGHT-GAP));
+    }
 }
 
 
@@ -80,11 +79,9 @@ header * {
     min-height: 8vh;
     padding: 0 20px;
 }
-
 .gnb ul {
     list-style: none;
 }
-
 .gnb li {
     flex: 0 0 auto;
     text-decoration: none;
@@ -113,7 +110,6 @@ header * {
     
     z-index: 10;
 }
-
 .gnb .menuitem {
     display: block;
     flex: 0 0 auto;
@@ -123,7 +119,6 @@ header * {
     text-align: center;
     cursor: pointer;
 }
-
 .gnb .menuitem a {
     color: white;
     font-family: 'Noto Sans KR', sans-serif;
@@ -141,7 +136,6 @@ header * {
     overflow: visible;
     width: 160px;
 }
-
 .gnb .submenu li {
     display: inline-block;
     height: 80px;
@@ -151,7 +145,6 @@ header * {
     text-align: center;
     z-index: 101;
 }
-
 .gnb .menuitem:hover .submenu {
     display: flex;
     flex-flow: column;
@@ -211,7 +204,6 @@ header * {
         line-height: 40px;
     }
 }
-
 @media screen and (max-width: 768px) {
     .gnb .menu {
         width: 100%;
@@ -230,12 +222,10 @@ header * {
     width: 80px;
     margin: 4px;
 }
-
 .gnb .icons li {
     display: inline-block;
     cursor: pointer;
 }
-
 .gnb .icons li > .menubtn {
     display: none;
 }
@@ -259,23 +249,18 @@ header * {
 
     cursor: pointer;
 }
-
 .btn.invert {
     filter: invert(100%);
 }
-
 .btn.searchbtn {
     background: var(--IMAGE-URL-SEARCH);
 }
-
 .btn.loginbtn {
     background: var(--IMAGE-URL-LOGIN);
 }
-
 .btn.logout {
     background: var(--IMAGE-URL-LOGOUT);
 }
-
 .btn.menubtn {
     background: var(--IMAGE-URL-MENU);
 }
