@@ -4,5 +4,6 @@
     <!-- Alias -->
 	<typeAliases>
         <typeAlias type="kr.go.seoul.democracy.common.model.vo.Member" alias="member" />
+        <typeAlias type="kr.go.seoul.democracy.proposal.vo.Proposal" alias="proposal" />
     </typeAliases>
 </configuration>
