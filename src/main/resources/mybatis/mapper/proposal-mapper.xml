@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mybatis">
+<mapper namespace="proposal">
 	<!-- SQL QUERYS -->
 	
-	<select id="selectAllList" resultType="proposal">
+	<select id="selectAllList" resultType="kr.go.seoul.democracy.proposal.vo.Proposal">
 	SELECT 
 			proposal_no as proposalNo,
- 		 	proposal_title as proposanlTitle,
+ 		 	proposal_title as proposalTitle,
  		 	proposal_content as proposalContent,
  		 	proposal_date as proposalDate,
  		 	proposal_start as proposalStart,
  		 	proposal_end as proposalEnd,
  		 	proposal_del_YN as proposalDelYN,
- 		 	proposal_thumbnail as proposal_Thumbnail
- 		 	proposal_thumbnail_path as proposal_ThumbnailPath
+ 		 	proposal_thumbnail as proposalThumbnail,
+ 		 	proposal_thumbnail_path as proposalThumbnailPath
 	FROM 
 		PROPOSAL
 	</select>

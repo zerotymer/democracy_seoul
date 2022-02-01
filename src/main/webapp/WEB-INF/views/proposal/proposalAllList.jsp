@@ -5,12 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <link rel="stylesheet" href="/header.css">
-    <link rel="stylesheet" href="/main-content.css">
-    <link rel="stylesheet" href="/card-container.css">
+    <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
+    <link rel="stylesheet" href="/resources/style/header.css">
+    <link rel="stylesheet" href="/resources/style/card-container.css">
     <link rel="stylesheet" href="/resources/style/content-frame.css">
     <link rel="stylesheet" href="/resources/style/proposal/ProposalAllList.css">
+    <link rel="stylesheet" href="/resources/style/footer.css">
+    
 </head>
 
 <body>

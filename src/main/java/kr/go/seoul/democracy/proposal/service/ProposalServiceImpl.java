@@ -1,18 +1,20 @@
-package kr.go.democracySeoul.proposal.service;
+package kr.go.seoul.democracy.proposal.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import kr.go.democracySeoul.proposal.dao.ProposalDAO;
-import kr.go.democracySeoul.proposal.vo.Proposal;
+import kr.go.seoul.democracy.proposal.dao.ProposalDAO;
+import kr.go.seoul.democracy.proposal.vo.Proposal;
 
-@Service
+@Service("proposalServiceImpl")
 public class ProposalServiceImpl implements ProposalService {
 	
 	@Autowired
+	@Qualifier("proposalDAO")
 	private ProposalDAO pDAO;
 
 	@Override

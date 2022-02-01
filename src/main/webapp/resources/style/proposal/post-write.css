@@ -6,7 +6,7 @@
     
 }
 
-.container{
+.container1{
    
     margin-top: 40px;
 	border:1px solid var(--COLOR-BORDER);
@@ -17,20 +17,20 @@
     min-width: 200px;
 
 }
-.title{
-    width:800px;
+section .title{
+    width:300px;
    
    
 }	
 
-.editor4: focus{
+section .editor4 {
     outline: none;
-    width: 100%;
-    height: 20px;
+    width: 700PX;
+    min-height: 500px;
     resize: none;
     
 }
 
-.commit {
+section .commit {
      margin-right: 20%;
 }

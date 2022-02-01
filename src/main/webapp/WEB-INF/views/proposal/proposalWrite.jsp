@@ -81,10 +81,10 @@
             </div>
         </div>
     </div>
-    <content>
+    <section>
         
         <div class="container" >
-            <!-- DHH -->
+            <!-- DHH: 다흐ㅎ흐 -->
             <br>
             <h1 style="text-align: center;">글쓰기</h1><br><br><br><br>
                 <div style="text-align:center;">
@@ -92,7 +92,7 @@
                     <br>
                     <hr width="800px">
                       
-                         <textarea id = "editor4" name = "editor4" placeholder="내용" style="width: 50%; height: 500px"  ></textarea> 
+                         <textarea id="editor4" class="editor4" name="editor4" placeholder="내용" ></textarea> 
                         <script>CKEDITOR.replace('editor4');</script>
            <br>
             
@@ -106,7 +106,7 @@
             
            </div>
          </div>
-    </content>
+    </section>
     <script src="/resources/script/content-frame.js"></script>
 </body>
 </html>

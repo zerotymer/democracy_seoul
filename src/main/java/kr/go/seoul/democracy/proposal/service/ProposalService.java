@@ -1,9 +1,9 @@
-package kr.go.democracySeoul.proposal.service;
+package kr.go.seoul.democracy.proposal.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.go.democracySeoul.proposal.vo.Proposal;
+import kr.go.seoul.democracy.proposal.vo.Proposal;
 
 public interface ProposalService {
 

@@ -22,7 +22,7 @@ public class TestController2 {
     /// METHODs
     @RequestMapping("/dw.do")
     public String test() {
-        return "proposal/ProposalWrite";
+        return "proposal/proposalWrite";
     }
     
     @RequestMapping("/dw1.do")
@@ -36,6 +36,6 @@ public class TestController2 {
     @RequestMapping("/dw2.do")
     public String test2() {
     	
-        return "proposal/ProposalAllList";
+        return "proposal/proposalAllList";
     }
 }
