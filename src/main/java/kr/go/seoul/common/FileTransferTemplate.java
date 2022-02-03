@@ -1,21 +1,19 @@
-package kr.go.seoul.democracy.common;
+package kr.go.seoul.common;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import kr.go.seoul.democracy.common.transfer.FileTransferInfo;
-import org.springframework.context.ApplicationContext;
-import org.springframework.http.MediaType;
+
+import kr.go.seoul.common.transfer.FileTransferInfo;
+
 import org.springframework.util.FileCopyUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.OctetStreamData;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -29,6 +27,15 @@ public class FileTransferTemplate {
     private final String UPLOAD_TEMP_DIR;
 
     /// CONSTRUCTORs
+
+    /**
+     * FileTransferTemplate 인스턴스를 생성합니다.
+     * @param servletContext 서블릿 컨텍스트(매핑)
+     * @param uploadFileSizeLimit 업로드 파일 사이즈 제한
+     * @param encoding 인코딩
+     * @param uploadTemporaryDir 업로드 임시 디렉토리
+     * @author 신현진
+     */
     public FileTransferTemplate(ServletContext servletContext,
                                 int uploadFileSizeLimit,
                                 String encoding,
@@ -65,7 +72,7 @@ public class FileTransferTemplate {
     }
 
     /**
-     * 파일을 이동합니다. (파일명은 miliseconds 로 생성)
+     * 파일을 이동합니다. 파일명은 임의(time)로 생성됩니다.
      * @param request 웹요청
      * @param fileParameterName 파라미터명('file')
      * @param targetDir 이동할 디렉토리
@@ -95,14 +102,12 @@ public class FileTransferTemplate {
     public void fileTransfer(HttpServletResponse response,
                              FileTransferInfo fileInfo) throws IOException {
         File file = new File(fileInfo.getAbsolutePath());
-//        String encodingName = fileInfo.getOriginalFileName(StandardCharsets.ISO_8859_1);
-        String encodingName = fileInfo.getOriginalFileName("ISO_8859_1");
+        String encodingName = fileInfo.getOriginalFileName(StandardCharsets.ISO_8859_1);
 
         // Response 설정
-//        response.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        response.setContentType("application/octet-stream");                                                            // 문서 설정
-        response.setHeader("Content-Disposition", "attachment;filename=" + encodingName);                               // 첨부파일 설정
-        response.setContentLength((int)file.length());
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=" + encodingName);
+        response.setContentLength((int) file.length());
 
         // 파일 스트림 생성
         FileInputStream fin = new FileInputStream(file);

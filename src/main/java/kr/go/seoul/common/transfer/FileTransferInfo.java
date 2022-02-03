@@ -1,9 +1,10 @@
-package kr.go.seoul.democracy.common.transfer;
+package kr.go.seoul.common.transfer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 
@@ -13,19 +14,18 @@ import java.nio.file.FileAlreadyExistsException;
  */
 public class FileTransferInfo {
     /// FIELDs
-    private final String originalFileName;                                                                              // 원본 파일명
-    private String fileName;                                                                                            // 파일명
-    private String absolutePath;                                                                                        // 파일 전체경로
-    private long fileSize;                                                                                              // 파일 크기
+    protected final String originalFileName;                                                                            // 원본 파일명
+    protected String fileName;                                                                                          // 파일명
+    protected String absolutePath;                                                                                      // 파일 전체경로
+    protected long fileSize;                                                                                            // 파일 크기
 
     /// CONSTRUCTORs
-
     /**
      * FileTransferInfo를 생성하기 위한 생성자
      * @param filePath 파일 전체 경로
      */
     public FileTransferInfo(String filePath) {
-        int index = filePath.lastIndexOf('\\');                                                                         // TODO: CHECK 정상동작여부
+        int index = filePath.lastIndexOf('\\') + 1;                                                                     // TODO: CHECK 정상동작여부
         this.fileName = filePath.substring(0, index);
         this.originalFileName = filePath.substring(0, index);
         this.absolutePath = filePath;
@@ -52,12 +52,11 @@ public class FileTransferInfo {
     public String getAbsolutePath() { return absolutePath; }
     public long getFileSize() { return fileSize; }
 
-    public String getOriginalFileName(StandardCharsets charsets) throws UnsupportedEncodingException {
-//        return new String(originalFileName.getBytes(), charsets);
-        return null;                                                                                                    // TODO: CHECK
+    public String getOriginalFileName(Charset charset) throws UnsupportedEncodingException {
+        return new String(originalFileName.getBytes(), charset);
     }
-    public String getOriginalFileName(String charsets) throws UnsupportedEncodingException {
-        return new String(originalFileName.getBytes(), charsets);
+    public String getOriginalFileName(String charset) throws UnsupportedEncodingException {
+        return new String(originalFileName.getBytes(), charset);
     }
 
     /// SETTERs
@@ -72,7 +71,7 @@ public class FileTransferInfo {
      * @return 파일크기
      * @author 신현진
      */
-    private static long getFileSize(String filePath) {
+    public static long getFileSize(String filePath) {
         File file = new File(filePath);
         return file.exists() ? file.length() : 0;
     }
@@ -92,7 +91,7 @@ public class FileTransferInfo {
     /**
      * 파일을 이동하는 메서드
      * @param targetDir 이동할 디렉토리
-     * @param filename 변경할 파일명
+     * @param filename 변경할 파일명 - 확장자 포함
      * @return 이동된 현재 파일(Channing)
      * @throws IOException
      * @author 신현진
