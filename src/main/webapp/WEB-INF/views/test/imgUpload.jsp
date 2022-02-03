@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form action="/test/imageUpload.do" method="post" enctype="multipart/form-data">
+    <input type="file" name="img" placeholder="업로드할 파일명을 지정해주세요"/>
+    <input type="submit">
+</form>
 </body>
 </html>

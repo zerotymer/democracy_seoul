@@ -22,7 +22,8 @@ public class ImageTransferInfo extends FileTransferInfo {
 
     /**
      * ImageTransferInfo를 생성하기 위한 생성자
-     * @param filePath 이미지 파일의 전체 경로
+     * @param path 이미지 파일의 폴더
+     * @param fileName 이미지 파일 이름(확장자 포함)
      * @author 신현진
      */
     public ImageTransferInfo(String path, String fileName) {
@@ -33,7 +34,8 @@ public class ImageTransferInfo extends FileTransferInfo {
     }
     /**
      * ImageTransferInfo를 생성하기 위한 생성자
-     * @param filePath 이미지 파일의 전체 경로
+     * @param path 이미지 파일의 폴더
+     * @param fileName 이미지 파일 이름(확장자 포함)
      * @author 신현진
      */
     public ImageTransferInfo(String path, String fileName, ImageSize maxSize) {
@@ -112,13 +114,17 @@ public class ImageTransferInfo extends FileTransferInfo {
         graphics.drawImage(scaleImg, 0, 0, null);
         graphics.dispose();
 
+        // 경로 생성
+        File folder = new File(targetDir);
+        if (!folder.exists()) folder.mkdirs();
+
         // 저장
         this.fileName = filename + '.' + ext;
         File newFile = new File(targetDir + '\\' + this.fileName);
         if (newFile.exists()) throw new FileAlreadyExistsException(newFile.getAbsolutePath());                          // 중복 파일 존재할 경우 예외
 
         ImageIO.write(newImage, ext.toLowerCase(), newFile);                                                            // 이미지 저장
-        this.absolutePath = newFile.getAbsolutePath();
+//        this.absolutePath = newFile.getAbsolutePath();
         return this;
     }
 
@@ -167,6 +173,26 @@ public class ImageTransferInfo extends FileTransferInfo {
             originalSize.getHeight() > maxSize.getHeight()) {
             resizeCopyTo(targetDir, filename + "_max", maxSize);
         }
+
+        // TODO: DEBUG
+        System.err.println(this);
+
         return this.moveTo(targetDir, filename);
+    }
+
+    ///
+
+
+    @Override
+    public String toString() {
+        return "ImageTransferInfo{" +
+                "원본 파일명='" + originalFileName + '\'' +
+                ", 파일이름='" + fileName + '\'' +
+                ", 파일전체경로='" + absolutePath + '\'' +
+                ", 파일크기=" + fileSize +
+                ", 이미지크기=" + imageSizes +
+                ", 원본 이미지 크기=" + originalSize +
+                ", 최대 크기=" + maxSize +
+                '}';
     }
 }

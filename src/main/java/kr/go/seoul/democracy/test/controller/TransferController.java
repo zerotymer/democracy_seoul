@@ -1,7 +1,9 @@
 package kr.go.seoul.democracy.test.controller;
 
 import kr.go.seoul.common.FileTransferTemplate;
+import kr.go.seoul.common.ImageResizeTemplate;
 import kr.go.seoul.common.transfer.FileTransferInfo;
+import kr.go.seoul.common.transfer.ImageTransferInfo;
 import kr.go.seoul.democracy.test.model.service.TestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,11 +19,14 @@ import java.io.IOException;
 public class TransferController {
     /// FIELDs
     private FileTransferTemplate fileTemplate;
+    private ImageResizeTemplate imgTemplate;
 
     /// CONSTRUCTORs
     @Autowired
-    public TransferController(@Qualifier("fileTransferTemplate") FileTransferTemplate fileTemplate) {
+    public TransferController(@Qualifier("fileTransferTemplate") FileTransferTemplate fileTemplate,
+                              @Qualifier("basicImageTemplate") ImageResizeTemplate imgTemplate) {
         this.fileTemplate = fileTemplate;
+        this.imgTemplate = imgTemplate;
     }
 
     /// METHODs
@@ -33,6 +38,11 @@ public class TransferController {
     @RequestMapping("/test/download.do")
     public String testDownloadJsp() {
         return "test/download";
+    }
+
+    @RequestMapping("/test/imgUpload.do")
+    public String imgUpload() {
+        return "test/imgUpload";
     }
 
 
@@ -76,4 +86,18 @@ public class TransferController {
         return "index";
     }
 
+    /**
+     * 이미지 리사이징 업로드를 설명하기 위한 예시
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/test/imageUpload.do", method = RequestMethod.POST)
+    public String imageUpload(HttpServletRequest request) throws IOException {
+        ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "img", "test");
+
+        System.err.println("img transfer");
+        System.err.println(info);                                                                                       // 이동한 파일 정보
+        return "index";
+    }
 }

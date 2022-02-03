@@ -26,6 +26,10 @@
 		<constructor-arg index="0" value="1200" />
 		<constructor-arg index="1" value="0" />
 	</bean>
+	<bean id="testSize" class="kr.go.seoul.common.model.vo.ImageSize">
+		<constructor-arg index="0" value="300" />
+		<constructor-arg index="1" value="300" />
+	</bean>
 
 	<!-- 이미지 전송을 위한 공용 템플릿 -->
 	<bean id="basicImageTemplate" class="kr.go.seoul.common.ImageResizeTemplate">
@@ -37,6 +41,7 @@
 		<constructor-arg index="5">
 			<map>
 				<entry key="thumbnail" value-ref="thumnbnailSize" />
+				<entry key="test" value-ref="testSize" />
 			</map>
 		</constructor-arg>
 	</bean>
