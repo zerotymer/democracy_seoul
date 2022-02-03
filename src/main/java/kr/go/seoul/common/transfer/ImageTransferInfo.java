@@ -16,7 +16,7 @@ public class ImageTransferInfo extends FileTransferInfo {
     /// FIELDs
     private HashMap<String, ImageSize> imageSizes;
     private final ImageSize originalSize;
-    private ImageSize maxSize;
+    private final ImageSize maxSize;
 
     /// CONSTRUCTORs
 
@@ -30,6 +30,17 @@ public class ImageTransferInfo extends FileTransferInfo {
         this.imageSizes = new HashMap<>();
         this.originalSize = ImageTransferInfo.getImageSize(filePath);
         this.maxSize = new ImageSize(0, 0);
+    }
+    /**
+     * ImageTransferInfo를 생성하기 위한 생성자
+     * @param filePath 이미지 파일의 전체 경로
+     * @author 신현진
+     */
+    public ImageTransferInfo(String filePath, ImageSize maxSize) {
+        super(filePath);
+        this.imageSizes = new HashMap<>();
+        this.originalSize = ImageTransferInfo.getImageSize(filePath);
+        this.maxSize = maxSize;
     }
 
     /**

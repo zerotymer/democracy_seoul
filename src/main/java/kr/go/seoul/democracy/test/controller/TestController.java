@@ -52,9 +52,9 @@ public class TestController {
     @RequestMapping(value = "/test/fileUpload.do", method = RequestMethod.POST)
     public String testUpload(HttpServletRequest request) throws IOException {
 
-//        FileTransferInfo info = fileTemplate.fileTransfer(request, "file", "USERID", "test");                         // 파일명을 포함하여 변경(request, 파라미터이름, 이동할 폴더명, 변경할 파일명)
+//        FileTransferInfo info = fileTemplate.fileTransfer(request, "file", "USERID", "test.txt");                         // 파일명을 포함하여 변경(request, 파라미터이름, 이동할 폴더명, 변경할 파일명)
         FileTransferInfo info = fileTemplate.fileTransfer(request, "file", "USERID");                                   // 파일명을 자동으로 변경(request, 파라미터이름, 이동할 폴더명)
-
+        // 비즈니스 로직 - 알아서 만드세요.
         System.out.println("test transfer");
         System.out.println(info);
         return "index";
@@ -71,8 +71,6 @@ public class TestController {
     public String testDownload(HttpServletResponse response) throws IOException {
 
         // 비즈니스 로직 - 알아서 만드세요.
-
-
         FileTransferInfo info = new FileTransferInfo("원본파일명", "바뀐파일명", "파일경로", 0);                            // 데이터 연결. 0: 파일크기
         fileTemplate.fileTransfer(response, info);                                                                      // 전송처리
         return "index";
