@@ -2,6 +2,7 @@ package kr.go.seoul.democracy.proposal.vo;
 
 import java.sql.Date;
 
+
 public class Proposal {
 	private int proposalNo;
 	private String proposalTitle;
