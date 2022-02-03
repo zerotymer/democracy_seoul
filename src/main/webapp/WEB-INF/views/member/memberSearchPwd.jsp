@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
-<link rel="stylesheet" href="/resources/assets/commons/default.css">
-<link rel="stylesheet" href="/resources/assets/commons/common.css">
-<link rel="stylesheet" href="/resources/assets/css/memberSearchPwd.css">
+<link rel="stylesheet" href="/resources/style/member/commons/default.css">
+<link rel="stylesheet" href="/resources/style/member/commons/common.css">
+<link rel="stylesheet" href="/resources/style/member/css/memberSearchPwd.css">
 </head>
 
 <body>
@@ -28,6 +28,5 @@
 		</div>
 	</div>
 	
-	<!-- footer -->
 </body>
 </html>

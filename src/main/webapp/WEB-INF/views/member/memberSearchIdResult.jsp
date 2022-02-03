@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>아이디 찾기</title>
+<title>아이디 찾기 결과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
-<link rel="stylesheet" href="/assets/commons/default.css">
-<link rel="stylesheet" href="/assets/commons/common.css">
-<link rel="stylesheet" href="/assets/css/memberSearchIdResult.css">
+<link rel="stylesheet" href="/resources/style/member/commons/default.css">
+<link rel="stylesheet" href="/resources/style/member/commons/common.css">
+<link rel="stylesheet" href="/resources/style/member/memberSearchIdResult.css">
 </head>
 
 <body>
@@ -31,6 +31,5 @@
 			<button class="btn-login"><a href="/member/goLogin.do">로그인하기</a></button>
 		</div>
 	</div>
-	<!-- footer -->
 </body>
 </html>

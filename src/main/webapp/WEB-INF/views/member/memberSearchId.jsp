@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
-<link rel="stylesheet" href="/resources/assets/commons/default.css">
-<link rel="stylesheet" href="/resources/assets/commons/common.css">
-<link rel="stylesheet" href="/resources/assets/css/memberSearchId.css">
+<link rel="stylesheet" href="/resources/style/member/commons/default.css">
+<link rel="stylesheet" href="/resources/style/member/commons/common.css">
+<link rel="stylesheet" href="/resources/style/member/css/memberSearchId.css">
 </head>
 
 
@@ -37,7 +37,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	
 	<script>
-			//이메일이 일치하면 아이디 값을 알려준다.
 
 			$("#searchId").click(function() {
 				var email = $("#email").val();
@@ -53,6 +52,5 @@
 			
 	</script>
 	
-	<!-- footer -->
 </body>
 </html>
