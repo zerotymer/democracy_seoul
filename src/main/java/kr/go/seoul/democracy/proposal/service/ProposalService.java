@@ -7,6 +7,9 @@ import kr.go.seoul.democracy.proposal.vo.Proposal;
 
 public interface ProposalService {
 
-	List<Proposal> selectAllList();
+	 List<Proposal> selectAllList() throws Exception;
+	 
+	 Proposal proposalView(int proposalNo) throws Exception; 
+
 
 }

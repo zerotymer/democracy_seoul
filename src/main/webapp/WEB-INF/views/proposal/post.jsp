@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <script type="text/javascript" ></script>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,34 +88,33 @@
 
         <div class="inner">
             <!-- DHH -->
-
+		 
+            
             <div class="container">
                 <div class="contentTitle">
                     <br><br>
-                    <span class="title">
-                        <h2>서울시가 묻습니다.</h2>
-                    </span>
-                    <div class="detail">투표기간:
-                        <span class="date">
-                            2022.12.25~2011.12.25
-                        </span>
+                    <div class="title"  value='<c:out value="${proposalView.propsosalTitle}"/>'>
+                        <h2>서울시가 묻습니다. </h2>
+                    </div>
+                    <div class="detail" >투표기간 :
+                        
                     </div>
                     <div class="hashtag">#동네책방 #동네책방</div>
                 </div>
                 <br><br>
                 <hr>
-                <article class="view_content">
-                    내용입니다.
-                    내용입니다.
-                    내용입니다.
+                <article class="view_content" value='<c:out value="${proposalView.propsosalContent}"/>'>
+                    내용입니다. ${proposal.proposalContent }
+                  
                     <br>
 
                     <button class="survey" style="border: 0;">
                         설문조사
                     </button>
-
+  	
                 </article>
-
+                
+              
                 <div class="sug">당신의 의견을 전달해주세요</div>
 
                 <div class="comment">
@@ -127,19 +129,26 @@
 
                 <hr style="color: #CCCCC">
 
+				<!-- 댓글영역 -->
+                <div id="replyList"></div>
+                
+    <script>     
+	function listReply(num){
+		$.ajax({
+			type: "get",
+			url: "${path}/reply/list.do?proposalNo=${proposal.proposalno}&curPage="+num,
+			success: function(result){
+			// responseText가 result에 저장됨.
+				$("#listReply").html(result);
+			}
+		});
+	}
 
-                <div id="replyList">
-                    <tr>
-                        <td>유저이름</td>
-                        <td>날짜</td>
-                        <br>
-
-                    </tr>
-                </div>
-
-
+	
+	  </script> 
             </div>
         </div>
+        
     </content>
     <script src="/resources/script/content-frame.js"></script>
 </body>

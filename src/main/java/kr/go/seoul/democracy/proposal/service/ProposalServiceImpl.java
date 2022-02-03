@@ -18,8 +18,13 @@ public class ProposalServiceImpl implements ProposalService {
 	private ProposalDAO pDAO;
 
 	@Override
-	public List<Proposal> selectAllList(){
+	public List<Proposal> selectAllList() throws Exception{
 		return pDAO.selectAllList();
+	}
+
+	@Override
+	public Proposal proposalView(int proposalNo) throws Exception {
+			return pDAO.proposalView(proposalNo);
 	}
 	
 	

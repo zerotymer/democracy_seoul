@@ -17,11 +17,13 @@ public class ProposalDAO {
 	@Qualifier("sqlSessionTemplate")
 	private SqlSessionTemplate sqlSession;//mybatis 사용을 위한 
 
-	public List<Proposal> selectAllList(){
-//		return sqlSession.selectList("proposal.selectAllList");
-		List<Proposal> list = sqlSession.selectList("proposal.selectAllList");
-		System.err.println(list);
-		return null;
+	public List<Proposal> selectAllList() throws Exception{
+	return  sqlSession.selectList("proposal.selectAllList");
+
+	}
+
+	public Proposal proposalView(int proposalNo)throws Exception {
+		return sqlSession.selectOne("proposal.proposalView",proposalNo);
 	} 
 	
 	
