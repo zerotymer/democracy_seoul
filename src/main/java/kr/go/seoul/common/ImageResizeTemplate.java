@@ -10,12 +10,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.go.seoul.common.model.vo.ImageSize;
 import kr.go.seoul.common.transfer.FileTransferInfo;
 import kr.go.seoul.common.transfer.ImageTransferInfo;
-import org.springframework.util.FileCopyUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 /**
@@ -70,7 +66,7 @@ public class ImageResizeTemplate extends FileTransferTemplate {
                 request, UPLOAD_TEMP_DIR, FILE_SIZE_LIMIT, ENCODING, new DefaultFileRenamePolicy());
         String originalFileName = multiRequest.getFilesystemName(fileParameterName);
 
-        ImageTransferInfo info = new ImageTransferInfo(originalFileName, max);
+        ImageTransferInfo info = new ImageTransferInfo(this.UPLOAD_TEMP_DIR, originalFileName, max);
         info.setImageSizes(imageSizes);
         info.resizeMoveToAll(UPLOAD_ROOT_DIR + '\\' + targetDir, targetFilename);
         return info;
@@ -94,7 +90,7 @@ public class ImageResizeTemplate extends FileTransferTemplate {
                 request, UPLOAD_TEMP_DIR, FILE_SIZE_LIMIT, ENCODING, new DefaultFileRenamePolicy());
         String originalFileName = multiRequest.getFilesystemName(fileParameterName);
 
-        ImageTransferInfo info = new ImageTransferInfo(originalFileName, max);
+        ImageTransferInfo info = new ImageTransferInfo(this.UPLOAD_TEMP_DIR, originalFileName, max);
         info.setImageSizes(imageSizes);
         info.resizeMoveToAll(UPLOAD_ROOT_DIR + '\\' + targetDir, String.valueOf(currentTime));
         return info;

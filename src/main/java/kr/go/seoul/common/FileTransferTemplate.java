@@ -44,9 +44,13 @@ public class FileTransferTemplate {
         this.FILE_SIZE_LIMIT = uploadFileSizeLimit;
         this.ENCODING = encoding;
         this.UPLOAD_ROOT_DIR = servletContext.getRealPath(UPLOAD);
-        this.UPLOAD_TEMP_DIR = servletContext.getRealPath(UPLOAD) + '\\' + uploadTemporaryDir + '\\';
+        this.UPLOAD_TEMP_DIR = servletContext.getRealPath(UPLOAD) + '\\' + uploadTemporaryDir;
+        
+        // 경로설정
+        File file = new File(UPLOAD_TEMP_DIR);
+        if (!file.exists()) file.mkdirs();
 
-        System.err.println(String.format("Info: FileTransferTemplate have set temporary path for upload(%s)", UPLOAD_TEMP_DIR));
+        System.out.println(String.format("Info: FileTransferTemplate have set temporary path for upload(%s)", UPLOAD_TEMP_DIR));
     }
 
     /// METHODs
@@ -68,7 +72,7 @@ public class FileTransferTemplate {
         MultipartRequest multiRequest = new MultipartRequest(
                 request, UPLOAD_TEMP_DIR, FILE_SIZE_LIMIT, ENCODING, new DefaultFileRenamePolicy());
         String originalFileName = multiRequest.getFilesystemName(fileParameterName);
-        FileTransferInfo file = new FileTransferInfo(originalFileName);                                                 // TODO: CHECK 동시저장 이슈
+        FileTransferInfo file = new FileTransferInfo(this.UPLOAD_TEMP_DIR, originalFileName);                           // TODO: CHECK 동시저장 이슈
         file.moveTo(UPLOAD_ROOT_DIR + '\\' + targetDir, targetFilename);
         return file;
     }
@@ -89,7 +93,7 @@ public class FileTransferTemplate {
         MultipartRequest multiRequest = new MultipartRequest(
                 request, UPLOAD_TEMP_DIR, FILE_SIZE_LIMIT, ENCODING, new DefaultFileRenamePolicy());
         String originalFileName = multiRequest.getFilesystemName(fileParameterName);
-        FileTransferInfo file = new FileTransferInfo(originalFileName);                                                 // TODO: CHECK 동시저장 이슈
+        FileTransferInfo file = new FileTransferInfo(this.UPLOAD_TEMP_DIR, originalFileName);                           // TODO: CHECK 동시저장 이슈
         file.moveTo(UPLOAD_ROOT_DIR + '\\' + targetDir, String.valueOf(currentTime));
         return file;
     }

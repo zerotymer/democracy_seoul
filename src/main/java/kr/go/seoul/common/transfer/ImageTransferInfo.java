@@ -25,10 +25,10 @@ public class ImageTransferInfo extends FileTransferInfo {
      * @param filePath 이미지 파일의 전체 경로
      * @author 신현진
      */
-    public ImageTransferInfo(String filePath) {
-        super(filePath);
+    public ImageTransferInfo(String path, String fileName) {
+        super(path, fileName);
         this.imageSizes = new HashMap<>();
-        this.originalSize = ImageTransferInfo.getImageSize(filePath);
+        this.originalSize = ImageTransferInfo.getImageSize(absolutePath);
         this.maxSize = new ImageSize(0, 0);
     }
     /**
@@ -36,10 +36,10 @@ public class ImageTransferInfo extends FileTransferInfo {
      * @param filePath 이미지 파일의 전체 경로
      * @author 신현진
      */
-    public ImageTransferInfo(String filePath, ImageSize maxSize) {
-        super(filePath);
+    public ImageTransferInfo(String path, String fileName, ImageSize maxSize) {
+        super(path, fileName);
         this.imageSizes = new HashMap<>();
-        this.originalSize = ImageTransferInfo.getImageSize(filePath);
+        this.originalSize = ImageTransferInfo.getImageSize(absolutePath);
         this.maxSize = maxSize;
     }
 

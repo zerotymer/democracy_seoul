@@ -10,17 +10,17 @@
 		<constructor-arg index="0" ref="servletContext" />
 		<constructor-arg index="1" value="52428800" /> <!-- 50MB -->
 		<constructor-arg index="2" value="UTF-8" />
-		<constructor-arg index="3" value="temp\\file" />
+		<constructor-arg index="3" value="temp\file" />
 	</bean>
 
-
-	<bean id="thumnbnailSize" class="kr.go.seoul.common.model.vo.ImageSize">
-		<constructor-arg index="0" value="200" />
-		<constructor-arg index="1" value="200" />
-	</bean>
+	<!-- 이미지 크기 규격 -->
 	<bean id="maxSize" class="kr.go.seoul.common.model.vo.ImageSize">
 		<constructor-arg index="0" value="1200" />
 		<constructor-arg index="1" value="0" />
+	</bean>
+	<bean id="thumnbnailSize" class="kr.go.seoul.common.model.vo.ImageSize">
+		<constructor-arg index="0" value="200" />
+		<constructor-arg index="1" value="200" />
 	</bean>
 	<bean id="profileSize" class="kr.go.seoul.common.model.vo.ImageSize">
 		<constructor-arg index="0" value="1200" />
@@ -32,7 +32,7 @@
 		<constructor-arg index="0" ref="servletContext" />
 		<constructor-arg index="1" value="52428800" /> <!-- 50MB -->
 		<constructor-arg index="2" value="UTF-8" />
-		<constructor-arg index="3" value="temp\\image" />
+		<constructor-arg index="3" value="temp\image" />
 		<constructor-arg index="4" ref="maxSize" />
 		<constructor-arg index="5">
 			<map>
@@ -46,7 +46,7 @@
 		<constructor-arg index="0" ref="servletContext" />
 		<constructor-arg index="1" value="52428800" /> <!-- 50MB -->
 		<constructor-arg index="2" value="UTF-8" />
-		<constructor-arg index="3" value="temp\\image" />
+		<constructor-arg index="3" value="temp\profile" />
 		<constructor-arg index="4" ref="maxSize" />
 		<constructor-arg index="5">
 			<map>
@@ -60,7 +60,7 @@
 		<constructor-arg index="0" ref="servletContext" />
 		<constructor-arg index="1" value="52428800" /> <!-- 50MB -->
 		<constructor-arg index="2" value="UTF-8" />
-		<constructor-arg index="3" value="temp\\image" />
+		<constructor-arg index="3" value="temp\discussion" />
 		<constructor-arg index="4" ref="maxSize" />
 		<constructor-arg index="5">
 			<map>
@@ -74,7 +74,7 @@
 		<constructor-arg index="0" ref="servletContext" />
 		<constructor-arg index="1" value="52428800" /> <!-- 50MB -->
 		<constructor-arg index="2" value="UTF-8" />
-		<constructor-arg index="3" value="temp\\image" />
+		<constructor-arg index="3" value="temp\proposal" />
 		<constructor-arg index="4" ref="maxSize" />
 		<constructor-arg index="5">
 			<map>
