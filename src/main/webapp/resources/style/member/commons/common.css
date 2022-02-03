@@ -168,7 +168,7 @@ box-search {
 	position: absolute;
 	top: 15px;
 	right: 16px;
-	color: #AAAAAA;
+	color: #808080;
 	z-index: 999;
 }
 .input-search {
@@ -182,7 +182,7 @@ box-search {
 .icon-search {
 	font-size: 16px;
 	margin: 12px 10px 0 18px;
-	color: #C8C8C8;
+	color: #808080;
 }
 .input-search>input {
 	border: 0;
