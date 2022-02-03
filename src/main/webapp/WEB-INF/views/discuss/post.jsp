@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- JSTL Library -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <title>민서네 시민토론 - 게시글</title>
+    
     <style>
         * {
             box-sizing: border-box;
@@ -184,7 +185,7 @@
         <div>
 
           <div id="title">
-            <div>게시글 제목 겸 토론 주제</div>
+            <div>${discuss.discussTitle}</div>
             <div>
                 <div class="tag"><a href="url">#해시태그</a></div>
             </div>
@@ -204,16 +205,22 @@
             </div>
           </div>
 
-          <div id="contents">토론 내용</div>
+          <div id="contents">
+          	${discuss.discussContent}
+          	<c:forEach items="${file }" var="file">
+          	<img src="${file.filePath }"/>
+          	</c:forEach>
+          </div>
 
         </div>
         <div>
 
           <div id="pros">
+          <c:forEach items="${pro }" var="pro">
             <div class="pros">
                 <div>
-                    <div>찬성 댓글 내용</div>
-                    <div>찬성 댓글 작성자</div>
+                    <div>${pro.commentContent}</div>
+                    <div>${pro.userId}</div>
                 </div>
                 <div>
                     <svg style="width:18px;height:18px" viewBox="0 0 24 24">
@@ -221,9 +228,11 @@
                     </svg>
                 </div>
             </div>
+          </c:forEach>
           </div>
 
           <div id="cons">
+          <c:forEach items="${con }" var="con">
             <div class="cons">
                 <div>
                     <svg style="width:18px;height:18px" viewBox="0 0 24 24">
@@ -231,10 +240,11 @@
                     </svg>
                 </div>
                 <div>
-                    <div>반대 댓글 내용</div>
-                    <div>반대 댓글 작성자</div>
+                    <div>${con.commentContent}</div>
+                    <div>${con.userId}</div>
                 </div>
             </div>
+          </c:forEach>
           </div>
 
         </div>
@@ -244,6 +254,8 @@
       </div>
     </content>
 
+<!-- jQuery Library -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
     var result1=false;
     var result2=false;
@@ -274,8 +286,8 @@
         else{
             result2=confirm('안건에 찬성하시겠습니까?');
             if(result2){
-                var final=confirm('한번 투표 시 재투표가 불가합니다. 정말 찬성하시겠습니까?')
-                if(final){
+                var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 찬성하시겠습니까?')
+                if(result){
                     alert('찬성하셨습니다. 투표해 주셔서 감사합니다.');
                     $('#vote>div:last').empty();
                     $('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" /></svg>').appendTo('#vote>div:last');

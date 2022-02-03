@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="discussion">
+<mapper namespace="discuss">
 
+	<!-- 시민토론 목록 -->
+	<select id="list" resultType="discuss">
+		select discuss_no as discussNo,
+			discuss_title as discussTitle,
+			userid as userId,
+			discuss_content as discussContent,
+			discuss_date as discussDate,
+			discuss_start as discussStart,
+			discuss_end as discussEnd,
+			discuss_del_yn as discussDelYN,
+			discuss_thumbnail_name as discussThumbnailName,
+			discuss_thumbnail_path as discussThumbnailPath
+		from discussion
+	</select>
+	
+	<select id="onePost" resultType="discuss">
+		select discuss_no as discussNo,
+			discuss_title as discussTitle,
+			userid as userId,
+			discuss_content as discussContent,
+			discuss_date as discussDate,
+			discuss_start as discussStart,
+			discuss_end as discussEnd,
+			discuss_del_yn as discussDelYN,
+			discuss_thumbnail_name as discussThumbnailName,
+			discuss_thumbnail_path as discussThumbnailPath
+		from discussion
+		where discuss_no=#{value}
+	</select>
+	
+	<select id="proCommentList" resultType="discussComment">
+		select discuss_no as discussNo,
+			comment_no as commentNo,
+			userid as userId,
+			comment_content as commentContent,
+			comment_vote as commentVote,
+			comment_date as commentDate,
+		from discuss_comment
+		where discuss_no=#{value} and comment_vote='1'
+	</select>
+	
+	<select id="conCommentList" resultType="discussComment">
+		select discuss_no as discussNo,
+			comment_no as commentNo,
+			userid as userId,
+			comment_content as commentContent,
+			comment_vote as commentVote,
+			comment_date as commentDate,
+		from discuss_comment
+		where discuss_no=#{value} and comment_vote='2'
+	</select>
+	
+	<select id="fileList" resultType="discussFile">
+		select discuss_no as discussNo,
+			file_no as fileNo,
+			file_name as fileName,
+			file_path as filePath,
+		from discuss_file
+		where discuss_no=#{value}
+	</select>
 </mapper>
