@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.user-info {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	margin-bottom: 40px;
+}
+.info {
+	width: 100%;
+}
+.info td {
+	border-top: 0.5px solid #D8D8D8;
+}
+.info td:first-child {
+	width: 20%;
+	height: 100px;
+	font-size: 18px;
+	font-weight: bold;
+}
+table td {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	vertical-align: middle;
+	color: #2A2A2A;
+}
+
+.profile-img {
+	width: 100px;
+	padding: 20px 20px 20px 0;
+}
+.profile-img2 {
+	width: 100px;
+	height: 100px;
+	display: block;
+	
+	object-fit: cover;
+	border-radius: 50px;
+	border: 0.5px solid #2A2A2A;
+}
+.img-box {
+	width: 90px;
+	height: 90px;
+	border: 1px solid #AAAAAA;
+	border-radius: 100px;
+}
+
+
+
+.user-sec {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+.sec {
+	width: 100%;
+}
+.sec td {
+	border-bottom: 0.5px solid #D8D8D8;
+}
+
+.sec td:first-child {
+	width: 20%;
+	height: 100px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.btn-m {
+	background-color: #5EB656;
+	float: right;
+}
+
+.user-withdraw {
+	height: 180px;
+}
+.btn-withdraw {
+	width: 100px;
+	height: 40px;
+	padding: 0;
+	background-color: white;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	border: 1px solid #C8C8C8;
+	cursor: pointer;
+	float: right;
+	margin-left: 10px;
+}
+
+.btn-withdraw a {
+	color: #C8C8C8;
+}
+
+.user-withdraw td:first-child {
+	color: #C8C8C8;
+}
+.user-withdraw table {
+	float : right;
+	margin-top: 30px;
+}
