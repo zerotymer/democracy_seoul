@@ -1,4 +1,4 @@
-package kr.go.seoul.common;
+package kr.go.seoul.democracy.common;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

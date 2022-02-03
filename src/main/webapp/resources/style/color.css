@@ -1,0 +1,33 @@
+:root {
+    --COLOR-RED: #F05454;
+    --COLOR-GREEN: #14A086;
+    --COLOR-YELLOW: #F1C40F;
+    --COLOR-BLUE: #3C5BFF;
+    --COLOR-WHITE: #FFFFFF;
+    --COLOR-DARK: #2C3F50;
+
+    --COLOR-GRAY: #7B8789;
+}
+
+.card-item {
+    --COLOR-SUGGEST: var(--COLOR-YELLOW);
+    --COLOR-DISCUSSION: var(--COLOR-RED);
+    --COLOR-SURVEY: var(--COLOR-BLUE);
+    /* --COLOR-SURVEY: var(--COLOR-GREEN); */
+    /* --COLOR-SUGGEST: var(--COLOR-RED); */
+}
+
+/* SUGGEST: 제안 */
+.card-item.suggest .category {
+    background-color: var(--COLOR-SUGGEST);
+}
+
+/* DISCUSSION: 토론 */
+.card-item.discussion .category {
+    background-color: var(--COLOR-DISCUSSION);
+}
+
+/* SURVEY: 투표 */
+.card-item.survey .category {
+    background-color: var(--COLOR-SURVEY);
+}

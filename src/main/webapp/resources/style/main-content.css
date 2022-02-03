@@ -1,0 +1,26 @@
+/* Defination Color */
+@import '/resources/style/color.css';
+
+body {
+    background-color: var(--COLOR-WHITE);
+    margin: 0;
+
+    /* no Scrollbar */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+header {
+    z-index: 10;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    min-height: 90vh;
+    overflow: scroll;
+}

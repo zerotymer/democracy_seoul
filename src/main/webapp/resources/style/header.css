@@ -1,0 +1,284 @@
+/* Header */
+/* screan 1600 기준 작성 */
+@import '/resources/style/color.css';
+@import '/resources/style/icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+:root {
+    --HEIGHT-HEADER: 160px;
+    --HEIGHT-HEADER-SMALL: 80px;
+    --HEIGHT-GAP: 20px;
+    --HEIGHT-GNB: 112px;
+
+    --TABLET-SCREEN: 1024px;
+    --MOBILE-SCREEN: 768px;
+    --SMALL-SCREEN: 480px;
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+        overflow-x: hidden;
+    }
+}
+
+
+header {
+    display: block;
+    position: fixed;
+    
+    width: 100vw;
+    height: var(--HEIGHT-HEADER);
+    
+    background-color: var(--COLOR-DARK);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 18px;
+    color: white;
+
+    z-index: 100;
+}
+header * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    padding-top: calc(var(--HEIGHT-HEADER) + var(--HEIGHT-GAP));
+}
+
+@media screen and (max-width: 1024px) {
+    header {
+        height: var(--HEIGHT-HEADER-SMALL);
+    }
+    section {
+        padding-top: calc(var(--HEIGHT-HEADER-SMALL) + var(--HEIGHT-GAP));
+    }
+}
+
+
+/* NOTICE BAR */
+.noticebar {
+/*    display: none;*/
+    height: 48px;
+    background-color: var(--COLOR-BLUE);
+}
+
+@media screen and (max-width: 1024px) {
+    .noticebar {
+        display: none;
+    }
+}
+
+/* Navi : GNB */
+.gnb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: var(--HEIGHT-GNB);
+    min-height: 8vh;
+    padding: 0 20px;
+}
+.gnb ul {
+    list-style: none;
+}
+.gnb li {
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .gnb {
+        justify-content: space-between;
+        height: 80px;
+        margin: 0;
+    }
+    .gnb .logo {
+        flex: 1 0 auto;
+        text-align: center;
+        text-indent: 120px;
+    }
+}
+
+/* Menu */
+.gnb .menu {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 800px;
+    margin: auto;
+    
+    z-index: 10;
+}
+.gnb .menuitem {
+    display: block;
+    flex: 0 0 auto;
+    width: 140px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.gnb .menuitem a {
+    color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    letter-spacing: 0.2em;
+}
+
+/* Navi : Submenu */
+.gnb .submenu {
+    display: none;
+    position: relative;
+    margin-top: 40px;
+    /* color: blue; */
+    z-index: 99;
+    overflow: visible;
+    width: 160px;
+}
+.gnb .submenu li {
+    display: inline-block;
+    height: 80px;
+    width: 160px;
+    padding: 4px;
+    font: 300 14px/60px 'Noto Sans KR', sans-serif;
+    text-align: center;
+    z-index: 101;
+}
+.gnb .menuitem:hover .submenu {
+    display: flex;
+    flex-flow: column;
+    background-color: pink;
+}
+
+@media screen and (max-width: 1024px) {
+    
+    .gnb .menu {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 80px;
+        right: 0;
+        width: 200px;
+        /* height: 40vh; */
+
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+
+        background-color: var(--COLOR-BLUE);
+    }
+    .gnb .menuitem {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: inherit;
+        right: 0;
+    }
+    .gnb .submenu {
+        display: none;
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        opacity: 0%;
+    }
+    .gnb .submenu li {
+        width: 100%;
+    }
+
+    .gnb .menuitem:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    .gnb .menuitem:hover .submenu {
+        display: flex;
+        flex-flow: column nowrap;
+        opacity: 100%;
+        
+        transition: opacity 0.5s ease-in;
+    }
+    .gnb .submenu li {
+        /* top: 40px; */
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .gnb .menu {
+        width: 100%;
+    }
+}
+
+
+/* Navi : ICONS */
+
+.gnb .icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    width: 80px;
+    margin: 4px;
+}
+.gnb .icons li {
+    display: inline-block;
+    cursor: pointer;
+}
+.gnb .icons li > .menubtn {
+    display: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .gnb .icons {
+        flex: 0 0 120px;
+    }
+    .gnb .icons li > .menubtn {
+        display: inline-block;
+        flex: 0 0 auto;
+        right: 0px;
+    }
+}
+/* Common - BTN */
+.btn {
+    border: none;
+    width: 28px;
+    height: 28px;
+    background-color: gray;
+
+    cursor: pointer;
+}
+.btn.invert {
+    filter: invert(100%);
+}
+.btn.searchbtn {
+    background: var(--IMAGE-URL-SEARCH);
+}
+.btn.loginbtn {
+    background: var(--IMAGE-URL-LOGIN);
+}
+.btn.logout {
+    background: var(--IMAGE-URL-LOGOUT);
+}
+.btn.menubtn {
+    background: var(--IMAGE-URL-MENU);
+}
+
+
+/* Annimation */
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Event: Active */
+.menu.nav-active {
+    transform: translateX(0);
+}

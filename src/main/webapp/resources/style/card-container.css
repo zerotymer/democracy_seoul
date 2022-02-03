@@ -1,0 +1,140 @@
+@import '/resources/style/color.css';
+@import '/resources/style/icons.css';
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+:root {
+    --COLOR-TEST: lightgray;
+    --COLOR-BORDER: #CCC;
+}
+
+/* CARD */
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    /* grid-column: 1 / 3; */
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.card-item {
+    position: relative;
+    padding: 10px 18px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 350px;
+    /* padding: 12px; */
+    margin: 0 auto;
+    background-color: var(--COLOR-WHITE);
+    border-radius: 12px;
+    border: 2px solid lightgray;
+    border-color: var(--COLOR-BORDER);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    color: var(--COLOR-GRAY);
+}
+
+.card-item .category {
+    background-color: var(--COLOR-TEST);
+
+    width: 150px;
+    height: 46px;
+    margin: 16px auto;
+    border-radius: 20px;
+    font-size: 19px;
+    line-height: 46px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 2px;
+    color: white;
+}
+.card-item .title {
+    height: 42px;
+    margin: 16px auto;
+    padding: 0 6px;
+    font-size: 20px;
+    line-height: 22px;
+    font-weight: 600;
+    text-align: left;
+}
+.card-item .content {
+    /* padding: 20px; */
+    height: 160px;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    overflow-y: hidden;
+}
+
+.card-item .icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 7px;
+    position: relative;
+    height: 22px;
+    bottom: 24px;
+    margin: 0 auto;
+    margin-top: 28px;
+    width: 100%;
+    font-weight: 200;
+}
+.card-item .icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    filter: invert(60%);
+}
+.card-item .icons span {
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 800;
+}
+.card-item .icons .auto-hidden,
+.card-item .icons .auto-hidden+span {
+    display: none;
+}
+
+
+@media screen and (max-width: 1024px) {
+    content {
+        top: 100px;
+    }
+    .card-container {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+        width: 90%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+}
+@media screen and (max-width: 480px) {
+    .card-container {
+        grid-template-columns: 1fr;
+        column-gap: 20px;
+    }
+}
+
+/* for JavaScript */
+.card-item.expand {
+    grid-column: span 2;
+}
+.expand .icons .auto-hidden,
+.expand .icons .auto-hidden+span {
+    display: inline-block;
+}
+@media screen and (max-width: 768) {
+    .expand {
+        grid-column: none;
+    }
+    .expand .auto-hidden,
+    .expand .auto-hidden+span {
+        display: none;
+    }
+}

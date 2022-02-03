@@ -1,0 +1,46 @@
+/* ICON SVG IMAGES */
+.btn {
+    --IMAGE-URL-MENU: url('/resources/icons/menu.svg');
+    --IMAGE-URL-LOGIN: url('/resources/icons/login.svg');
+    --IMAGE-URL-LOGOUT: url('/resources/icons/logout.svg');
+    --IMAGE-URL-SEARCH: url('/resources/icons/search.svg');   
+}
+
+.icon.heart {
+    background: url('/resources/icons/heart.svg');
+}
+.icon.comment {
+    background: url('/resources/icons/comment.svg');
+}
+.icon.thumb-up {
+    background: url('/resources/icons/thumb-up.svg');
+}
+.icon.thumb-down {
+    background: url('/resources/icons/thumb-down.svg');
+}
+.icon.survey {
+    background: url('/resources/icons/person-check.svg');
+}
+.icon.hits {
+    background: url('/resources/icons/book-open.svg');
+}
+.icon.calendar {
+    background: url('/resources/icons/calendar-multiselect.svg');
+}
+
+.icon.youtube {
+    background: url('/resources/icons/youtube.svg');
+}
+.icon.facebook {
+    background: url('/resources/icons/facebook.svg');
+}
+.icon.twitter {
+    background: url('/resources/icons/twitter.svg');
+}
+.icon.instagram {
+    background: url('/resources/icons/instagram.svg');
+}
+
+.icon.home {
+    background: url('/resources/icons/home.svg');
+}

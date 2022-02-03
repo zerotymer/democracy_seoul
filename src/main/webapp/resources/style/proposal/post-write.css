@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+:root{
+    
+    --COLOR-BORDER: #CCCCCC;
+    
+}
+
+.container1{
+   
+    margin-top: 40px;
+	border:1px solid var(--COLOR-BORDER);
+    border-radius: 12px;
+    box-sizing: border-box;
+   box-shadow: 4px 4px 4px rgba(236, 240, 241, 0.5);
+    min-height: 200px;
+    min-width: 200px;
+
+}
+section .title{
+    width:300px;
+   
+   
+}	
+
+section .editor4 {
+    outline: none;
+    width: 700PX;
+    min-height: 500px;
+    resize: none;
+    
+}
+
+section .commit {
+     margin-right: 20%;
+}
