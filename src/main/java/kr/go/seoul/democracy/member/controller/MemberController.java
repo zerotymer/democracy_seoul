@@ -17,6 +17,38 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
+	//메인 화면에서 로그인 페이지로 이동하는 로직
+	@RequestMapping(value="/member/goLogin.do")
+	public String goLoginPage() {
+		
+		return "member/memberLogin";
+	}
+	
+	
+	//로그인 페이지에서 아이디 찾기 페이지로  가는 로직
+	@RequestMapping(value="/member/goMemberSearchId.do")
+	public String goMemberSearchId() {
+		
+		return "member/memberSearchId";//대소문자 주의
+		
+	}
+	
+	
+    //로그인 페이지에서 '비밀번호 변경 페이지'로 가는 로직
+	@RequestMapping(value="/member/goMemberSearchPwd.do")
+	public String goMemberSearchPwd() {
+		return "member/memberSearchPwd";
+	}
+	
+	
+	//회원가입 페이지로 이동하는 로직
+	@RequestMapping(value="/member/goMemberJoinus.do",method=RequestMethod.GET)
+	public String goMemberJoinus() 
+	{//기본페이지에서 회원가입 누른 사람들 회원가입 페이지로 보내는 메소드
+		return "member/memberJoinus";
+	}
+	
+	
 	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
 	public String login(HttpServletRequest request,
 			Member member

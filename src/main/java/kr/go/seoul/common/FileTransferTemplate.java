@@ -21,10 +21,11 @@ import java.nio.charset.StandardCharsets;
  */
 public class FileTransferTemplate {
     /// FIELDs
-    private final String ENCODING;
-    private final int FILE_SIZE_LIMIT;
-    private final String UPLOAD_ROOT_DIR;
-    private final String UPLOAD_TEMP_DIR;
+    private static final String UPLOAD = "/upload";
+    protected final String ENCODING;
+    protected final int FILE_SIZE_LIMIT;
+    protected final String UPLOAD_ROOT_DIR;
+    protected final String UPLOAD_TEMP_DIR;
 
     /// CONSTRUCTORs
 
@@ -42,10 +43,14 @@ public class FileTransferTemplate {
                                 String uploadTemporaryDir) {
         this.FILE_SIZE_LIMIT = uploadFileSizeLimit;
         this.ENCODING = encoding;
-        this.UPLOAD_ROOT_DIR = servletContext.getRealPath("/upload");
-        this.UPLOAD_TEMP_DIR = servletContext.getRealPath("/upload") + '\\' + uploadTemporaryDir + '\\';
+        this.UPLOAD_ROOT_DIR = servletContext.getRealPath(UPLOAD);
+        this.UPLOAD_TEMP_DIR = servletContext.getRealPath(UPLOAD) + '\\' + uploadTemporaryDir;
+        
+        // 경로설정
+        File file = new File(UPLOAD_TEMP_DIR);
+        if (!file.exists()) file.mkdirs();
 
-        System.err.println(String.format("Info: FileTransferTemplate have set temporary path for upload(%s)", UPLOAD_TEMP_DIR));
+        System.out.println(String.format("Info: FileTransferTemplate have set temporary path for upload(%s)", UPLOAD_TEMP_DIR));
     }
 
     /// METHODs
@@ -55,7 +60,7 @@ public class FileTransferTemplate {
      * @param request 웹요청
      * @param fileParameterName 파라미터명('file')
      * @param targetDir 이동할 디렉토리
-     * @param targetFilename 이동할 파일명
+     * @param targetFilename 이동할 파일명(확장자 포함)
      * @return 이동된 파일 정보
      * @throws IOException
      * @author 신현진
@@ -66,7 +71,8 @@ public class FileTransferTemplate {
                                          String targetFilename) throws IOException {
         MultipartRequest multiRequest = new MultipartRequest(
                 request, UPLOAD_TEMP_DIR, FILE_SIZE_LIMIT, ENCODING, new DefaultFileRenamePolicy());
-        FileTransferInfo file = new FileTransferInfo(fileParameterName);                                                // TODO: CHECK 동시저장 이슈
+        String originalFileName = multiRequest.getFilesystemName(fileParameterName);
+        FileTransferInfo file = new FileTransferInfo(this.UPLOAD_TEMP_DIR, originalFileName);                           // TODO: CHECK 동시저장 이슈
         file.moveTo(UPLOAD_ROOT_DIR + '\\' + targetDir, targetFilename);
         return file;
     }
@@ -86,7 +92,8 @@ public class FileTransferTemplate {
         long currentTime = System.currentTimeMillis();
         MultipartRequest multiRequest = new MultipartRequest(
                 request, UPLOAD_TEMP_DIR, FILE_SIZE_LIMIT, ENCODING, new DefaultFileRenamePolicy());
-        FileTransferInfo file = new FileTransferInfo(fileParameterName);                                                // TODO: CHECK 동시저장 이슈
+        String originalFileName = multiRequest.getFilesystemName(fileParameterName);
+        FileTransferInfo file = new FileTransferInfo(this.UPLOAD_TEMP_DIR, originalFileName);                           // TODO: CHECK 동시저장 이슈
         file.moveTo(UPLOAD_ROOT_DIR + '\\' + targetDir, String.valueOf(currentTime));
         return file;
     }

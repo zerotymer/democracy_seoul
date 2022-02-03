@@ -24,12 +24,11 @@ public class FileTransferInfo {
      * FileTransferInfo를 생성하기 위한 생성자
      * @param filePath 파일 전체 경로
      */
-    public FileTransferInfo(String filePath) {
-        int index = filePath.lastIndexOf('\\') + 1;                                                                     // TODO: CHECK 정상동작여부
-        this.fileName = filePath.substring(0, index);
-        this.originalFileName = filePath.substring(0, index);
-        this.absolutePath = filePath;
-        this.fileSize = FileTransferInfo.getFileSize(filePath);
+    public FileTransferInfo(String path, String fileName) {
+        this.fileName = fileName;
+        this.originalFileName = fileName;
+        this.absolutePath = path + '\\' + fileName;
+        this.fileSize = FileTransferInfo.getFileSize(absolutePath);
     }
 
     /**
