@@ -3,6 +3,21 @@
 <mapper namespace="admin">
   	<!-- SQL QUERYS -->
   	
+  	<!-- 관리자 로그인 -->
+  	<select id="selectLoginAdmin" parameterType="admin" resultType="admin">
+  		SELECT 
+  			adminno as adminNo,
+  			adminid as adminId,
+  			adminpwd as adminPwd,
+  			adminname as adminName,
+  			admingrade as adminGrade,
+  			admindate as adminDate,
+  			adminemail as adminEmail,
+  			admindepart as adminDepart
+  		FROM
+  			admin
+  		WHERE adminid = #{adminId} and adminpwd = #{adminPwd} and adminGrade = 'N'
+  	</select>
   	
   	
 </mapper>

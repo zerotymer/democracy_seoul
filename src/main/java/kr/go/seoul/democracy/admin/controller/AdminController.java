@@ -14,13 +14,13 @@ import kr.go.seoul.democracy.admin.model.vo.Admin;
 public class AdminController {
 	
 	@Autowired
-	private AdminService AdminService;
+	private AdminService aService;
 	
-	@RequestMapping(value="/admin/AdminLogin.do", method = RequestMethod.POST)
+	@RequestMapping(value="/admin/adminLogin.do", method = RequestMethod.POST)
 	private void login(HttpServletRequest request,
 						 Admin admin)
 	{
-		System.out.println("Login 로직 정상 호출");
+		Admin a = aService.selectLoginAdmin(admin);
 	}
 
 }
