@@ -1,10 +1,10 @@
 package kr.go.seoul.democracy.test.controller;
 
-import kr.go.seoul.democracy.common.FileTransferTemplate;
-import kr.go.seoul.democracy.common.transfer.FileTransferInfo;
+import kr.go.seoul.common.FileTransferTemplate;
+import kr.go.seoul.common.transfer.FileTransferInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,7 +12,6 @@ import kr.go.seoul.democracy.test.model.service.TestService;
 import kr.go.seoul.democracy.test.model.service.TestServiceImpl;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -70,8 +69,11 @@ public class TestController {
      */
     @RequestMapping(value = "/test/fileDownload.do", method = RequestMethod.GET)
     public String testDownload(HttpServletResponse response) throws IOException {
+
         // 비즈니스 로직 - 알아서 만드세요.
-        FileTransferInfo info = new FileTransferInfo("원본파일명", "바뀐파일명", "파일경로", 0);                            // 데이터 연결
+
+
+        FileTransferInfo info = new FileTransferInfo("원본파일명", "바뀐파일명", "파일경로", 0);                            // 데이터 연결. 0: 파일크기
         fileTemplate.fileTransfer(response, info);                                                                      // 전송처리
         return "index";
     }
