@@ -69,7 +69,7 @@ public class MemberController {
 					return "member/loginFail";
 				}
 				
-				}
+			}
 	
 
 }
