@@ -71,17 +71,20 @@
 	<div class="wrapper">
         <div class="login_form">
             <div class="image">  
-            <img src="/src/main/webapp/WEB-INF/image/main_logo.png"> 
+            <img src="/src/main/webapp/resources/images/adminmain_logo.png"> 
             </div>
             <div class="img_admin_icon">  
-            <img src="/src/main/webapp/WEB-INF/image/admin_icon.png">
+            <img src="/src/main/webapp/resources/images/admin_icon.png">
             </div>
             <div class="text">
             <H3>관리자 로그인</H3>
             </div>
             <div class="enter">
-                아이디 &nbsp;&nbsp; <input type="text" size="15"/><br>
-                비밀번호 <input type="password" size="15"/>
+                <form id="adminLoginForm" action="/admin/adminLogin.do" method="post">
+                	아이디 &nbsp;&nbsp; <input type="text" size="15"/><br>
+               		비밀번호 <input type="password" size="15"/>
+            		<input type="submit" value="로그인"/>
+            	</form>
             </div>
         </div>
     </div>
