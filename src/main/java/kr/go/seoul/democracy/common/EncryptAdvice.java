@@ -28,7 +28,7 @@ public class EncryptAdvice {
 		public void encryptPasswordForMember(JoinPoint jp) throws NoSuchAlgorithmException {
 			if (!(jp.getArgs()[0] instanceof Member)) return;
 
-			Member member = jp.getArgs()[0] == null ? null : (Member) jp.getArgs()[0];
+			Member member = jp.getArgs()[0] != null ? (Member) jp.getArgs()[0] : null;
 			if (member == null) return;
 
 			String data = this.template.encryptString(member.getUserPwd(), member.getUserId());

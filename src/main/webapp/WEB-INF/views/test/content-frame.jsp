@@ -89,10 +89,10 @@
                 </div>
             </div>
         </div>
-    </section>
 
-    <div class="footer-gap">
-    </div>
+        <div>
+        </div>
+    </section>
 
     <footer>
         <%@ include file="/resources/include/footer.jsp" %>
