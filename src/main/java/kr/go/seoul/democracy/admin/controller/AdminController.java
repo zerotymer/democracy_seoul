@@ -55,6 +55,22 @@ public class AdminController {
 	}
 	
 	
+	@RequestMapping(value="/admin/adminMyPage.do")
+	public String myPagePassCheck(HttpServletRequest request,
+								@SessionAttribute Admin admin,
+								HttpSession session)
+	{
+		String adminPwd = request.getParameter("adminPwd");
+		
+		if(adminPwd == null)
+		{
+			return "admin/myPagePassCheck";
+		}else {
+			return null;
+		}
+	}
+	
+	
 	
 	
 	
