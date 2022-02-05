@@ -42,7 +42,7 @@ public class ProposalController {
 	
 	
 	@RequestMapping(value="/proposal/proposalAllList.do")
-	public ModelAndView allList(@RequestParam(defaultValue="proposalTilte")String searchOption,
+	public ModelAndView allList(@RequestParam(value="proposalTilte", required=false)String searchOption,
 			@RequestParam(defaultValue="")String keyword,
 			@RequestParam(defaultValue="1")int curPage) throws Exception{
 
@@ -55,11 +55,13 @@ public class ProposalController {
 	
 	@RequestMapping(value="/proposal/post.do")
 	public ModelAndView proposalview(
-		@RequestParam(value="proposalNo",defaultValue="1")int proposalNo,HttpSession session) throws Exception{
+		@RequestParam(value="proposalNo",defaultValue="1")int proposalNo,
+		HttpSession session) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("proposal/post");
-		mav.addObject("Proposal",pService.proposalView(proposalNo));
+		mav.addObject("proposal", pService.proposalView(proposalNo));
+		
 		logger.info("mav",mav);
 		return mav;
 	}

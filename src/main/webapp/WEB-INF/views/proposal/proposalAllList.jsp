@@ -164,7 +164,7 @@
 					<c:forEach items="${requestScope.list }" var="proposal" varStatus="i"> 
 			            <div class="card-item survey">
 			                <div class="category">TEST</div>
-			                <div class="title"><a href="/proposal/post.do?proposalNo=${proposalView.proposalNO}">${proposal.proposalTitle }</div>
+			                <div class="title"><a href="/proposal/post.do?proposalNo=${proposal.proposalNo}">${proposal.proposalTitle }</div>
 			                <div class="content">${proposal.proposalContent }</div>
 			                <div class="icons">
 			                    <object class="icon hits auto-hidden"></object>
