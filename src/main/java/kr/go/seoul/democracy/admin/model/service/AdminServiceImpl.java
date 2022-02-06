@@ -28,4 +28,10 @@ public class AdminServiceImpl implements AdminService{
 		return aDAO.updatePassword(map);
 	}
 
+	@Override
+	public int updateWithdraw(String adminId, String adminPwd) {
+		
+		return aDAO.updateWithdraw(adminId, adminPwd);
+	}
+
 }

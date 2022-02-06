@@ -26,4 +26,14 @@ public class AdminDAO {
 		return sqlSession.update("admin.updatePassword", map);
 	}
 
+	public int updateWithdraw(String adminId, String adminPwd) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("adminId", adminId);
+		map.put("adminPwd", adminPwd);
+		
+		return sqlSession.update("admin.updateWithdraw", map);
+	}
+
 }

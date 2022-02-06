@@ -10,4 +10,6 @@ public interface AdminService {
 
 	int updatePassword(HashMap<String, Object> map);
 
+	int updateWithdraw(String adminId, String adminPwd);
+
 }

@@ -122,6 +122,58 @@ public class AdminController {
 		
 	}
 	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.06
+	 * Description : 관리자 탈퇴 메소드
+	 */
+	/*@RequestMapping(value="/admin/adminWithDraw.do")
+	public String adminWithDraw(HttpServletRequest request, 
+						   		Model model, 
+						   		@SessionAttribute Admin admin,
+						   		HttpSession session) //throws IOException
+	{
+		String adminPwd = request.getParameter("adminPwd");
+		
+		if(adminPwd == null)
+		{
+			return "admin/adminWithDrawCheck";
+		}
+		
+		String agree = request.getParameter("agree");
+		
+		if(agree == null || !agree.equals("Y"))
+		{
+			model.addAttribute("adminMsg", "동의를 하지 않으면 탈퇴를 할 수 없습니다.");
+			model.addAttribute("location", "/admin/adminWithDraw.do");
+			return "admin/adminMsg";
+		}
+		
+		String adminId = admin.getAdminId();
+		
+		int result = aService.updateWithdraw(adminId, adminPwd);
+		
+		if(result>0)
+		{
+			session.invalidate();
+			model.addAttribute("adminMsg", "정상 탈퇴처리 되었습니다.");
+			model.addAttribute("location", "/");
+		}else {
+			model.addAttribute("adminMsg", "비밀번호가 일치하지 않습니다. 재확인해주세요.");
+			model.addAttribute("location", "/admin/adminWithDraw.do");
+		
+			return "admin/adminMsg";
+		}
+	}*/
+
+	
+	
+	@RequestMapping(value="/member/joinPage.do", method = RequestMethod.GET)
+	public String joinPage() 
+	{
+		return "member/joinPage";
+	}
+	
 	
 	
 	
