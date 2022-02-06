@@ -1,5 +1,7 @@
 package kr.go.seoul.democracy.admin.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +19,11 @@ public class AdminDAO {
 	public Admin selectLoginAdmin(Admin admin) {
 		
 		return sqlSession.selectOne("admin.selectLoginAdmin", admin);
+	}
+
+	public int updatePassword(HashMap<String, Object> map) {
+		
+		return sqlSession.update("admin.updatePassword", map);
 	}
 
 }

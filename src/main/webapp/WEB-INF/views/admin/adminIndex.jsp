@@ -33,8 +33,8 @@
 			<form id="loginForm" action="/admin/adminLogin.do" method="post">
 				<fieldset>
 					<legend>로그인</legend>
-					ID : <input type="text" name="userId"/><br>
-					PW : <input type="password" name="userPwd"/><br>
+					ID : <input type="text" name="adminId"/><br>
+					PW : <input type="password" name="adminPwd"/><br>
 					<input type="submit" value="로그인"/>
 				</fieldset>
 			</form>
