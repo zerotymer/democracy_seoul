@@ -27,22 +27,19 @@
             z-index: 10;
         }
 
-        content {
+        section {
             position: relative;
             width: 100%;
             min-height: 90vh;
-            overflow: scroll;
+            /* overflow: scroll; */
         }
     </style>
 </head>
 
 <body>
     <header>
-        <%@ include file="/resources/include/header.jsp" %>
+        <%@ include file="/includes/header.jsp" %>
     </header>
-
-    <div class="header-gap">
-    </div>
 
     <section>
         <div>
@@ -109,6 +106,9 @@
                 <div class="category">제안</div>
                 <div class="title">제목4</div>
                 <div class="content">내용</div>
+                <div class="thumnail">
+                    <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
+                </div>
                 <div class="icons">
                     <object class="icon hits auto-hidden"></object>
                     <span>212</span>
@@ -124,6 +124,9 @@
                 <div class="category">토론</div>
                 <div class="title">제목5</div>
                 <div class="content">내용</div>
+                <div class="thumnail">
+                    <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
+                </div>
                 <div class="icons">
                     <object class="icon hits auto-hidden"></object>
                     <span>212</span>
@@ -139,6 +142,9 @@
                 <div class="category">토론</div>
                 <div class="title">제목6</div>
                 <div class="content">내용</div>
+                <div class="thumnail">
+                    <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
+                </div>
                 <div class="icons">
                     <object class="icon hits auto-hidden"></object>
                     <span>212</span>
@@ -154,6 +160,9 @@
                 <div class="category">설문</div>
                 <div class="title">제목7</div>
                 <div class="content">내용</div>
+                <div class="thumnail">
+                    <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
+                </div>
                 <div class="icons">
                     <object class="icon hits auto-hidden"></object>
                     <span>212</span>
@@ -169,6 +178,9 @@
                 <div class="category">설문</div>
                 <div class="title">제목8</div>
                 <div class="content">내용</div>
+                <div class="thumnail">
+                    <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
+                </div>
                 <div class="icons">
                     <object class="icon hits auto-hidden"></object>
                     <span>212</span>
@@ -183,11 +195,9 @@
         </div>
     </section>
 
-    <div class="footer-gap">
-    </div>
 
     <footer>
-        <%@ include file="/resources/include/footer.jsp" %>
+        <%@ include file="/includes/footer.jsp" %>
     </footer>
     
     <script src="/resources/script/header.js"></script>

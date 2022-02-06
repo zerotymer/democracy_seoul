@@ -1,0 +1,21 @@
+.card-item {
+    height: 450px;
+    /* text-align: center; */
+}
+.card-item .icons {
+    bottom: 68px;
+}
+.card-item .detail-btn {
+    width: 80%;
+    height: 44px;
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    line-height: 44px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: var(--COLOR-DARK-GRAY);
+    color: white;
+    text-decoration: none;
+    transform: translateX(-50%);
+}
