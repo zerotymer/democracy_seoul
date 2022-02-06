@@ -22,6 +22,11 @@ public class DiscussServiceImpl implements DiscussService {
 	}
 
 	@Override
+	public int discussTotalCount() {
+		return dDAO.discussTotalCount();
+	}
+
+	@Override
 	public Discuss discussOne(int discussNo) {
 		return dDAO.discussOne(discussNo);
 	}
@@ -34,6 +39,11 @@ public class DiscussServiceImpl implements DiscussService {
 	@Override
 	public ArrayList<DiscussComment> conComment(int discussNo) {
 		return dDAO.conComment(discussNo);
+	}
+
+	@Override
+	public int commentTotalCount(int discussNo) {
+		return dDAO.commentTotalCount(discussNo);
 	}
 
 	@Override

@@ -9,13 +9,18 @@ import kr.go.seoul.democracy.discuss.model.vo.DiscussFile;
 public interface DiscussService {
 
 	ArrayList<Discuss> discussList();
+	
+	int discussTotalCount();
 
 	Discuss discussOne(int discussNo);
 
 	ArrayList<DiscussComment> proComment(int discussNo);
 
 	ArrayList<DiscussComment> conComment(int discussNo);
+	
+	int commentTotalCount(int discussNo);
 
 	ArrayList<DiscussFile> file(int discussNo);
+
 
 }

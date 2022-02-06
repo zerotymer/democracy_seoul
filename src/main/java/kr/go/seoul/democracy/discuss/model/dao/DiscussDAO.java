@@ -21,6 +21,10 @@ public class DiscussDAO {
 		return new ArrayList<Discuss>(sqlSession.selectList("discuss.list"));
 	}
 
+	public int discussTotalCount() {
+		return sqlSession.selectOne("discuss.discussTotalCount");
+	}
+
 	public Discuss discussOne(int discussNo) {
 		return sqlSession.selectOne("discuss.onePost",discussNo);
 	}
@@ -33,7 +37,12 @@ public class DiscussDAO {
 		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.conCommentList"));
 	}
 
+	public int commentTotalCount(int discussNo) {
+		return sqlSession.selectOne("discuss.commentTotalCount");
+	}
+
 	public ArrayList<DiscussFile> file(int discussNo) {
 		return new ArrayList<DiscussFile>(sqlSession.selectList("discuss.fileList"));
 	}
+
 }
