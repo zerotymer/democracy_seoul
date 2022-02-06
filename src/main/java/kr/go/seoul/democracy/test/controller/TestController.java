@@ -1,25 +1,32 @@
 package kr.go.seoul.democracy.test.controller;
 
-import kr.go.seoul.common.FileTransferTemplate;
-import kr.go.seoul.democracy.test.model.service.TestService;
-import kr.go.seoul.democracy.test.model.service.TestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.go.seoul.common.FileTransferTemplate;
+import kr.go.seoul.democracy.common.model.vo.Member;
+import kr.go.seoul.democracy.member.model.service.MemberService;
+import kr.go.seoul.democracy.member.model.service.MemberServiceImpl;
+import kr.go.seoul.democracy.test.model.service.TestService;
+import kr.go.seoul.democracy.test.model.service.TestServiceImpl;
 
 @Controller("testController")
 public class TestController {
     /// FIELDs
     private TestService testService;
     private FileTransferTemplate fileTemplate;
+    private MemberService mService;
 
     /// CONSTRUCTORs
     @Autowired
     public TestController(@Qualifier("testServiceImpl") TestServiceImpl testService,
-                          @Qualifier("fileTransferTemplate") FileTransferTemplate fileTemplate) {
+                          @Qualifier("fileTransferTemplate") FileTransferTemplate fileTemplate,
+                          @Qualifier("memberServiceImpl") MemberServiceImpl mService) {
         this.testService = testService;
         this.fileTemplate = fileTemplate;
+        this.mService = mService;
     }
 
     /// METHODs
@@ -50,6 +57,16 @@ public class TestController {
     @RequestMapping("/test/survey.do")
     public String test6() {
         return "test/list-survey";
+    }
+    
+    @RequestMapping("/test/member.do")
+    public String test7() {
+    	System.err.println("test");
+    	Member m = new Member();
+    	m.setUserId("1234");
+    	m.setUserPwd("1234");
+    	mService.selectLoginMember(m);
+    	return "index";
     }
 
 }
