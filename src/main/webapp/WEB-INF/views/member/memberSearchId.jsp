@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
-<link rel="stylesheet" href="/resources/style/member/commons/default.css">
-<link rel="stylesheet" href="/resources/style/member/commons/common.css">
-<link rel="stylesheet" href="/resources/style/member/css/memberSearchId.css">
+<link rel="stylesheet" href="/resources/style/default.css">
+<link rel="stylesheet" href="/resources/style/common.css">
+<link rel="stylesheet" href="/resources/style/member/memberSearchId.css">
 </head>
 
 
@@ -19,10 +19,10 @@
 	<div class="bg-color">
 		<div class="box-white">
 			<div class="tab-search">
-				<a href="/member/goMemberSearchId.do">아이디 찾기</a>
+				<a href="/member/goMemberSearchId.do"><H1>아이디 찾기</H1></a>
 			</div>
 			<form action="/member/memberSearchId.do" method="get">
-                <input type="text" id="name" class="input-style" name="name" placeholder="이름 입력"><br>
+                <input type="text" id="nick" class="input-style" name="nick" placeholder="닉네임 입력"><br>
 				<input type="email" id="email" class="input-style" name="email" placeholder="이메일 입력"><br>
 				<span id="emailCheck" class="check-msg"></span><br>
 				<input type="submit" id="searchId" onclick="submitSearchId();" class="btn-searchId" value="아이디 찾기">
