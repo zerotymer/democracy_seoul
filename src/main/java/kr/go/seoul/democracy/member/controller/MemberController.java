@@ -270,6 +270,4 @@ public class MemberController {
         System.err.println(info);                                                                                       // 이동한 파일 정보
         return "index";
     }
-	
-
 }

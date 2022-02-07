@@ -340,3 +340,5 @@ GitHub.sublime-settings
 artsuwon.iml
 
 WebContent/test/
+
+!src/main/webapp/WEB-INF/lib/*

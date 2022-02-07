@@ -7,6 +7,7 @@
     --COLOR-DARK: #2C3F50;
 
     --COLOR-GRAY: #7B8789;
+    --COLOR-DARK-GRAY: #333;
 }
 
 .card-item {
@@ -16,18 +17,34 @@
     /* --COLOR-SURVEY: var(--COLOR-GREEN); */
     /* --COLOR-SUGGEST: var(--COLOR-RED); */
 }
+.rect {
+    z-index: 0;
+}
 
 /* SUGGEST: 제안 */
 .card-item.suggest .category {
-    background-color: var(--COLOR-SUGGEST);
+    background-color: var(--COLOR-YELLOW);
 }
 
 /* DISCUSSION: 토론 */
 .card-item.discussion .category {
-    background-color: var(--COLOR-DISCUSSION);
+    background-color: var(--COLOR-RED);
 }
 
 /* SURVEY: 투표 */
 .card-item.survey .category {
-    background-color: var(--COLOR-SURVEY);
+    background-color: var(--COLOR-BLUE);
+}
+
+
+
+.rect.suggest {
+    background-color: var(--COLOR-YELLOW);
+}
+
+
+
+.btn.suggest {
+    background-color: var(--COLOR-YELLOW);
+    color: white;
 }
