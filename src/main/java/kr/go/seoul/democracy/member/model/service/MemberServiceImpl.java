@@ -12,17 +12,65 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO mDAO; 
 	
+	
+	//common-context.xml에 이메일 설정 추가
+	
 	@Override
 	public Member selectLoginMember(Member member) {
 		
 		System.out.println("[MemberService] - selectLoginMember 메소드 호출");
 		
-		Member m = mDAO.selectLoginMember(member);
-		
+		return mDAO.selectLoginMember(member);
+	}
+	
+	
 
-		return m;
+	@Override
+	public int insertMember(Member member) {
+	
 		
+		return mDAO.insertMember(member);
+		
+	}
+
+
+
+	@Override
+	public int selectIdCheck(String userId) {
+
+		
+		return mDAO.selectIdCheck(userId);
+		
+	}
+
+
+
+	@Override
+	public int selectNickCheck(String nick) {
+		
+		return mDAO.selectNickCheck(nick);
+	}
+
+
+
+	@Override
+	public int selectEmailCheck(String email) {
+		
+		return mDAO.selectEmailCheck(email);
 	}
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

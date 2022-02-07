@@ -16,8 +16,32 @@
   			admindepart as adminDepart
   		FROM
   			admin
-  		WHERE adminid = #{adminId} and adminpwd = #{adminPwd} and adminGrade = 'N'
+  		WHERE adminid = #{adminId} and adminpwd = #{adminPwd} and adminGrade = 'N' 
   	</select>
+  	<!-- or로 adminGrade를 적어야할 것 같은데 모르겠다.. 0 or 1or 2 여야 한다 -->
   	
+  	
+  	
+  	<!-- 관리자 비밀번호 변경 -->
+  	<update id="updatePassword" parameterType="hashmap">
+		UPDATE
+			ADMIN
+		SET
+			adminPwd = #{adminNewPass}
+		WHERE
+			adminId = #{adminId} AND adminPwd = #{adminOriginalPass}
+	</update>
+	
+	
+	<!-- 관리자 탈퇴 -->
+	<update id="updateWithdraw" parameterType="hashmap">
+		UPDATE
+			ADMIN
+		SET
+			ADMIN_GRADE = 'Y'
+		WHERE 
+			ADMIN_ID = #{adminId} AND ADMIN_PWD = #{adminPwd}
+	</update>
+	
   	
 </mapper>
