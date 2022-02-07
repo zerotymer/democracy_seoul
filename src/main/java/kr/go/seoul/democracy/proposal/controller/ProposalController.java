@@ -29,7 +29,7 @@ public class ProposalController {
 	@Qualifier("proposalServiceImpl")
 	private ProposalService pService;	
 	
-	@RequestMapping("/test/dwdw.do")
+	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.POST)
 	public String test() {
 		return "index";
 	}
@@ -41,10 +41,10 @@ public class ProposalController {
 	
 	
 	
-	@RequestMapping(value="/proposal/proposalAllList.do")
+	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.POST)
 	public ModelAndView allList(@RequestParam(value="proposalTilte", required=false)String searchOption,
 			@RequestParam(defaultValue="")String keyword,
-			@RequestParam(defaultValue="1")int curPage) throws Exception{
+			@RequestParam(required=false, defaultValue="1")int curPage) throws Exception{
 
 		List<Proposal> list = pService.selectAllList();
 		ModelAndView mav = new ModelAndView(); //모델(데이터)+뷰(화면) 함께 전달하는 객체
@@ -53,7 +53,7 @@ public class ProposalController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/proposal/post.do")
+	@RequestMapping(value="/proposal/post.do", method = RequestMethod.POST)
 	public ModelAndView proposalview(
 		@RequestParam(value="proposalNo",defaultValue="1")int proposalNo,
 		HttpSession session) throws Exception {

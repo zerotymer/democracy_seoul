@@ -38,4 +38,10 @@ public class TestController2 {
     	
         return "proposal/proposalAllList";
     }
+    
+    @RequestMapping("/dw3.do")
+    public String test3() {
+    	
+        return "survey/test";
+    }
 }
