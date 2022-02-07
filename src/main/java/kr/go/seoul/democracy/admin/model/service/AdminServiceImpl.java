@@ -34,4 +34,10 @@ public class AdminServiceImpl implements AdminService{
 		return aDAO.updateWithdraw(adminId, adminPwd);
 	}
 
+	@Override
+	public int insertAdminMember(Admin a) {
+		
+		return aDAO.insertAdminMember(a);
+	}
+
 }

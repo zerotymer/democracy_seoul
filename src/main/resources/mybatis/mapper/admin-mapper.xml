@@ -16,9 +16,8 @@
   			admindepart as adminDepart
   		FROM
   			admin
-  		WHERE adminid = #{adminId} and adminpwd = #{adminPwd} and adminGrade = 'N' 
+  		WHERE adminid = #{adminId} and adminpwd = #{adminPwd} and adminGrade != 'W' 
   	</select>
-  	<!-- or로 adminGrade를 적어야할 것 같은데 모르겠다.. 0 or 1or 2 여야 한다 -->
   	
   	
   	
@@ -42,6 +41,13 @@
 		WHERE 
 			ADMIN_ID = #{adminId} AND ADMIN_PWD = #{adminPwd}
 	</update>
+	
+	<!-- 관리자 가입 -->
+	<insert id="insertAdminMember" parameterType="admin">
+		INSERT INTO 
+			ADMIN 
+		VALUES (ADMIN_SEQ.NEXTVAL, #{adminId}, #{adminPwd}, #{adminName}, '1', current_date, #{adminEmail}, '기획부')
+	</insert>
 	
   	
 </mapper>

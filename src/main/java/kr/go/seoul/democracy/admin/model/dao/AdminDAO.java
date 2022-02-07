@@ -36,4 +36,9 @@ public class AdminDAO {
 		return sqlSession.update("admin.updateWithdraw", map);
 	}
 
+	public int insertAdminMember(Admin a) {
+		
+		return sqlSession.insert("admin.insertAdminMember", a);
+	}
+
 }

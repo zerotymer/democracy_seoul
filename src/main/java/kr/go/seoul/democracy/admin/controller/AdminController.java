@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.go.seoul.democracy.admin.model.service.AdminService;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
@@ -126,8 +127,9 @@ public class AdminController {
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.06
 	 * Description : 관리자 탈퇴 메소드
+	 * @return 
 	 */
-	/*@RequestMapping(value="/admin/adminWithDraw.do")
+	@RequestMapping(value="/admin/adminWithDraw.do")
 	public String adminWithDraw(HttpServletRequest request, 
 						   		Model model, 
 						   		@SessionAttribute Admin admin,
@@ -161,21 +163,74 @@ public class AdminController {
 		}else {
 			model.addAttribute("adminMsg", "비밀번호가 일치하지 않습니다. 재확인해주세요.");
 			model.addAttribute("location", "/admin/adminWithDraw.do");
-		
-			return "admin/adminMsg";
 		}
-	}*/
+		
+		return "admin/adminMsg";
+	}
 
 	
-	
-	@RequestMapping(value="/member/joinPage.do", method = RequestMethod.GET)
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.07
+	 * Description : 관리자 가입 페이지로 이동하는 메소드
+	 */
+	@RequestMapping(value="/admin/adminJoinPage.do", method = RequestMethod.GET)
 	public String joinPage() 
 	{
-		return "member/joinPage";
+		return "admin/adminJoinPage";
 	}
 	
 	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.07
+	 * Description : 관리자 가입 메소드
+	 */
+	@RequestMapping(value="/admin/adminJoin.do", method = RequestMethod.POST)
+	public ModelAndView memberJoinus(Admin a, 
+									 ModelAndView mav)
+	{
+		int result = aService.insertAdminMember(a);
+		
+		if(result>0)
+		{
+			mav.addObject("msg", "관리자 가입 성공");
+			mav.addObject("location", "/");
+			
+		}else {
+			
+			mav.addObject("msg", "관리자 가입 실패");
+			mav.addObject("location", "/admin/adminJoinPage.do");
+		}
+		
+		mav.setViewName("admin/adminMsg"); //return 대신
+		
+		return mav;
+		
+	}
 	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.07
+	 * Description : 관리자 ID 중복체크 메소드
+	 */
+	@RequestMapping(value="/admin/adminIdCheck.do", method = RequestMethod.GET)
+	public void memberIdCheck(@RequestParam String adminId, 
+							  HttpServletResponse response) throws IOException
+	{ 
+		int result = aService.selectAdminIdCheck(adminId);
+		
+		if(result>0)
+		{
+			response.getWriter().print(true);
+			
+		}else {
+			response.getWriter().print(false);
+		}
+		
+		
+	}
 	
 	
 	

@@ -12,4 +12,6 @@ public interface AdminService {
 
 	int updateWithdraw(String adminId, String adminPwd);
 
+	int insertAdminMember(Admin a);
+
 }
