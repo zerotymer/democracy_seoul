@@ -1,16 +1,15 @@
 package kr.go.seoul.democracy.test.controller;
 
+import kr.go.seoul.common.FileTransferTemplate;
+import kr.go.seoul.democracy.common.model.vo.Member;
+import kr.go.seoul.democracy.member.model.service.MemberService;
+import kr.go.seoul.democracy.test.model.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.go.seoul.common.FileTransferTemplate;
-import kr.go.seoul.democracy.common.model.vo.Member;
-import kr.go.seoul.democracy.member.model.service.MemberService;
-import kr.go.seoul.democracy.member.model.service.MemberServiceImpl;
-import kr.go.seoul.democracy.test.model.service.TestService;
-import kr.go.seoul.democracy.test.model.service.TestServiceImpl;
+import java.util.HashMap;
 
 @Controller("testController")
 public class TestController {
@@ -69,5 +68,13 @@ public class TestController {
     	mService.selectLoginMember(m);
     	return "index";
     }
-
+    @RequestMapping("/test/hashmap.do")
+    public String hashMapTest() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", "1111");
+        map.put("userid", "1111");
+        map.put("userPwd", "1111");
+        testService.hashmapTest(map);
+        return "index";
+    }
 }

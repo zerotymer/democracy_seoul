@@ -1,5 +1,8 @@
 package kr.go.seoul.democracy.test.model.service;
 
+import java.util.HashMap;
+
 public interface TestService {
-   public String selectSysdate();
+   String selectSysdate();
+   String hashmapTest(HashMap<String, Object> map);
 }
