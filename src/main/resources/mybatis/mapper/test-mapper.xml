@@ -3,6 +3,6 @@
 <mapper namespace="test">
 	<!-- SQL QUERYS -->
 	<select id="date" resultType="string">
-		SELECT SYSDATE FROM dual
+		SELECT SYSDATE, SYSTIMESTAMP, current_date, current_timestamp FROM dual
 	</select>
 </mapper>
