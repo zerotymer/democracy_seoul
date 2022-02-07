@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -231,6 +232,53 @@ public class AdminController {
 		
 		
 	}
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.07
+	 * Description : 모든 회원 정보 가져오는 메소드
+	 */
+	@RequestMapping(value="/admin/allMemberList.do", method=RequestMethod.GET)
+	public ModelAndView allMemberList(ModelAndView mav)
+	{
+		ArrayList<Admin> list = aService.selectAllMemberList();
+		mav.addObject("list", list);
+		mav.setViewName("admin/allMemberList");
+		
+		return mav;
+		
+	}
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.07
+	 * Description : 탈퇴 여부 버튼 변경 메소드
+	 */
+	@RequestMapping(value="/admin/memberEndYNChange.do", method=RequestMethod.POST)
+	public void memberEndYNChange(@RequestParam int userNo, @RequestParam char endYN, HttpServletResponse response)
+	throws IOException
+	{
+		//중간 확인 System.out.println("userNo : " + userNo + " / endYN : " + endYN);
+		
+		//삼항 연산자
+		endYN = endYN=='Y'?'N':'Y';
+		
+		int result = mService.updateMemberEndYNChange(userNo, endYN);
+		
+		if(result>0)
+		{
+			response.getWriter().print(endYN);
+		}else {
+			response.getWriter().print(false);
+		}
+		
+		
+	}
+	
+	
+	
 	
 	
 	

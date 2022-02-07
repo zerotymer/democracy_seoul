@@ -1,5 +1,6 @@
 package kr.go.seoul.democracy.admin.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -39,6 +40,16 @@ public class AdminDAO {
 	public int insertAdminMember(Admin a) {
 		
 		return sqlSession.insert("admin.insertAdminMember", a);
+	}
+
+	public int selectAdminIdCheck(String adminId) {
+		
+		return sqlSession.selectOne("admin.selectAdminIdCheck", adminId) != null? 1:0;
+	}
+
+	public ArrayList<Admin> selectAllMemberList() {
+		
+		return new ArrayList<Admin>(sqlSession.selectList("admin.selectAllMemberList"));
 	}
 
 }

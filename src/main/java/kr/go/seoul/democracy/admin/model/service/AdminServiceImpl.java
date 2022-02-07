@@ -1,5 +1,6 @@
 package kr.go.seoul.democracy.admin.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,18 @@ public class AdminServiceImpl implements AdminService{
 	public int insertAdminMember(Admin a) {
 		
 		return aDAO.insertAdminMember(a);
+	}
+
+	@Override
+	public int selectAdminIdCheck(String adminId) {
+		
+		return aDAO.selectAdminIdCheck(adminId);
+	}
+
+	@Override
+	public ArrayList<Admin> selectAllMemberList() {
+		
+		return aDAO.selectAllMemberList();
 	}
 
 }

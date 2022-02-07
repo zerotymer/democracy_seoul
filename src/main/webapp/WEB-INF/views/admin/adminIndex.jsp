@@ -25,8 +25,8 @@
 		<c:when test="${sessionScope.admin != null }">
 			[<a href="/admin/myPage.do">${sessionScope.admin.adminName }</a>]님 환영합니다. <a href="/admin/adminLogout.do">로그아웃</a><br>
 			<a href="/admin/adminMyPage.do">마이 페이지</a><br>
-			<a href="/admin/adminWithDraw.do">회원 탈퇴</a><br>
-			<a href="/admin/memberAllList.do">전체 회원 리스트</a><br>
+			<a href="/admin/adminWithDraw.do">관리자 탈퇴</a><br>
+			<a href="/admin/allMemberList.do">전체 회원 리스트</a><br>
 		</c:when>
 		
 		<c:otherwise>
