@@ -16,9 +16,12 @@ public class TestServiceImpl implements TestService {
         this.tDAO = tDAO;
     }
 
+    
+    
     /// METHODs
-
     public String selectSysdate() {
+    	System.out.println("TestService - selectSysdate()");
+    	System.out.println("1111");
         return tDAO.selectSysdate();
     }
 }

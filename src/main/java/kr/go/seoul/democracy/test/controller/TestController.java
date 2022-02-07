@@ -21,9 +21,9 @@ public class TestController {
 
     /// CONSTRUCTORs
     @Autowired
-    public TestController(@Qualifier("testServiceImpl") TestServiceImpl testService,
+    public TestController(@Qualifier("testServiceImpl") TestService testService,
                           @Qualifier("fileTransferTemplate") FileTransferTemplate fileTemplate,
-                          @Qualifier("memberServiceImpl") MemberServiceImpl mService) {
+                          @Qualifier("memberServiceImpl") MemberService mService) {
         this.testService = testService;
         this.fileTemplate = fileTemplate;
         this.mService = mService;
@@ -32,7 +32,9 @@ public class TestController {
     /// METHODs
     @RequestMapping("/test.do")
     public String test() {
-        System.err.println(testService.selectSysdate());
+    	System.out.println("TestController - test() start");
+        System.out.println(testService.selectSysdate());
+        System.out.println("TestController - test() end");
         return "index";
     }
 
@@ -61,7 +63,6 @@ public class TestController {
     
     @RequestMapping("/test/member.do")
     public String test7() {
-    	System.err.println("test");
     	Member m = new Member();
     	m.setUserId("1234");
     	m.setUserPwd("1234");

@@ -10,7 +10,7 @@
 	<!-- Load Resources -->
 	<util:properties id="settings" location="classpath:/settings.properties" />
 
-	<!-- Encription Template -->
+	<!-- Encryption Template -->
 	<bean id="encryptionTemplate" class="kr.go.seoul.democracy.common.EncryptionTemplate">
 		<constructor-arg value="#{settings['encryption.method']}" />
 		<constructor-arg value="#{settings['encryption.key']}" />
@@ -23,17 +23,19 @@
 
 	<!-- config -->
 	<aop:config>
-		<!-- PointCut -->
-		<aop:pointcut id="memberEncryptionPointCut" expression="execution(* kr..service.*.*Member(kr.go.seoul.democracy.common.model.vo.Member))"/>
-		<aop:pointcut id="memberHashMapPointCut" expression="execution(* kr..service.*.*Member(java..HashMap))"/>
-		
 		<!-- aspect -->
-		<aop:aspect ref="encryptAdvice">
+		<aop:aspect id="nonameAspect" ref="encryptAdvice">
+			<!-- PointCut -->
+			<aop:pointcut id="memberEncryptionPointCut" expression="execution(* kr..service.*.*Member(kr.go.seoul.democracy.common.model.vo.Member))"/>
+			<aop:pointcut id="memberHashMapPointCut" expression="execution(* kr..service.*.*Member(java..HashMap))"/>
+			<aop:pointcut id="allPointCut" expression="execution(* kr..*ServiceImpl.*(..))"/>
+			<aop:pointcut id="testPointCut" expression="within(kr.go.seoul.democracy.test.service.*)"/>
+			
 			<aop:before method="encryptPasswordForMember" pointcut-ref="memberEncryptionPointCut" />
-		</aop:aspect>
-		<aop:aspect ref="encryptAdvice">
 			<aop:before method="encryptPasswordForHashMap" pointcut-ref="memberHashMapPointCut" />
+
 		</aop:aspect>
 	</aop:config>
 	
+	<!-- <aop:aspectj-autoproxy proxy-target-class="true"/> -->
 </beans>

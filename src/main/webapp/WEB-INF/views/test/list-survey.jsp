@@ -118,7 +118,7 @@
         </div>
 
         <div class="frame--header inner">
-            <div class="rect suggest">
+            <div class="rect survey">
                 
             </div>
             
