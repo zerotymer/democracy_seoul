@@ -150,7 +150,6 @@
 			<groupId>com.oracle.database.security</groupId>
 			<artifactId>osdt_cert</artifactId>
 		</dependency>
-
 		
 		<!-- Spring JDBC -->
 		<dependency>

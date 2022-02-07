@@ -26,7 +26,7 @@ public class TestController3 {
 
     /// CONSTRUCTORs
     @Autowired
-    public TestController3(@Qualifier("testServiceImpl") TestServiceImpl testService,
+    public TestController3(@Qualifier("testServiceImpl") TestService testService,
                           @Qualifier("fileTransferTemplate") FileTransferTemplate fileTemplate) {
         this.testService = testService;
         this.fileTemplate = fileTemplate;
