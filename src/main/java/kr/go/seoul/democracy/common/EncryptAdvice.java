@@ -24,7 +24,6 @@ public class EncryptAdvice {
 		/// CONSTRUCTORs
 		public EncryptAdvice(EncryptionTemplate template) {
 			this.template = template;
-			System.err.println("생성확인");
 		}
 		
 		/**

@@ -24,7 +24,7 @@
 	<!-- config -->
 	<aop:config>
 		<!-- aspect -->
-		<aop:aspect id="nonameAspect" ref="encryptAdvice">
+		<aop:aspect ref="encryptAdvice">
 			<!-- PointCut -->
 			<aop:pointcut id="memberEncryptionPointCut" expression="execution(* kr..service.*.*Member(kr.go.seoul.democracy.common.model.vo.Member))"/>
 			<aop:pointcut id="memberHashMapPointCut" expression="execution(* kr..service.*.*Member(java..HashMap))"/>
