@@ -28,14 +28,13 @@ public class DiscussController {
 	//시민토론 목록 데이터 가져오기+페이징 처리(더보기)
 	@RequestMapping(value="/discuss/list.do", method = RequestMethod.GET)
 	public ModelAndView discussList(ModelAndView mav, @RequestParam int currentListPage) {
-		//시민토론 목록 데이터 가져오기
-		ArrayList<Discuss> list=dService.discussList();
-		
 		//페이징 처리
 		int pageSize=12;
 		int totalCount=dService.discussTotalCount();
-		
 		if(currentListPage==0) currentListPage=1;
+		
+		//시민토론 목록 데이터 가져오기
+		ArrayList<Discuss> list=dService.discussList(pageSize,currentListPage);
 		
 		mav.addObject("list",list);
 		mav.addObject("currentListPage",currentListPage);
@@ -48,17 +47,18 @@ public class DiscussController {
 	
 	//시민토론 게시글 하나 데이터 가져오기+댓글 페이징 처리(더보기)
 	@RequestMapping(value="/discuss/onePost.do", method = RequestMethod.GET)
-	public ModelAndView discussOne(ModelAndView mav, @RequestParam int discussNo) {
-		//데이터 가져오기
-		Discuss discuss=dService.discussOne(discussNo); //게시글 번호로 해당 게시글 찾기
-		ArrayList<DiscussComment> proComment=dService.proComment(discussNo); //게시글 번호로 해당 게시글의 찬성 댓글 목록 가져오기
-		ArrayList<DiscussComment> conComment=dService.conComment(discussNo); //게시글 번호로 해당 게시글의 반대 댓글 목록 가져오기
-		ArrayList<DiscussFile> file=dService.file(discussNo); //게시글 번호로 해당 게시글의 파일 목록 가져오기
+	public ModelAndView discussOne(ModelAndView mav, @RequestParam int discussNo, @RequestParam int currentCommentPage) {
 		
 		//페이징 처리
 		int pageSize=5; //한번에 댓글 몇개씩 보여줄건지
 		int totalCount=dService.commentTotalCount(discussNo); //해당 게시글에 댓글 총 갯수
-		int currentCommentPage=1; //게시글 로드할때마다 댓글은 첫 5개씩만 보여준다.
+		if(currentCommentPage==0) currentCommentPage=1; //게시글 로드할때마다 댓글은 첫 5개씩만 보여준다.
+		
+		//데이터 가져오기
+		Discuss discuss=dService.discussOne(discussNo); //게시글 번호로 해당 게시글 찾기
+		ArrayList<DiscussComment> proComment=dService.proComment(discussNo,pageSize,currentCommentPage); //게시글 번호로 해당 게시글의 찬성 댓글 목록 가져오기
+		ArrayList<DiscussComment> conComment=dService.conComment(discussNo,pageSize,currentCommentPage); //게시글 번호로 해당 게시글의 반대 댓글 목록 가져오기
+		ArrayList<DiscussFile> file=dService.file(discussNo); //게시글 번호로 해당 게시글의 파일 목록 가져오기
 		
 		mav.addObject("discuss",discuss);
 		mav.addObject("pro",proComment);

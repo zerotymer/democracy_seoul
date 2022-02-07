@@ -263,7 +263,7 @@
 
         </div>
         <div>
-        	<button>더보기</button>
+        	<button id="getComment" value="1" type="submit"><i class="xi-caret-down-circle-o"></i>더보기</button>
         </div>
         
       </div>
@@ -274,6 +274,8 @@
 
 <!-- jQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<!-- 투표하기 -->
 <script>
     var result1=false;
     var result2=false;
@@ -313,7 +315,26 @@
             }
         }
     });
-    
+</script>
+
+<!-- 댓글 더보기 -->
+<script>
+	$('#getComment').click(function(){
+		var currentCommentPage=$('#getComment').val();
+		
+		$.ajax({
+			url : "/discuss/onePost.do",
+			type: "get",
+			data : {currentCommentPage:currentCommentPage},
+			success : function(data){
+				console.log("성공");
+			},
+			error : function(data){
+				alert('댓글을 불러오지 못하였습니다. 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+			}	
+		});
+	});
+
 </script>
 
 </body>

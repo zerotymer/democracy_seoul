@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +18,9 @@ public class DiscussDAO {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Discuss> discussList() {
-		return new ArrayList<Discuss>(sqlSession.selectList("discuss.list"));
+	public ArrayList<Discuss> discussList(int pageSize, int currentListPage) {
+		RowBounds rb=new RowBounds((currentListPage-1)*pageSize,pageSize);
+		return new ArrayList<Discuss>(sqlSession.selectList("discuss.list",null,rb));
 	}
 
 	public int discussTotalCount() {
@@ -29,12 +31,14 @@ public class DiscussDAO {
 		return sqlSession.selectOne("discuss.onePost",discussNo);
 	}
 
-	public ArrayList<DiscussComment> proComment(int discussNo) {
-		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.proCommentList"));
+	public ArrayList<DiscussComment> proComment(int discussNo,int pageSize,int currentCommentPage) {
+		RowBounds rb=new RowBounds((currentCommentPage-1)*pageSize,pageSize);
+		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.proCommentList",null,rb));
 	}
 
-	public ArrayList<DiscussComment> conComment(int discussNo) {
-		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.conCommentList"));
+	public ArrayList<DiscussComment> conComment(int discussNo,int pageSize,int currentCommentPage) {
+		RowBounds rb=new RowBounds((currentCommentPage-1)*pageSize,pageSize);
+		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.conCommentList",null,rb));
 	}
 
 	public int commentTotalCount(int discussNo) {
