@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
-<link rel="stylesheet" href="/resources/style/default.css">
-<link rel="stylesheet" href="/resources/style/common.css">
-<link rel="stylesheet" href="/resources/style/memberLogin.css">
+<link rel="stylesheet" href="/resources/style/member/default.css">
+<link rel="stylesheet" href="/resources/style/member/common.css">
+<link rel="stylesheet" href="/resources/style/member/memberLogin.css">
 </head>
 
 <body>

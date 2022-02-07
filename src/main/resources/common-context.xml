@@ -93,7 +93,7 @@
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
         <property name="username" value="namj6917@gmail.com"/>
-        <property name="password" value="dbwlals12()" />
+        <property name="password" value="비밀번호" />
         <property name="javaMailProperties">
             <props>
            		<prop key="mail.smtp.starttls.enable">true</prop>

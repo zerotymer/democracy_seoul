@@ -8,4 +8,6 @@
 	<import resource="/common-context.xml" />
 	<import resource="/aop-context.xml" />
 	<import resource="/mybatis-context.xml" />
+	<import resource="/member-context.xml" />
+	
 </beans>
