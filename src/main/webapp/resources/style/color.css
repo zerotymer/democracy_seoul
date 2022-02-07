@@ -1,3 +1,4 @@
+/*
 :root {
     --COLOR-RED: #F05454;
     --COLOR-GREEN: #14A086;
@@ -8,7 +9,18 @@
 
     --COLOR-GRAY: #7B8789;
     --COLOR-DARK-GRAY: #333;
-}
+} */
+:root {
+    --COLOR-RED: #7BABEB;
+    --COLOR-GREEN: #6AAC79;
+    --COLOR-YELLOW: #AE9C6E;
+    --COLOR-BLUE: #3C5BFF;
+    --COLOR-WHITE: #FFFFFF;
+    --COLOR-DARK: #2C3F50;
+
+    --COLOR-GRAY: #7B8789;
+    --COLOR-DARK-GRAY: #333;
+} 
 
 .card-item {
     --COLOR-SUGGEST: var(--COLOR-YELLOW);

@@ -1,5 +1,7 @@
 package kr.go.seoul.democracy.admin.model.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,18 @@ public class AdminServiceImpl implements AdminService{
 		Admin a = aDAO.selectLoginAdmin(admin);
 		
 		return a;
+	}
+
+	@Override
+	public int updatePassword(HashMap<String, Object> map) {
+		
+		return aDAO.updatePassword(map);
+	}
+
+	@Override
+	public int updateWithdraw(String adminId, String adminPwd) {
+		
+		return aDAO.updateWithdraw(adminId, adminPwd);
 	}
 
 }
