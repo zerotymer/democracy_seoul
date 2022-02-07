@@ -12,13 +12,14 @@
 <link rel="stylesheet" href="/resources/style/member/commons/default.css">
 <link rel="stylesheet" href="/resources/style/member/commons/common.css">
 <link rel="stylesheet" href="/resources/style/member/css/memberJoinus.css">
+	<!-- 비밀번호 유효성 검사 확인 및 이메일-->
+	
 </head>
 
 <body>
 
-
-	<!-- 비밀번호 유효성 검사 확인-->
-	<script>
+<script>
+		let val = false;
 	    //비밀번호 일치 및 조건
         function pwCheck(){
             var userPwd = document.getElementById('userPwd').value;
@@ -52,9 +53,6 @@
                 }
             }
         }
-   	</script>
-
-	<script>
 		<!-- 전체 약관 동의를 누르면 전체 선택 및 전체해제-->
 		function selectAll(selectAll)  {
 			  const checkboxes 
@@ -86,10 +84,155 @@
 			  }
 	
 		}		
-	 </script>
+	 
+		 <!-- 최종 제출전 다향성 검사 -->
+		 function Validation(){
+			 
+			 
+		        var RegExp = /^[a-zA-Z0-9]{8,12}$/;  //id 영어와 숫자 글자수 검사
+		        var pRegExp = /^[a-zA-Z0-9!@#$%^&*()]{8,16}$/;//pwassword 글자수 유효성 검사 정규식 
+		        var eRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 유효성검사
+				var nRegExp= /^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,16}\$/;//nick 유효성 검사
+				var nameRegExp = /^[가-힣]{2,6}$/;
+			   
+		        
+		        var objId = document.getElementById("userId"); //아이디
+		        var objPwd = document.getElementById("userPwd"); //비밀번호
+		        var objPwdCheck = document.getElementById("userPwdRe"); //비밀번호확인
+		        var objNick = document.getElementById("nick"); //닉네임
+				var objName = document.getElementById("userName"); //이름
+		        var objEmail = document.getElementById("email");//메일
+		        var chk1=document.getElementById("checkAgreement").checked;//필수 약관 체크박스 체크여부 확인 [하나]
+		        var chk2=document.getElementById("agreementCheck").checked;//필수 약관 체크박스 체크여부 확인 [둘]
+		   
+	
+		        
+		        // ================ ID 유효성검사 ================ //
+		        
+		        if(objId.value==''){
+		            alert("ID를 입력해주세요.");
+		            return false;
+		        }
+		        if(!RegExp.test(objId.value)){ //아이디 유효성검사
+		            alert("ID는 8~12자의 영문 대소문자와 숫자로만 입력하여 주세요.");        
+		            return false;
+		        }
+		        
+		        // ================ PASSWORD 유효성검사 ===============//
+		        if(objPwd.value==''){ // 비밀번호 입력여부 검사
+		            alert("Password를 입력해주세요.");
+		            return false;
+		        }
+		        if(!pRegExp.test(objPwd.value)){ //패스워드 유효성검사
+		            alert("Password는 8~16자의 영문 대소문자와 숫자 특수문자로만 입력하여 주세요.");
+		            return false;
+		        }
+		        /*
+		        if(objPwd.value==objId.value){ //패스워드와 ID가 동일한지 검사
+		            alert("Password는 ID와 동일하면 안됩니다.");
+		            return false;
+		        }*/
+		        
+		        if(objPwdCheck.value!=objPwd.value){ //비밀번호와 비밀번호확인이 동일한지 검사
+		            alert("비밀번호가 일치하지 않습니다. 다시 확인하여 입력해주세요.");
+		            return false;
+		        }
+		        
+		        //===============Nick 유효성 검사=========================//
+		        
+		        if(objNick.value ==''){
+		            alert("닉네임을 입력해주세요.");
+		            return false;
+		        }
+		        if(!nRegExp.test(objNick.value)){ //닉네임
+		            alert("닉네임을 2~16자의 숫자,한국어,영어,'_'로 입력해주세요.");        
+		            return false;
+		        }
 
+		        
+		        //===============이름 유효성 검사=========================//
+		        if(objName.value ==''){
+		            alert("이름을 입력해주세요.");
+		            return false;
+		        }
+		        if(!nameRegExp.test(objName.value)){
+		            alert("특수문자,영어,숫자는 사용할수 없습니다. 한글만 입력하여주세요.");
+		            return false;
+		        }
+
+		        
+		        // ================ email 유효성검사 ================ //
+		        if(eRegExp.value == ''){ // 이메일 입력여부 검사
+		            alert("이메일을 입력해주세요.");
+		            return false;
+		        }
+		        
+		        if(!eRegExp.test(objEmail.value)){ //이메일 유효성 검사
+		            alert("올바른 이메일 형식이 아닙니다.");
+		            return false;
+		        }
+		        
+		        if(!val){
+		        	alert("인증 실패.");
+		        	return false;
+		        }
+		      
+		        //==================필수약관 체크 여부 ==================== //
+		 		
+		        
+		        if(!chk1){
+		            alert('필수 약관에 동의해 주세요');
+		            return false;
+		        } 
+		        if(!chk2) {
+		            alert('필수 약관에 동의해 주세요');
+		            return false;
+		        }
+			 
+		 }
+		  
+		 function sendEmail(){
+			 //alert('확인');
+			
+			 const m= document.getElementById('email').value;//이메일 가져오고
+			 fetch("http://localhost/member/memberSendEmail.do?email="+m).then((response)=>
+					console.log(response)		 
+			 
+			 );
+			 alert('인증 이메일이 전송되었습니다.');
+			 
+			 
+		 }
 		 
-
+		 function checkNum(){
+			 //alert('확인')
+			  $.ajax({
+					type : "GET",
+					url : "get.do",
+					data : {
+					
+					},
+					error : function(error) {
+						console.log("error");
+					},
+					success : function(data) {
+						console.log("success");
+						 const checkNum = data;
+						 const m= document.getElementById('emailRe').value;
+						 console.log(checkNum)
+						 if(m==checkNum){
+							 val =true;
+							 alert("일치");
+						 }
+						 else{
+							 alert("불일치");
+						 }
+					}
+				});
+		 }
+		 
+		 
+		 </script>
 	<div id="wrap">
 		<div class="bg-color">
 			<div class="box-white">
@@ -111,12 +254,15 @@
 					<span id="nickCheck" class="check-msg"></span><br>
 					
 					<label for="userName" class="tit-label">이름</label><br>
-					<input type="text" id="userName" class="input-style" name="userName" placeholder="이름 입력(한글 )" ><br>
-					<span id="userName" class="check-msg"></span><br>
+					<input type="text" id="userName" class="input-style" name="userName" placeholder="이름 입력(반드시 실명을 한글로 입력해주세요.)" ><br>
+					<span id="nameCheck" class="check-msg"></span><br>
 					
 					<label for="email" class="tit-label">이메일</label><br>
-					<input type="email" id="email" class="input-style" name="email" placeholder="이메일"><button>인증하기</button><br>
-					<span id="emailCheck" class="check-msg"></span><br>
+					<input type="email" id="email" class="input-style" name="email" placeholder="이메일"><button type="button" onclick='sendEmail()'>인증하기</button><br>	
+					<span id="emailCheck" class="check-msg"></span><br>				
+				    <input type="email" class="input-style" id="emailRe" name="emailRe" onchange="emailCheck()"  placeholder="이메일 인증번호"><br>
+				    <button type="button" onclick='checkNum()'>인증번호 확인</button><br>		
+					
 		
 					<br>
 					    	
@@ -134,6 +280,153 @@
 		
 	</div>
 	
+	
+	
+	
+	
+		<!-- jQuery 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	
+	<!-- 이름 한글 유효성 -->
+	<script>
+	
+				$("#userName").blur(function() {
+				var userName = $("#userName").val();
+				var nameRegExp = /^[가-힣]{2,6}$/;
+
+			    
+			    
+		        if(!nameRegExp.test($("#userName").val())){ 
+					$("#nameCheck").html("반드시 실명을 한글로 입력해주세요").css("color","red");
+			        $("#userName").focus();
+		            return false;
+		        }else{
+					$("#nameCheck").html(" ").css("color","red");
+		        	return true;
+		            }
+				});
+		        </script>
+	
+	
+	
+	
+	<!-- ID 중복 체크 -->
+	<script>
+			
+			$("#userId").blur(function() {
+				var userId = $("#userId").val();
+			    var getCheck= RegExp(/^[a-zA-Z0-9]{8,12}$/);
+			   
+				
+			    if(!getCheck.test($("#userId").val())){
+					$("#msg").html("ID는 8~12자의 영문 대소문자와 숫자로만 입력하여 주세요.").css("color","red");
+			        return false;
+			      }
+				
+				
+				$.ajax({ 
+					url: "/member/memberIdCheck.do",
+					data: {"userId":userId},
+					type: "get",
+					success: function(result) {
+						
+						if(result=="true"){
+							$("#msg").html("중복되는 아이디입니다.다시 입력해주세요.").css("color","red");
+							$("#userId").val('');
+							return false;
+						}else{
+							$("#msg").html("중복되지 않는 아이디입니다.").css("color","blue");
+
+						}
+						
+					},
+					error: function() {
+						console.log("ajax 통신 실패")
+					}
+				});
+			});
+	</script>
+	
+	
+		<!-- nick 중복 체크 -->
+	<script>
+			
+			$("#nick").blur(function() {
+				var nick = $("#nick").val();
+			    var n_RegExp= RegExp(/^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,16}\$/);
+			    
+			    
+		        if(!n_RegExp.test($("#nick").val())){ 
+					$("#nickCheck").html("닉네임을 2~16자의 숫자,한국어,영어,'_'로 입력해주세요.").css("color","red");
+			        $("#nick").focus();
+		            return false;
+		        }
+
+
+				
+				$.ajax({ 
+					url: "/member/memberNickCheck.do",
+					data: {"nick": nick},
+					type: "get",
+					success: function(result) {
+						
+						if(result=="true"){
+							$("#nickCheck").html("중복되는 닉네임입니다.").css("color","red");
+							$("#nick").val('');
+							return false;
+						}else{
+							$("#nickCheck").html("중복되지 않는 닉네임입니다.").css("color","blue");
+
+						}
+						
+					},
+					error: function() {
+						console.log("ajax 통신 실패")
+					}
+				});
+			});
+	</script>
+	
+			<!-- email 중복 체크 -->
+	
+	<script>
+			
+			$("#email").blur(function() {
+				var email = $("#email").val();
+			    var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+			    
+			   
+				
+			    if(!getMail.test($("#email").val())){
+					$("#emailCheck").html("올바른 이메일 형식이 아닙니다.").css("color","red");
+			        return false;
+			      }
+			
+				
+				$.ajax({ 
+					url: "/member/memberEmailCheck.do",
+					data: {"email":email},
+					type: "get",
+					success: function(result) {
+						
+						if(result=="true"){
+							$("#emailCheck").html("중복되는 이메일입니다.다시 입력해주세요.").css("color","red");
+							$("#email").val('');
+							return false;
+						}else{
+							$("#emailCheck").html("중복되지 않는 이메일입니다.").css("color","blue");
+
+						}
+						
+					},
+					error: function() {
+						console.log("ajax 통신 실패")
+					}
+				});
+			});
+	</script>
+	
+
 	
 
 	
