@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.go.seoul.democracy.admin.model.service.AdminService;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
 
 @Controller
 public class AdminController {
@@ -154,7 +155,7 @@ public class AdminController {
 		
 		String adminId = admin.getAdminId();
 		
-		int result = aService.updateWithdraw(adminId, adminPwd);
+		int result = aService.updateWithdraw(admin);
 		
 		if(result>0)
 		{
@@ -257,15 +258,14 @@ public class AdminController {
 	 * Description : 탈퇴 여부 버튼 변경 메소드
 	 */
 	@RequestMapping(value="/admin/memberEndYNChange.do", method=RequestMethod.POST)
-	public void memberEndYNChange(@RequestParam int userNo, @RequestParam char endYN, HttpServletResponse response)
-	throws IOException
+	public void memberEndYNChange(@RequestParam String userId, 
+								  @RequestParam char endYN, 
+								  HttpServletResponse response) throws IOException
 	{
-		//중간 확인 System.out.println("userNo : " + userNo + " / endYN : " + endYN);
 		
-		//삼항 연산자
 		endYN = endYN=='Y'?'N':'Y';
 		
-		int result = mService.updateMemberEndYNChange(userNo, endYN);
+		int result = aService.updateMemberEndYNChange(userId, endYN);
 		
 		if(result>0)
 		{

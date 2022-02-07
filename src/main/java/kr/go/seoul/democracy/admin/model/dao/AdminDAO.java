@@ -27,12 +27,12 @@ public class AdminDAO {
 		return sqlSession.update("admin.updatePassword", map);
 	}
 
-	public int updateWithdraw(String adminId, String adminPwd) {
+	public int updateWithdraw(Admin admin) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("adminId", adminId);
-		map.put("adminPwd", adminPwd);
+		map.put("adminId", admin.getAdminId());
+		map.put("adminPwd", admin.getAdminPwd());
 		
 		return sqlSession.update("admin.updateWithdraw", map);
 	}
@@ -50,6 +50,16 @@ public class AdminDAO {
 	public ArrayList<Admin> selectAllMemberList() {
 		
 		return new ArrayList<Admin>(sqlSession.selectList("admin.selectAllMemberList"));
+	}
+
+	public int updateMemberEndYNChange(String userId, char endYN) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userId", userId);
+		map.put("endYN", endYN);
+		
+		return sqlSession.update("member.updateMemberEndYNChange", map);
 	}
 
 }

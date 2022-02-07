@@ -11,12 +11,14 @@ public interface AdminService {
 
 	int updatePassword(HashMap<String, Object> map);
 
-	int updateWithdraw(String adminId, String adminPwd);
+	int updateWithdraw(Admin admin); 
 
 	int insertAdminMember(Admin a);
 
 	int selectAdminIdCheck(String adminId);
 
 	ArrayList<Admin> selectAllMemberList();
+
+	int updateMemberEndYNChange(String userId, char endYN);
 
 }

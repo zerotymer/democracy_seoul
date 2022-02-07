@@ -30,9 +30,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int updateWithdraw(String adminId, String adminPwd) {
+	public int updateWithdraw(Admin admin) {
 		
-		return aDAO.updateWithdraw(adminId, adminPwd);
+		return aDAO.updateWithdraw(admin);
 	}
 
 	@Override
@@ -51,6 +51,12 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<Admin> selectAllMemberList() {
 		
 		return aDAO.selectAllMemberList();
+	}
+
+	@Override
+	public int updateMemberEndYNChange(String userId, char endYN) {
+		
+		return aDAO.updateMemberEndYNChange(userId, endYN);
 	}
 
 }

@@ -66,19 +66,27 @@
 	</select>
 	
 	<!-- 모든 회원 정보 가져오기 -->
-	<select id="selectAllList" resultType="member">
+	<select id="selectAllMemberList" resultType="member">
 		SELECT 
-			adminno as adminNo,
-			adminid as adminId,
-			adminpwd as adminPwd,
-			adminname as adminName,
-			admingrade as adminGrade,
-			admindate as adminDate,
-			adminemail as adminEmail,
-			admindepart as adminDepart
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			nick as nick,
+			email as email,
+			enrolldate as enrollDate
 		FROM
-			ADMIN
+			MEMBER
 	</select>
+	
+	<!-- 탈퇴 여부 버튼 바꾸기 -->
+	<update id="updateMemberEndYNChange" parameterType="hashmap">
+		UPDATE
+			MEMBER
+		SET
+			end_yn = #{endYN}
+		WHERE
+			userId = #{userId}
+	</update>
 	
   	
 </mapper>
