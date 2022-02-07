@@ -1,12 +1,12 @@
 .card-item {
-    height: 450px;
+    height: 430px;
     /* text-align: center; */
 }
 .card-item .icons {
     bottom: 68px;
 }
 .card-item .detail-btn {
-    width: 80%;
+    width: 60%;
     height: 44px;
     position: absolute;
     left: 50%;
@@ -18,4 +18,16 @@
     color: white;
     text-decoration: none;
     transform: translateX(-50%);
+}
+.card-item.discussion .category,
+.card-item.survey .category {
+    display: none;
+}
+.card-item.discussion .title,
+.card-item.survey .title {
+    margin: 28px 0px;
+}
+
+.frame--header {
+    box-shadow: 4px 4px 4px lightgray;
 }

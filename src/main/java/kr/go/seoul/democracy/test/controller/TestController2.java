@@ -15,7 +15,7 @@ public class TestController2 {
 
     /// CONSTRUCTORs
     @Autowired
-    public TestController2(@Qualifier("testServiceImpl") TestServiceImpl testService) {
+    public TestController2(@Qualifier("testServiceImpl") TestService testService) {
         this.testService = testService;
     }
 

@@ -1,16 +1,22 @@
 package kr.go.seoul.democracy.common;
 
-import kr.go.seoul.democracy.common.model.vo.Member;
-
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+import kr.go.seoul.democracy.common.model.vo.Member;
 
 /**
  * 암호화를 위한 Advice
  * @author 신현진
  */
+
 public class EncryptAdvice {
 	/// FIELDs
 		private EncryptionTemplate template;
@@ -26,15 +32,12 @@ public class EncryptAdvice {
 		 * @throws NoSuchAlgorithmException
 		 */
 		public void encryptPasswordForMember(JoinPoint jp) throws NoSuchAlgorithmException {
-			System.err.println(jp.toString());
 			if (!(jp.getArgs()[0] instanceof Member)) return;
 
 			Member member = jp.getArgs()[0] != null ? (Member) jp.getArgs()[0] : null;
-			System.err.println(member);
 			if (member == null) return;
 
 			String data = this.template.encryptString(member.getUserPwd(), member.getUserId());
-			System.err.println(data);
 			member.setUserPwd(data);
 		}
 
@@ -51,5 +54,9 @@ public class EncryptAdvice {
 
 			String data = this.template.encryptString(userPwd, userId);
 			map.put("userPwd", data);
+		}
+		
+		public void test() {
+			System.out.println("--------------------------------------------------------------------아따 포인트 컷");
 		}
 }

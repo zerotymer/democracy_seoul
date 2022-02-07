@@ -3,21 +3,85 @@
 <mapper namespace="member">
 	<!-- SQL QUERYS -->
 	
-		<!-- SQL QUERYS -->
+	<!-- 로그인 SQL QUERYS 로그인이 되지 않아 임시로 만들었습니다.-->
 	<select id="selectLoginMember" parameterType="member" resultType="member">
 		SELECT
 			userid as userId,
 			userpwd as userPwd,
 			username as userName,
-			NICK as nick.
+			NICK as nick,
 			EMAIL as email,
 			enrollDate as enrollDate,
 			end_yn as endYN,
 			USERGRADE as userGrade
 		FROM
 			member
-		WHERE userid = #{userId} and userpwd = #{userPwd} and end_yn='N'
+		WHERE USERID = 'user11' and USERPWD = '1234567!' and end_yn='N'
 	</select>	
+	
+	<!-- 회원가입 SQL QUERYS -->
+	<insert id="insertMember" parameterType="member">
+	
+		INSERT INTO 
+	   MEMBER VALUES(#{userId},#{userPwd},#{userName},#{nick},#{email},SYSDATE,'N','0')
+	
+	</insert>
+	
+	<!-- ID 중복확인 QUERYS -->
+	<select id="selectIdCheck" resultType="member">
+		SELECT 
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			NICK as nick,
+			EMAIL as email,
+			enrollDate as enrollDate,
+			end_yn as endYN,
+			USERGRADE as userGrade
+		FROM 
+			MEMBER 
+		WHERE USERID = #{value}
+	
+	</select>
+	
+	
+	
+		
+	<!-- Nick 중복확인 QUERYS -->
+	<select id="selectNickCheck" resultType="member">
+		SELECT 
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			NICK as nick,
+			EMAIL as email,
+			enrollDate as enrollDate,
+			end_yn as endYN,
+			USERGRADE as userGrade
+		FROM 
+			MEMBER 
+		WHERE NICK = #{value}
+	
+	</select>
+	
+	
+		
+	<!-- email 중복확인 QUERYS -->
+	<select id="selectEmailCheck" resultType="member">
+		SELECT 
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			NICK as nick,
+			EMAIL as email,
+			enrollDate as enrollDate,
+			end_yn as endYN,
+			USERGRADE as userGrade
+		FROM 
+			MEMBER 
+		WHERE EMAIL = #{value}
+	
+	</select>
 	
 	
 </mapper>
