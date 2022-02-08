@@ -36,17 +36,12 @@ public class HitsAdvice {
         Sug sug = (Sug) jp.getArgs()[0];
         if (sug == null) return;
 
-//        addCountHits("SUGGE");
-        return;
+        //addCountHits("SUGGEST_HIT", 1);                                 // TODO: REVISE
     }
     public void addCountHitsDiscussion(JoinPoint jp) {
 
     }
     public void addCountHitsProposal(JoinPoint jp) {
-
     }
 
-    private void addCountHits(String tableName, int boardNo) {
-        hService.addCountHitsTable(tableName, boardNo);
-    }
 }
