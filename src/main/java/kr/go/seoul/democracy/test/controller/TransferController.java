@@ -114,10 +114,12 @@ public class TransferController {
     @RequestMapping(value = "/ajax/imageUpload.do", method = RequestMethod.POST)
     public void ajaxImageUpload(HttpServletRequest request,
                                   HttpServletResponse response) throws IOException {
-        ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "upload", "ckeditor");
+        ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "upload", "ckeditor");           // 자동 이름 생성
 
         JsonObject json = new JsonObject();
-        json.addProperty("url", "/upload/ckeditor/11111.png");
+        String url = "/upload/ckeditor/" + info.getFileName();
+        System.out.println(url);
+        json.addProperty("url", url);
         json.addProperty("uploaded", 1);
         json.addProperty("fileName", info.getOriginalFileName());
         new Gson().toJson(json, response.getWriter());

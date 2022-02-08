@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 
@@ -76,5 +77,11 @@ public class TestController {
     @RequestMapping("/ckeditor.do")
     public String ckeditor() {
     	return "test/ckeditor";
+    }
+
+    @RequestMapping("/test/print.do")
+    public String print(@RequestParam String content) {
+        System.out.println(content);
+        return "index";
     }
 }

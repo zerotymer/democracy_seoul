@@ -17,6 +17,7 @@ public class ImageTransferInfo extends FileTransferInfo {
     private HashMap<String, ImageSize> imageSizes;
     private final ImageSize originalSize;
     private final ImageSize maxSize;
+    private String targetDir = "";
 
     /// CONSTRUCTORs
 
@@ -149,7 +150,7 @@ public class ImageTransferInfo extends FileTransferInfo {
         if (!dir.exists()) dir.mkdirs();                                                                                // 디렉토리가 없을 경우 디렉토리 생성
 
         originFile.renameTo(newFile);
-        this.fileName = filename;
+        this.fileName = newFile.getName();
         this.absolutePath = newFile.getAbsolutePath();
         return this;
     }
@@ -174,11 +175,9 @@ public class ImageTransferInfo extends FileTransferInfo {
             resizeCopyTo(targetDir, filename + "_max", maxSize);
         }
 
-        // TODO: DEBUG
-        System.err.println(this);
-
         return this.moveTo(targetDir, filename);
     }
+
 
     ///
 
