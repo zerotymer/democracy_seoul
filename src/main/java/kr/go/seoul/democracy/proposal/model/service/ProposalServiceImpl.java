@@ -18,19 +18,14 @@ public class ProposalServiceImpl implements ProposalService {
 	private ProposalDAO pDAO;
 
 	@Override
-	public List<Proposal> selectAllList(int start, int end, String searchOption, String keyword) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public Proposal proposalView(int proposalNo) throws Exception {
 			return pDAO.proposalView(proposalNo);
 	}
-
+	
 	@Override
-	public int countArticle(String searchOption, String keyword) {
+	public List<Proposal> selectAllList(int curPage, int recordCountPage) throws Exception {
 		// TODO Auto-generated method stub
-		return pDAO.countArticle(searchOption,keyword);
+		return pDAO.selectList(curPage,recordCountPage);
 	}
 
 

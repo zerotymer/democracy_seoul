@@ -36,7 +36,10 @@
 	
 	</select>
 	
+	<select id="proposalCnt" parameterType="proposal" resultType="int">
+	SELECT COUNT (*) FROM Proposal WHERE proposal_del_YN='n'
+	</select>
 	
-	
+			
 </mapper>
 	

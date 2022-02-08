@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,23 +21,22 @@ public class ProposalDAO {
 	private SqlSessionTemplate sqlSession;//mybatis 사용을 위한 
 
 	//01. 게시글리스트 보기
-	public List<Proposal> selectAllList() throws Exception{
-	return  sqlSession.selectList("proposal.selectAllList");
-
+	public List<Proposal> selectList(int curPage, int recordCountPage) {
+		int offset = (curPage-1)*recordCountPage; 
+		RowBounds rows = new RowBounds(offset,recordCountPage);
+		return sqlSession.selectList("proposal.selectAllList",null,rows);
 	}
+	
 	//02. 게시글 상세보기
 	public Proposal proposalView(int proposalNo)throws Exception {
 		return sqlSession.selectOne("proposal.proposalView",proposalNo);
 	}
+
+	public String getPageNavi(int curPage, int recordCountPage, int naviCountPerPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	//03. 게시글 레코드 갯수
-	public int countArticle(String searchOption, String keyword) {
-		//검색옵션, 키워드 를 맵에 저장한다. 
-		Map<String,String>map = new HashMap<String,String>();
-		map.put("searchOption",searchOption);
-		map.put("keyword",keyword);
-		return sqlSession.selectOne("proposal.countArticle",map);
-	} 
 	
 	
 }

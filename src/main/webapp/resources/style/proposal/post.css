@@ -33,7 +33,7 @@
 .proposalTitle{
 	margin-top:-15px;
 	margin-bottom:10px;
-    font-size:25px;
+    font-size:30px;
 }
 
 .date{
@@ -43,15 +43,20 @@
 
 .hashtag{
     margin-left: 80%;
-    font-size:20px;
+    font-size:15px;
      
 }
 
 .adminCon{
-	margin-lift : 70%;
-	
+	display:flex;
+	flex-direction: row;
+	justify-content : flex-end;
+	margin-right : 10px;
 }
-
+.adminCon button {
+	margin-right : 5px;
+	border : 0px;
+}
 
 .view_content{
     height:700px;

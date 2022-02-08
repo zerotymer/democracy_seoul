@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import kr.go.seoul.democracy.proposal.model.service.BoardPager;
 import kr.go.seoul.democracy.proposal.model.service.ProposalService;
 import kr.go.seoul.democracy.proposal.model.vo.Proposal;
 
@@ -39,22 +37,16 @@ public class ProposalController {
 
 	
 	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.GET)
-	public ModelAndView allList(@RequestParam int proposalNo,@RequestParam(value="proposalTilte", required=false)String searchOption,
-			@RequestParam(defaultValue="")String keyword,
+	public ModelAndView allList(ModelAndView mav,
 			@RequestParam(required=false, defaultValue="1")int curPage) throws Exception{
-		
-		int count = pService.countArticle(searchOption, keyword);
-		BoardPager boardPager = new BoardPager(count,curPage);
-		int start = boardPager.getPageBegin();
-		int end = boardPager.getPageEnd();
-		
-		List<Proposal> list = pService.selectAllList(start,end,searchOption,keyword);
-		
-		Map<String,Object> map  = new HashMap<String, Object>();
-		
-		ModelAndView mav = new ModelAndView(); //모델(데이터)+뷰(화면) 함께 전달하는 객체
+			
+		int recordCountPage = 9;
+		List<Proposal> list = pService.selectAllList(curPage,recordCountPage);
+		int naviCountPerPage =5;
+		String pageCountPerPage =pService.getPageNavi(curPage,recordCountPage,naviCountPerPage);
 		mav.setViewName("proposal/allList");
 		mav.addObject("list",list);
+		System.out.println(list);
 		return mav;
 	}
 	
@@ -66,11 +58,10 @@ public class ProposalController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("proposal/post");
 		mav.addObject("proposal", pService.proposalView(proposalNo));
-		
-		logger.info("mav",mav);
 		return mav;
 	}
 	
 	
-
+	
+	
 }

@@ -7,12 +7,12 @@ import kr.go.seoul.democracy.proposal.model.vo.Proposal;
 
 public interface ProposalService {
 
-	 List<Proposal> selectAllList(int start, int end, String searchOption, String keyword) throws Exception;
+	 List<Proposal> selectAllList(int curPage,int recordCountPage) throws Exception;
 	 
 	 Proposal proposalView(int proposalNo) throws Exception;
-	 
-	 //게시글 레코드 갯수 
-	int countArticle(String searchOption, String keyword); 
 
+	String getPageNavi(int curPage, int recordCountPage, int naviCountPerPage);
+	 
+	
 
 }
