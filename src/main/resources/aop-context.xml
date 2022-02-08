@@ -11,30 +11,75 @@
 	<util:properties id="settings" location="classpath:/settings.properties" />
 
 	<!-- Encryption Template -->
-	<bean id="encryptionTemplate" class="kr.go.seoul.democracy.common.EncryptionTemplate">
-		<constructor-arg value="#{settings['encryption.method']}" />
-		<constructor-arg value="#{settings['encryption.key']}" />
+	<bean id="userEncryption" class="kr.go.seoul.democracy.common.EncryptionTemplate">
+		<constructor-arg value="#{settings['user.encryption.method']}" />
+		<constructor-arg value="#{settings['user.encryption.key']}" />
+	</bean>
+	<bean id="adminEncryption" class="kr.go.seoul.democracy.common.EncryptionTemplate">
+		<constructor-arg value="#{settings['admin.encryption.method']}" />
+		<constructor-arg value="#{settings['admin.encryption.key']}" />
 	</bean>
 
 	<!-- advice -->
-	<bean id="encryptAdvice" class="kr.go.seoul.democracy.common.EncryptAdvice">
-		<constructor-arg ref="encryptionTemplate" />
+	<bean id="userEncryptAdvice" class="kr.go.seoul.democracy.common.EncryptAdvice">
+		<constructor-arg index="0" ref="userEncryption" />
+		<constructor-arg index="1"> <!-- salt -->
+			<list value-type="java.lang.String">
+				<value>userId</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg index="2"> <!-- data -->
+			<list value-type="java.lang.String">
+				<value>userPwd</value>
+				<value>userOriginalPass</value>
+				<value>userNewPass</value>
+			</list>
+		</constructor-arg>
 	</bean>
+	<bean id="adminEncryptAdvice" class="kr.go.seoul.democracy.common.EncryptAdvice">
+		<constructor-arg index="0" ref="adminEncryption" />
+		<constructor-arg index="1"> <!-- salt -->
+			<list value-type="java.lang.String">
+				<value>adminId</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg index="2"> <!-- data -->
+			<list value-type="java.lang.String">
+				<value>adminPwd</value>
+				<value>adminOriginalPass</value>
+				<value>adminNewPass</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
 
 	<!-- config -->
 	<aop:config>
-		<!-- aspect -->
-		<aop:aspect ref="encryptAdvice">
-			<!-- PointCut -->
-			<aop:pointcut id="memberEncryptionPointCut" expression="execution(* kr..service.*.*Member(kr.go.seoul.democracy.common.model.vo.Member))"/>
-			<aop:pointcut id="memberHashMapPointCut" expression="execution(* kr..service.*.*Member(java..HashMap))"/>
-			<aop:pointcut id="allPointCut" expression="execution(* kr..*ServiceImpl.*(..))"/>
-			<aop:pointcut id="testPointCut" expression="within(kr.go.seoul.democracy.test.service.*)"/>
-			
-			<aop:before method="encryptPasswordForMember" pointcut-ref="memberEncryptionPointCut" />
-			<aop:before method="encryptPasswordForHashMap" pointcut-ref="memberHashMapPointCut" />
+		<!-- common Pointcut -->
+		<aop:pointcut id="allPointCut" 							expression="execution(* kr..*ServiceImpl.*(..))" />
+		<aop:pointcut id="allHashMapPointCut" 					expression="execution(* kr..service.*(java..HashMap))" />
+		<aop:pointcut id="testPointCut" 						expression="execution(* kr..service.TestServiceImpl.*(..))" />
 
+		<!-- user EncryptAdvice aspect -->
+		<aop:aspect ref="userEncryptAdvice">
+			<!-- PointCut -->
+			<aop:pointcut id="memberEncryptionPointCut" 		expression="execution(* kr..member.model.service.*(kr.go.seoul.democracy.common.model.vo.Member))" />
+			<!-- Weaving -->
+			<aop:before method="encryptPasswordForMember" 		pointcut-ref="memberEncryptionPointCut" />
+			<aop:before method="encryptPasswordForHashMap" 		pointcut-ref="allHashMapPointCut" />
 		</aop:aspect>
+
+		<aop:aspect ref="adminEncryptAdvice">
+			<!-- PointCut -->
+			<aop:pointcut id="adminEncryptionPointCut" 			expression="execution(* kr..admin.model.service.*(kr.go.seoul.democracy.admin.model.vo.Admin))" />
+			<!-- Weaving -->
+			<aop:before method="encryptPasswordForAdmin" 		pointcut-ref="adminEncryptionPointCut" />
+			<aop:before method="encryptPasswordForHashMap" 		pointcut-ref="allHashMapPointCut" />
+		</aop:aspect>
+
+
 	</aop:config>
-	
+
+	<aop:aspectj-autoproxy />
+	<!-- HitsAdvice -->
 </beans>

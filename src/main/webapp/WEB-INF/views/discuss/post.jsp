@@ -111,34 +111,39 @@
             width:50%;
             margin-top:10px;
         }
-        .pros{
+        .pro{
             width:97%;
             display:flex;
             flex-direction: row;
             border:1px solid rgba(200, 200, 180);
             border-radius: 8px;
         }
-        .pros>div:first-child{
+        .pro-content{
             width:85%;
             margin:10px;
         }
-        .pros>div:first-child>div:first-child{
+        .pro-content>div:first-child{
             font-size:12px;
         }
-        .pros>div:first-child>div:last-child{
+        .pro-content>div:last-child{
             margin-top:5px;
             font-size:14px;
             color:rgba(110, 110, 100);
         }
-        .pros>div:last-child{
+        .pro-icon{
             width:15%;
-            height:100%;
-            margin:auto;
+            margin:auto 0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
             background-color:rgba(69, 49, 250);
             text-align: center;
-            color:white;
+        }
+        .pro-icon>div{
+        	width:100%;
+        	color:white;
         }
         
         #cons{
@@ -153,25 +158,30 @@
             border:1px solid rgba(200, 200, 180);
             border-radius: 8px;
         }
-        .cons>div:first-child{
+        .con-icon{
             width:15%;
-            height:100%;
-            margin:auto;
+            margin:auto 0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
             border-top-left-radius: 8px;
             border-bottom-left-radius: 8px;
             background-color: rgba(250, 49, 49);
             text-align: center;
-            color:white;
         }
-        .cons>div:last-child{
+        .con-icon>div{
+        	width:100%;
+        	color:white;
+        }
+        .con-content{
             width:85%;
             height:100%;
             margin:10px;
         }
-        .cons>div:last-child>div:first-child{
+        .con-content>div:first-child{
             font-size:12px;
         }
-        .cons>div:last-child>div:last-child{
+        .con-content>div:last-child{
             margin-top:5px;
             font-size:14px;
             color:rgba(110, 110, 100);
@@ -217,15 +227,17 @@
 
           <div id="pros">
           <c:forEach items="${pro }" var="pro">
-            <div class="pros">
-                <div>
+            <div class="pro">
+                <div class="pro-content">
                     <div>${pro.commentContent}</div>
                     <div>${pro.userId}</div>
                 </div>
-                <div>
-                    <svg style="width:18px;height:18px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" />
-                    </svg>
+                <div class="pro-icon">
+                	<div>
+                		<svg style="width:18px;height:18px" viewBox="0 0 24 24">
+	                    <path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" />
+	                    </svg>
+                	</div>
                 </div>
             </div>
           </c:forEach>
@@ -233,13 +245,15 @@
 
           <div id="cons">
           <c:forEach items="${con }" var="con">
-            <div class="cons">
-                <div>
-                    <svg style="width:18px;height:18px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" />
-                    </svg>
-                </div>
-                <div>
+            <div class="con">
+                <div class="con-icon">
+                	<div>
+                		<svg style="width:18px;height:18px" viewBox="0 0 24 24">
+                    	<path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" />
+                    	</svg>
+                	</div>
+                </div> 
+                <div class="con-content">
                     <div>${con.commentContent}</div>
                     <div>${con.userId}</div>
                 </div>
@@ -248,6 +262,10 @@
           </div>
 
         </div>
+        <div>
+        	<button id="getComment" value="1" type="submit"><i class="xi-caret-down-circle-o"></i>더보기</button>
+        </div>
+        
       </div>
       <div>
           <div id="page" style="text-align: center;"></div>
@@ -256,6 +274,8 @@
 
 <!-- jQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<!-- 투표하기 -->
 <script>
     var result1=false;
     var result2=false;
@@ -295,7 +315,26 @@
             }
         }
     });
-    
+</script>
+
+<!-- 댓글 더보기 -->
+<script>
+	$('#getComment').click(function(){
+		var currentCommentPage=$('#getComment').val();
+		
+		$.ajax({
+			url : "/discuss/onePost.do",
+			type: "get",
+			data : {currentCommentPage:currentCommentPage},
+			success : function(data){
+				console.log("성공");
+			},
+			error : function(data){
+				alert('댓글을 불러오지 못하였습니다. 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+			}	
+		});
+	});
+
 </script>
 
 </body>
