@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/resources/style/member/common.css">
 <link rel="stylesheet" href="/resources/style/member/myPageWithdraw.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="/assets/js/ui.js"></script>
+<script src="/resources/CKEditor/member/ui.js"></script>
 </head>
 
 <body>
@@ -91,9 +91,7 @@
 					<tr>
 						<td colspan="2">
 							<p class="title-wd">탈퇴 유의사항</p>
-							<p> - 사용하고 계신 아이디(아이디)는 탈퇴할 경우 재사용 및 복구가 불가능합니다. <br>
-							 - 탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.<br>
-							 - 각종 게시판의 게시글, 댓글 등의 데이터는 삭제되지 않습니다. 반드시 탈퇴 전 직접 삭제하셔야 합니다. <p> <br>
+							<p>-(아이디)탈퇴할 경우 재사용 및 복구가 불가능합니다. <br>
 							<input type="checkbox" id="agree"> <span>안내사항을 모두 확인하였으며, 이에 동의합니다.</span>
 						</td>
 					</tr>
