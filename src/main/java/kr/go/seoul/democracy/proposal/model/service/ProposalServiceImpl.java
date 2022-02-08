@@ -28,6 +28,8 @@ public class ProposalServiceImpl implements ProposalService {
 		return pDAO.selectList(curPage,recordCountPage);
 	}
 
+	
+
 
 	
 	

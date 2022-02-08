@@ -131,9 +131,22 @@
                     <span>읍냐?</span>
                 </div>
                 <div class="contents--btns">
-                    <button class="btn suggest">시민토론 작성하기</button>
+                    <button class="btn suggest" id="btnWrite">서울 제안 작성하기</button>
                 </div>
             </div>
+				<script>
+					 
+					//글쓰기 폼으로 이동하게 하는 함수
+					$(function(){    
+					        $("#btnWrite").click(function(){
+					            location.href="proposalWrite.do";
+					        });
+					});
+					 
+				</script>
+					 
+
+
 
             <div class="contents-search">
                 <!-- 검색 위치 -->

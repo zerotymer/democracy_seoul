@@ -42,8 +42,6 @@ public class ProposalController {
 			
 		int recordCountPage = 9;
 		List<Proposal> list = pService.selectAllList(curPage,recordCountPage);
-		int naviCountPerPage =5;
-		String pageCountPerPage =pService.getPageNavi(curPage,recordCountPage,naviCountPerPage);
 		mav.setViewName("proposal/allList");
 		mav.addObject("list",list);
 		System.out.println(list);
@@ -62,6 +60,10 @@ public class ProposalController {
 	}
 	
 	
+	@RequestMapping(value="/proposal/proposalWrite.do", method=RequestMethod.GET)
+	public String write() {
+		return "proposal/proposalWrite";
+	}
 	
 	
 }

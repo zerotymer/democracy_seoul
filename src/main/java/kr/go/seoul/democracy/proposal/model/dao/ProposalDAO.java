@@ -31,11 +31,6 @@ public class ProposalDAO {
 	public Proposal proposalView(int proposalNo)throws Exception {
 		return sqlSession.selectOne("proposal.proposalView",proposalNo);
 	}
-
-	public String getPageNavi(int curPage, int recordCountPage, int naviCountPerPage) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 	

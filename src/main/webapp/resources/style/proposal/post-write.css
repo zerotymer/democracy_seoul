@@ -6,7 +6,7 @@
     
 }
 
-.container1{
+.container{
    
     margin-top: 40px;
 	border:1px solid var(--COLOR-BORDER);
@@ -23,12 +23,18 @@ section .title{
    
 }	
 
-section .editor4 {
+section .editor {
     outline: none;
-    width: 700PX;
-    min-height: 500px;
+    width: 50PX;
+    min-height: 400px;
     resize: none;
     
+}
+
+
+.ck-editor__editable {
+	min-width: 400px;
+    min-height: 400px;
 }
 
 section .commit {

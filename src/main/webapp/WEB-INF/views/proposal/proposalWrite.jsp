@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/resources/style/content-frame.css">
     <link rel="stylesheet" href="/resources/style/proposal/post-write.css">
+<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 </head>
 <body>
     <div class="content-frame">
@@ -92,9 +93,16 @@
                     <br>
                     <hr width="800px">
                       
-                         <textarea id="editor4" class="editor4" name="editor4" placeholder="내용" ></textarea> 
-                        <script>CKEDITOR.replace('editor4');</script>
-           <br>
+                         <textarea id="editor" class="editor" name="editor" placeholder="내용" ></textarea> 
+                            <script>
+							    // 3. CKEditor5를 생성할 textarea 지정
+							    ClassicEditor
+							        .create( document.querySelector( '#editor' ) )
+							        .catch( error => {
+							            console.error( error );
+							        } );
+							    </script>
+          					 <br>
             
                
                <button type="submit" class="commit" style="float: right;  background-color: white; border:1px; ">
