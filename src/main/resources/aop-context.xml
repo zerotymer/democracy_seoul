@@ -33,6 +33,9 @@
 				<value>userPwd</value>
 				<value>userOriginalPass</value>
 				<value>userNewPass</value>
+				<value>memberPwd</value>
+				<value>memberOriginalPass</value>
+				<value>memberNewPass</value>
 			</list>
 		</constructor-arg>
 	</bean>
