@@ -16,6 +16,7 @@ public class HitsServiceImpl implements HitsService {
         this.hDAO = hDAO;
     }
 
+    /// METHODs
     @Override
     public boolean insertHitsTable(String tableName, int boardNo) {
         return false;
