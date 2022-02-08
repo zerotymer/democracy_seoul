@@ -7,7 +7,10 @@
 
  </HEAD>
  <BODY>
-    <textarea name="content" id="editor"></textarea>
+ 	<form action="/test/print.do" method="post">
+    	<textarea name="content" id="editor"></textarea>
+    	<input type="submit" value="도라에몽"/>
+    </form>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
