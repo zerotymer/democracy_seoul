@@ -2,7 +2,9 @@ package kr.go.seoul.democracy.proposal.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.go.seoul.democracy.proposal.service.ProposalService;
-import kr.go.seoul.democracy.proposal.vo.Proposal;
+import kr.go.seoul.democracy.proposal.model.service.BoardPager;
+import kr.go.seoul.democracy.proposal.model.service.ProposalService;
+import kr.go.seoul.democracy.proposal.model.vo.Proposal;
 
 @Controller("proposalController")
 public class ProposalController {
@@ -29,31 +32,33 @@ public class ProposalController {
 	@Qualifier("proposalServiceImpl")
 	private ProposalService pService;	
 	
-	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.POST)
+	@RequestMapping(value="/proposal/dw.do", method = RequestMethod.POST)
 	public String test() {
 		return "index";
 	}
-		
-	public static void main(String[] args) {
-		logger.debug("ProposalController 디버그");
-		logger.error("error발생");
-	}
+
 	
-	
-	
-	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.POST)
-	public ModelAndView allList(@RequestParam(value="proposalTilte", required=false)String searchOption,
+	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.GET)
+	public ModelAndView allList(@RequestParam int proposalNo,@RequestParam(value="proposalTilte", required=false)String searchOption,
 			@RequestParam(defaultValue="")String keyword,
 			@RequestParam(required=false, defaultValue="1")int curPage) throws Exception{
-
-		List<Proposal> list = pService.selectAllList();
+		
+		int count = pService.countArticle(searchOption, keyword);
+		BoardPager boardPager = new BoardPager(count,curPage);
+		int start = boardPager.getPageBegin();
+		int end = boardPager.getPageEnd();
+		
+		List<Proposal> list = pService.selectAllList(start,end,searchOption,keyword);
+		
+		Map<String,Object> map  = new HashMap<String, Object>();
+		
 		ModelAndView mav = new ModelAndView(); //모델(데이터)+뷰(화면) 함께 전달하는 객체
-		mav.setViewName("proposal/proposalAllList");
+		mav.setViewName("proposal/allList");
 		mav.addObject("list",list);
 		return mav;
 	}
 	
-	@RequestMapping(value="/proposal/post.do", method = RequestMethod.POST)
+	@RequestMapping(value="/proposal/post.do", method = RequestMethod.GET)
 	public ModelAndView proposalview(
 		@RequestParam(value="proposalNo",defaultValue="1")int proposalNo,
 		HttpSession session) throws Exception {

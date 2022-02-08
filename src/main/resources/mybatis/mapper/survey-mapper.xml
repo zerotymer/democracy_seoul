@@ -4,7 +4,7 @@
 	<!-- SQL QUERYS -->
 
 <!-- 1 -->
-<insert id="insertProposal" parameterType="kr.go.seoul.democracy.proposal.vo.Proposal">
+<insert id="insertProposal" parameterType="kr.go.seoul.democracy.proposal.model.vo.Proposal">
 	
 	insert into proposal
 	values(Proposal_SEQ.NEXTVAL,#{proposalTitle},#{proposalContent},SYSDATE,SYSDATE,SYSDATE+14,'Y',#{proposalThumbnail},#{proposalThumbnailPath})
@@ -13,7 +13,7 @@
 
 	
 <!-- 2 -->	
-<select id="selectProposalNo" parameterType="kr.go.seoul.democracy.proposal.vo.Proposal">
+<select id="selectProposalNo" parameterType="kr.go.seoul.democracy.proposal.model.vo.Proposal">
 	
 	select 
 	proposal_No
@@ -24,7 +24,7 @@
 </select>
 
 <!-- 3 -->
-<update id="updateProposalId"	parameterType="kr.go.seoul.democracy.survey.vo.Proposal">
+<update id="updateProposalId"	parameterType="kr.go.seoul.democracy.proposal.model.vo.Proposal">
 	
 	update proposal
 	set proposal_Title = #{proposalTitle}
@@ -33,7 +33,7 @@
 </update>
 
 <!-- 4-1 데이터넣기-->
-<insert id="addSurvey" parameterType="kr.go.seoul.democracy.proposal.vo.Proposal" >
+<insert id="addSurvey" parameterType="kr.go.seoul.democracy.survey.model.vo.Survey" >
 	
 	insert into survey  
 	values (SURVEY_SEQ.NEXTVAL, #{proposalNo}, #{surveyTitle} )
@@ -42,7 +42,7 @@
 </insert>
 
 <!-- 4-2 -->
-<select id="searchSurveyNo" parameterType="kr.go.seoul.democracy.proposal.vo.Proposal">
+<select id="searchSurveyNo" parameterType="kr.go.seoul.democracy.proposal.model.vo.Proposal">
 
 	select
 	survey_No
@@ -55,7 +55,7 @@
 
 
 <!-- 4-3 -->	
-<insert id="addQuestion" parameterType="kr.go.seoul.democracy.survey.Survey">
+<insert id="addQuestion" parameterType="kr.go.seoul.democracy.survey.model.vo.Survey">
 
 	insert into survey_q
 	values (SURVEY_Q_SEQ.NEXTVAL, #{surveyNo},#{question},#{inputType},#{content},#{content_q})

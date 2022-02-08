@@ -101,9 +101,13 @@
                 </div>
                 <div class="hashtag">
                     #동네책방 #동네책방
-                </div><br>
+                </div><br><br>
             
-
+            <div class="adminCon">
+            	<button clsss="editBtn">수정</button>
+            	<button clsss="delBtn">삭제</button>
+            	<button clsss="listBtn">목록</button>
+			</div>
             <hr>
             <article class="view_content">
                 내용입니다.
@@ -121,7 +125,7 @@
 
             <div class="comment">
                 <input type="hidden" name="bno" class="bno" value="" />
-                <div class="userNick">김떙땡</div>
+                <div class="userNick">${ requestScope.member.nick }</div>
                 <input type="hidden" name="bno" class="bno" value="" />
                 <input type="hidden" name="name" value="" />
                 <span class="today">

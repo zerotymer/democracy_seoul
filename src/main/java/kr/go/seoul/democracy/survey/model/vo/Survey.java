@@ -1,4 +1,4 @@
-package kr.go.seoul.democracy.survey.vo;
+package kr.go.seoul.democracy.survey.model.vo;
 
 public class Survey {
 	private int surveyNo;

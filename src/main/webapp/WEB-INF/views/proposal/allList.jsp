@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,7 +120,7 @@
         </div>
 
         <div class="frame--header inner">
-            <div class="rect suggest">
+            <div class="rect survey">
                 
             </div>
             
@@ -148,243 +150,33 @@
         </div>
         <div class="contents">
             <div class="card-container">
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-          <c:choose>
-				<c:when test="${!requestScope.list.isEmpty()}">
-					<c:forEach items="${requestScope.list }" var="proposal" varStatus="i"> 
-			            <div class="card-item survey">
-			                <div class="category"> 설문</div>
-			                <div class="title"><a href="/proposal/post.do?proposalNo=${proposal.proposalNo}">${proposal.proposalTitle }</div>
-			                <div class="content">${proposal.proposalContent }</div>
-			                <div class="icons">
-			                    <object class="icon hits auto-hidden"></object>
-			                    <span>212</span>
-			                    <object class="icon heart"></object>
-			                    <span>11</span>
-			                    <object class="icon comment"></object>
-			                    <span>12</span>
-			                    <object class="icon calendar auto-hidden"></object>
-			                    <span> ${proposal.proposalStart } ~ ${proposal.proposalEnd }</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-         </div>
-            		</c:forEach>
-            	</c:when>
-	       
-			</c:choose>
-        </div>
-    </section>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
-                <div class="card-item survey">
-                    <div class="category">서울시가 묻습니다</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        결과 보기
-                    </a>
-                </div>
+
+				<c:forEach items="${ requestScope.list }" var="proposal" varStatus="i"> 
+		            <div class="card-item survey">
+		                <div class="category"> 설문</div>
+		                <div class="title">
+		                	<a href="/proposal/post.do?proposalNo=${proposal.proposalNo}">${proposal.proposalTitle }</a>
+		                </div>
+		                <div class="content">${proposal.proposalContent }</div>
+		                <div class="thumnail">
+	                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
+	                    </div>
+		                <div class="icons">
+		                    <object class="icon hits auto-hidden"></object>
+		                    <span>212</span>
+		                    <object class="icon heart"></object>
+		                    <span>11</span>
+		                    <object class="icon comment"></object>
+		                    <span>12</span>
+		                    <object class="icon calendar auto-hidden"></object>
+		                    <span> ${proposal.proposalStart } ~ ${proposal.proposalEnd }</span>
+	                    </div>
+	                    <a class="detail-btn" href="">
+                        			결과 보기 
+                   		</a>
+      				</div>
+           		</c:forEach> 
+               
             </div>
 
             <div class="contents-navbar"></div>

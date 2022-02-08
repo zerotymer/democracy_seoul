@@ -1,4 +1,4 @@
-package kr.go.seoul.democracy.survey.dao;
+package kr.go.seoul.democracy.survey.model.dao;
 
 import javax.annotation.Resource;
 import javax.annotation.Resources;
