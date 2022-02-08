@@ -1,16 +1,12 @@
 package kr.go.seoul.democracy.common;
 
+import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
+import org.aspectj.lang.JoinPoint;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
-
-import kr.go.seoul.democracy.common.model.vo.Member;
+import java.util.List;
 
 /**
  * 암호화를 위한 Advice
@@ -20,10 +16,16 @@ import kr.go.seoul.democracy.common.model.vo.Member;
 public class EncryptAdvice {
 	/// FIELDs
 		private EncryptionTemplate template;
+		private List<String> saltList;
+		private List<String> dataList;
 
 		/// CONSTRUCTORs
-		public EncryptAdvice(EncryptionTemplate template) {
+		public EncryptAdvice(EncryptionTemplate template,
+							 List<String> saltList,
+							 List<String> dataList) {
 			this.template = template;
+			this.saltList = saltList;
+			this.dataList = dataList;
 		}
 		
 		/**
@@ -41,6 +43,16 @@ public class EncryptAdvice {
 			member.setUserPwd(data);
 		}
 
+		public void encryptPasswordForAdmin(JoinPoint jp) throws NoSuchAlgorithmException {
+			if (!(jp.getArgs()[0] instanceof Admin)) return;
+
+			Admin admin = jp.getArgs()[0] != null ? (Admin) jp.getArgs()[0] : null;
+			if (admin == null) return;
+
+			String data = this.template.encryptString(admin.getAdminPwd(), admin.getAdminId());
+			admin.setAdminPwd(data);
+		}
+
 		/**
 		 * 사용자의 Password를 암호화
 		 * @param jp
@@ -49,14 +61,17 @@ public class EncryptAdvice {
 			if (!(jp.getArgs()[0] instanceof HashMap)) return;
 			HashMap<String, Object> map = (HashMap<String, Object>) jp.getArgs()[0];
 
-			String userId = (String) map.get("userId");
-			String userPwd = (String) map.get("userPwd");
+			StringBuilder salt = new StringBuilder();
+			saltList.stream().map(map::get).forEach(salt::append);
 
-			String data = this.template.encryptString(userPwd, userId);
-			map.put("userPwd", data);
+			for (String key : dataList) {
+				if (map.containsKey(key))
+					map.put(key, this.template.encryptString( (String)map.get(key), salt.toString()));
+			}
 		}
 		
 		public void test() {
 			System.out.println("--------------------------------------------------------------------아따 포인트 컷");
 		}
+
 }

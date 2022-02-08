@@ -16,9 +16,8 @@
   			admindepart as adminDepart
   		FROM
   			admin
-  		WHERE adminid = #{adminId} and adminpwd = #{adminPwd} and adminGrade = 'N' 
+  		WHERE adminid = #{adminId} and adminpwd = #{adminPwd} and adminGrade != 'W' 
   	</select>
-  	<!-- or로 adminGrade를 적어야할 것 같은데 모르겠다.. 0 or 1or 2 여야 한다 -->
   	
   	
   	
@@ -41,6 +40,52 @@
 			ADMIN_GRADE = 'Y'
 		WHERE 
 			ADMIN_ID = #{adminId} AND ADMIN_PWD = #{adminPwd}
+	</update>
+	
+	<!-- 관리자 가입 -->
+	<insert id="insertAdminMember" parameterType="admin">
+		INSERT INTO 
+			ADMIN 
+		VALUES (ADMIN_SEQ.NEXTVAL, #{adminId}, #{adminPwd}, #{adminName}, '1', current_date, #{adminEmail}, '기획부')
+	</insert>
+	
+	<!-- 관리자 ID 중복 체크 -->
+	<select id="selectAdminIdCheck" resultType="admin">
+		SELECT 
+			adminno as adminNo,
+			adminid as adminId,
+			adminpwd as adminPwd,
+			adminname as adminName,
+			admingrade as adminGrade,
+			admindate as adminDate,
+			adminemail as adminEmail,
+			admindepart as adminDepart
+		FROM
+			ADMIN
+		WHERE ADMINID = #{value}
+	</select>
+	
+	<!-- 모든 회원 정보 가져오기 -->
+	<select id="selectAllMemberList" resultType="member">
+		SELECT 
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			nick as nick,
+			email as email,
+			enrolldate as enrollDate
+		FROM
+			MEMBER
+	</select>
+	
+	<!-- 탈퇴 여부 버튼 바꾸기 -->
+	<update id="updateMemberEndYNChange" parameterType="hashmap">
+		UPDATE
+			MEMBER
+		SET
+			end_yn = #{endYN}
+		WHERE
+			userId = #{userId}
 	</update>
 	
   	

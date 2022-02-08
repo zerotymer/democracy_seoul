@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Service("testServiceImpl")
 public class TestServiceImpl implements TestService {
     /// FIELDs
@@ -19,8 +21,16 @@ public class TestServiceImpl implements TestService {
     
     
     /// METHODs
+    @Override
     public String selectSysdate() {
     	System.out.println("TestService - selectSysdate()");
         return tDAO.selectSysdate();
+    }
+
+    @Override
+    public String hashmapTest(HashMap<String, Object> map) {
+        System.err.println("TestService - hashmapTest()");
+        System.err.println(map);
+        return null;
     }
 }

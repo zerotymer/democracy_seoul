@@ -25,7 +25,6 @@ public class EncryptionTemplate {
      * @author 신현진
      */
     public String encryptString(String data, String salt) throws NoSuchAlgorithmException {
-    	System.err.println("aaa");
         MessageDigest digest = MessageDigest.getInstance(METHOD);
         String str = KEY + data + salt;
         digest.update(str.getBytes());

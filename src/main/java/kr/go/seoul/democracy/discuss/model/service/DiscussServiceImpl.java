@@ -17,8 +17,13 @@ public class DiscussServiceImpl implements DiscussService {
 	private DiscussDAO dDAO;
 	
 	@Override
-	public ArrayList<Discuss> discussList() {
-		return dDAO.discussList();
+	public ArrayList<Discuss> discussList(int pageSize,int currentListPage) {
+		return dDAO.discussList(pageSize,currentListPage);
+	}
+
+	@Override
+	public int discussTotalCount() {
+		return dDAO.discussTotalCount();
 	}
 
 	@Override
@@ -27,13 +32,18 @@ public class DiscussServiceImpl implements DiscussService {
 	}
 
 	@Override
-	public ArrayList<DiscussComment> proComment(int discussNo) {
-		return dDAO.proComment(discussNo);
+	public ArrayList<DiscussComment> proComment(int discussNo,int pageSize,int currentCommentPage) {
+		return dDAO.proComment(discussNo,pageSize,currentCommentPage);
 	}
 
 	@Override
-	public ArrayList<DiscussComment> conComment(int discussNo) {
-		return dDAO.conComment(discussNo);
+	public ArrayList<DiscussComment> conComment(int discussNo,int pageSize,int currentCommentPage) {
+		return dDAO.conComment(discussNo,pageSize,currentCommentPage);
+	}
+
+	@Override
+	public int commentTotalCount(int discussNo) {
+		return dDAO.commentTotalCount(discussNo);
 	}
 
 	@Override
