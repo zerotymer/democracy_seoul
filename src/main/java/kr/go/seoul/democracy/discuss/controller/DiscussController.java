@@ -74,5 +74,18 @@ public class DiscussController {
 		return mav;
 	}
 	
+	//시민토론 게시글 작성 폼으로 이동(jsp)
+	@RequestMapping(value="/discuss/writeForm.do", method = RequestMethod.GET)
+	public String writeForm() {
+		return "discuss/write";
+	}
 	
+	//시민토론 게시글 작성
+	@RequestMapping(value="/discuss/write.do", method = RequestMethod.GET)
+	public ModelAndView write(ModelAndView mav) {
+		
+		
+		return mav;
+	}
+		
 }

@@ -19,11 +19,8 @@
             margin: 0;
             padding: 0;
         }
-        content {
-            width: 100%;
-        }
         
-        content .inner {
+        .inner {
             width: 80%;
             margin: 0 auto;
         }
@@ -92,7 +89,7 @@
             color:white;
         }
         
-        #contents{
+        .contents{
             width:100%;
             margin-top:2%;
             margin-left:auto;
@@ -101,36 +98,54 @@
             font-size:14px;
         }
         
-        .inner>div:last-of-type{
+        .comment-container{
             width:100%;
             margin:0 auto;
             display:flex;
             flex-direction: row;
         }
-        #pros{
+        
+        .comments{
             width:50%;
             margin-top:10px;
         }
-        .pro{
+        
+        .comment {
+        	margin: 0;
+        	padding: 0;
+        	overflow: hidden;
             width:97%;
-            display:flex;
-            flex-direction: row;
             border:1px solid rgba(200, 200, 180);
             border-radius: 8px;
+            display: flex;
         }
-        .pro-content{
+        .comment.pro {
+        	flex-direction: row;
+        	background-color: rgba(69, 49, 250);
+        }
+        .comment.con {
+        	margin-left:3%;
+        	flex-direction: row-reverse;
+        	background-color: rgba(250, 49, 49);
+        }
+        
+        .comment .content {
             width:85%;
-            margin:10px;
+            height:100%;
+        	margin: 0;
+        	padding: 8px;
+            background-color: white;
         }
-        .pro-content>div:first-child{
+        .comment .content .text{
             font-size:12px;
         }
-        .pro-content>div:last-child{
+        .comment .content .id{
             margin-top:5px;
             font-size:14px;
             color:rgba(110, 110, 100);
         }
-        .pro-icon{
+        
+        .icon{
             width:15%;
             margin:auto 0;
             display:flex;
@@ -138,60 +153,17 @@
             justify-content:center;
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
-            background-color:rgba(69, 49, 250);
             text-align: center;
         }
-        .pro-icon>div{
+        .icon .img{
         	width:100%;
         	color:white;
-        }
-        
-        #cons{
-            width:50%;
-            margin-top:10px;
-        }
-        .cons{
-            width:97%;
-            margin-left:3%;
-            display:flex;
-            flex-direction: row;
-            border:1px solid rgba(200, 200, 180);
-            border-radius: 8px;
-        }
-        .con-icon{
-            width:15%;
-            margin:auto 0;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-            background-color: rgba(250, 49, 49);
-            text-align: center;
-        }
-        .con-icon>div{
-        	width:100%;
-        	color:white;
-        }
-        .con-content{
-            width:85%;
-            height:100%;
-            margin:10px;
-        }
-        .con-content>div:first-child{
-            font-size:12px;
-        }
-        .con-content>div:last-child{
-            margin-top:5px;
-            font-size:14px;
-            color:rgba(110, 110, 100);
         }
     </style>
     
 </head>
 <body>
-    <content>
-      <div class="inner">
+    <section class="inner">
         <div>
 
           <div id="title">
@@ -215,7 +187,7 @@
             </div>
           </div>
 
-          <div id="contents">
+          <div id="contents" class="contents">
           	${discuss.discussContent}
           	<c:forEach items="${file }" var="file">
           	<img src="${file.filePath }"/>
@@ -223,54 +195,49 @@
           </div>
 
         </div>
-        <div>
-
-          <div id="pros">
-          <c:forEach items="${pro }" var="pro">
-            <div class="pro">
-                <div class="pro-content">
-                    <div>${pro.commentContent}</div>
-                    <div>${pro.userId}</div>
+        <div class="comment-container">
+        
+        <div id="comments-pro" class="comments pro">
+            <div class="comment pro">
+                <div class="content">
+                    <div class="text">fkkfkf</div>
+                    <div class="id">asdf</div>
                 </div>
-                <div class="pro-icon">
-                	<div>
+                <div class="icon">
+                	<div class="img">
                 		<svg style="width:18px;height:18px" viewBox="0 0 24 24">
 	                    <path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" />
 	                    </svg>
                 	</div>
                 </div>
             </div>
-          </c:forEach>
-          </div>
-
-          <div id="cons">
-          <c:forEach items="${con }" var="con">
-            <div class="con">
-                <div class="con-icon">
-                	<div>
+        </div>
+        
+		<div id="comments-con" class="comments con">
+            <div class="comment con">
+                <div class="content">
+                    <div class="text">asd</div>
+                    <div class="id">erwtrg</div>
+                </div>
+                <div class="icon">
+                	<div class="img">
                 		<svg style="width:18px;height:18px" viewBox="0 0 24 24">
                     	<path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" />
                     	</svg>
                 	</div>
                 </div> 
-                <div class="con-content">
-                    <div>${con.commentContent}</div>
-                    <div>${con.userId}</div>
-                </div>
             </div>
-          </c:forEach>
-          </div>
-
+		</div>
+		
         </div>
         <div>
         	<button id="getComment" value="1" type="submit"><i class="xi-caret-down-circle-o"></i>´õº¸±â</button>
         </div>
         
-      </div>
       <div>
           <div id="page" style="text-align: center;"></div>
       </div>
-    </content>
+    </section>
 
 <!-- jQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
