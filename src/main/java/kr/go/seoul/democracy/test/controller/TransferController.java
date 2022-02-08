@@ -1,5 +1,7 @@
 package kr.go.seoul.democracy.test.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import kr.go.seoul.common.FileTransferTemplate;
 import kr.go.seoul.common.ImageResizeTemplate;
 import kr.go.seoul.common.transfer.FileTransferInfo;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 
 @Controller
 public class TransferController {
@@ -99,5 +103,25 @@ public class TransferController {
         System.err.println("img transfer");
         System.err.println(info);                                                                                       // 이동한 파일 정보
         return "index";
+    }
+
+    /**
+     * 이미지 리사이징 업로드를 설명하기 위한 예시
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/ajax/imageUpload.do", method = RequestMethod.POST)
+    public void ajaxImageUpload(HttpServletRequest request,
+                                  HttpServletResponse response) throws IOException {
+        ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "upload", "ckeditor");
+
+        JsonObject json = new JsonObject();
+        json.addProperty("url", "/upload/ckeditor/11111.png");
+        json.addProperty("uploaded", 1);
+        json.addProperty("fileName", info.getOriginalFileName());
+        new Gson().toJson(json, response.getWriter());
+        System.err.println("img transfer");
+        System.err.println(info);
     }
 }

@@ -20,6 +20,26 @@
 		<constructor-arg value="#{settings['admin.encryption.key']}" />
 	</bean>
 
+	<!-- HitsMapping Template -->
+	<bean id="hitsMappingTemplate" class="kr.go.seoul.democracy.common.HitsMappingTemplate">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<value>kr.go.seoul.democracy.suggest.vo.Sug</value>
+					</key>
+					<value>SUGEST_HITS</value>
+				</entry>
+				<entry>
+					<key>
+						<value>kr.go.seoul.democracy.discuss.model.vo.Discuss</value>
+					</key>
+					<value>DISCUSSION_HITS</value>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
 	<!-- advice -->
 	<bean id="userEncryptAdvice" class="kr.go.seoul.democracy.common.EncryptAdvice">
 		<constructor-arg index="0" ref="userEncryption" />
@@ -51,6 +71,7 @@
 			</list>
 		</constructor-arg>
 	</bean>
+	
 
 	<!-- config -->
 	<aop:config>
@@ -75,6 +96,8 @@
 			<aop:before method="encryptPasswordForAdmin" 		pointcut-ref="adminEncryptionPointCut" />
 			<aop:before method="encryptPasswordForHashMap" 		pointcut-ref="allHashMapPointCut" />
 		</aop:aspect>
+
+
 	</aop:config>
 	
 </beans>
