@@ -36,17 +36,14 @@ public class TestController {
         System.out.println("TestController - test() end");
         return "index";
     }
-
     @RequestMapping("/test/content.do")
     public String test2() {
         return "test/content-frame";
     }
-
     @RequestMapping("/test/content-list.do")
     public String test3() {
         return "test/content-list";
     }
-
     @RequestMapping("/test/suggest.do")
     public String test4() {
         return "test/list-suggest";
@@ -59,7 +56,6 @@ public class TestController {
     public String test6() {
         return "test/list-survey";
     }
-    
     @RequestMapping("/test/member.do")
     public String test7() {
     	Member m = new Member();
