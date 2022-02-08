@@ -73,4 +73,8 @@ public class TestController {
         testService.hashmapTest(map);
         return "index";
     }
+    @RequestMapping("/ckeditor.do")
+    public String ckeditor() {
+    	return "test/ckeditor";
+    }
 }

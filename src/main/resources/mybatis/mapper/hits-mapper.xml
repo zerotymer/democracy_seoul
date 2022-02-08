@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="hits">
-  <update id="updateHits">
-  	UPDATE ${BOARDNAME}
-  	SET 
-  		hit_count = hit_count + 1,
-  		update_date = current_date
- 	WHERE
- 		board_no = #{ boardNo }
-  </update>
-  <insert id="insertHits">
-  	INSERT INTO ${BOARDNAME}
-  	VALUES ( #{boardNo}, 0, current_date)
-  </insert>
+	<insert id="insertHits">
+		INSERT INTO ${ boardname }
+		VALUES ( #{boardNo}, 0, current_date)
+	</insert>
+	<update id="updateHits">
+		UPDATE ${ boardname }
+		SET
+			hit_count = hit_count + 1,
+			update_date = current_date
+		WHERE
+			board_no = #{ boardNo }
+	</update>
+	<select id="selectHits" resultType="integer" parameterType="hashmap">
+		SELECT COUNT(*) FROM ${ boardname } WHERE board_no = #{ boardNo }
+	</select>
 </mapper>
