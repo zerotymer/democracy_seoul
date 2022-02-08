@@ -89,7 +89,6 @@ public class ImageResizeTemplate extends FileTransferTemplate {
         MultipartRequest multiRequest = new MultipartRequest(
                 request, UPLOAD_TEMP_DIR, FILE_SIZE_LIMIT, ENCODING, new DefaultFileRenamePolicy());
         String originalFileName = multiRequest.getFilesystemName(fileParameterName);
-
         ImageTransferInfo info = new ImageTransferInfo(this.UPLOAD_TEMP_DIR, originalFileName, max);
         info.setImageSizes(imageSizes);
         info.resizeMoveToAll(UPLOAD_ROOT_DIR + '\\' + targetDir, String.valueOf(currentTime));

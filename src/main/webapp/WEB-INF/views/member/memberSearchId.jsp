@@ -22,7 +22,7 @@
 				<a href="/member/goMemberSearchId.do"><H1>아이디 찾기</H1></a>
 			</div>
 			<form action="/member/memberSearchId.do" method="get">
-                <input type="text" id="nick" class="input-style" name="nick" placeholder="닉네임 입력"><br>
+                <input type="text" id="userName" class="input-style" name="userName" placeholder="이름 입력"><br>
 				<input type="email" id="email" class="input-style" name="email" placeholder="이메일 입력"><br>
 				<span id="emailCheck" class="check-msg"></span><br>
 				<input type="submit" id="searchId" onclick="submitSearchId();" class="btn-searchId" value="아이디 찾기">
