@@ -17,6 +17,10 @@
 		from discussion
 	</select>
 	
+	<select id="discussTotalCount" resultType="int">
+		select count from discussion
+	</select>
+	
 	<select id="onePost" resultType="discuss">
 		select discuss_no as discussNo,
 			discuss_title as discussTitle,
@@ -52,6 +56,12 @@
 			comment_date as commentDate,
 		from discuss_comment
 		where discuss_no=#{value} and comment_vote='2'
+	</select>
+	
+	<select id="commentTotalCount" resultType="int">
+		select count
+		from discuss_comment
+		where discuss_no=#{value}
 	</select>
 	
 	<select id="fileList" resultType="discussFile">
