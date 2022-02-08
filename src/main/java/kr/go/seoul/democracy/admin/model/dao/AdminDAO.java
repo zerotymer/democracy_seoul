@@ -1,5 +1,6 @@
 package kr.go.seoul.democracy.admin.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -26,14 +27,39 @@ public class AdminDAO {
 		return sqlSession.update("admin.updatePassword", map);
 	}
 
-	public int updateWithdraw(String adminId, String adminPwd) {
+	public int updateWithdraw(Admin admin) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("adminId", adminId);
-		map.put("adminPwd", adminPwd);
+		map.put("adminId", admin.getAdminId());
+		map.put("adminPwd", admin.getAdminPwd());
 		
 		return sqlSession.update("admin.updateWithdraw", map);
+	}
+
+	public int insertAdminMember(Admin a) {
+		
+		return sqlSession.insert("admin.insertAdminMember", a);
+	}
+
+	public int selectAdminIdCheck(String adminId) {
+		
+		return sqlSession.selectOne("admin.selectAdminIdCheck", adminId) != null? 1:0;
+	}
+
+	public ArrayList<Admin> selectAllMemberList() {
+		
+		return new ArrayList<Admin>(sqlSession.selectList("admin.selectAllMemberList"));
+	}
+
+	public int updateMemberEndYNChange(String userId, char endYN) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userId", userId);
+		map.put("endYN", endYN);
+		
+		return sqlSession.update("member.updateMemberEndYNChange", map);
 	}
 
 }
