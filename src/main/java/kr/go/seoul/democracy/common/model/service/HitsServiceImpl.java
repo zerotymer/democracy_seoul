@@ -4,5 +4,5 @@ import org.springframework.stereotype.Service;
 
 @Service("hitsServiceImpl")
 public class HitsServiceImpl implements HitsService {
-    
+
 }
