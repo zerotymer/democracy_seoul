@@ -19,7 +19,7 @@ public class SugDAO {
 
     /// METHODs
     public String selectSysdate() {
-        return sqlSession.selectOne("sug.date");
+        return sqlSession.selectOne("test.date");
     }
 
 }
