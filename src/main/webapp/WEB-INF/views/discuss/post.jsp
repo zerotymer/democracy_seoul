@@ -7,7 +7,10 @@
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<title>민서네 시민토론 - 게시글</title>
+<title>민주주의 서울 - 시민토론 게시글 <${discuss.discussTitle}></title>
+
+    <link rel="stylesheet" href="/resources/style/header.css">
+    <link rel="stylesheet" href="/resources/style/footer.css">
     
     <style>
         * {
@@ -163,6 +166,11 @@
     
 </head>
 <body>
+
+	<header>
+        <%@ include file="/includes/header.jsp" %>
+    </header>
+
     <section class="inner">
         <div>
 
@@ -238,6 +246,10 @@
           <div id="page" style="text-align: center;"></div>
       </div>
     </section>
+    
+    <footer>
+        <%@ include file="/includes/footer.jsp" %>
+    </footer>
 
 <!-- jQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

@@ -6,7 +6,10 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>민서네 시민토론 - 게시글 작성</title>
+<title>민주주의 서울 - 시민토론 게시글 작성</title>
+
+	<link rel="stylesheet" href="/resources/style/header.css">
+    <link rel="stylesheet" href="/resources/style/footer.css">
 
 	<style>
         * {
@@ -58,6 +61,11 @@
 
 </head>
 <body>
+
+	<header>
+        <%@ include file="/includes/header.jsp" %>
+    </header>
+
 	<section class="inner">
     <form name="writeForm" method="post" action="/discuss/write.do">
         <div>
@@ -76,6 +84,10 @@
     </form>
     </section>
 
+	<footer>
+        <%@ include file="/includes/footer.jsp" %>
+    </footer>
+
 <!-- JQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
@@ -83,9 +95,11 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 <script>
     ClassicEditor
-        .create( document.querySelector( '#editor' ), {
-        	filebrowserImageUploadUrl: '/webapp/upload'
-        } )
+	    .create( document.querySelector( '#editor' ), {
+	        ckfinder: {
+	            uploadUrl: '/ajax/imageUpload.do'
+	        }
+	    })
         .catch( error => {
             console.error( error );
         } );

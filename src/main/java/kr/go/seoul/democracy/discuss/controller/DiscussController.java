@@ -1,14 +1,23 @@
 package kr.go.seoul.democracy.discuss.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.go.seoul.common.FileTransferTemplate;
+import kr.go.seoul.common.ImageResizeTemplate;
+import kr.go.seoul.common.transfer.FileTransferInfo;
+import kr.go.seoul.democracy.admin.model.vo.Admin;
 import kr.go.seoul.democracy.discuss.model.service.DiscussService;
 import kr.go.seoul.democracy.discuss.model.vo.Discuss;
 import kr.go.seoul.democracy.discuss.model.vo.DiscussComment;
@@ -19,6 +28,9 @@ public class DiscussController {
 	@Autowired
 	private DiscussService dService;
 	
+	private FileTransferTemplate fileTemplate;
+    private ImageResizeTemplate imgTemplate;
+
 	//시민토론 목록 페이지로 이동
 	@RequestMapping(value="/discuss/link.do", method = RequestMethod.GET)
 	public String discussLink() {
@@ -82,10 +94,25 @@ public class DiscussController {
 	
 	//시민토론 게시글 작성
 	@RequestMapping(value="/discuss/write.do", method = RequestMethod.GET)
-	public ModelAndView write(ModelAndView mav) {
+	public ModelAndView write(ModelAndView mav,@SessionAttribute Admin admin) {
 		
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "/test/fileDownload.do", method = RequestMethod.GET)
+    public String testDownload(HttpServletResponse response) throws IOException {
+
+        // 비즈니스 로직 - 알아서 만드세요.
+        
+        // 예시
+        FileTransferInfo info = new FileTransferInfo(
+                "image.jpg",
+                "1643865378470",
+                "F:\\Workspace\\Github\\democracy_seoul\\src\\main\\webapp\\upload\\FOLDER\\1643865378470",
+                299671);
+        fileTemplate.fileTransfer(response, info);                                                                      // 전송처리
+        return "index";
+    }
 		
 }
