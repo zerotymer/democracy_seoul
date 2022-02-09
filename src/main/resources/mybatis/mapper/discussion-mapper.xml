@@ -75,7 +75,7 @@
 	
 	<insert id="write" parameterType="discuss">
 		insert into discussion values
-		(discuss_seq.nextval(),#{discussTitle},#{userId},#{discussContent},sysdate,sysdate,?,'N',#{discussThumbnailName},#{discussThumbnailPath})
+		(discuss_seq.nextval(),#{discussTitle},#{userId},#{discussContent},current_date,current_date,current_date+14,'N',#{discussThumbnailName},#{discussThumbnailPath})
 	</insert>
 	
 </mapper>

@@ -36,10 +36,10 @@ public class DiscussServiceImpl implements DiscussService {
 		return dDAO.proComment(discussNo,pageSize,currentCommentPage);
 	}
 
-	/*@Override
-	public ArrayList conComment(int discussNo,int pageSize,int currentCommentPage) {
+	@Override
+	public ArrayList<HashMap<String, Object>> conComment(int discussNo,int pageSize,int currentCommentPage) {
 		return dDAO.conComment(discussNo,pageSize,currentCommentPage);
-	}*/
+	}
 
 	@Override
 	public int commentTotalCount(int discussNo) {

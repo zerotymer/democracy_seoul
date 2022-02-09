@@ -49,4 +49,8 @@ public class DiscussDAO {
       return new ArrayList<DiscussFile>(sqlSession.selectList("discuss.fileList"));
    }
 
+public int write(Discuss discuss) {
+	return sqlSession.selectOne("discuss.write", discuss);
+}
+
 }

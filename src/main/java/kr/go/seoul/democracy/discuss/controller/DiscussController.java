@@ -77,7 +77,7 @@ public class DiscussController {
 		Discuss discuss=dService.discussOne(discussNo); //게시글 번호로 해당 게시글 찾기
 		ArrayList<HashMap<String, Object>> proComment = dService.proComment(discussNo,pageSize,currentCommentPage);;
 		proComment.add(comment);
-		//ArrayList conComment=dService.conComment(discussNo,pageSize,currentCommentPage); //게시글 번호로 해당 게시글의 반대 댓글 목록 가져오기
+		ArrayList<HashMap<String, Object>> conComment=dService.conComment(discussNo,pageSize,currentCommentPage); //게시글 번호로 해당 게시글의 반대 댓글 목록 가져오기
 		ArrayList<DiscussFile> file=dService.file(discussNo); //게시글 번호로 해당 게시글의 파일 목록 가져오기
 		
 		mav.addObject("discuss",discuss);
