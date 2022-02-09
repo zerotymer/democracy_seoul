@@ -1,6 +1,8 @@
 package kr.go.seoul.democracy.member.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,7 @@ import kr.go.seoul.common.transfer.ImageTransferInfo;
 import kr.go.seoul.democracy.common.model.vo.Member;
 import kr.go.seoul.democracy.member.model.service.MailSendService;
 import kr.go.seoul.democracy.member.model.service.MemberService;
+import kr.go.seoul.democracy.member.model.vo.MemberProfile;
 
 @Controller
 public class MemberController {
@@ -37,6 +40,7 @@ public class MemberController {
 	
 	@Autowired
 	private MailSendService mss;
+	
 	
 	//메인 화면에서 로그인 페이지로 이동하는 로직
 	@RequestMapping(value="/member/goLogin.do",method=RequestMethod.GET)
@@ -62,7 +66,7 @@ public class MemberController {
 	}
 	
 	
-    //로그인 페이지에서 '비밀번호 변경 페이지'로 가는 로직
+    //로그인 페이지에서 '비밀번호 찾기 페이지'로 가는 로직
 	@RequestMapping(value="/member/goMemberSearchPwd.do",method=RequestMethod.GET)
 	public String goMemberSearchPwd() {
 		return "member/memberSearchPwd";
@@ -75,6 +79,56 @@ public class MemberController {
 	{//기본페이지에서 회원가입 누른 사람들 회원가입 페이지로 보내는 메소드
 		return "member/memberJoinus";
 	}
+	
+	
+	 //아이디 찾기 페이지로 이동하는 메소드
+	  @RequestMapping(value="/member/goSearchIdResult.do",method=RequestMethod.GET)
+	  public String goMemberSearchIdResult() {
+			
+			return "member/memberSearchId";
+		}
+	  
+	  
+	  //비밀번호 찾기시 이메일 인증 페이지로 가는 로직
+	  @RequestMapping(value="/member/goMemberSearchPwdEmailCheck.do")
+	  public String goMemberSearchPwdEmailCheck() {
+		
+		  return "member/memberSearchPwdEmailCheck";
+
+	  }
+	   //이메일 변경 페이지 이동
+	  @RequestMapping(value="/member/goMemberUpdateEmail.do")
+	  public String goResetEmailCheck() {
+		  
+		  return "member/memberUpdateEmail";
+	  }
+	  
+	  
+		//메인 화면에서 마이 페이지로 이동하는 로직
+		@RequestMapping(value="/member/goMyPage.do",method=RequestMethod.GET)
+		public String goMyPage(HttpServletRequest request,Model model) {
+			HttpSession session = request.getSession();
+			Member m = (Member)session.getAttribute("user");//
+			System.out.println("담겨있는것"+m.toString());
+			MemberProfile mf = mService.selcetMemberProfile(m);
+			//System.out.println(mf.toString());
+			model.addAttribute("user",m);//
+			model.addAttribute("mf", mf);
+			return "member/myPage";
+		}
+		
+		
+		//메인페이지에서 정보 수정으로 이동하는 로직
+		@RequestMapping(value="/member/goMyPageUpdate.do",method=RequestMethod.GET)
+		public String goMyPageUpdate(HttpServletRequest request,Model model) {
+			HttpSession session = request.getSession();
+			Member m = (Member)session.getAttribute("user");//
+			//System.out.println(m.toString());
+			MemberProfile mf = mService.selcetMemberProfile(m);
+			model.addAttribute("user",m);//
+			model.addAttribute("mf", mf);
+			return "member/myPageModify";
+		}
 	
 	
 	
@@ -92,9 +146,9 @@ public class MemberController {
 	{
 		System.out.println("로그인 성공");
 		HttpSession session = request.getSession();
-		session.setAttribute("member",m);
-		
-		return "redirect:/";
+		session.setAttribute("user",m);//
+		return "redirect:/member/goHome.do";
+		//return "redirect:/member/goMyPage.do";
 	}else {
 		model.addAttribute("msg","로그인의 실패하였습니다.아이디와 비밀번호 확인해주세요.");
 		model.addAttribute("location","/");
@@ -224,9 +278,9 @@ public class MemberController {
 		int result=mService.selectEmailCheck(email);
 		
 		if(result>0) {
-			response.getWriter().print(true);// 닉네임이 중복된다.
+			response.getWriter().print(true);// 이메일이 중복된다.
 		}else {
-			response.getWriter().print(false);// 닉네임이 중복되지 않는다.
+			response.getWriter().print(false);// 이메일이 중복되지 않는다.
 		}
 		
 		
@@ -247,12 +301,142 @@ public class MemberController {
 		
 	}
 	
+	
+	//아이디 찾기 로직
+	@RequestMapping(value="/member/memberSearchId.do", method=RequestMethod.GET)
+	public String memberSearchId(HttpServletRequest request,Model model,Member member) {
+		
+		
+		
+		System.out.println("SearchId 로직 정상 호출");
+		System.out.println(member.toString());
+		Member m = mService.searchId(member);
+		
+		if(m!=null)
+		{   //이름과 이메일이 일치한다면 아이디 값을 보내준다.
+			System.out.println("아이디 찾기 성공");
+			HttpSession session = request.getSession(true);
+			session.setAttribute("user",m);//
+			
+			return "member/memberSearchIdResult";
+		}else {//아이디 찾기 실패할시
+			model.addAttribute("msg","아이디 찾기 실패하였습니다.이메일과 이름을 확인해주세요.");
+			model.addAttribute("location","/member/goMemberSearchId.do");
+			return "member/msg";
+		}
+		
+		}
+	
+	
+		//비밀번호 찾기 로직
+	  @RequestMapping(value="/member/memberSearchPwd.do", method=RequestMethod.POST)
+	  public String memberSearchPwd(HttpServletRequest request,Model model,Member member) {
+		  //1.입력한 아이디와 이메일을 받아오기
+		  //2.두개가 일치한다면 이메일로 인증 코드 보내주기
+		  //3.인증코드 확인하는 jsp페이지로 보내주기
+		  
+			System.out.println("SearchPwd 로직 정상 호출");
+			System.out.println(member.toString());
+			Member m = mService.searchPwd(member);
+			
+			
+			if(m!=null)
+			{   //이메일과 아이디가 일치한다면 인증코드를 비밀번호에 보내준다.
+				System.out.println("아이디와 이메일 찾기 일치");
+				HttpSession session = request.getSession(true);
+				session.setAttribute("user",m);//
+				
+				return "member/memberSearchPwdEmailCheck";
+			}else {//아이디 찾기 실패할시
+				model.addAttribute("msg","비밀번호 찾기 실패하였습니다.이메일과 이름을 확인해주세요.");
+				model.addAttribute("location","/member/goMemberSearchId.do");
+				return "member/msg";
+			} 
+		  
+	  }
+	  
+	  
+	  
+	  //비번 찾기시 이메일 본인 인증되면 비밀번호 재설정 페이지로 이동하는 로직
+	  @RequestMapping(value="/member/goMemberSearchPwdResult.do")
+	  public String goMemberSearchPwdResult() {
+		  
+		  return "member/memberSearchPwdResult";
 
+		  
+	  }
+	  
+	  
+	  //비밀번호 찾기 후 비번  변경하는 로직
+	  @RequestMapping(value="/member/memberUpdatePassword.do")
+	  public String resetPassword(HttpServletRequest request,Model model,Member member) throws IOException
+	  {
+		    //유저가 입력한 변경할 패스워드를 받는다.
+		    System.out.println("updatePwd 로직 정상 호출");
+			System.out.println(member.toString());
+			int result = mService.resetPassword(member);
+
+			
+			 if(result>0)
+			{	System.out.println("비밀번호 재설정 성공");
+			    HttpSession session = request.getSession(true);
+		    	session.setAttribute("PwdResult", true);
+				model.addAttribute("msg","비밀번호 재설정에 성공하였습니다.로그인해주세요.");
+				model.addAttribute("location","/member/goLogin.do");
+				return "member/msg";
+
+			}else
+			{request.setAttribute("pwdResult",false);
+			 model.addAttribute("msg","비밀번호 찾기 실패하였습니다.이메일과 이름을 확인해주세요.");
+			 model.addAttribute("location","/member/goMemberSearchPwdResult.do");
+			 return "member/msg";
+			
+			}
+				
+
+	  }
+	  
+	  
+	  //마이페이지에서 이메일인증 후 변경하는 로직
+	  @RequestMapping(value="/member/memberUpdateEmail.do")
+	  public String memberUpdateEmail(HttpServletRequest request,Model model,Member member) throws IOException
+	  {
+		    //유저가 입력한 변경할 패스워드를 받는다.
+		    System.out.println("UpdateEmail 로직 정상 호출");
+			System.out.println(member.toString());
+			int result = mService.memberUpdateEmail(member);
+
+			
+			 if(result>0)
+			{	System.out.println("이메일 재설정 성공");
+			    HttpSession session = request.getSession(true);
+		    	session.setAttribute("EmailResult", true);
+				model.addAttribute("msg","이메일 변경에 성공하였습니다.");
+				model.addAttribute("location","/");
+				return "member/msg";
+
+			}else
+			{request.setAttribute("pwdResult",false);
+			 model.addAttribute("msg","이메일 변경에 실패하였습니다.");
+			 model.addAttribute("location","/member/goMemberUpdateEmail.do");
+			 return "member/msg";
+			
+			}
+				
+
+	  }
 	
 	
 	
 	
 	
+	
+	  
+	  //임시 메인페이지 이동
+	 @RequestMapping(value="/member/goHome.do")
+	  public String goHome() {
+		  return "member/memberHome";
+	  }
 	
 	
 	
@@ -264,10 +448,73 @@ public class MemberController {
      */
     @RequestMapping(value = "/member/imageUpload.do", method = RequestMethod.POST)
     public String imageUpload(HttpServletRequest request) throws IOException {
+    	MemberProfile memberProfile = new MemberProfile();
+    	HttpSession session = request.getSession();
+		//session.getAttribute("");
+		Member m = (Member)session.getAttribute("user");//
+		System.out.println(m.toString());
+		MemberProfile mf = mService.selcetMemberProfile(m);
+		memberProfile.setUserId(m.getUserId());
         ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "img", "profile");
-        info.getFileName();
-        System.err.println("img transfer");
-        System.err.println(info);                                                                                       // 이동한 파일 정보
-        return "index";
+        System.out.println(info.getFileName());
+        memberProfile.setProfileName(info.getFileName());
+        memberProfile.setProfileFilePath(info.getAbsolutePath());
+        if(mf==null) 
+        	mService.insertMemberProfile(memberProfile);//아이디로 올라온게 없으면 넣어주고
+        else
+        	mService.updateMemberProfile(memberProfile);//있으면 수정해준다.
+        return "redirect:/member/goMyPage.do";
     }
+    
+    
+    
+      //맴버 비밀번호 변경
+	  @RequestMapping(value="/member/goMypageUpdatePwd.do")
+	  public String goMypageUpdatePwd() {
+		  
+		  
+		   return "member/myPageUpdatePwd";
+
+	  }
+	  
+	  
+	  //마이 페이지에서 비밀번호 변경로직
+	  @RequestMapping(value="/member/MypageUpdatePassword.do", method=RequestMethod.POST)
+	  public String myPageUpdatePassword(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam String memberOriginalPass, @RequestParam String memberNewPass) throws IOException
+	  {//memberOriginalPass,memberNewPass,“userPwd”
+		  
+		   HttpSession session = request.getSession();
+		   Member m = (Member)session.getAttribute("user");
+		   //System.out.println("비번변경시 갖고있는 데이터 : "+m);
+		   Map<String,String> Map = new HashMap<>();
+		   Map.put("memberOriginalPass", memberOriginalPass);
+		   Map.put("memberNewPass", memberNewPass);
+		   Map.put("userId",m.getUserId());
+		   System.out.println(Map);
+		   
+		   
+		  int result = mService.myPageUpdatePassword(Map);
+		  
+			if(result>0)
+			{   
+			System.out.println("비밀번호 재설정 성공");
+			session = request.getSession(true);
+		    session.setAttribute("MyPagePwdResult", true);
+			model.addAttribute("msg","이메일 변경에 성공하였습니다.");
+			model.addAttribute("location","/");
+			return "member/msg";
+			}else
+			{  System.out.println("비밀번호 재설정 실패");
+				response.getWriter().print(false);
+				return "redirect:/member/goMyPage.do";
+			}
+			
+		   
+	
+	  }
+		  
+		  
+		  
+    
+    
 }
