@@ -17,8 +17,8 @@
             <a href="">참여하기</a>
             <ul class="submenu">
                 <li><a href=""></a>시민제안</li>
-                <li><a href=""></a>시민토론</li>
-                <li><a href=""></a>서울시가 묻습니다</li>
+                <li><a href="/discuss/link.do"></a>시민토론</li>
+                <li><a href="/proposal/proposalAllList.do"></a>서울시가 묻습니다</li>
             </ul>
         </li>
         <li class="menuitem">

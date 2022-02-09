@@ -50,7 +50,7 @@ public class FileTransferTemplate {
         File file = new File(UPLOAD_TEMP_DIR);
         if (!file.exists()) file.mkdirs();
 
-        System.out.println(String.format("Info: FileTransferTemplate have set temporary path for upload(%s)", UPLOAD_TEMP_DIR));
+        System.out.println(String.format("INFO - FILE: 파일 전송을 위하여 업로드 폴더가 지정되었습니다.(%s)", UPLOAD_TEMP_DIR));
     }
 
     /// METHODs

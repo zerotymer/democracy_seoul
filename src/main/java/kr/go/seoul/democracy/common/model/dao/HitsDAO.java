@@ -18,7 +18,6 @@ public class HitsDAO {
     }
 
     /// METHODs
-
     /**
      * 조회수를 적용하는 메서드
      * @param tableName 테이블명

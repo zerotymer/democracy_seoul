@@ -238,3 +238,17 @@ Content-Session: 글작성 버튼
     font: 600 16px/38px 'Noto Sans KR';
     color: #666;
 }
+
+/* VIEWER */
+
+.content--viewer {
+
+}
+.content--viewer h4 {
+    font: 500 30px/40px 'Noto Sans KR';
+    margin-bottom: 0;
+}
+
+.content--block {
+
+}
