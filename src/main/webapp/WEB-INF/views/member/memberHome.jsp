@@ -19,7 +19,7 @@
 
 <H1>기본 메인 페이지</H1>
 
-<c:choose>
+<c:choose><!-- 임시로 만든페이지 -->
 	<c:when test="${sessionScope.user != null }">
 		[<a href="/member/myPage.do">${sessionScope.user.userName }</a>]님 환영 합니다 <a href="/member/logout.do">로그아웃</a><br>
 	    <a href="/member/goMyPage.do">mypage</a>
@@ -34,9 +34,7 @@
 				<input type="submit" value="로그인"/>
 			</fieldset>
 			
-		</form>
-		<a href="/member/joinPage.do">회원가입</a><br>
-		
+		</form>		
 	</c:otherwise>
 </c:choose>
 
