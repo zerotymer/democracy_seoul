@@ -44,7 +44,7 @@
 			comment_vote as commentVote,
 			comment_date as commentDate,
 		from discuss_comment
-		where discuss_no=#{value} and comment_vote='1'
+		where discuss_no=#{value} and comment_vote='Y'
 	</select>
 	
 	<select id="conCommentList" resultType="discussComment">
@@ -55,11 +55,11 @@
 			comment_vote as commentVote,
 			comment_date as commentDate,
 		from discuss_comment
-		where discuss_no=#{value} and comment_vote='2'
+		where discuss_no=#{value} and comment_vote='N'
 	</select>
 	
 	<select id="commentTotalCount" resultType="int">
-		select count
+		select count(*)
 		from discuss_comment
 		where discuss_no=#{value}
 	</select>

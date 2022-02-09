@@ -14,7 +14,7 @@ import kr.go.seoul.democracy.discuss.model.vo.DiscussFile;
 
 @Repository
 public class DiscussDAO {
-	
+
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSession;
 
@@ -33,16 +33,16 @@ public class DiscussDAO {
 
 	public ArrayList<DiscussComment> proComment(int discussNo,int pageSize,int currentCommentPage) {
 		RowBounds rb=new RowBounds((currentCommentPage-1)*pageSize,pageSize);
-		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.proCommentList",null,rb));
+		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.proCommentList",discussNo,rb));
 	}
 
 	public ArrayList<DiscussComment> conComment(int discussNo,int pageSize,int currentCommentPage) {
 		RowBounds rb=new RowBounds((currentCommentPage-1)*pageSize,pageSize);
-		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.conCommentList",null,rb));
+		return new ArrayList<DiscussComment>(sqlSession.selectList("discuss.conCommentList",discussNo,rb));
 	}
 
 	public int commentTotalCount(int discussNo) {
-		return sqlSession.selectOne("discuss.commentTotalCount");
+		return sqlSession.selectOne("discuss.commentTotalCount", discussNo);
 	}
 
 	public ArrayList<DiscussFile> file(int discussNo) {

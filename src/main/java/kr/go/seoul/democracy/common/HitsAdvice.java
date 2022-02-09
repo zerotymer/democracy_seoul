@@ -3,7 +3,7 @@ package kr.go.seoul.democracy.common;
 import kr.go.seoul.democracy.common.model.service.HitsService;
 import kr.go.seoul.democracy.common.model.service.HitsServiceImpl;
 import kr.go.seoul.democracy.discuss.model.vo.Discuss;
-import kr.go.seoul.democracy.proposal.vo.Proposal;
+import kr.go.seoul.democracy.proposal.model.vo.Proposal;
 import kr.go.seoul.democracy.suggest.vo.Sug;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -56,7 +56,7 @@ public class HitsAdvice {
         hService.addCountHitsTable("DISCUSSION_HITS", value.getDiscussNo());
     }
 
-    @Pointcut("execution(kr.go.seoul.democracy.proposal.vo.Proposal kr..service.*.*(..))")      // TODO: model
+    @Pointcut("execution(kr.go.seoul.democracy.proposal.model.vo.Proposal kr..service.*.*(..))")      // TODO: model
     public void proposalPointCut() {}
 
     @After("proposalPointCut()")
