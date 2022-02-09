@@ -38,7 +38,7 @@ public class HitsAdvice {
         Sug value = (Sug) jp.getArgs()[0];
         if (value == null) return;
 
-        hService.addCountHitsTable("SUGGEST_HIT", 1);                                           // TODO: REVISE
+        hService.addCountHitsTable("SUGGEST_HITS", 1);                                           // TODO: REVISE
     }
 
     @Pointcut("execution(kr.go.seoul.democracy.discuss.model.vo.Discuss kr..service.*.*(..))")
@@ -49,7 +49,7 @@ public class HitsAdvice {
         Discuss value = (Discuss) jp.getArgs()[0];
         if (value == null) return;
 
-        hService.addCountHitsTable("DISCUSSION_HIT", value.getDiscussNo());
+        hService.addCountHitsTable("DISCUSSION_HITS", value.getDiscussNo());
     }
 
     @Pointcut("execution(kr.go.seoul.democracy.proposal.vo.Proposal kr..service.*.*(..))")      // TODO: model
@@ -60,7 +60,7 @@ public class HitsAdvice {
         Proposal value = (Proposal) jp.getArgs()[0];
         if (value == null) return;
 
-        hService.addCountHitsTable("DISCUSSION_HIT", value.getProposalNo());
+        hService.addCountHitsTable("PROPOSAL_HITS", value.getProposalNo());
     }
 
 

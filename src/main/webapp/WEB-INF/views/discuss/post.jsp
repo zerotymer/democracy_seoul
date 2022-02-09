@@ -196,10 +196,7 @@
           </div>
 
           <div id="contents" class="contents">
-          	${discuss.discussContent}
-          	<c:forEach items="${file }" var="file">
-          	<img src="${file.filePath }"/>
-          	</c:forEach>
+          	
           </div>
 
         </div>
@@ -294,6 +291,17 @@
             }
         }
     });
+</script>
+
+<script language="javascript">
+	var content="{{discuss.discussContent}}";
+	content=content.replaceAll("&lt;","<");
+	content=content.replaceAll("&gt;",">");
+	content=content.replaceAll("&amp;lt;","<");
+	content=content.replaceAll("&amp;gt;",">");
+	content=content.replaceAll("&amp;nbsp;"," ");
+	content=content.replaceAll("&amp;amp;","&");
+	$('#contents').html(content);
 </script>
 
 <!-- ´ñ±Û ´õº¸±â -->

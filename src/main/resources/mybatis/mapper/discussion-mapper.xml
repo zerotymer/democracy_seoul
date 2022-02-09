@@ -36,7 +36,7 @@
 		where discuss_no=#{value}
 	</select>
 	
-	<select id="proCommentList" resultType="discussComment">
+	<select id="proCommentList" resultType="hashmap">
 		select discuss_no as discussNo,
 			comment_no as commentNo,
 			userid as userId,
@@ -44,10 +44,10 @@
 			comment_vote as commentVote,
 			comment_date as commentDate,
 		from discuss_comment
-		where discuss_no=#{value} and comment_vote='1'
+		where discuss_no=#{value} and comment_vote='Y'
 	</select>
 	
-	<select id="conCommentList" resultType="discussComment">
+	<select id="conCommentList" resultType="arraylist">
 		select discuss_no as discussNo,
 			comment_no as commentNo,
 			userid as userId,
@@ -55,11 +55,11 @@
 			comment_vote as commentVote,
 			comment_date as commentDate,
 		from discuss_comment
-		where discuss_no=#{value} and comment_vote='2'
+		where discuss_no=#{value} and comment_vote='N'
 	</select>
 	
 	<select id="commentTotalCount" resultType="int">
-		select count
+		select count(*)
 		from discuss_comment
 		where discuss_no=#{value}
 	</select>
@@ -72,4 +72,10 @@
 		from discuss_file
 		where discuss_no=#{value}
 	</select>
+	
+	<insert id="write" parameterType="discuss">
+		insert into discussion values
+		(discuss_seq.nextval(),#{discussTitle},#{userId},#{discussContent},sysdate,sysdate,?,'N',#{discussThumbnailName},#{discussThumbnailPath})
+	</insert>
+	
 </mapper>
