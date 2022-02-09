@@ -16,7 +16,7 @@ public interface DiscussService {
 
 	ArrayList<HashMap<String, Object>> proComment(int discussNo,int pageSize,int currentCommentPage);
 
-	//ArrayList conComment(int discussNo,int pageSize,int currentCommentPage);
+	ArrayList<HashMap<String, Object>> conComment(int discussNo,int pageSize,int currentCommentPage);
 	
 	int commentTotalCount(int discussNo);
 
