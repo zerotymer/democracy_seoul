@@ -1,5 +1,7 @@
 :root {
     --COLOR-FONT-STRONG: #00a8ff;
+    --COLOR-TAB: lightgray;
+    --COLOR-TAB-ACTIVE: blue;
 }
 
 .search--container {
@@ -30,4 +32,54 @@
 }
 .search--container .search-msg strong {
     color: var(--COLOR-FONT-STRONG);
+}
+
+.search--container .tab {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 40px;
+    border-bottom: 5px solid var(--COLOR-TAB-ACTIVE);
+}
+.search--container .tab-btn {
+    width: 220px;
+    height: 70px;
+    text-align: center;
+    font: 400 18px/70px 'Nanum Gothic', sans-serif;
+    background-color: var(--COLOR-TAB);
+    box-sizing: border-box;
+    border-right: 3px solid white;
+    cursor: pointer;
+}
+
+/* for JavaScript */
+.search--container .tab-btn.active {
+    background-color: var(--COLOR-TAB-ACTIVE);
+    color: white;
+}
+
+
+.search--container .result ul {
+    list-style: none;
+    padding: 0;
+}
+.search--container .result li {
+    padding-left: 10px;
+    border-bottom: 2px solid var(--COLOR-TAB);
+}
+.search--container .result div {
+    display: flex;
+    flex-flow: row nowrap;
+    border-bottom: 6px solid var(--COLOR-TAB);
+}
+.search--container .result h3 {
+    flex: 1 0 auto;
+}
+
+.search--container .result .more {
+    flex: 0 0 120px;
+    margin-top: 16px;
+    height: 40px;
+    background-color: red;
+    text-align: center;
+    font: 100 14px/40px 'Nanum Gothic', sans-serif;
 }

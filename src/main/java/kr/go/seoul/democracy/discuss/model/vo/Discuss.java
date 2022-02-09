@@ -45,6 +45,15 @@ public class Discuss {
 	}
 
 
+	public Discuss(String userId, String discussTitle, String discussContent, String discussThumbnailName, String discussThumbnailPath) {
+		this.discussTitle = discussTitle;
+		this.userId = userId;
+		this.discussContent = discussContent;
+		this.discussThumbnailName = discussThumbnailName;
+		this.discussThumbnailPath = discussThumbnailPath;
+	}
+
+
 	public int getDiscussNo() {
 		return discussNo;
 	}

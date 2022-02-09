@@ -22,9 +22,9 @@
 </head>
 <body>
 	
-	ID : ${sessionScope.admin.adminId }<br>
-	이름 : ${sessionScope.admin.adminName }<br>
-	관리자 등급 : ${sessionScope.admin.adminGrade }<br>
+	ID  ${sessionScope.admin.adminId }<br>
+	이름  ${sessionScope.admin.adminName }<br>
+	관리자 등급  ${sessionScope.admin.adminGrade }<br>
 		
 	<form id="myForm" action="/admin/adminUpdate.do" method="post"> 
 		<fieldset>

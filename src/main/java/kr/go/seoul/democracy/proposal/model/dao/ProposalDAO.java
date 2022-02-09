@@ -43,7 +43,7 @@ public class ProposalDAO {
 	//04. 글수정하기
 	public void modify(Proposal proposal){
 	System.err.println(proposal);
-	 sqlSession.modify("proposal.modify",proposal); 
+//	 sqlSession.modify("proposal.modify",proposal); 
 	}
 	 
 	/*

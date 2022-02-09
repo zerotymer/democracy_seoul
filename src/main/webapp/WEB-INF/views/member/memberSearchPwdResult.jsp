@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>비밀번호 찾기</title>
+<title>비밀번호 찾기: 비밀번호 재설정</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
@@ -55,7 +55,7 @@
 			<div class="box-result">
 				<p>비밀번호 재설정</p>
 				<form action="/member/memberUpdatePassword.do" onsubmit="return Validation();" method="post">
-				    <input type="text" class="input-style" id="userId" name="userId" value="${sessionScope.member.userId }" readonly/><br>					
+				    <input type="text" class="input-style" id="userId" name="userId" value="${sessionScope.user.userId }" readonly/><br>					
 					<input type="password" class="input-style" id="userPwd" name="userPwd" placeholder="비밀번호 입력"> <br>
 					<input type="password" class="input-style" id="userPwdRe" name="userPwdRe" placeholder="비밀번호 확인"> <br>
 					<input type="submit" class="btn-login" value="비밀번호 재설정">

@@ -12,7 +12,7 @@
 <style>
         .wrapper{
             width: 100%;
-            height: 600px;
+            height: 750px;
             background-color: #3F51B5;
             box-sizing: border-box;
             display: flex;
@@ -71,23 +71,42 @@
 	<div class="wrapper">
         <div class="login_form">
             <div class="image">  
-            <img src="/src/main/webapp/resources/images/adminmain_logo.png"> 
+            <img src="/resources/images/admin/adminmain_logo.png"> 
             </div>
             <div class="img_admin_icon">  
-            <img src="/src/main/webapp/resources/images/admin_icon.png">
+            <img src="/resources/icons/admin_icon.png">
             </div>
             <div class="text">
             <H3>관리자 로그인</H3>
             </div>
+            
+            <c:choose>
+            
+            <c:when test="${sessionScope.admin != null }"> 
+			[<a href="/admin/myPage.do">${sessionScope.admin.adminName }</a>]님 환영합니다. <a href="/admin/adminLogout.do">로그아웃</a><br>
+			<a href="/admin/adminMyPage.do">마이 페이지</a><br>
+			<a href="/admin/adminWithDraw.do">관리자 탈퇴</a><br>
+			<a href="/admin/allMemberList.do">전체 회원 리스트</a><br>
+			</c:when>
+            
+            <c:otherwise>
             <div class="enter">
                 <form id="adminLoginForm" action="/admin/adminLogin.do" method="post">
-                	아이디 &nbsp;&nbsp; <input type="text" size="15"/><br>
-               		비밀번호 <input type="password" size="15"/>
+                	아이디 <input type="text" name="adminId" size="15"/><br>
+               		비밀번호 <input type="password" name="adminPwd"/><br>
             		<input type="submit" value="로그인"/>
             	</form>
+            	
+            	 <a href="/admin/adminJoinPage.do">회원가입</a><br>
+            	
             </div>
+			</c:otherwise>
+			
+			</c:choose>
+            
         </div>
     </div>
+	
 
 </body>
 </html>

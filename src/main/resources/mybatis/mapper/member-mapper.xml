@@ -3,7 +3,7 @@
 <mapper namespace="member">
 	<!-- SQL QUERYS -->
 	
-	<!-- 로그인 SQL QUERYS 로그인이 되지 않아 임시로 만들었습니다.-->	
+	<!-- 로그인 SQL QUERYS -->	
 	<select id="selectLoginMember" parameterType="member" resultType="member">
 		SELECT
 			userid as userId,
@@ -132,7 +132,7 @@
 	
 	
 		<!-- Mypage이메일 변경  SQL Query-->
-	<update id="memberUpdateEmail" parameterType="member">
+	<update id="memberUpdateEmail" parameterType="hashmap">
 		UPDATE	
 			 MEMBER 
 		 SET 
@@ -188,6 +188,26 @@
 	
 	
 	
+	<!--회원 삭제-->
+	<update id="updateMemberWithdraw" parameterType="hashmap">
+		UPDATE 
+			MEMBER 
+		SET 
+			END_YN='Y' 
+		WHERE 
+			USERID=#{userId} AND USERPWD=#{userPwd}
+	</update>
+	
+	<!--닉네임 변경 -->
+	<update id="myPageUpdateNick" parameterType="hashmap">
+		UPDATE	
+			 MEMBER 
+		 SET 
+		     NICK= #{nick}
+		 Where 
+		     USERID= #{userId}
+
+	</update>
 	
 	
 	
