@@ -66,7 +66,7 @@
 		<!-- user EncryptAdvice aspect -->
 		<aop:aspect ref="userEncryptAdvice">
 			<!-- PointCut -->
-			<aop:pointcut id="memberEncryptionPointCut" 		expression="execution(* kr..member.model.service.*(kr.go.seoul.democracy.common.model.vo.Member))" />
+			<aop:pointcut id="memberEncryptionPointCut" 		expression="execution(* kr..member.model.service.*.*(kr.go.seoul.democracy.common.model.vo.Member))" />
 			<!-- Weaving -->
 			<aop:before method="encryptPasswordForMember" 		pointcut-ref="memberEncryptionPointCut" />
 			<aop:before method="encryptPasswordForHashMap" 		pointcut-ref="allHashMapPointCut" />
@@ -74,7 +74,7 @@
 
 		<aop:aspect ref="adminEncryptAdvice">
 			<!-- PointCut -->
-			<aop:pointcut id="adminEncryptionPointCut" 			expression="execution(* kr..admin.model.service.*(kr.go.seoul.democracy.admin.model.vo.Admin))" />
+			<aop:pointcut id="adminEncryptionPointCut" 			expression="execution(* kr..admin.model.service.*.*(kr.go.seoul.democracy.admin.model.vo.Admin))" />
 			<!-- Weaving -->
 			<aop:before method="encryptPasswordForAdmin" 		pointcut-ref="adminEncryptionPointCut" />
 			<aop:before method="encryptPasswordForHashMap" 		pointcut-ref="allHashMapPointCut" />

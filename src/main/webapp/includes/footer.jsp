@@ -3,7 +3,7 @@
 <!-- <footer> -->
 <nav id="FNB" class="fnb">
     <ul>
-        <li><a href="http://www.seoul.go.kr/helper/privacy.do">개인정보처리방침</a></li>
+        <li><a href="https://www.seoul.go.kr/helper/privacy.do">개인정보처리방침</a></li>
         <li><a href="https://democracy.seoul.go.kr/front/intro/faq/induList.do#faq">자주묻는 질문</a></li>
         <li><a href="https://democracy.seoul.go.kr/front/intro/siteMap/list.do">사이트맵</a></li>
     </ul>

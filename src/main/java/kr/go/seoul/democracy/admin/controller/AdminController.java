@@ -98,6 +98,43 @@ public class AdminController {
 	
 	/**
 	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.08
+	 * Description : 관리자 정보 수정 메소드
+	 */
+	@RequestMapping(value="/admin/adminUpdate.do", method=RequestMethod.POST)
+	public String adminUpdate(@RequestParam String adminEmail,
+							   @SessionAttribute Admin admin,
+							   Model model) 
+	{
+		
+		String adminId = admin.getAdminId();
+		
+		Admin a = new Admin();
+		a.setAdminEmail(adminEmail);
+		
+		int result = aService.adminUpdate(a);
+		
+		if(result>0)
+		{
+			model.addAttribute("adminMsg", "관리자 정보 변경 성공");
+			model.addAttribute("location", "/admin/adminMyPage.do");
+			
+		}else {
+			String adminMsg = "정보 변경 실패";
+			String location = "/";
+			model.addAttribute("adminMsg", adminMsg);
+			model.addAttribute("location", location);
+		}
+		
+		
+		
+		return "admin/adminMsg";
+		
+	}
+	
+	
+	/**
+	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.06
 	 * Description : 관리자 비밀번호 변경 메소드
 	 */
@@ -196,12 +233,12 @@ public class AdminController {
 		
 		if(result>0)
 		{
-			mav.addObject("msg", "관리자 가입 성공");
-			mav.addObject("location", "/");
+			mav.addObject("adminMsg", "관리자 가입 성공");
+			mav.addObject("location", "/admin/adminJoinPage.jsp");
 			
 		}else {
 			
-			mav.addObject("msg", "관리자 가입 실패");
+			mav.addObject("adminMsg", "관리자 가입 실패");
 			mav.addObject("location", "/admin/adminJoinPage.do");
 		}
 		

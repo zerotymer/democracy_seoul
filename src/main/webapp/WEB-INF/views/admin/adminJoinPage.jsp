@@ -3,6 +3,9 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +21,7 @@
 </head>
 <body>
 
+	<!-- 관리자 회원 가입  -->
 	<form action="/admin/adminJoin.do" method="post" id="joinForm">
 		<fieldset>
 			<legend>관리자 가입</legend>
@@ -29,7 +33,7 @@
 		</fieldset>
 	</form>
 	
-	<a href="/">메인 페이지</a>
+	<a href="/admin/adminLoginPage.jsp">메인 페이지</a>
 	
 	<script>
 		$('#idCheckBtn').click(function(){
@@ -55,6 +59,66 @@
 			});
 		});
 	</script>
+	
+	
+	<!-- 가입 유효성 검사 -->
+	<script>
+
+            var message = document.getElementById("message");
+            
+            var adminId = document.getElementById("adminId");
+            var adminPwd = document.getElementById("adminPwd");
+            var adminPwd_re = document.getElementById("adminPwd_re");
+            var adminName = document.getElementById("adminName");
+            
+            var email1 = document.getElementById("email1");
+            var email2 = document.getElementById("email2");
+
+
+        function check() {
+			
+        	if (!(/^[a-z][a-z0-9]{8,10}$/.test(adminId.value))) //아이디 검사
+            {
+            	message.style.color = "red";
+                message.innerHTML = "※아이디는 영문 소문자,숫자 8~10 글자 이내로 입력";
+                return false;
+                
+            } 
+			else if (!(/[a-zA-Z0-9]{8,12}$/.test(adminPwd.value))) //비밀번호 검사
+            {
+            	message.style.color = "red";
+                message.innerHTML = "※비밀번호는 소문자,대문자,숫자를 포함한 8~12 글자 이내로 입력";
+                return false;
+                
+            } 
+			else if (!(adminPwd.value == adminPwd_re.value)) //PW와 PW_RE 비교 검사
+            {
+            	message.style.color = "red";
+                message.innerHTML = "※비밀번호가 일치하지 않습니다.";
+                return false;
+       			
+            }
+			else if (!(/[가-힣]+$/.test(adminName.value))) //이름 검사
+            {
+            	message.style.color = "red";
+                message.innerHTML = "※이름은 한글(최소1글자)만 가능합니다.";
+                return false;
+                
+            }
+			else if (!(/^[a-z0-9]{4,12}/).test(email1.value)) //이메일 검사
+            {
+            	message.style.color = "red";
+                message.innerHTML = "※이메일을 재확인해주세요.";
+                return false;
+            } 	
+			else{
+            	return true;	
+            }
+            
+            
+        }
+
+    </script>
 
 </body>
 </html>

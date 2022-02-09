@@ -22,6 +22,12 @@ public class AdminServiceImpl implements AdminService{
 		
 		return a;
 	}
+	
+	@Override
+	public int adminUpdate(Admin a) {
+		
+		return aDAO.adminUpdate(a);
+	}
 
 	@Override
 	public int updatePassword(HashMap<String, Object> map) {
@@ -58,5 +64,7 @@ public class AdminServiceImpl implements AdminService{
 		
 		return aDAO.updateMemberEndYNChange(userId, endYN);
 	}
+
+	
 
 }

@@ -3,20 +3,19 @@
 <mapper namespace="member">
 	<!-- SQL QUERYS -->
 	
-	<!-- 로그인 SQL QUERYS 로그인이 되지 않아 임시로 만들었습니다.-->
+	<!-- 로그인 SQL QUERYS 로그인이 되지 않아 임시로 만들었습니다.-->	
 	<select id="selectLoginMember" parameterType="member" resultType="member">
 		SELECT
 			userid as userId,
 			userpwd as userPwd,
 			username as userName,
-			NICK as nick,
-			EMAIL as email,
+			nick as nick,
+			email as email,
 			enrollDate as enrollDate,
 			end_yn as endYN,
-			USERGRADE as userGrade
-		FROM
-			member
-		WHERE USERID = 'user11' and USERPWD = '1234567!' and end_yn='N'
+			usergrade as userGrade
+		FROM MEMBER
+		WHERE USERID=#{userId} AND USERPWD=#{userPwd} AND END_YN='N'
 	</select>	
 	
 	<!-- 회원가입 SQL QUERYS -->
@@ -82,6 +81,115 @@
 		WHERE EMAIL = #{value}
 	
 	</select>
+	
+	
+	
+	
+	<!-- 아이디 찾기 SQL Query-->
+	<select id="searchId" parameterType="member" resultType="member">
+		SELECT
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			NICK as nick,
+			EMAIL as email,
+			enrollDate as enrollDate,
+			end_yn as endYN,
+			USERGRADE as userGrade
+		FROM
+			member
+		WHERE USERNAME = #{userName} and EMAIL = #{email} and end_yn='N'
+	</select>	
+	
+	
+	<!-- 비밀번호 찾기 SQL Query-->
+	<select id="searchPwd" parameterType="member" resultType="member">
+		SELECT
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			NICK as nick,
+			EMAIL as email,
+			enrollDate as enrollDate,
+			end_yn as endYN,
+			USERGRADE as userGrade
+		FROM
+			member
+		WHERE USERID = #{userId} and EMAIL = #{email} and end_yn='N'
+	</select>	
+	
+	
+	<!-- 비번잊어먹은 회원 비밀번호  재설정 SQL Query -->
+	<update id="resetPassword" parameterType="member">
+		UPDATE	
+			 MEMBER 
+		 SET 
+		     USERPWD= #{userPwd}
+		 Where 
+		     USERID= #{userId}
+
+	</update>
+	
+	
+		<!-- Mypage이메일 변경  SQL Query-->
+	<update id="memberUpdateEmail" parameterType="member">
+		UPDATE	
+			 MEMBER 
+		 SET 
+		     EMAIL= #{email}
+		 Where 
+		     USERID= #{userId}
+
+	</update>
+	
+	
+	
+	<!-- 프로필사진 로직 -->
+	<select id="selectMemberProfile" parameterType="member" resultType="memberProfile">
+		SELECT
+			userid as userId,
+			PROFILE_NAME as profileName,
+			PROFILE_FILEPATH as profileFilePath
+		FROM
+			  MEMBER_PROFILE
+		WHERE USERID = #{userId}
+	</select>
+	
+	
+	
+	<!-- 프로필사진 수정 로직 -->
+	<update id="updateMemberProfile" parameterType="memberProfile" >
+		UPDATE
+			MEMBER_PROFILE
+		SET
+			PROFILE_NAME = #{profileName},
+			PROFILE_FILEPATH = #{profileFilePath}
+		WHERE 
+			USERID = #{userId}
+	</update>
+	
+	
+	<!-- 프로필사진 등록 로직 -->
+	<insert id="insertMemberProfile" parameterType="memberProfile">
+	  INSERT INTO 
+	  MEMBER_PROFILE VALUES(PROFILE_SEQ.NEXTVAL,#{userId},#{profileName},#{profileFilePath})	
+	</insert>
+	
+	
+	<!--페이지 비밀번호 변경 -->
+     <update id="myPageUpdatePassword" parameterType="hashmap">
+		UPDATE 
+			MEMBER 
+		SET 
+			userPwd=#{memberNewPass} 
+		WHERE 
+			userId=#{userId} AND userPwd=#{memberOriginalPass}
+	</update>
+	
+	
+	
+	
+	
 	
 	
 </mapper>
