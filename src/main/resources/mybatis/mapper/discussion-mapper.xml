@@ -47,7 +47,7 @@
 		where discuss_no=#{value} and comment_vote='Y'
 	</select>
 	
-	<select id="conCommentList" resultType="arraylist">
+	<select id="conCommentList" resultType="hashmap">
 		select discuss_no as discussNo,
 			comment_no as commentNo,
 			userid as userId,
