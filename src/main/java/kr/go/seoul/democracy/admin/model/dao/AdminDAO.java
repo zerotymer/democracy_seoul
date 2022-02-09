@@ -21,6 +21,11 @@ public class AdminDAO {
 		
 		return sqlSession.selectOne("admin.selectLoginAdmin", admin);
 	}
+	
+	public int adminUpdate(Admin a) {
+		
+		return sqlSession.update("admin.adminUpdate", a);
+	}
 
 	public int updatePassword(HashMap<String, Object> map) {
 		
@@ -61,5 +66,6 @@ public class AdminDAO {
 		
 		return sqlSession.update("member.updateMemberEndYNChange", map);
 	}
+
 
 }

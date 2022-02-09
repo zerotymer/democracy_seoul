@@ -6,29 +6,37 @@
   	<!-- 관리자 로그인 -->
   	<select id="selectLoginAdmin" parameterType="admin" resultType="admin">
   		SELECT 
-  			adminno as adminNo,
-  			adminid as adminId,
-  			adminpwd as adminPwd,
-  			adminname as adminName,
-  			admingrade as adminGrade,
-  			admindate as adminDate,
-  			adminemail as adminEmail,
-  			admindepart as adminDepart
+  			admin_no as adminNo,
+  			admin_id as adminId,
+  			admin_pwd as adminPwd,
+  			admin_name as adminName,
+  			admin_grade as adminGrade,
+  			admin_date as adminDate,
+  			admin_email as adminEmail,
+  			admin_depart as adminDepart
   		FROM
   			admin
-  		WHERE adminid = #{adminId} and adminpwd = #{adminPwd} and adminGrade != 'W' 
+  		WHERE admin_id = #{adminId} and admin_pwd = #{adminPwd} and admin_grade != 'W' 
   	</select>
   	
-  	
+  	<!-- 관리자 정보 수정 -->
+  	<update id="adminUpdate" parameterType="admin">
+		UPDATE
+			ADMIN
+		SET
+			admin_Email = #{adminEmail}
+		WHERE
+			ADMIN_ID = #{adminId}
+	</update>
   	
   	<!-- 관리자 비밀번호 변경 -->
   	<update id="updatePassword" parameterType="hashmap">
 		UPDATE
 			ADMIN
 		SET
-			adminPwd = #{adminNewPass}
+			admin_Pwd = #{adminNewPass}
 		WHERE
-			adminId = #{adminId} AND adminPwd = #{adminOriginalPass}
+			admin_Id = #{adminId} AND admin_Pwd = #{adminOriginalPass}
 	</update>
 	
 	
@@ -52,25 +60,25 @@
 	<!-- 관리자 ID 중복 체크 -->
 	<select id="selectAdminIdCheck" resultType="admin">
 		SELECT 
-			adminno as adminNo,
-			adminid as adminId,
-			adminpwd as adminPwd,
-			adminname as adminName,
-			admingrade as adminGrade,
-			admindate as adminDate,
-			adminemail as adminEmail,
-			admindepart as adminDepart
+			admin_no as adminNo,
+			admin_id as adminId,
+			admin_pwd as adminPwd,
+			admin_name as adminName,
+			admin_grade as adminGrade,
+			admin_date as adminDate,
+			admin_email as adminEmail,
+			admin_depart as adminDepart
 		FROM
 			ADMIN
-		WHERE ADMINID = #{value}
+		WHERE ADMIN_ID = #{value}
 	</select>
 	
 	<!-- 모든 회원 정보 가져오기 -->
 	<select id="selectAllMemberList" resultType="member">
 		SELECT 
-			userid as userId,
-			userpwd as userPwd,
-			username as userName,
+			user_id as userId,
+			user_pwd as userPwd,
+			user_name as userName,
 			nick as nick,
 			email as email,
 			enrolldate as enrollDate
@@ -85,7 +93,7 @@
 		SET
 			end_yn = #{endYN}
 		WHERE
-			userId = #{userId}
+			user_Id = #{userId}
 	</update>
 	
   	
