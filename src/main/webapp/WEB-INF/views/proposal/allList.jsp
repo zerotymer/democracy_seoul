@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 
 <!DOCTYPE html>
 <html>
@@ -131,15 +135,17 @@
                     <span>읍냐?</span>
                 </div>
                 <div class="contents--btns">
+                <%-- <c:if test="${sessionScope.adminId != null}"> --%>
                     <button class="btn suggest" id="btnWrite">서울 제안 작성하기</button>
+               <%--  </c:if> --%>
                 </div>
             </div>
 				<script>
 					 
 					//글쓰기 폼으로 이동하게 하는 함수
-					$(function(){    
+					$(document).ready(function(){    
 					        $("#btnWrite").click(function(){
-					            location.href="proposalWrite.do";
+					            location.href="/proposal/proposalWrite.do";
 					        });
 					});
 					 
@@ -168,7 +174,7 @@
 		            <div class="card-item survey">
 		                <div class="category"> 설문</div>
 		                <div class="title">
-		                	<a href="/proposal/post.do?proposalNo=${proposal.proposalNo}">${proposal.proposalTitle }</a>
+		                	<a class="proposalTitle">${proposal.proposalTitle }</a>
 		                </div>
 		                <div class="content">${proposal.proposalContent }</div>
 		                <div class="thumnail">
@@ -184,14 +190,46 @@
 		                    <object class="icon calendar auto-hidden"></object>
 		                    <span> ${proposal.proposalStart } ~ ${proposal.proposalEnd }</span>
 	                    </div>
-	                    <a class="detail-btn" href="">
+	                    <a class="detail-btn" href="/proposal/post.do?proposalNo=${proposal.proposalNo}">
                         			결과 보기 
                    		</a>
       				</div>
            		</c:forEach> 
                
             </div>
-
+						<script>
+							$(document).ready(function(){
+				    
+							    let result = '<c:out value="${result}"/>';
+							    
+							   	 checkAlert(result);
+							    
+							    	function checkAlert(result){
+							        
+							        	if(result === ''){
+							            reutrn;
+							        }
+							        
+							       	 if(result === "enrol success"){
+							            alert("등록이 완료되었습니다.");
+							        }
+							        
+				    }    
+				    
+				});
+							
+							
+							//글쓰기 폼으로 이동하게 하는 함수
+							$(document).ready(function(){    
+							        $("#proposalTitle").click(function(){
+							            location.href="/proposal/post.do?proposalNo=${proposal.proposalNo}";
+							        });
+							});
+							 
+						</script>
+							 
+				</script>
+						
             <div class="contents-navbar"></div>
         </div>
     </section>

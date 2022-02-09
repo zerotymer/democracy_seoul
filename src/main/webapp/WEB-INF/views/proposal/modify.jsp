@@ -109,13 +109,13 @@
                 		<br>
                 			<br>
             
-		     <%-- <c:if test="${sessionScope.adminId != null}"> --%>
-			            <div class="adminCon">
-				            	<button clsss="editBtn">수정</button>
-				            		<button clsss="delBtn">삭제</button>
+ <form id="modifyForm" action="/proposal/modify" method="post">			            <div class="adminCon">
+				            	<button clsss="editBtn" id="editBtn">수정</button>
+				            		<button clsss="delBtn" id="delBtn">삭제</button>
 				            	<button clsss="listBtn" id="listBtn">목록</button>
 						</div>
-			<%--  </c:if> --%>
+		  </form>
+
            		 <hr>
             <article class="view_content">
               

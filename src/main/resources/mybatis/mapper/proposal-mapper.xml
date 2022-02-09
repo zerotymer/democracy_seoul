@@ -40,6 +40,32 @@
 	SELECT COUNT (*) FROM Proposal WHERE proposal_del_YN='n'
 	</select>
 	
+	<!-- 게시판글쓰기 -->
+	<insert id="insert" parameterType="proposal">
+		insert into proposal  
+		values (
+			PROPOSAL_SEQ.NEXTVAL,
+			#{proposalTitle}, 
+			#{proposalContent},
+			current_date,
+			current_date,
+			current_date + 14,
+			'N',
+			#{proposalThumbnail, jdbcType=VARCHAR},
+			#{proposalThumbnailPath, jdbcType=VARCHAR})
+		
+	</insert>
+	
+	
+	<update id="modify" parameterType="proposal">
+		update proposal set
+		proposalTitle = #{proposalTitle},
+ 		proposalContent = #{proposalContent}
+		where proposal_No = #{propsalNo}
+	
+	</update>
+	
+	
 			
 </mapper>
 	

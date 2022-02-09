@@ -28,9 +28,23 @@ public class ProposalDAO {
 	}
 	
 	//02. 게시글 상세보기
-	public Proposal proposalView(int proposalNo)throws Exception {
+	public Proposal proposalView(int proposalNo) {
 		return sqlSession.selectOne("proposal.proposalView",proposalNo);
 	}
+
+	//글작성하기
+	public void insert(Proposal proposal) {
+		System.err.println(proposal);
+		 sqlSession.insert("proposal.insert",proposal);
+		
+	}
+	
+	/*
+	 * public int modify(Proposal proposal) { System.err.println(proposal);
+	 * sqlSession.modify("proposal.modify",proposal); }
+	 */
+
+
 	
 	
 	

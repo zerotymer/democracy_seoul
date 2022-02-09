@@ -4,6 +4,8 @@
     
 }
 
+
+
 .container{
    
     margin: 40px;
@@ -32,7 +34,7 @@
 
 .proposalTitle{
 	margin-top:-15px;
-	margin-bottom:10px;
+	margin-bottom:px;
     font-size:30px;
 }
 
@@ -55,7 +57,9 @@
 }
 .adminCon button {
 	margin-right : 5px;
-	border : 0px;
+	 border:1px solid var(--COLOR-BORDER);
+	background-color: white;
+	padding :5px;
 }
 
 .view_content{
@@ -100,7 +104,9 @@ padding :15px;
 
 .reg{
    margin-right: 10px;
-   margin-left: 90%;  
-   border:0px; 
-   background-color: #F0F0F0;
+ 
+   border:1px solid var(--COLOR-BORDER);
+	background-color: white;
+	padding :3px;
+   
 }

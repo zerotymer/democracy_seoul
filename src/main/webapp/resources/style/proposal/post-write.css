@@ -7,36 +7,45 @@
 }
 
 .container{
-   
+    
     margin-top: 40px;
 	border:1px solid var(--COLOR-BORDER);
     border-radius: 12px;
     box-sizing: border-box;
-   box-shadow: 4px 4px 4px rgba(236, 240, 241, 0.5);
+    box-shadow: 4px 4px 4px rgba(236, 240, 241, 0.5);
     min-height: 200px;
     min-width: 200px;
+    padding :20px 150px;
+    
 
 }
 section .title{
-    width:300px;
+   width:820px;
+    height:30px;
+ 	border:1px solid var(--COLOR-BORDER);
    
    
 }	
 
-section .editor {
-    outline: none;
-    width: 50PX;
+.textBox {
+	
+	
+}
+
+section .ckeditor {
+    min-width: 300PX;
     min-height: 400px;
     resize: none;
-    
+    display: table-cell;
 }
 
 
 .ck-editor__editable {
-	min-width: 400px;
-    min-height: 400px;
-}
+       height: 500px;
+    }
 
 section .commit {
-     margin-right: 20%;
+	border:1px solid var(--COLOR-BORDER);
+	background-color: white;
+	padding :3px;
 }

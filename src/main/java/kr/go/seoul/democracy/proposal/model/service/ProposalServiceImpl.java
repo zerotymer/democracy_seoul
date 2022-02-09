@@ -18,15 +18,30 @@ public class ProposalServiceImpl implements ProposalService {
 	private ProposalDAO pDAO;
 
 	@Override
-	public Proposal proposalView(int proposalNo) throws Exception {
+	public Proposal proposalView(int proposalNo) {
 			return pDAO.proposalView(proposalNo);
 	}
 	
 	@Override
-	public List<Proposal> selectAllList(int curPage, int recordCountPage) throws Exception {
+	public List<Proposal> selectAllList(int curPage, int recordCountPage) {
 		// TODO Auto-generated method stub
 		return pDAO.selectList(curPage,recordCountPage);
 	}
+
+	@Override
+	public void insert(Proposal proposal) {
+		 pDAO.insert(proposal);
+	}
+
+	/*
+	 * @Override public int modify(Proposal proposal) { return
+	 * pDAO.modify(proposal);
+	 * 
+	 * }
+	 * 
+	 * 
+	 */
+	
 
 	
 
