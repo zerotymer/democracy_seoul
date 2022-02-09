@@ -27,11 +27,22 @@ public class SugController {
 	 * System.out.println(sugService.selectSysdate());
 	 * System.out.println("SugController - sug() end"); return "index"; }
 	 */
-
-    @RequestMapping("/suggest.do")
+    //글의 리스트를 보는 게시판
+    @RequestMapping("/suggest/suggest.do")
     public String sug() {
         return "suggest/sugBoard";
     }
+    //글을 작성하는곳
+    @RequestMapping("/suggest/suggestWrite.do")
+    public String sug1() {
+        return "suggest/sugWrite";
+    }
+    // 작성한 글을 볼수있는곳
+    @RequestMapping("/suggest/suggestview.do")
+    public String sug2() {
+        return "suggest/sugView";
+    }
+    
 	/*
 	 * @RequestMapping("/member.do") public String member() { Member m = new
 	 * Member(); m.setUserId("1234"); m.setUserPwd("1234");
