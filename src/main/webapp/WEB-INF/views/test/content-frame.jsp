@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <%@ include file="/resources/include/header.jsp" %>
+        <%@ include file="/includes/header.jsp" %>
     </header>
 
     <section>
@@ -95,7 +95,7 @@
     </section>
 
     <footer>
-        <%@ include file="/resources/include/footer.jsp" %>
+        <%@ include file="/includes/footer.jsp" %>
     </footer>
     
     <script src="/resources/script/header.js"></script>

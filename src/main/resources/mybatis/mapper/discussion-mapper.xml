@@ -42,9 +42,9 @@
 			userid as userId,
 			comment_content as commentContent,
 			comment_vote as commentVote,
-			comment_date as commentDate,
+			comment_date as commentDate
 		from discuss_comment
-		where discuss_no=#{value} and comment_vote='1'
+		where discuss_no=#{value} and comment_vote='Y'
 	</select>
 	
 	<select id="conCommentList" resultType="discussComment">
@@ -53,13 +53,13 @@
 			userid as userId,
 			comment_content as commentContent,
 			comment_vote as commentVote,
-			comment_date as commentDate,
+			comment_date as commentDate
 		from discuss_comment
-		where discuss_no=#{value} and comment_vote='2'
+		where discuss_no=#{value} and comment_vote='N'
 	</select>
 	
 	<select id="commentTotalCount" resultType="int">
-		select count
+		select count(*)
 		from discuss_comment
 		where discuss_no=#{value}
 	</select>
@@ -68,7 +68,7 @@
 		select discuss_no as discussNo,
 			file_no as fileNo,
 			file_name as fileName,
-			file_path as filePath,
+			file_path as filePath
 		from discuss_file
 		where discuss_no=#{value}
 	</select>

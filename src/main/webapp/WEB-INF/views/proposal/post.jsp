@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <script type="text/javascript" ></script>
-    
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
     <link rel="stylesheet" href="/resources/style/content-frame.css">
     <link rel="stylesheet" href="/resources/style/proposal/post.css">
+    <link rel="stylesheet" type="text/css" href="fontawesome-free-5.15.1-web/css/fontawesome.min.css">
 </head>
 <body>
-	<div class="content-frame">
+    <div class="content-frame">
         <div class="frame-image">
             <div class="inner">
                 <h2>제안결과</h2>
@@ -84,72 +87,95 @@
             </div>
         </div>
     </div>
-    <content>
 
+    <section>
         <div class="inner">
             <!-- DHH -->
-		 
-            
             <div class="container">
                 <div class="contentTitle">
                     <br><br>
-                    <div class="title"  value='<c:out value="${proposalView.propsosalTitle}"/>'>
-                        <h2>서울시가 묻습니다. </h2>
+                    <div class="title">
+                     	<h5>서울시가 묻습니다.</h5> 
+                        	<div class="proposalTitle">${ requestScope.proposal.proposalTitle}</div>
                     </div>
-                    <div class="detail" >투표기간 :
-                        
-                    </div>
-                    <div class="hashtag">#동네책방 #동네책방</div>
-                </div>
-                <br><br>
-                <hr>
-                <article class="view_content" value='<c:out value="${proposalView.propsosalContent}"/>'>
-                    내용입니다. ${proposal.proposalContent }
-                  
-                    <br>
-
-                    <button class="survey" style="border: 0;">
-                        설문조사
-                    </button>
-  	
-                </article>
-                
+                   
+                </div><br>
+                		<div class="date">
+                    		투표기간 : ${ requestScope.proposal.proposalStart} ~ ${ requestScope.proposal.proposalEnd} 
+               			</div>
+                	<div class="hashtag">
+                    #동네책방 #동네책방
+                	</div>
+                		<br>
+                			<br>
+            
+		     <%-- <c:if test="${sessionScope.adminId != null}"> --%>
+			            <div class="adminCon">
+				            	<button clsss="editBtn">수정</button>
+				            		<button clsss="delBtn">삭제</button>
+				            	<button clsss="listBtn" id="listBtn">목록</button>
+						</div>
+			<%--  </c:if> --%>
+           		 <hr>
+            <article class="view_content">
               
-                <div class="sug">당신의 의견을 전달해주세요</div>
-
-                <div class="comment">
-                    <input type="hidden" name="bno" class="bno" value="">
-                    <div class="userNick">김떙땡</div>
-                    <input type="hidden" name="bno" class="bno" value="">
-                    <input type="hidden" name="name" value="">
-                    <div class="today">2022.01.22</div>
-                    <textarea class="ccontent" style="width: 99%; border:0;"></textarea>
-                    <button value="reg" style="float: right;  border: 0; background-color: white;">등록</button>
-                </div>
-
-                <hr style="color: #CCCCC">
-
-				<!-- 댓글영역 -->
-                <div id="replyList"></div>
-                
-    <script>     
-	function listReply(num){
-		$.ajax({
-			type: "get",
-			url: "${path}/reply/list.do?proposalNo=${proposal.proposalno}&curPage="+num,
-			success: function(result){
-			// responseText가 result에 저장됨.
-				$("#listReply").html(result);
-			}
-		});
-	}
-
-	
-	  </script> 
+                	${ requestScope.proposal.proposalContent }
+                <br>
+                <button class="survey">
+                  		  설문조사 <i class="far fa-thumbs-up"></i>
+                </button>
+            </article>
+				</div>
+				
+            <div class="sug">
+                당신의 의견을 전달해주세요
             </div>
+
+            <div class="comment">
+                <input type="hidden" name="bno" class="bno" value="" />
+                <div class="userNick">${ requestScope.member.nick }</div>
+                <input type="hidden" name="bno" class="bno" value="" />
+                <input type="hidden" name="name" value="" />
+                <span class="today">
+                    2022.01.22
+                </span>
+                <textarea class="ccontent" style="width: 99%; border:0;">
+                </textarea>
+                <button value="reg">등록</button>
+            </div>
+
+            <hr style="color: #CCC">
+            <!-- 댓글영역 -->
+            <div id="replyList"></div>
         </div>
-        
-    </content>
+    </section>
     <script src="/resources/script/content-frame.js"></script>
+    <script>
+        function listReply(num) {
+            var path = 'path';
+            var proposalNo = ${ requestScope.proposal.proposalNo};
+
+            $.ajax({
+                url: path + "/reply/list.do",
+                type: "get",
+                data: {
+                    proposalNo: proposalNo,
+                    curPage: num
+                },
+                success: function (result) {
+                    // responseText가 result에 저장됨.
+                    $("#listReply").html(result);
+                }
+            });
+        }
+        
+      //글목록으로 이동하게 하는 함수
+		$(document).ready(function(){    
+		        $("#listBtn").click(function(){
+		            location.href="/proposal/allList.do";
+		        });
+		});
+        
+    </script>
 </body>
 </html>

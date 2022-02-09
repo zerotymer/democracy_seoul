@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="proposal">
+	<!-- SQL QUERYS -->
+
+<!-- 1 -->
+<insert id="insertProposal" parameterType="kr.go.seoul.democracy.proposal.model.vo.Proposal">
+	
+	insert into proposal
+	values(Proposal_SEQ.NEXTVAL,#{proposalTitle},#{proposalContent},SYSDATE,SYSDATE,SYSDATE+14,'Y',#{proposalThumbnail},#{proposalThumbnailPath})
+
+</insert>
+
+	
+<!-- 2 -->	
+<select id="selectProposalNo" parameterType="kr.go.seoul.democracy.proposal.model.vo.Proposal">
+	
+	select 
+	proposal_No
+	from
+	proposal 
+	where proposal_Title = #{proposalTitle} 
+
+</select>
+
+<!-- 3 -->
+<update id="updateProposalId"	parameterType="kr.go.seoul.democracy.proposal.model.vo.Proposal">
+	
+	update proposal
+	set proposal_Title = #{proposalTitle}
+	where proposal_No = #{proposalNo}
+	
+</update>
+
+<!-- 4-1 데이터넣기-->
+<insert id="addSurvey" parameterType="kr.go.seoul.democracy.survey.model.vo.Survey" >
+	
+	insert into survey  
+	values (SURVEY_SEQ.NEXTVAL, #{proposalNo}, #{surveyTitle} )
+	
+	
+</insert>
+
+<!-- 4-2 -->
+<select id="searchSurveyNo" parameterType="kr.go.seoul.democracy.proposal.model.vo.Proposal">
+
+	select
+	survey_No
+	from 
+	survey
+	where proposal_No = #{proposalNo} 
+
+</select>
+
+
+
+<!-- 4-3 -->	
+<insert id="addQuestion" parameterType="kr.go.seoul.democracy.survey.model.vo.Survey">
+
+	insert into survey_q
+	values (SURVEY_Q_SEQ.NEXTVAL, #{surveyNo},#{question},#{inputType},#{content},#{content_q})
+
+</insert>	
+
+</mapper>

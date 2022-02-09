@@ -1,4 +1,4 @@
-package kr.go.seoul.democracy.proposal.vo;
+package kr.go.seoul.democracy.proposal.model.vo;
 
 import java.sql.Date;
 

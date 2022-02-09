@@ -2,6 +2,8 @@ package kr.go.seoul.democracy.common;
 
 import kr.go.seoul.democracy.common.model.service.HitsService;
 import kr.go.seoul.democracy.common.model.service.HitsServiceImpl;
+import kr.go.seoul.democracy.discuss.model.vo.Discuss;
+import kr.go.seoul.democracy.proposal.model.vo.Proposal;
 import kr.go.seoul.democracy.suggest.vo.Sug;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -27,21 +29,45 @@ public class HitsAdvice {
         System.out.println(String.format("INFO - AOP: 조회수 처리를 위한 %s 객체 생성", this.getClass().getName()));
     }
 
-    /// POINTCUTs
-    @Pointcut("execution(kr.go.seoul.democracy.suggest.vo.Sug kr..service.*.*())")
+    /// POINTCUT & Weaver
+    @Pointcut("execution(kr.go.seoul.democracy.suggest.vo.Sug kr..service.*.*(..))")
     public void suggetPointCut() {}
 
     @After("suggetPointCut()")
     public void hitSuggest(JoinPoint jp) {
-        Sug sug = (Sug) jp.getArgs()[0];
-        if (sug == null) return;
+        if (!(jp.getArgs()[0] instanceof Sug)) return;
 
-        //addCountHits("SUGGEST_HIT", 1);                                 // TODO: REVISE
-    }
-    public void addCountHitsDiscussion(JoinPoint jp) {
+        Sug value = (Sug) jp.getArgs()[0];
+        if (value == null) return;
 
+        hService.addCountHitsTable("SUGGEST_HITS", 1);                                           // TODO: REVISE
     }
-    public void addCountHitsProposal(JoinPoint jp) {
+
+    @Pointcut("execution(kr.go.seoul.democracy.discuss.model.vo.Discuss kr..service.*.*(..))")
+    public void discussPointCut() {}
+
+    @After("discussPointCut()")
+    public void hitDiscuss(JoinPoint jp) {
+        if (!(jp.getArgs()[0] instanceof Discuss)) return;
+
+        Discuss value = (Discuss) jp.getArgs()[0];
+        if (value == null) return;
+
+        hService.addCountHitsTable("DISCUSSION_HITS", value.getDiscussNo());
     }
+
+    @Pointcut("execution(kr.go.seoul.democracy.proposal.model.vo.Proposal kr..service.*.*(..))")      // TODO: model
+    public void proposalPointCut() {}
+
+    @After("proposalPointCut()")
+    public void hitProposal(JoinPoint jp) {
+        if (!(jp.getArgs()[0] instanceof Proposal)) return;
+
+        Proposal value = (Proposal) jp.getArgs()[0];
+        if (value == null) return;
+
+        hService.addCountHitsTable("PROPOSAL_HITS", value.getProposalNo());
+    }
+
 
 }

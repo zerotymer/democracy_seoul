@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/resources/style/content-frame.css">
     <link rel="stylesheet" href="/resources/style/proposal/post-write.css">
+
 </head>
 <body>
     <div class="content-frame">
@@ -83,31 +84,54 @@
     </div>
     <section>
         
-        <div class="container" >
+        <div class="container inner" >
             <!-- DHH: 다흐ㅎ흐 -->
             <br>
             <h1 style="text-align: center;">글쓰기</h1><br><br><br><br>
-                <div style="text-align:center;">
-                    <input type="text" name="title" class="title" placeholder="제목을 입력하세요" >    
-                    <br>
-                    <hr width="800px">
-                      
-                         <textarea id="editor4" class="editor4" name="editor4" placeholder="내용" ></textarea> 
-                        <script>CKEDITOR.replace('editor4');</script>
-           <br>
-            
-               
-               <button type="submit" class="commit" style="float: right;  background-color: white; border:1px; ">
-                글작성
-            </button>
+				<form action="/proposal/enroll.do" method="post">
+				    <div style="text-align:center;">
+				    	
+				        <input type="text" name="proposalTitle" class="title" placeholder="제목을 입력하세요" >    
+				        <br>
+				        	<hr width="800px">
+								<div class="textBox">			          
+					             <textarea id="ckeditor" class="ckeditor" name="proposalContent" ></textarea> 
+				                </div>
+							 <br>
+				
+				   
+				   <button type="submit" class="commit" style="float: right;" a href="/proposal/enroll">
+				    				  글작성
+				  			</button>
+				  	</div>
+				</form>  
 
         		<br><br><br><br><br><br>
-            
 
-            
            </div>
          </div>
     </section>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+	<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
     <script src="/resources/script/content-frame.js"></script>
+    <script>
+	    // 3. CKEditor5를 생성할 textarea 지정
+	    ClassicEditor
+	        .create( document.querySelector( '#ckeditor' ) )
+	        .catch( error => {
+	            console.error( error );
+	        } );
+	    
+	  //글쓰기 폼으로 이동하게 하는 함수
+		$(document).ready(function(){    
+		        $("#btnWrite").click(function(){
+		            location.href="/allList.do";
+		        });
+		});
+    </script>
 </body>
 </html>

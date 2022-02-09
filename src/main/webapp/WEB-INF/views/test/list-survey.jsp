@@ -169,6 +169,11 @@
                         결과 보기
                     </a>
                 </div>
+                
+                
+                
+                
+                
                 <div class="card-item survey">
                     <div class="category">서울시가 묻습니다</div>
                     <div class="title">공공장소 금주 어떻게 생각 하세요?</div>

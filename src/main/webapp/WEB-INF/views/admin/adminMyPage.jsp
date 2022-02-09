@@ -23,20 +23,23 @@
 <body>
 	
 	ID : ${sessionScope.admin.adminId }<br>
-	관리자 등급 : ${sessionScope.admin.adminGrade }<br>
 	이름 : ${sessionScope.admin.adminName }<br>
+	관리자 등급 : ${sessionScope.admin.adminGrade }<br>
 		
-	<form id="myForm"> 
+	<form id="myForm" action="/admin/adminUpdate.do" method="post"> 
 		<fieldset>
-			<div id="pass">
-				<H4>비밀번호 변경</H4>
-				기존 비밀번호 : <input type="password" name="adminOriginalPass"/><br>
-				새로운 비밀번호 : <input type="password" name="adminNewPass"/><br>
-				비밀번호 재입력 : <input type="password" name="adminNewPass_re"/><br>
-				<button id="adminPassChangeBtn">변경</button>
-			</div>
+			이메일 <input type="text" name="email" placeholder="${sessionScope.admin.adminEmail }"/><br>
+			<input type="submit" value="변경"/>
 		</fieldset>
 	</form>
+	
+	<div id="pass">
+		<H4>비밀번호 변경</H4>
+		기존 비밀번호 : <input type="password" name="adminOriginalPass"/><br>
+		새로운 비밀번호 : <input type="password" name="adminNewPass"/><br>
+		비밀번호 재입력 : <input type="password" name="adminNewPass_re"/><br>
+		<input type="button" id="adminPassChangeBtn" value="변경"/>
+	</div>
 	
 	<script>
 		$('#adminPassChangeBtn').click(function(){
