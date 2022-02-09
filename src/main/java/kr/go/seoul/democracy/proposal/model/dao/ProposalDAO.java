@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,17 +36,21 @@ public class ProposalDAO {
 	//글작성하기
 	public void insert(Proposal proposal) {
 		System.err.println(proposal);
-		 sqlSession.insert("proposal.insert",proposal);
+		sqlSession.insert("proposal.insert",proposal);
 		
 	}
 	
+	//04. 글수정하기
+	public void modify(Proposal proposal){
+	System.err.println(proposal);
+	 sqlSession.modify("proposal.modify",proposal); 
+	}
+	 
 	/*
-	 * public int modify(Proposal proposal) { System.err.println(proposal);
-	 * sqlSession.modify("proposal.modify",proposal); }
+	 * public void delete(Proposal proposal) {
+	 * SqlSession.delete("proposal.delete",proposal); }
+	 * 
 	 */
-
-
-	
 	
 	
 }

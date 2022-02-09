@@ -56,15 +56,19 @@
 		
 	</insert>
 	
-	
+	<!-- 게시글수정처리 -->
 	<update id="modify" parameterType="proposal">
 		update proposal set
 		proposalTitle = #{proposalTitle},
  		proposalContent = #{proposalContent}
-		where proposal_No = #{propsalNo}
+		where proposal_No = #{proposalNo}
 	
 	</update>
 	
+	<delete id="delete" parameterType="proposal">
+		delete from proposal
+		where proposal_No = #{proposalNo}
+	</delete>
 	
 			
 </mapper>

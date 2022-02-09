@@ -16,7 +16,7 @@ public interface ProposalService {
 	 void insert(Proposal proposal)throws Exception;
 	 
 	 //게시글수정
-	public int modify(Proposal proposal);
+	public void modify(Proposal proposal);
 
 
 

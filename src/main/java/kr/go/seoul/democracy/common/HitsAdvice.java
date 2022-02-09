@@ -61,7 +61,7 @@ public class HitsAdvice {
 
     @After("proposalPointCut()")
     public void hitProposal(JoinPoint jp) {
-        if (!(jp.getArgs()[0] instanceof Proposal)) return;
+        if (!(jp.getArgs()[0] instanceof kr.go.seoul.democracy.proposal.model.vo.Proposal)) return;
 
         Proposal value = (Proposal) jp.getArgs()[0];
         if (value == null) return;
