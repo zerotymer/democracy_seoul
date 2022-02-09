@@ -248,7 +248,50 @@ Content-Session: 글작성 버튼
     font: 500 30px/40px 'Noto Sans KR';
     margin-bottom: 0;
 }
+.content--viewer hr {
+    border: 3px solid #CCC;
+}
 
 .content--block {
+    
+}
+.content--block h2 {
+    margin-top: 20px;
+    font: 300 30px/40px 'Noto Sans KR';
+    text-align: center;
+}
+.content--block h4 {
+    margin-top: 70px;
+    font: 500 20px/20px 'Noto Sans KR';
+}
+.content--block .img__center {
+    display: block;
+    text-align: center;
+}
+.content--block .img__center img {
+    margin: 0 auto;
+}
+
+.content--block .detail-btn {
+    display: block;
+    width: 280px;
+    height: 60px;
+    border-radius: 6px;
+    margin: 20px auto;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    font: 100 20px/60px 'Noto Sans KR';
 
 }
+.content--block .detail-btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.content--block ul {
+    list-style: none;
+    padding: none;
+}
+
+
