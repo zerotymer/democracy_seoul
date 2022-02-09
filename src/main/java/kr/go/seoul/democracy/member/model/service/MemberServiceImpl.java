@@ -119,22 +119,50 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public int memberUpdateEmail(Member member) {
-
-		System.out.println("[MemberService] - resetPassword 메소드 호출");
-
-		return mDAO.memberUpdateEmail(member);
-	}
-
-
-
-	@Override
 	public int myPageUpdatePassword(Map<String, String> passwordMap) {
 		
 		
 		return mDAO.myPageUpdatePassword(passwordMap);
 
 	}
+
+
+
+	@Override
+	public int updateMemberWithdraw(HashMap<String, Object> map) {
+		
+		
+		return mDAO.updateMemberWithdraw(map);
+
+	}
+
+
+
+	@Override
+	public int myPageUpdateNick(Map<String, String> map) {
+	
+		
+		return mDAO.myPageUpdateNick(map);
+
+		
+	}
+
+
+
+	@Override
+	public int memberUpdateEmail(Map<String, String> Map) {
+		System.out.println("[MemberService] - resetPassword 메소드 호출");
+
+		return mDAO.memberUpdateEmail(Map);
+	}
+
+
+
+	
+
+
+
+
 
 	
 	

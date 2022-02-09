@@ -115,7 +115,7 @@
 					<tr>
 						<td><p>회원탈퇴</p></td>
 						<td><button class="btn-withdraw">
-								<a href="">회원 탈퇴</a>
+								<a href="/member/goMypageWithdraw.do">회원 탈퇴</a>
 							</button>
 						</td>
 					</tr>

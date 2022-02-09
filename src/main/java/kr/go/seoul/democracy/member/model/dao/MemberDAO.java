@@ -99,9 +99,9 @@ public class MemberDAO {
 
 
 
-	public int memberUpdateEmail(Member member) {
+	public int memberUpdateEmail(Map<String, String> Map) {
 
-		return sqlSession.update("member.memberUpdateEmail",member);
+		return sqlSession.update("member.memberUpdateEmail",Map);
 	}
 
 
@@ -109,6 +109,23 @@ public class MemberDAO {
 	public int myPageUpdatePassword(Map<String, String> Map) {
 		System.out.println(Map);
 		return sqlSession.update("member.myPageUpdatePassword",Map);
+
+	}
+
+
+
+
+
+	public int updateMemberWithdraw(HashMap<String, Object> map) {
+		System.out.println("삭제로직 DAO"+map);
+		return sqlSession.update("member.updateMemberWithdraw",map);
+	}
+
+
+
+	public int myPageUpdateNick(Map<String, String> map) {
+		System.out.println("닉네임 변경 로직 DAO 상황: "+map);
+		return sqlSession.update("member.myPageUpdateNick",map);
 
 	}
 	

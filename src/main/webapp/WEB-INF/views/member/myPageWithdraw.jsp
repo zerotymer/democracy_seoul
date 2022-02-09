@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원 탈퇴</title>
+<title>마이페이지:회원 탈퇴</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap"
 	rel="stylesheet">
@@ -81,17 +81,17 @@
 				<table class="info">
 					<tr>
 						<td>비밀번호</td>
-						<td><input type="password" class="input-style" id="pwd" name="pwd" placeholder="비밀번호를 입력하세요."></td>
+						<td><input type="password" class="input-style" id="pwd" name="userPwd" placeholder="비밀번호를 입력하세요."></td>
 					</tr>
 					<tr>
 						<td>비밀번호 확인</td>
-						<td><input type="password" class="input-style" id="pwd_re" name="pwd_re" placeholder="비밀번호를 입력하세요."></td>
+						<td><input type="password" class="input-style" id="pwd_re" name="userPwd_re" placeholder="비밀번호를 입력하세요."></td>
 					</tr>
 					<tr>
 						<td colspan="2">
 							<p class="title-wd">탈퇴 유의사항</p>
-							<p>-(아이디)탈퇴할 경우 재사용 및 복구가 불가능합니다. <br>
-							<input type="checkbox" id="agree"> <span>안내사항을 모두 확인하였으며, 이에 동의합니다.</span>
+							<p>-탈퇴할 경우 재사용 및 복구가 불가능합니다.- <br>
+							<input type="checkbox" id="agree" name="agree"> <span>안내사항을 모두 확인하였으며, 이에 동의합니다.</span>
 						</td>
 					</tr>
 				</table>
