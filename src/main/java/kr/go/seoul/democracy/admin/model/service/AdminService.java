@@ -8,6 +8,8 @@ import kr.go.seoul.democracy.admin.model.vo.Admin;
 public interface AdminService {
 
 	Admin selectLoginAdmin(Admin admin);
+	
+	int adminUpdate(Admin a);
 
 	int updatePassword(HashMap<String, Object> map);
 
@@ -20,5 +22,5 @@ public interface AdminService {
 	ArrayList<Admin> selectAllMemberList();
 
 	int updateMemberEndYNChange(String userId, char endYN);
-
+	
 }
