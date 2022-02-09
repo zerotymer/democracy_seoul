@@ -34,7 +34,8 @@ public class ProposalServiceImpl implements ProposalService {
 	}
 
 
-	@Override public int modify(Proposal proposal) { 
+	@Override 
+	public int modify(Proposal proposal) { 
 		return 0;
 		
 		// pDAO.modify(proposal);
