@@ -65,12 +65,15 @@
             </div>
             <div class="update">
                 <H3>정보수정</H3>
+                	관리자 등급  ${sessionScope.admin.adminGrade }<br>
+                	ID  ${sessionScope.admin.adminId }<br>
+					이름  ${sessionScope.admin.adminName }<br>
             </div>
             <div class="enter">
-                등급 <input type="text" placeholder="최고관리자" size="8"/><br>
-                아이디 <input type="text" placeholder="superadmin" size="8"/><br>
-                비밀번호 <input type="password" size="12"/><br>
-                비밀번호 재확인 <input type="password" size="12"/><br>
+		                등급 <input type="text" placeholder="일반관리자" size="8"/><br>
+		                아이디 <input type="text" placeholder="superadmin" size="8"/><br>
+		                비밀번호 <input type="password" size="12"/><br>
+		                비밀번호 재확인 <input type="password" size="12"/><br>
             </div>
         </div>
     </div>

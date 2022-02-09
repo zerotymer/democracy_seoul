@@ -43,7 +43,7 @@ public class AdminController {
 			HttpSession session = request.getSession();
 			session.setAttribute("admin", a);
 			
-			return "redirect:/";
+			return "admin/adminBoardPage";
 		}else {
 			return "admin/adminLoginFail";
 		}
@@ -233,8 +233,10 @@ public class AdminController {
 		
 		if(result>0)
 		{
+			String location = "admin/adminJoinPage";
+			
 			mav.addObject("adminMsg", "관리자 가입 성공");
-			mav.addObject("location", "/admin/adminJoinPage.jsp");
+			mav.addObject("location", location);
 			
 		}else {
 			

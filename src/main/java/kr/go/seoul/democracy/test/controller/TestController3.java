@@ -35,7 +35,7 @@ public class TestController3 {
     /// METHODs
     @RequestMapping("/test/admintest.do")
     public String test() {
-        return "admin/adminIndex";
+        return "admin/adminLoginPage";
     }
 
 
