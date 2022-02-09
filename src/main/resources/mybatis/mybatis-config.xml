@@ -13,7 +13,6 @@
         <typeAlias type="kr.go.seoul.democracy.common.model.vo.Member" alias="member" />
         <typeAlias type="kr.go.seoul.democracy.proposal.model.vo.Proposal" alias="proposal" />
         <typeAlias type="kr.go.seoul.democracy.discuss.model.vo.Discuss" alias="discuss" />
-        <typeAlias type="kr.go.seoul.democracy.discuss.model.vo.DiscussComment" alias="discussComment" />
         <typeAlias type="kr.go.seoul.democracy.discuss.model.vo.DiscussFile" alias="discussFile" />
         <typeAlias type="kr.go.seoul.democracy.admin.model.vo.Admin" alias="admin" />
         <typeAlias type="kr.go.seoul.democracy.member.model.vo.MemberProfile" alias="memberProfile" />
