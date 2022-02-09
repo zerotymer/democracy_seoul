@@ -4,13 +4,15 @@
     
 }
 
+
+
 .container{
    
-    margin-top: 40px;
-   border:1px solid var(--COLOR-BORDER);
+    margin: 40px;
+   	border:1px solid var(--COLOR-BORDER);
     border-radius: 12px;
     box-sizing: border-box;
-   box-shadow: 4px 4px 4px rgba(236, 240, 241, 0.5);
+   	box-shadow: 4px 4px 4px rgba(236, 240, 241, 0.5);
     min-height: 200px;
     min-width: 200px;
 
@@ -26,23 +28,43 @@
    
 }
 
-.ProposalTitle{
-    font-size:20px;
+.title{
+	margin-top:-10px;
 }
 
-.detail{
-     
+.proposalTitle{
+	margin-top:-15px;
+	margin-bottom:px;
+    font-size:30px;
+}
+
+.date{
+    margin-left:50px;
     font-size: 15px;
 }
 
 .hashtag{
     margin-left: 80%;
+    font-size:15px;
      
 }
 
+.adminCon{
+	display:flex;
+	flex-direction: row;
+	justify-content : flex-end;
+	margin-right : 10px;
+}
+.adminCon button {
+	margin-right : 5px;
+	 border:1px solid var(--COLOR-BORDER);
+	background-color: white;
+	padding :5px;
+}
 
 .view_content{
-    height:700px ;
+    height:700px;
+    margin: 30px;
     border-bottom: 1px solid var(--COLOR-BORDER);
 }
 
@@ -52,6 +74,7 @@
     background-color:#F0F0F0;
     border-radius: 12px;
     padding: 25px 100px ;
+    border:0px; 
 }
 
 .sug{
@@ -80,6 +103,10 @@ padding :15px;
 }
 
 .reg{
-    margin-right: 10px;
+   margin-right: 10px;
+ 
+   border:1px solid var(--COLOR-BORDER);
+	background-color: white;
+	padding :3px;
    
 }
