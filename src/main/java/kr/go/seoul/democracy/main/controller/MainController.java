@@ -17,4 +17,17 @@ public class MainController {
     public String moveIntroduce() {
         return "main/introduce";
     }
+    
+    @RequestMapping("/main/moveSearch.do")
+    public String moveSearch() {
+    	return "main/search";
+    }
+    
+    
+    
+    
+    @RequestMapping("/main/search.do")
+    public String search() {
+    	return "";
+    }
 }

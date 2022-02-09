@@ -41,7 +41,7 @@
         <li class="menuitem">
             <a href="">서울시민회의</a>
             <ul class="submenu">
-                <li><a href="">서울시민회의 <wbr/>소개</a></li>
+                <li><a href="/main/introduce.do">서울시민회의 <wbr/>소개</a></li>
                 <li><a href="">서울시민회의 <wbr/>소식</a></li>
             </ul>
         </li>

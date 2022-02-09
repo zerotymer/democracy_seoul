@@ -35,6 +35,8 @@ public class HitsAdvice {
 
     @After("suggetPointCut()")
     public void hitSuggest(JoinPoint jp) {
+        if (!(jp.getArgs()[0] instanceof Sug)) return;
+
         Sug value = (Sug) jp.getArgs()[0];
         if (value == null) return;
 
@@ -46,6 +48,8 @@ public class HitsAdvice {
 
     @After("discussPointCut()")
     public void hitDiscuss(JoinPoint jp) {
+        if (!(jp.getArgs()[0] instanceof Discuss)) return;
+
         Discuss value = (Discuss) jp.getArgs()[0];
         if (value == null) return;
 
@@ -57,6 +61,8 @@ public class HitsAdvice {
 
     @After("proposalPointCut()")
     public void hitProposal(JoinPoint jp) {
+        if (!(jp.getArgs()[0] instanceof Proposal)) return;
+
         Proposal value = (Proposal) jp.getArgs()[0];
         if (value == null) return;
 

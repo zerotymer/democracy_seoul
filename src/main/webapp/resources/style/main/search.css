@@ -1,0 +1,33 @@
+:root {
+    --COLOR-FONT-STRONG: #00a8ff;
+}
+
+.search--container {
+
+}
+
+.search--container .search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 60px auto;
+}
+.search--container .search-bar input {
+    height: 36px;
+    min-width: 400px;
+    padding: 8px;
+    font-size: 20px;
+    line-height: 36px;
+    border: 4px solid #CCC;
+}
+.search--container .search-bar button {
+    margin-left: 5px;
+}
+
+.search--container .search-msg {
+    font: 200 20px/1.5 'Nanum Gothic', sans-serif;
+    text-align: center;
+}
+.search--container .search-msg strong {
+    color: var(--COLOR-FONT-STRONG);
+}
