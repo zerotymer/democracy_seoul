@@ -44,7 +44,7 @@
             if(document.getElementById('userPwd').value !='' && document.getElementById('userPwdRe').value!=''){
                 if(document.getElementById('userPwd').value==document.getElementById('userPwdRe').value){
                     document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
-                    document.getElementById('check').style.color='green';     }
+                    document.getElementById('check').style.color='blue';     }
                 else{
                 	document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
                     document.getElementById('check').style.color='red';
@@ -260,7 +260,7 @@
 					<label for="email" class="tit-label">이메일</label><br>
 					<input type="email" id="email" class="input-style" name="email" placeholder="이메일"><button type="button" onclick='sendEmail()'>인증하기</button><br>	
 					<span id="emailCheck" class="check-msg"></span><br>				
-				    <input type="email" class="input-style" id="emailRe" name="emailRe" onchange="emailCheck()"  placeholder="이메일 인증번호"><br>
+				    <input type="text" class="input-style" id="emailRe" name="emailRe" onchange="emailCheck()"  placeholder="이메일 인증번호"><br>
 				    <button type="button" onclick='checkNum()'>인증번호 확인</button><br>		
 					
 		

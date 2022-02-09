@@ -1,6 +1,8 @@
 package kr.go.seoul.democracy.test.controller;
 
 import kr.go.seoul.common.FileTransferTemplate;
+import kr.go.seoul.democracy.admin.model.service.AdminService;
+import kr.go.seoul.democracy.admin.model.vo.Admin;
 import kr.go.seoul.democracy.common.model.vo.Member;
 import kr.go.seoul.democracy.member.model.service.MemberService;
 import kr.go.seoul.democracy.test.model.service.TestService;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 
@@ -17,15 +20,18 @@ public class TestController {
     private TestService testService;
     private FileTransferTemplate fileTemplate;
     private MemberService mService;
+    private AdminService aService;
 
     /// CONSTRUCTORs
     @Autowired
     public TestController(@Qualifier("testServiceImpl") TestService testService,
                           @Qualifier("fileTransferTemplate") FileTransferTemplate fileTemplate,
-                          @Qualifier("memberServiceImpl") MemberService mService) {
+                          @Qualifier("memberServiceImpl") MemberService mService,
+                          AdminService aService) {
         this.testService = testService;
         this.fileTemplate = fileTemplate;
         this.mService = mService;
+        this.aService = aService;
     }
 
     /// METHODs
@@ -76,5 +82,20 @@ public class TestController {
     @RequestMapping("/ckeditor.do")
     public String ckeditor() {
     	return "test/ckeditor";
+    }
+
+    @RequestMapping("/test/print.do")
+    public String print(@RequestParam String content) {
+        System.out.println(content);
+        return "index";
+    }
+    @RequestMapping("/test/admin.do")
+    public String print() {
+        Admin a = new Admin();
+        a.setAdminId("1111");
+        a.setAdminPwd("2222");
+        System.err.println(a);
+        aService.insertAdminMember(a);
+    	return "index";
     }
 }

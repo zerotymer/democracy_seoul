@@ -16,18 +16,11 @@ public class HitsServiceImpl implements HitsService {
         this.hDAO = hDAO;
     }
 
-    @Override
-    public boolean insertHitsTable(String tableName, int boardNo) {
-        return false;
-    }
+    /// METHODs
 
     @Override
     public boolean addCountHitsTable(String tableName, int boardNo) {
-        return false;
+        return hDAO.addCountHitsTable(tableName, boardNo) == 1;
     }
 
-    @Override
-    public int getCountHitsTable(String tableName, int boardNo) {
-        return 0;
-    }
 }

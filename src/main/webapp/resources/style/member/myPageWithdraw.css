@@ -1,0 +1,49 @@
+@charset "UTF-8";
+.user-info {
+	height: 900px;
+}
+.info tr td:not(:last-child) {
+	width: 20%;
+	height: 100px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #2A2A2A;
+}
+.info tr:last-child {
+	width: 20%;
+	height: 200px;
+}
+.info {
+	width: 100%;
+}
+.title-wd {
+	font-size: 18px;
+	font-weight: bold;
+}
+input[type=password] {
+	width: 400px;
+}
+
+.info td {
+	border-bottom: 0.5px solid #D8D8D8;
+}
+
+table td {
+	font-family: 'Noto Sans KR', sans-serif;
+	vertical-align :middle;
+	color: #2A2A2A;
+}
+input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	vertical-align:-2px;
+}
+
+.btn-m {
+	background-color: #80ffff;
+}
+.user-info div:last-child {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+}

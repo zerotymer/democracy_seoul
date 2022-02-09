@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="hits">
-	<insert id="insertHits">
-		INSERT INTO ${ boardname }
-		VALUES ( #{boardNo}, 0, current_date)
+	<insert id="insertBoard" parameterType="kr.go.seoul.democracy.common.model.vo.HitsTableData">
+		INSERT INTO ${ boardName }
+		VALUES ( #{boardNo}, 0, current_date )
 	</insert>
-	<update id="updateHits">
-		UPDATE ${ boardname }
+	<update id="updateBoard" parameterType="kr.go.seoul.democracy.common.model.vo.HitsTableData">
+		UPDATE ${ boardName }
 		SET
 			hit_count = hit_count + 1,
 			update_date = current_date
 		WHERE
 			board_no = #{ boardNo }
 	</update>
-	<select id="selectHits" resultType="integer" parameterType="hashmap">
-		SELECT COUNT(*) FROM ${ boardname } WHERE board_no = #{ boardNo }
+	<select id="isExist" parameterType="kr.go.seoul.democracy.common.model.vo.HitsTableData" resultType="int" >
+		SELECT COUNT(*) FROM ${ boardName } WHERE board_no = #{ boardNo }
+	</select>
+	<select id="getCount" parameterType="kr.go.seoul.democracy.common.model.vo.HitsTableData" resultType="int">
+		SELECT HIT_COUNT FROM ${ boardName } WHERE board_no = #{ boardNo }
 	</select>
 </mapper>
