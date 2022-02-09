@@ -291,9 +291,9 @@ public class MemberController {
 	//로그아웃
 	
 	@RequestMapping(value="/member/logout.do", method=RequestMethod.GET)
-	public String logout(HttpSession session, @SessionAttribute Member member)
+	public String logout(HttpSession session, @SessionAttribute Member user)
 	{	
-		System.out.println("["+member.getUserId()+"] 로그아웃 ");
+		System.out.println("["+user.getUserId()+"] 로그아웃 ");
 		
 		session.invalidate();
 		
@@ -399,17 +399,25 @@ public class MemberController {
 	  
 	  //마이페이지에서 이메일인증 후 변경하는 로직
 	  @RequestMapping(value="/member/memberUpdateEmail.do")
-	  public String memberUpdateEmail(HttpServletRequest request,Model model,Member member) throws IOException
+	  public String memberUpdateEmail(HttpServletRequest request,Model model,@RequestParam String email) throws IOException
 	  {
 		    //유저가 입력한 변경할 패스워드를 받는다.
-		    System.out.println("UpdateEmail 로직 정상 호출");
-			System.out.println(member.toString());
-			int result = mService.memberUpdateEmail(member);
+		    //System.out.println("UpdateEmail 로직 정상 호출");
+			//System.out.println(member.toString());
+			//int result = mService.memberUpdateEmail(member);
+		  
+		   HttpSession session = request.getSession();
+		   Member m = (Member)session.getAttribute("user");
+		   Map<String,String> Map = new HashMap<>();
+		   Map.put("email", email);
+		   Map.put("userId",m.getUserId());
 
 			
+		  int result = mService.memberUpdateEmail(Map);
+		  
 			 if(result>0)
 			{	System.out.println("이메일 재설정 성공");
-			    HttpSession session = request.getSession(true);
+			    session = request.getSession(true);
 		    	session.setAttribute("EmailResult", true);
 				model.addAttribute("msg","이메일 변경에 성공하였습니다.");
 				model.addAttribute("location","/");
@@ -512,6 +520,105 @@ public class MemberController {
 		   
 	
 	  }
+	  
+	  //마이 페이지에서 삭제 페이지로 가는 로직
+	  @RequestMapping(value="/member/goMypageWithdraw.do")
+	  public String goMypageWithdraw() {
+		  
+		  return "member/myPageWithdraw";
+
+	  }
+	  
+	  
+	  
+	  	//마이 페이지에서 회원 삭제로직
+		@RequestMapping(value="/member/memberWithdraw.do",method=RequestMethod.POST)
+		public String memberWithDraw(HttpServletRequest request, Model model, @SessionAttribute Member user,
+				HttpSession session)
+		throws IOException
+		{	
+			System.out.println("회원삭제 로직 정상구동");
+			
+			String userPwd = request.getParameter("userPwd");
+			
+			if(userPwd == null)
+			{
+				return "member/myPageWithdraw";
+			}
+			
+		
+			String userId = user.getUserId();
+			
+			HashMap<String, Object> map = new HashMap<String,Object>();
+			map.put("userId", userId);
+			map.put("userPwd", userPwd);
+			
+			System.out.println("삭제로직 컨틀롤러"+map);
+			
+			int result = mService.updateMemberWithdraw(map);
+			
+			if(result>0)
+			{
+				session.invalidate();
+				
+				model.addAttribute("msg","정상적으로 탈퇴 처리 되었습니다.");
+				model.addAttribute("location","/");
+				
+			}else
+			{
+				model.addAttribute("msg", "비밀번호가 일치하지 않습니다. 재확인해주세요");
+				model.addAttribute("location", "/member/myPageWithdraw.do");
+			}
+			
+			return "member/msg";
+	
+			
+			
+			
+		}
+		
+	     //마이 페이지에서 닉네임 변경로직
+		@RequestMapping(value="/member/goMemberUpdateNick.do")
+		public String goMemberUpdateNick() {
+			
+			return "member/myPageUpdateNick";
+		}
+		
+		
+		
+		 //마이 페이지에서 닉네임 변경로직
+		  @RequestMapping(value="/member/myPageUpdateNick.do")
+		  public String myPageUpdatePassword(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam String nick) throws IOException
+		  {//memberOriginalPass,memberNewPass,“userPwd”
+			  
+			   HttpSession session = request.getSession();
+			   Member m = (Member)session.getAttribute("user");
+			   //System.out.println("비번변경시 갖고있는 데이터 : "+m);
+			   Map<String,String> Map = new HashMap<>();
+			   Map.put("nick", nick);
+			   Map.put("userId",m.getUserId());
+			   System.out.println(Map);
+			   
+			   
+			  int result = mService.myPageUpdateNick(Map);
+			  
+				if(result>0)
+				{   
+				System.out.println("비밀번호 재설정 성공");
+				session = request.getSession(true);
+			    session.setAttribute("nickResult", true);
+				model.addAttribute("msg","닉네임 변경에 성공하였습니다.");
+				model.addAttribute("location","/");
+				return "member/msg";
+				}else
+				{  System.out.println("비밀번호 재설정 실패");
+					response.getWriter().print(false);
+					return "redirect:/member/goMyPage.do";
+				}
+				
+			   
+		
+		  }
 		  
 		  
 		  

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>비밀번호 찾기</title>
+<title>이메일 변경 및 인증</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
@@ -86,13 +86,13 @@
 	<div class="bg-color">
 		<div class="box-white">
 			<div class="tab-search">
-				<a href="/member/goMemberUpdateEmail.do">이메일인증 찾기</a>
+				<a href="/member/goMemberUpdateEmail.do">이메일 변경</a>
 			</div>
-			<form action="/member/goMemberSearchPwdResult.do" onsubmit="return Validation();" method="post">
-					<span id="memberEmail">기존 ${sessionScope.member.email }</span>					 			
+			<form action="/member/memberUpdateEmail.do" onsubmit="return Validation();" method="post">
+					<span id="memberEmail">${sessionScope.user.email }</span>					 			
 					<label for="email" class="tit-label">에서 변경하실 이메일을 입력하시고 인증해주세요.</label><br>
-				    <input type="text" class="input-style" id="userId" name="userId" value="${sessionScope.member.userId }" readonly/><br>					
-					<input type="email" id="email" class="input-style" name="email" placeholder="새로운 이메일을 입력해주세요."><button type="button" onclick='sendEmail()'>인증메일 발송하기</button><br>	
+					<input type="email" id="email" class="input-style" name="email" placeholder="새로운 이메일을 입력해주세요."><button type="button" onclick='sendEmail()'>인증메일 발송하기</button><br>
+					<span id="emailCheck" class="check-msg"></span><br>		
 				    <input type="text" class="input-style" id="emailRe" name="emailRe" placeholder="이메일 인증번호를 입력해주세요."><br>
 				    <button type="button" onclick='checkNum()'>인증번호 확인</button><br>
 				    <input type="submit" class="btn-submit" value="인증완료">		
@@ -100,5 +100,42 @@
 			<a href="/">메인으로 가기</a>
 		</div>
 	</div>
+	
+	
+	<script>
+			
+			$("#email").blur(function() {
+				var email = $("#email").val();
+			    var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+			    
+			    if(!getMail.test($("#email").val())){
+					$("#emailCheck").html("올바른 이메일 형식이 아닙니다.").css("color","red");
+			        return false;
+			      }
+			    
+				
+				$.ajax({ 
+					url: "/member/memberEmailCheck.do",
+					data: {"email":email},
+					type: "get",
+					success: function(result) {
+						
+						if(result=="true"){
+							$("#emailCheck").html("중복되는 이메일입니다.다시 입력해주세요.").css("color","red");
+							$("#email").val('');
+							return false;
+						}else{
+							$("#emailCheck").html("중복되지 않는 이메일입니다.").css("color","blue");
+
+						}
+						
+					},
+					error: function() {
+						console.log("ajax 통신 실패")
+					}
+				});
+			});
+	</script>
+	
 </body>
 </html>

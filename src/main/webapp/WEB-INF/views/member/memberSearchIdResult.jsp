@@ -24,8 +24,8 @@
 			<div class="box-result">
 				<p>아이디 찾기 결과</p>
 				<div class="box-userInfo">
-					<span id="userId">${sessionScope.member.userId }</span> 
-					<span id="enrollDate">${sessionScope.member.enrollDate}</span>
+					<span id="userId">${sessionScope.user.userId }</span> 
+					<span id="enrollDate">${sessionScope.user.enrollDate}</span>
 				</div>
 			</div>
 			<button class="btn-login"><a href="/member/goLogin.do">로그인하기</a></button>
