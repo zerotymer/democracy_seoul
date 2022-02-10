@@ -28,7 +28,6 @@ import kr.go.seoul.democracy.discuss.model.vo.Discuss;
 import kr.go.seoul.democracy.member.model.service.MailSendService;
 import kr.go.seoul.democracy.member.model.service.MemberService;
 import kr.go.seoul.democracy.member.model.vo.MemberProfile;
-import kr.go.seoul.democracy.test.model.service.BoardService;
 
 @Controller
 public class MemberController {
@@ -622,37 +621,7 @@ public class MemberController {
 			   
 		
 		  }
-		  /*
-			@Autowired
-			private BoardService bService;
-			
-			//공지사항 페이지로 이동기능 
-			@RequestMapping(value="/member/goNoticeNews.do")
-			public String NoticeBoard() {
-				
-				return "member/noticeNews";
-			}
-			
-			//공지사항 리스트 
-			@RequestMapping(value="/notice/noticeNewslist.do")
-			public ModelAndView noticeNewsSearch(ModelAndView mv,@RequestParam int currentListPage) {
-				
-				int pageSize=12;
-				int totalCount=bService.noticeNewsTotalCount();
-				if(currentListPage==0) currentListPage=1;
-				
-				ArrayList<Discuss> list=bService.noticeNewsList(pageSize,currentListPage);
-			
-				mv.addObject("list",list);
-				mv.addObject("currentListPage",currentListPage);
-				mv.addObject("pageSize",pageSize);
-				mv.addObject("pageCount",(int)Math.ceil((double)totalCount/pageSize));
-				mv.setViewName("adminNotice/list");
-			
-				return mv;
-			}
-			*/
-		  
+
 		  
 		  
 		  
