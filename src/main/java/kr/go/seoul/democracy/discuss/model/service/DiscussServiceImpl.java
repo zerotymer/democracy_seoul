@@ -1,13 +1,13 @@
 package kr.go.seoul.democracy.discuss.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.go.seoul.democracy.discuss.model.dao.DiscussDAO;
 import kr.go.seoul.democracy.discuss.model.vo.Discuss;
-import kr.go.seoul.democracy.discuss.model.vo.DiscussComment;
 import kr.go.seoul.democracy.discuss.model.vo.DiscussFile;
 
 @Service
@@ -32,12 +32,12 @@ public class DiscussServiceImpl implements DiscussService {
 	}
 
 	@Override
-	public ArrayList<DiscussComment> proComment(int discussNo,int pageSize,int currentCommentPage) {
+	public ArrayList<HashMap<String, Object>> proComment(int discussNo,int pageSize,int currentCommentPage) {
 		return dDAO.proComment(discussNo,pageSize,currentCommentPage);
 	}
 
 	@Override
-	public ArrayList<DiscussComment> conComment(int discussNo,int pageSize,int currentCommentPage) {
+	public ArrayList<HashMap<String, Object>> conComment(int discussNo,int pageSize,int currentCommentPage) {
 		return dDAO.conComment(discussNo,pageSize,currentCommentPage);
 	}
 
@@ -49,6 +49,11 @@ public class DiscussServiceImpl implements DiscussService {
 	@Override
 	public ArrayList<DiscussFile> file(int discussNo) {
 		return dDAO.file(discussNo);
+	}
+
+	@Override
+	public int write(Discuss discuss) {
+		return dDAO.write(discuss);
 	}
 
 }

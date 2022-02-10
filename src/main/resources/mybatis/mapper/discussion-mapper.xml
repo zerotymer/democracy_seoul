@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="discussTotalCount" resultType="int">
-		select count from discussion
+		select count(*) from discussion
 	</select>
 	
 	<select id="onePost" resultType="discuss">
@@ -36,7 +36,7 @@
 		where discuss_no=#{value}
 	</select>
 	
-	<select id="proCommentList" resultType="discussComment">
+	<select id="proCommentList" resultType="hashmap">
 		select discuss_no as discussNo,
 			comment_no as commentNo,
 			userid as userId,
@@ -47,7 +47,7 @@
 		where discuss_no=#{value} and comment_vote='Y'
 	</select>
 	
-	<select id="conCommentList" resultType="discussComment">
+	<select id="conCommentList" resultType="hashmap">
 		select discuss_no as discussNo,
 			comment_no as commentNo,
 			userid as userId,
@@ -72,4 +72,10 @@
 		from discuss_file
 		where discuss_no=#{value}
 	</select>
+	
+	<insert id="write" parameterType="discuss">
+		insert into discussion values
+		(discuss_seq.nextval(),#{discussTitle},#{userId},#{discussContent},current_date,current_date,current_date+14,'N',#{discussThumbnailName},#{discussThumbnailPath})
+	</insert>
+	
 </mapper>

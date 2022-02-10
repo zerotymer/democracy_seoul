@@ -33,7 +33,6 @@ public class HitsAdvice {
     @Pointcut("execution(kr.go.seoul.democracy.suggest.vo.Sug kr..service.*.*(..))")
     public void suggetPointCut() {}
 
-    @After("suggetPointCut()")
     public void hitSuggest(JoinPoint jp) {
         if (!(jp.getArgs()[0] instanceof Sug)) return;
 
@@ -46,7 +45,6 @@ public class HitsAdvice {
     @Pointcut("execution(kr.go.seoul.democracy.discuss.model.vo.Discuss kr..service.*.*(..))")
     public void discussPointCut() {}
 
-    @After("discussPointCut()")
     public void hitDiscuss(JoinPoint jp) {
         if (!(jp.getArgs()[0] instanceof Discuss)) return;
 
@@ -59,9 +57,8 @@ public class HitsAdvice {
     @Pointcut("execution(kr.go.seoul.democracy.proposal.model.vo.Proposal kr..service.*.*(..))")      // TODO: model
     public void proposalPointCut() {}
 
-    @After("proposalPointCut()")
     public void hitProposal(JoinPoint jp) {
-        if (!(jp.getArgs()[0] instanceof Proposal)) return;
+        if (!(jp.getArgs()[0] instanceof kr.go.seoul.democracy.proposal.model.vo.Proposal)) return;
 
         Proposal value = (Proposal) jp.getArgs()[0];
         if (value == null) return;

@@ -3,40 +3,106 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!-- jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 로그인</title>
 
 <style>
-	#joinForm{
-		width : 500px;
-	}
-</style>
+        .wrapper{
+            width: 100%;
+            height: 750px;
+            background-color: #3F51B5;
+            box-sizing: border-box;
+            display: flex;
+        }
+        .login_form{
+            width: 300px;
+            height: 600px;
+            background-color: white;
+            margin: auto;
+            border-radius: 2em;
+            box-shadow: 7px 7px 2px 1px rgba(0, 0, 0, .2);
+            display: flex;
+        }
+        .image{
+            width : 200px;
+            height: 85px;
+            margin: 30px 50px 200px 50px;
+            text-align: center;
+        }
+        .image>img{
+            display: block;
+            margin: auto;
+        }
+        .img_admin_icon{
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            margin: 140px 110px 200px 110px;
+        }
+        .img_admin_icon>img{
+            width: 100%;
+            height: 100%;
+        }
+        .text{
+            width: 120px;
+            height: 40px;
+            text-align: center;
+            position: absolute;
+            margin: 200px 90px 50px 90px;
+            color: #8C8C8C;
+        }
+        .enter{
+            width: 230px;
+            height: 100px;
+            position: absolute;
+            margin: 260px 0px 50px 60px;
+        }
+        .enter>input{
+            text-align: center;
+        }
+    </style>
 
 </head>
 <body>
 
-	<!-- 관리자 회원 가입  -->
-	<form action="/admin/adminJoin.do" method="post" id="joinForm">
-		<fieldset>
-			<legend>관리자 가입</legend>
-			ID : <input type="text" name="adminId" placeholder="아이디"/><button type="button" id="idCheckBtn">중복체크</button><br>
-			PW : <input type="password" name="adminPwd" placeholder="비밀번호"/><br>
-			이름 : <input type="text" name="adminName" /><br>
-			이메일 : <input type="text" name="adminEmail"/><br>
-			<input type="submit" value="가입"/>
-		</fieldset>
-	</form>
-	
-	<a href="/admin/adminLoginPage.jsp">메인 페이지</a>
-	
-	<script>
-		$('#idCheckBtn').click(function(){
+	<div class="wrapper">
+        <div class="login_form">
+            <div class="image">  
+            <img src="/resources/images/admin/adminmain_logo.png"> 
+            </div>
+            <div class="img_admin_icon">  
+            <img src="/resources/icons/admin_icon.png">
+            </div>
+            <div class="text">
+            <H3>관리자 로그인</H3>
+            </div>
+            
+            
+            <div class="enter">
+                <form action="/admin/adminJoin.do" method="post" id="joinForm">
+					<fieldset>
+						ID  <input type="text" name="adminId" placeholder="아이디"/><input type="button" id="adminIdCheckBtn" value="중복체크"/><br>
+						비밀번호  <input type="password" name="adminPwd" placeholder="비밀번호"/><br>
+						비밀번호 재입력  <input type="password" name="adminPwd_re" placeholder="비밀번호 재입력"/><br>
+						이름  <input type="text" name="adminName" /><br>
+						이메일  <input type="text" name="adminEmail"/><br>
+						<input type="reset" value="취소"/> <input type="submit" value="가입"/>
+					</fieldset>
+				</form>
+				
+				<a href="/admin/adminLoginPage.jsp">메인 페이지</a>
+            </div>
+			
+            
+        </div>
+    </div>
+    
+    <!-- ID 중복 체크 -->
+    <script>
+		$('#adminIdCheckBtn').click(function(){
 			var adminId = $('input[name=adminId]').val();
 			
 			$.ajax({
@@ -119,6 +185,7 @@
         }
 
     </script>
+	
 
 </body>
 </html>

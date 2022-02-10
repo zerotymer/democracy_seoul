@@ -104,14 +104,17 @@
                 </div>
                 <div>
                     <div class="tab">
-                        <span class="tab-btn">전체 (0)</span>
+                        <span class="tab-btn active">전체 (0)</span>
                         <span class="tab-btn">시민제안 (0)</span>
                         <span class="tab-btn">서울시가 묻습니다 (0)</span>
                     </div>
                     <hr>
                     <div class="result">
                         <ul>
-                            <div>시민제안 검색결과 (총 <strong>400</strong>건)</div>
+                            <div>
+                                <h3>시민제안 검색결과 (총 <strong>400</strong>건)</h3>
+                                <span class="more">더보기</span>
+                            </div>
                             <li>
                                 <p>일회용 배달용기 플라스틱 줄이기</p>
                                 <p>안녕하세요. 저는 <strong>고등학교</strong> 1학년 학생입니다.코로나 장기화로 인해 외식은 줄어들고 가정에서도 음식 배달과 포장주문 이용이 더 늘어 환경파괴의 주범이
@@ -135,7 +138,10 @@
                             </li>
                         </ul>
                         <ul>
-                            <div>서울시가 묻습니다 검색결과 (총 1건)</div>
+                            <div>
+                                <h3>서울시가 묻습니다 검색결과 (총 1건)</h3>
+                                <span class="more">더보기</span>
+                            </div>
                             <li>
                                 <p>일회용 배달용기 플라스틱 줄이기</p>
                                 <p>안녕하세요. 저는 고등학교 1학년 학생입니다.코로나 장기화로 인해 외식은 줄어들고 가정에서도 음식 배달과 포장주문 이용이 더 늘어 환경파괴의 주범이
