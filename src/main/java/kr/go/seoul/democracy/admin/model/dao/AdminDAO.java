@@ -2,8 +2,9 @@ package kr.go.seoul.democracy.admin.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +12,14 @@ import org.springframework.stereotype.Repository;
 
 import kr.go.seoul.democracy.admin.model.vo.Admin;
 
+/**
+ * @author USER
+ *
+ */
+/**
+ * @author USER
+ *
+ */
 @Repository
 public class AdminDAO {
 	
@@ -67,15 +76,24 @@ public class AdminDAO {
 		
 		return sqlSession.update("member.updateMemberEndYNChange", map);
 	}
-
-	public List<Object> selectAllPostList(int currentPage, int recordCountPerPage) {
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 페이지의 목록의 갯수 
+	 */
+	public ArrayList<Admin> selectAllPostList(int recordCountPerPage, int currentPage) {
 		
-		ArrayList<Admin> list = new ArrayList();
+		int offset = ((currentPage-1) * recordCountPerPage);
+		int limit = recordCountPerPage;
 		
-		int start =  currentPage * recordCountPerPage - (recordCountPerPage-1);
-		int end = currentPage * recordCountPerPage;
+		RowBounds rb = new RowBounds(offset, limit);
 		
-		return sqlSession.selectList("admin.selectAllPostList", list);
+		System.out.println("MEMBER Pageing 처리");
+		
+		return new ArrayList<Admin>(sqlSession.selectList("member.selectAllPostList", null, rb));
+	
 	}
 
 

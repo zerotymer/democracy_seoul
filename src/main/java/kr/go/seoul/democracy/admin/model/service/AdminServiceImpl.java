@@ -2,8 +2,9 @@ package kr.go.seoul.democracy.admin.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,11 +68,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public HashMap<String, Object> selectAllPostList(int currentPage) {
+	public ArrayList<Admin> selectAllPostList(int currentPage, int recordCountPerPage) {
+		return aDAO.selectAllPostList(recordCountPerPage, currentPage);
 		
-		int recordCountPerPage = 10;
-		
-		List<Object> list = aDAO.selectAllPostList(currentPage, recordCountPerPage);
+	}
+
+	@Override
+	public HashMap<String, Object> getAdminPageNavi(int currentPage, int recordCountPerPage, int naviSize) {
 		
 		return null;
 	}

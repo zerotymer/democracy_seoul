@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.go.seoul.democracy.admin.model.service.AdminService;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
-import kr.go.seoul.democracy.common.model.vo.Member;
 
 @Controller
 public class AdminController {
@@ -313,7 +312,10 @@ public class AdminController {
 								  HttpServletResponse response) throws ServletException, IOException
 	{
 		
-		int currentPage;
+		int currentPage; //현재 페이지 번호
+		int recordCountPerPage = 10; //보여지는 게시글의 갯수
+		int naviSize = 5; //네비 갯수
+		//총 게시글 갯수 필요
 		
 		if(request.getParameter("currentPage")==null)
 		{
@@ -322,8 +324,10 @@ public class AdminController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		HashMap<String, Object> pageDateMap = aService.selectAllPostList(currentPage);
-		
+		//페이지 목록 10개씩 끊는 로직
+		ArrayList<Admin> list = aService.selectAllPostList(currentPage, recordCountPerPage);
+		//네비 바 5개씩 보여주는 로직
+		HashMap<String, Object> map = aService.getAdminPageNavi(currentPage, recordCountPerPage, naviSize);
 		
 		
 	}
