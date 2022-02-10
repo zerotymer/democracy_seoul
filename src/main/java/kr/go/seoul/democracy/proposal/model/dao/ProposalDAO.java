@@ -42,15 +42,16 @@ public class ProposalDAO {
 	
 	//04. 글수정하기
 	public void modify(Proposal proposal){
-	System.err.println(proposal);
-//	 sqlSession.modify("proposal.modify",proposal); 
+		System.err.println(proposal);
+		sqlSession.update("proposal.modify",proposal); 
 	}
 	 
-	/*
-	 * public void delete(Proposal proposal) {
-	 * SqlSession.delete("proposal.delete",proposal); }
-	 * 
-	 */
+	/* 05.글삭제하기 */
+	 public void delete(int proposalNo) {
+	 sqlSession.update("proposal.delete",proposalNo); 
+	 }
+
+	 
 	
 	
 }

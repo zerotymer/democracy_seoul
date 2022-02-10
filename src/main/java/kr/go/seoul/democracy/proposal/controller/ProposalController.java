@@ -98,20 +98,41 @@ public class ProposalController {
 	
 
 
-	//페이지 수정 
+	//페이지 수정뷰
 	@RequestMapping(value="/proposal/modify.do", method=RequestMethod.GET)
-	public void modify(@RequestParam("proposalNo") Proposal proposalNo,Proposal proposal,Model model) {
-		pService.modify(proposalNo);
-		model.addAttribute("view",proposal);
-		
+	public String modify(@RequestParam(defaultValue="1") int proposalNo,Model model,HttpSession session) throws Exception{
+		//세션확인 
+		Admin admin = (Admin)session.getAttribute("admin");
+		if(admin== null) return "proposal/allList"; 
+		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
+		//비지니스로직 
+		Proposal proposal = pService.proposalView(proposalNo);
+		model.addAttribute("proposal",proposal);
+		return "proposal/modify";
 	}
-
-	@RequestMapping(value="/proposal/modify.do", method=RequestMethod.POST)
-	public String postModify(Proposal proposal,RedirectAttributes rttr) {
+	
+	//페이지 수정
+	@RequestMapping(value="/proposal/update.do", method=RequestMethod.POST)
+	public String postModify(Proposal proposal,RedirectAttributes rttr,HttpSession session) throws Exception {
+		
+		Admin admin = (Admin)session.getAttribute("admin");
+		if(admin== null) return "proposal/allList"; 
+		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
+		
 		pService.modify(proposal);
-		rttr.addFlashAttribute("result","modify success");
+		//rttr.addFlashAttribute("result","modify success");
 		return "redirect:/proposal/post?proposalNo="+proposal.getProposalNo();	
 	}
 	
+	//게시글삭제하기 
+	@RequestMapping(value="/proposal/delete.do", method=RequestMethod.POST)
+	public String delete(@RequestParam(defaultValue="1") int proposalNo,HttpSession session) {
+		Admin admin = (Admin)session.getAttribute("admin");
+		if(admin== null) return "proposal/allList"; 
+		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
+		
+		pService.delete(proposal.getProposalNo());
+		return "redirect:/proposal/allList";
+	}
 	
 }

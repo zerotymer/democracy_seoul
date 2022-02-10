@@ -198,7 +198,7 @@
                
             </div>
 						<script>
-							$(document).ready(function(){
+						/* 	$(document).ready(function(){
 				    
 							    let result = '<c:out value="${result}"/>';
 							    
@@ -216,7 +216,7 @@
 							        
 				    }    
 				    
-				});
+				}); */
 							
 							
 							//글쓰기 폼으로 이동하게 하는 함수
