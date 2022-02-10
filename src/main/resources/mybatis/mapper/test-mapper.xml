@@ -5,4 +5,15 @@
 	<select id="date" resultType="string">
 		SELECT SYSDATE, SYSTIMESTAMP, current_date, current_timestamp FROM dual
 	</select>
+	
+		<!-- 공지사항 -->
+		<select id="noticeList" parameterType="adminNotice" resultType="adminNotice">
+		SELECT 
+		    NOTICE_NO as discussNo,
+			NOTICE_TITLE  as discussTitle,
+			NOTICE_CONTENT as discussContent,
+			NOTICE_DATE as discussDate,
+			NOTICE_DEL_YN as discussDelYN
+		from NOTICE
+	</select>
 </mapper>
