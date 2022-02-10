@@ -68,7 +68,7 @@
 		});
 	</script>
 	
-	<a href="/">메인 페이지로</a>
+	<a href="/admin/adminUpdatePage.jsp">메인 페이지로</a>
 	
 </body>
 </html>

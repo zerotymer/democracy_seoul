@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.go.seoul.democracy.admin.model.service.AdminService;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
-import kr.go.seoul.democracy.common.model.vo.Member;
 
 @Controller
 public class AdminController {
 	
 	@Autowired
 	private AdminService aService;
+	
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
 	
 	/**
 	 * 작성자 : 김영주
@@ -43,7 +49,7 @@ public class AdminController {
 			HttpSession session = request.getSession();
 			session.setAttribute("admin", a);
 			
-			return "admin/adminBoardPage";
+			return "redirect:/admin/allMemberList.do";
 		}else {
 			return "admin/adminLoginFail";
 		}
@@ -93,6 +99,17 @@ public class AdminController {
 			}
 			
 			}
+	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 관리자 정보 수정 페이지로 이동 메소드
+	 */
+	@RequestMapping(value="/admin/adminUpdatePageMove.do")
+	public String updatePageMove() 
+	{
+		return "admin/adminUpdatePage";
 	}
 	
 	
@@ -284,13 +301,56 @@ public class AdminController {
 	{
 		ArrayList<Admin> list = aService.selectAllMemberList();
 		mav.addObject("list", list);
-		mav.setViewName("admin/allMemberList");
+		mav.setViewName("admin/adminBoardPage");
 		
 		return mav;
 		
 	}
 	
 	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 페이지의 목록의 갯수 + 네비바 메소드
+	 */
+	@RequestMapping(value="/admin/allMemberPageNavi.do")
+	public void allMemberPageNavi(HttpServletRequest request, 
+								  HttpServletResponse response) throws ServletException, IOException
+	{
+		
+		int currentPage; //현재 페이지 번호
+		int recordCountPerPage = 10; //보여지는 게시글의 갯수
+		int naviSize = 5; //네비 갯수
+		int recordTotalCount = totalCount();//총 게시글 갯수 필요
+		
+		if(request.getParameter("currentPage")==null)
+		{
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		//페이지 목록 10개씩 끊는 로직
+		ArrayList<Admin> list = aService.selectAllPostList(currentPage, recordCountPerPage);
+		//네비 바 5개씩 보여주는 로직
+		HashMap<String, Object> map = aService.getAdminPageNavi(currentPage, recordCountPerPage, naviSize, recordTotalCount);
+		
+		
+	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 페이지의 총 게시글 갯수
+	 */
+	private int totalCount() {
+		
+		int recordTotalCount = sqlSession.selectOne("member.selectMemberTotalCount");
+		
+		return recordTotalCount;
+	}
+
+
 	/**
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.07
