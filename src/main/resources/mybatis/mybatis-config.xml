@@ -17,6 +17,6 @@
         <typeAlias type="kr.go.seoul.democracy.admin.model.vo.Admin" alias="admin" />
         <typeAlias type="kr.go.seoul.democracy.member.model.vo.MemberProfile" alias="memberProfile" />
         <typeAlias type="kr.go.seoul.democracy.adminNotice.model.vo.AdminNotice" alias="notice" />
-        <typeAlias type="kr.go.seoul.democracy.adminNotice.model.vo.AdminNotice" alias="adminNotice" />
+        <typeAlias type="kr.go.seoul.democracy.board.model.vo.BoardNotice" alias="boardNotice" />
     </typeAliases>
 </configuration>
