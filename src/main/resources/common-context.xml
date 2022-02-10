@@ -87,6 +87,20 @@
 			</map>
 		</constructor-arg>
 	</bean>
-	
+
+	<!-- CKEditor를 위한 공용 템플릿 -->
+	<bean id="ckeditorImageTemplate" class="kr.go.seoul.common.ImageResizeTemplate">
+		<constructor-arg index="0" ref="servletContext" />
+		<constructor-arg index="1" value="52428800" /> <!-- 50MB -->
+		<constructor-arg index="2" value="UTF-8" />
+		<constructor-arg index="3" value="temp\image" />
+		<constructor-arg index="4" ref="maxSize" />
+		<constructor-arg index="5">
+			<map>
+				<entry key="thumbnail" value-ref="thumnbnailSize" />
+				<entry key="test" value-ref="testSize" />
+			</map>
+		</constructor-arg>
+	</bean>
 
 </beans>

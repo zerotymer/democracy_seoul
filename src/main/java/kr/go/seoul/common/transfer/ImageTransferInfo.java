@@ -180,7 +180,11 @@ public class ImageTransferInfo extends FileTransferInfo {
 
 
     ///
-
+    public String getFileName(String imageSizeKey) {
+        String ext = this.fileName.substring(this.fileName.lastIndexOf('.'));
+        String name = this.fileName.substring(0, this.fileName.lastIndexOf('.')) + "_" + imageSizeKey;
+        return name + ext;
+    }
 
     @Override
     public String toString() {
