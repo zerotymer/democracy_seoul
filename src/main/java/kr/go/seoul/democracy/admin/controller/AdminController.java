@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -298,6 +299,32 @@ public class AdminController {
 		mav.setViewName("admin/adminBoardPage");
 		
 		return mav;
+		
+	}
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 페이지의 목록의 갯수 + 네비바 메소드
+	 */
+	@RequestMapping(value="/admin/allMemberPageNavi.do")
+	public void allMemberPageNavi(HttpServletRequest request, 
+								  HttpServletResponse response) throws ServletException, IOException
+	{
+		
+		int currentPage;
+		
+		if(request.getParameter("currentPage")==null)
+		{
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		HashMap<String, Object> pageDateMap = aService.selectAllPostList(currentPage);
+		
+		
 		
 	}
 	

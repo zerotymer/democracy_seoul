@@ -2,6 +2,7 @@ package kr.go.seoul.democracy.admin.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,16 @@ public class AdminDAO {
 		map.put("endYN", endYN);
 		
 		return sqlSession.update("member.updateMemberEndYNChange", map);
+	}
+
+	public List<Object> selectAllPostList(int currentPage, int recordCountPerPage) {
+		
+		ArrayList<Admin> list = new ArrayList();
+		
+		int start =  currentPage * recordCountPerPage - (recordCountPerPage-1);
+		int end = currentPage * recordCountPerPage;
+		
+		return sqlSession.selectList("admin.selectAllPostList", list);
 	}
 
 

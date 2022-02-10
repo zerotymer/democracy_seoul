@@ -95,5 +95,15 @@
 			user_Id = #{userId}
 	</update>
 	
+	<!-- 페이지 안에 들어갈 목록 갯수 -->
+	<select id="selectAllPostList" parameterType="java.util.list">
+		SELECT FROM (SELECT ROW_NUMBER() OVER(order BY BOARDNO DESC) AS NUM, BOARD.* ,USERNAME
+		FROM BOARD 
+		LEFT JOIN MEMBER ON (BOARD.WRITER=MEMBER.USERID)
+		WHERE BOARD.END_YN='N'
+		WHERE NUM BETWEEN ? AND ?
+		
+	</select>
+	
   	
 </mapper>

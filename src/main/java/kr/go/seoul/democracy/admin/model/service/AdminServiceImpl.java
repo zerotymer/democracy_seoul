@@ -2,6 +2,7 @@ package kr.go.seoul.democracy.admin.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,16 @@ public class AdminServiceImpl implements AdminService{
 	public int updateMemberEndYNChange(String userId, char endYN) {
 		
 		return aDAO.updateMemberEndYNChange(userId, endYN);
+	}
+
+	@Override
+	public HashMap<String, Object> selectAllPostList(int currentPage) {
+		
+		int recordCountPerPage = 10;
+		
+		List<Object> list = aDAO.selectAllPostList(currentPage, recordCountPerPage);
+		
+		return null;
 	}
 
 	
