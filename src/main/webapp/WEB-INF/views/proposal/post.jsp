@@ -111,7 +111,7 @@
             
 		     <%-- <c:if test="${sessionScope.adminId != null}"> --%>
 			            <div class="adminCon">
-				            	<button clsss="editBtn">수정</button>
+				            	<button clsss="editBtn" a href="/proposal/modify?proposalNo=${proposal.proposalNo}">수정</button>
 				            		<button clsss="delBtn">삭제</button>
 				            	<button clsss="listBtn" id="listBtn">목록</button>
 						</div>

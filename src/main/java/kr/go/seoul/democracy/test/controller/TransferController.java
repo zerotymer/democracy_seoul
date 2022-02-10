@@ -118,12 +118,12 @@ public class TransferController {
 
         JsonObject json = new JsonObject();
         String url = "/upload/ckeditor/" + info.getFileName();
-        System.out.println(url);
+//        System.out.println(url);
         json.addProperty("url", url);
         json.addProperty("uploaded", 1);
         json.addProperty("fileName", info.getOriginalFileName());
         new Gson().toJson(json, response.getWriter());
-        System.err.println("img transfer");
-        System.err.println(info);
+//        System.err.println("img transfer");
+//        System.err.println(info);
     }
 }

@@ -96,20 +96,22 @@ public class ProposalController {
 		return "redirect:/proposal/allList.do";
 	}
 	
-	/*
-	 * //수정페이지로 이동
-	 * 
-	 * @GetMapping(value="/proposal/modify.do") public void proposalModifyGet(int
-	 * proposalNo, Model model) {
-	 * model.addAttribute("pageInfo",pService.getPage(proposalNo)); }
-	 */
-	
+
+
 	//페이지 수정 
+	@RequestMapping(value="/proposal/modify.do", method=RequestMethod.GET)
+	public void modify(@RequestParam("proposalNo") Proposal proposalNo,Proposal proposal,Model model) {
+		pService.modify(proposalNo);
+		model.addAttribute("view",proposal);
+		
+	}
+
 	@RequestMapping(value="/proposal/modify.do", method=RequestMethod.POST)
-	public String modify(Proposal proposal,RedirectAttributes rttr) {
+	public String postModify(Proposal proposal,RedirectAttributes rttr) {
 		pService.modify(proposal);
 		rttr.addFlashAttribute("result","modify success");
-		return "redirect:/proposal/allList.do";	
+		return "redirect:/proposal/post?proposalNo="+proposal.getProposalNo();	
 	}
+	
 	
 }
