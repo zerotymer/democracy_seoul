@@ -24,5 +24,4 @@ public interface DiscussService {
 
 	int write(Discuss discuss);
 
-
 }
