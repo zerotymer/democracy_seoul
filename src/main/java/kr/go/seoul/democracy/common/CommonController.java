@@ -41,7 +41,7 @@ public class CommonController {
         ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "upload", "ckeditor");           // 자동 이름 생성
 
         JsonObject json = new JsonObject();
-        json.addProperty("url", "/upload/ckeditor/" + info.getFileName());                                              // 이미지 url 경로 반환
+        json.addProperty("url", "/upload/ckeditor/" + info.getFileName("max"));                                         // 이미지 url 경로 반환(최대 사이즈 제한)
         json.addProperty("uploaded", 1);                                                                                // 업로드한 파일 갯수
         json.addProperty("fileName", info.getOriginalFileName());                                                       // 원본파일이름
         new Gson().toJson(json, response.getWriter());
