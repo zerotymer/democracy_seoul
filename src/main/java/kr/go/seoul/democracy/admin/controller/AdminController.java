@@ -43,7 +43,7 @@ public class AdminController {
 			HttpSession session = request.getSession();
 			session.setAttribute("admin", a);
 			
-			return "admin/adminBoardPage";
+			return "redirect:/admin/allMemberList.do";
 		}else {
 			return "admin/adminLoginFail";
 		}
@@ -93,6 +93,17 @@ public class AdminController {
 			}
 			
 			}
+	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 관리자 정보 수정 페이지로 이동 메소드
+	 */
+	@RequestMapping(value="/admin/adminUpdatePageMove.do")
+	public String updatePageMove() 
+	{
+		return "admin/adminUpdatePage";
 	}
 	
 	
@@ -284,7 +295,7 @@ public class AdminController {
 	{
 		ArrayList<Admin> list = aService.selectAllMemberList();
 		mav.addObject("list", list);
-		mav.setViewName("admin/allMemberList");
+		mav.setViewName("admin/adminBoardPage");
 		
 		return mav;
 		
