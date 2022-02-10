@@ -1,4 +1,4 @@
-package kr.go.seoul.democracy.test.model.dao;
+package kr.go.seoul.democracy.board.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import kr.go.seoul.democracy.board.model.vo.BoardNotice;
 import kr.go.seoul.democracy.discuss.model.vo.Discuss;
 
 @Repository
@@ -19,18 +20,18 @@ public class BoardDAO {
 	@Qualifier(value="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Discuss> noticeNewsList(int pageSize, int currentListPage) {
-		RowBounds rb=new RowBounds((currentListPage-1)*pageSize,pageSize);
-		return new ArrayList<Discuss>(sqlSession.selectList("adminNotice.list",null,rb));
-	}
 
 	public int noticeNewsTotalCount() {
-	
-		return sqlSession.selectOne("adminNotice.discussTotalCount");
+	    return sqlSession.selectOne("board.discussTotalCount");
 
 	}
-	
-	
+
+	public ArrayList<BoardNotice> noticeNewsList(int pageSize, int currentListPage) {
+		   RowBounds rb=new RowBounds((currentListPage-1)*pageSize,pageSize);
+		   return new ArrayList<BoardNotice>(sqlSession.selectList("board.list",null,rb));
+	}
+
+
 
 
 	
