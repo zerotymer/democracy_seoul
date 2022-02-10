@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="main">
+	<select id="latestSuggestion" parameterType="int" resultType="hashmap" >
+		SELECT
+			suggest_no as BOARDNO,
+			'suggest' as CATEGORY,
+			suggest_title as TITLE,
+		    suggest_content as CONTENT,
+		    suggest_start as STARTDATE,
+		    suggest_end as ENDDATE,
+		    NVL(HIT_COUNT, 0) as HITCOUNT,
+			NVL("COMMENTS", 0) as COMMENTCOUNT,
+			NVL("HEARTS", 0) as HEARTCOUNT,
+		    'none' as THUMBNAIL
+		FROM (
+			SELECT *
+			FROM SUGGESTION
+				 LEFT JOIN SUGGEST_HITS ON (SUGGESTION.suggest_no = SUGGEST_HITS.board_no)
+				 LEFT JOIN (
+					SELECT suggest_no, COUNT(*) AS "COMMENTS"
+					FROM SUGGEST_COMMENT
+					GROUP BY suggest_no) USING (suggest_no)
+				 LEFT JOIN (
+					SELECT suggest_no, COUNT(*) AS "HEARTS"
+					FROM SUGGEST_COMMENT
+					WHERE comment_heart = 'Y'
+					GROUP BY suggest_no) USING (suggest_no)
+			WHERE suggest_del_yn = 'N'
+			ORDER BY suggest_date DESC)
+		WHERE ROWNUM BETWEEN 1 AND #{_parameter}
+	</select>
+	<select id="latestDiscussion" parameterType="int" resultType="hashmap" >
+		SELECT
+			discuss_no as BOARDNO,
+			'discussion' as CATEGORY,
+			discuss_title as TITLE,
+			discuss_content as CONTENT,
+			discuss_start as STARTDATE,
+			discuss_end as ENDDATE,
+			NVL(HIT_COUNT, 0) as HITCOUNT,
+			NVL("COMMENTS", 0) as COMMENTCOUNT,
+			'0' as HEARTCOUNT,
+			discuss_thumbnail_path as THUMBNAIL
+		FROM (
+			SELECT *
+			FROM DISCUSSION
+				LEFT JOIN DISCUSSION_HITS ON (DISCUSSION.discuss_no = DISCUSSION_HITS.board_no)
+				LEFT JOIN (
+					SELECT discuss_no, COUNT(*) AS "COMMENTS"
+					FROM DISCUSS_COMMENT
+					GROUP BY discuss_no) USING (discuss_no)
+			WHERE discuss_del_yn = 'N'
+			ORDER BY discuss_date DESC)
+		WHERE ROWNUM BETWEEN 1 AND #{_parameter}
+	</select>
+	<select id="latestProposal" parameterType="int" resultType="hashmap" >
+		SELECT
+			proposal_no as BOARDNO,
+			'survey' as CATEGORY,
+			proposal_title as TITLE,
+			proposal_content as CONTENT,
+			proposal_start as STARTDATE,
+			proposal_end as ENDDATE,
+			NVL(HIT_COUNT, 0) as HITCOUNT,
+			NVL("COMMENTS", 0) as COMMENTCOUNT,
+			'0' as HEARTCOUNT,
+			proposal_thumbnail_path as THUMBNAIL
+		FROM (
+			SELECT *
+			FROM PROPOSAL
+				LEFT JOIN PROPOSAL_HITS ON (PROPOSAL.proposal_no = PROPOSAL_HITS.board_no)
+				LEFT JOIN (
+					SELECT proposal_no, COUNT(*) AS "COMMENTS"
+					FROM PROPOSAL_COMMENT
+					GROUP BY proposal_no) USING (proposal_no)
+			WHERE proposal_del_yn = 'N'
+			ORDER BY proposal_date DESC)
+		WHERE ROWNUM BETWEEN 1 AND #{_parameter}
+	</select>
+</mapper>
