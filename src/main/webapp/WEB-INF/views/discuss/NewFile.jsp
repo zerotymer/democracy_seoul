@@ -7,14 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>민서네 시민토론 - 오류</title>
+<title>Insert title here</title>
 </head>
 <body>
 
-	<script>
-		alert('오류가 발생하였습니다. 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
-		window.redirect("/");
-	</script>
-	
 </body>
 </html>

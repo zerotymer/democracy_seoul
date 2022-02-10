@@ -136,9 +136,12 @@
 .expand .icons .auto-hidden+span {
     display: inline-block;
 }
-@media screen and (max-width: 768) {
+@media screen and (max-width: 768px) {
     .expand {
-        grid-column: none;
+        grid-column: none; /* TODO: ERROR */
+    }
+    .expand .category {
+        width: clear;
     }
     .expand .auto-hidden,
     .expand .auto-hidden+span {

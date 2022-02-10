@@ -16,7 +16,7 @@
         ClassicEditor
             .create( document.querySelector( '#editor' ), {
                 ckfinder: {
-                    uploadUrl: '/ajax/imageUpload.do'
+                    uploadUrl: '/ckeditor/imgUpload.do'
                 }
             })
             .catch( error => {

@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.go.seoul.common.ImageResizeTemplate;
 import kr.go.seoul.common.transfer.ImageTransferInfo;
 import kr.go.seoul.democracy.common.model.vo.Member;
+import kr.go.seoul.democracy.discuss.model.vo.Discuss;
 import kr.go.seoul.democracy.member.model.service.MailSendService;
 import kr.go.seoul.democracy.member.model.service.MemberService;
 import kr.go.seoul.democracy.member.model.vo.MemberProfile;
@@ -619,6 +621,7 @@ public class MemberController {
 			   
 		
 		  }
+
 		  
 		  
 		  
