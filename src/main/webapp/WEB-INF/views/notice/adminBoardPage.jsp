@@ -146,46 +146,72 @@
             </div>
             <div class="board">
                 <div class="board_content">
-                
-                <c:choose>
-					<c:when test="${!requestScope.list.isEmpty() }">
-	                
-	                    <table class="table">
-	                      <thead>
-	                        <tr>
-	                          <th scope="col">No</th>
-	                          <th scope="col">ID</th>
-	                          <th scope="col">이름</th>
-	                          <th scope="col">닉네임</th>
-	                          <th scope="col">이메일</th>
-	                          <th scope="col">가입일</th>
-	                          <th scope="col">탈퇴버튼</th>
-	                        </tr>
-	                      </thead>
-	                      
-	                      
-	                      <tbody>
-	                      	<c:forEach items="${requestScope.list }" var="m" varStatus="i">
-		                        <tr>
-		                          <th scope="row">${i.count }</th>
-		                          	<td>${m.userId }</td>
-									<td>${m.userName }</td>
-									<td>${m.nick }</td>
-									<td>${m.email }</td>
-									<td>${m.enrollDate }</td>
-		                          	<td><button style="width:100%" class="stateChangeBtn" data="${m.userNo }">${m.endYN }</button></td>
-		                        </tr>
-	                        </c:forEach>
-	                      </tbody>
-	                    </table>
-                    
-                   </c:when>
-                   
-                   <c:otherwise>
-				  		<H3>저장된 회원 리스트가 없습니다.</H3>
-				   </c:otherwise>
-                    
-               </c:choose> 
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">ID</th>
+                          <th scope="col">이름</th>
+                          <th scope="col">탈퇴여부</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>user11</td>
+                          <td>홍길동</td>
+                          <td>N</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>user22</td>
+                          <td>김말똥</td>
+                          <td>N</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>user33</td>
+                          <td>고길똥</td>
+                          <td>N</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">4</th>
+                          <td>user33</td>
+                          <td>고길똥</td>
+                          <td>N</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">5</th>
+                          <td>user33</td>
+                          <td>고길똥</td>
+                          <td>N</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">6</th>
+                          <td>user33</td>
+                          <td>고길똥</td>
+                          <td>N</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">7</th>
+                          <td>user33</td>
+                          <td>고길똥</td>
+                          <td>N</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">8</th>
+                          <td>user33</td>
+                          <td>고길똥</td>
+                          <td>N</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">9</th>
+                          <td>user33</td>
+                          <td>고길똥</td>
+                          <td>N</td>
+                        </tr>
+                      </tbody>
+                    </table>
                     
                     <nav aria-label="Page navigation example">
                       <ul class="pagination justify-content-center">
@@ -207,41 +233,6 @@
             </div>
         </div>
     </div>
-    
-  
-	<!-- 탈퇴 버튼 변경 ajax -->
-	<script>
-	$('.stateChangeBtn').click(function(){
-		
-		var userNo = $(this).attr('data');
-		var endYN = $(this).html();
-		
-		
-		$.ajax({
-			url : "/admin/memberEndYNChange.do",
-			data : {"userNo":userNo, "endYN":endYN},
-			type : "post",
-			context : this,
-			success : function(result){
-				
-				if(result != 'false')
-				{
-					$(this).html(result);
-				}else{
-					console.log("데이터 변경 실패");
-				}
-				
-			},
-			error : function(){
-				console.log('ajax 통신 문제 발생');
-			}
-		})
-		
-	});
-	</script>
-    
-    
-    
 	
 </body>
 </html>
