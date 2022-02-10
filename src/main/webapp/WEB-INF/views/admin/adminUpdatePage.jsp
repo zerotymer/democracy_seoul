@@ -3,6 +3,10 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<!-- jQuery 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +16,7 @@
 <style>
         .wrapper{
             width: 100%;
-            height: 600px;
+            height: 740px;
             background-color: #3F51B5;
             box-sizing: border-box;
             display: flex;
@@ -61,7 +65,7 @@
 	<div class="wrapper">
         <div class="login_form">
             <div class="image">  
-            <img src="/src/main/webapp/WEB-INF/image/main_logo.png"> 
+            <img src="/resources/images/admin/adminmain_logo.png"> 
             </div>
             <div class="update">
                 <H3>정보수정</H3>
