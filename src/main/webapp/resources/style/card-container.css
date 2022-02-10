@@ -138,7 +138,10 @@
 }
 @media screen and (max-width: 768) {
     .expand {
-        grid-column: none;
+        grid-column: 2; /* TODO: ERROR */
+    }
+    .expand .category {
+        width: clear;
     }
     .expand .auto-hidden,
     .expand .auto-hidden+span {
