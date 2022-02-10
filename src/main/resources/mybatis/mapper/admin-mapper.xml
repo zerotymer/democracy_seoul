@@ -103,9 +103,8 @@
 			nick as nick,
 			email as email,
 			enrolldate as enrollDate
-	  	FROM 
-	  		(SELECT row_number() over(order by user_No ASC) AS NUM, MEMBER.* FROM MEMBER)
-	  	WHERE NUM BETWEEN #{start} AND #{end}
+	  	FROM MEMBER
+			WHERE END_YN='N' ORDER BY USERID ASC ;
 	  </select>
 	
   	

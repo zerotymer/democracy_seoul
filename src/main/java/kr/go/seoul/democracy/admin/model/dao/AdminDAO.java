@@ -12,14 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.go.seoul.democracy.admin.model.vo.Admin;
 
-/**
- * @author USER
- *
- */
-/**
- * @author USER
- *
- */
 @Repository
 public class AdminDAO {
 	

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,10 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService aService;
+	
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
 	
 	/**
 	 * 작성자 : 김영주
@@ -315,7 +321,7 @@ public class AdminController {
 		int currentPage; //현재 페이지 번호
 		int recordCountPerPage = 10; //보여지는 게시글의 갯수
 		int naviSize = 5; //네비 갯수
-		//총 게시글 갯수 필요
+		int recordTotalCount = totalCount();//총 게시글 갯수 필요
 		
 		if(request.getParameter("currentPage")==null)
 		{
@@ -327,12 +333,24 @@ public class AdminController {
 		//페이지 목록 10개씩 끊는 로직
 		ArrayList<Admin> list = aService.selectAllPostList(currentPage, recordCountPerPage);
 		//네비 바 5개씩 보여주는 로직
-		HashMap<String, Object> map = aService.getAdminPageNavi(currentPage, recordCountPerPage, naviSize);
+		HashMap<String, Object> map = aService.getAdminPageNavi(currentPage, recordCountPerPage, naviSize, recordTotalCount);
 		
 		
 	}
 	
-	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 페이지의 총 게시글 갯수
+	 */
+	private int totalCount() {
+		
+		int recordTotalCount = sqlSession.selectOne("member.selectMemberTotalCount");
+		
+		return recordTotalCount;
+	}
+
+
 	/**
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.07

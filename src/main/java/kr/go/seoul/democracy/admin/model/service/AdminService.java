@@ -25,6 +25,7 @@ public interface AdminService {
 
 	ArrayList<Admin> selectAllPostList(int currentPage, int recordCountPerPage);
 
-	HashMap<String, Object> getAdminPageNavi(int currentPage, int recordCountPerPage, int naviSize);
+	HashMap<String, Object> getAdminPageNavi(int currentPage, int recordCountPerPage, int naviSize, int recordTotalCount);
+
 	
 }

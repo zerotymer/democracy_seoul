@@ -70,14 +70,17 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<Admin> selectAllPostList(int currentPage, int recordCountPerPage) {
 		return aDAO.selectAllPostList(recordCountPerPage, currentPage);
-		
+		//전체 글 목록 10개씩 끊어서
 	}
 
 	@Override
-	public HashMap<String, Object> getAdminPageNavi(int currentPage, int recordCountPerPage, int naviSize) {
+	public HashMap<String, Object> getAdminPageNavi(int currentPage, int recordCountPerPage, int naviSize, int recordTotalCount) {
 		
 		return null;
+		//네비바(5개)
 	}
+
+
 
 	
 
