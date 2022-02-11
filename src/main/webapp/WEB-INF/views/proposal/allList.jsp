@@ -207,7 +207,7 @@
 							    	function checkAlert(result){
 							        
 							        	if(result === ''){
-							            reutrn;
+							            return;
 							        }
 							        
 							       	 if(result === "enrol success"){
