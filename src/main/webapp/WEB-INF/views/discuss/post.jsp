@@ -162,6 +162,38 @@
         	width:100%;
         	color:white;
         }
+        
+        .more{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn.get{
+            border:0px;
+            
+        }
+        .btn.write{
+            border:1px solid rgba(110, 110, 100);
+            
+        }
+        
+        
+        /*댓글 작성폼*/
+        #commentWrite{
+        	width:100%;
+            height:110px;
+            display:flex;
+            flex-direction: row;
+        }
+        .input-group-text{
+            width:100px;
+            background-color: rgba(69, 49, 250); 
+            color:white;
+        }
+        .form-control{
+            resize:none;
+        }
     </style>
     
 </head>
@@ -174,6 +206,7 @@
     <section class="inner">
         <div>
 
+          <!-- 게시글 내용 -->
           <div id="title">
             <div>${discuss.discussTitle}</div>
             <div>
@@ -200,13 +233,30 @@
           </div>
 
         </div>
+        
+        <!-- 댓글 작성폼 -->
+        <c:if test="${user }!=null">
+        <form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+			<div>
+				<div class="input-group">
+                  <span class="input-group-text">댓글</span>
+                  <textarea name="commentContent" class="form-control" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요."></textarea>
+                </div>
+			</div>
+			<button class="btn write" style="font-size:13px;"><!--<i class="xi-pen-o"></i>-->입력</button>
+		</form>
+		</c:if><hr>
+        
+        
+        <!-- 댓글 목록 -->
         <div class="comment-container">
         
         <div id="comments-pro" class="comments pro">
+        	<c:forEach var="proComment" items="${proComment}">
             <div class="comment pro">
                 <div class="content">
-                    <div class="text">fkkfkf</div>
-                    <div class="id">asdf</div>
+                    <div class="text">${proComment.get(commentContent)}</div>
+                    <div class="id">${proComment.get(userId)}</div>
                 </div>
                 <div class="icon">
                 	<div class="img">
@@ -216,13 +266,15 @@
                 	</div>
                 </div>
             </div>
+            </c:forEach>
         </div>
         
 		<div id="comments-con" class="comments con">
+		<c:forEach var="conComment" items="${conComment}">
             <div class="comment con">
                 <div class="content">
-                    <div class="text">asd</div>
-                    <div class="id">erwtrg</div>
+                    <div class="text">${conComment.get(commentContent)}</div>
+                    <div class="id">${conComment.get(userId)}</div>
                 </div>
                 <div class="icon">
                 	<div class="img">
@@ -232,21 +284,19 @@
                 	</div>
                 </div> 
             </div>
+		</c:forEach>
 		</div>
 		
+        </div><hr>
+        <div class="more">
+        	<button class="btn get" value="1" type="submit"><i class="xi-caret-down-circle-o"></i>더보기</button>
         </div>
-        <div>
-        	<button id="getComment" value="1" type="submit"><i class="xi-caret-down-circle-o"></i>더보기</button>
-        </div>
-        
-      <div>
-          <div id="page" style="text-align: center;"></div>
-      </div>
+		
     </section>
     
-    <%-- <footer>
+    <footer>
         <%@ include file="/includes/footer.jsp" %>
-    </footer> --%>
+    </footer>
 
 <!-- jQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -291,6 +341,7 @@
     });
 </script>
 
+<!-- 게시글 내용 기호 변환 -->
 <script language="javascript">
 	var content="{{discuss.discussContent}}";
 	content=content.replaceAll("&lt;","<");
@@ -308,11 +359,27 @@
 		var currentCommentPage=$('#getComment').val();
 		
 		$.ajax({
-			url : "/discuss/onePost.do",
+			url : "/discuss/getComment.do",
 			type: "get",
 			data : {currentCommentPage:currentCommentPage},
 			success : function(data){
-				console.log("성공");
+				for(var i=0;i<data.length;i++){
+					if(data[i].comment_vote=='Y'){
+						$('<div class="comment pro"><div class="content"><div class="text">'
+						+data[i].commentContent
+						+'</div><div class="id">'
+						+data[i].userId
+						+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" /></svg></div></div></div>').appendTo('#comments-pro');
+					}
+					else if(data[i].comment_vote=='N'){
+						$('<div class="comment con"><div class="content"><div class="text">'
+						+data[i].commentContent
+						+'</div><div class="id">'
+						+data[i].userId
+						+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" /></svg></div></div></div>').appendTo('#comments-con');
+					}
+				}
+				$('#getComment').val(currentCommentPage+1);
 			},
 			error : function(data){
 				alert('댓글을 불러오지 못하였습니다. 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
