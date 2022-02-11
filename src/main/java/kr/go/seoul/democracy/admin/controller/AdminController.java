@@ -319,11 +319,12 @@ public class AdminController {
 		for (int i = startNavi; i <= endNavi; i++) {
 			navi.add(i);
 		}
-
+		//((currentPage-1) * recordCountPerPage);
 		mav.addObject("list", list);
 		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
 		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mav.addObject("navi", navi);
+		mav.addObject("countResult", (currentPage-1) * recordCountPerPage);
 		mav.setViewName("admin/adminBoardPage");
 		
 		return mav;

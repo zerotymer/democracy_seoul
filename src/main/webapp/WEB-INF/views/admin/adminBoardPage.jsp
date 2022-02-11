@@ -189,7 +189,7 @@
                             <tbody>
                             <c:forEach items="${requestScope.list }" var="m" varStatus="i">
                                 <tr>
-                                    <th scope="row">${i.count }</th>
+                                    <th scope="row">${(i.count) + (requestScope.countResult) }</th>
                                     <td>${m.userId }</td>
                                     <td>${m.userName }</td>
                                     <td>${m.nick }</td>
