@@ -131,8 +131,8 @@
             <div class="contents-session">
                 <!-- 글작성 버튼 위치 -->
                 <div class="contents--textarea">
-                    <h2>어쩌고 저쩌고</h2>
-                    <span>읍냐?</span>
+                    <h2>서울시민에게 의견을 구합니다</h2>
+                    <span>ㅎㅏ..이팅..!</span>
                 </div>
                 <div class="contents--btns">
                 <%-- <c:if test="${sessionScope.adminId != null}"> --%>
@@ -198,7 +198,7 @@
                
             </div>
 						<script>
-							$(document).ready(function(){
+						/* 	$(document).ready(function(){
 				    
 							    let result = '<c:out value="${result}"/>';
 							    
@@ -207,7 +207,7 @@
 							    	function checkAlert(result){
 							        
 							        	if(result === ''){
-							            reutrn;
+							            return;
 							        }
 							        
 							       	 if(result === "enrol success"){
@@ -216,7 +216,7 @@
 							        
 				    }    
 				    
-				});
+				}); */
 							
 							
 							//글쓰기 폼으로 이동하게 하는 함수
