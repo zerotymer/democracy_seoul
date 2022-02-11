@@ -3,6 +3,8 @@ package kr.go.seoul.democracy.admin.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,6 +67,25 @@ public class AdminDAO {
 		map.put("endYN", endYN);
 		
 		return sqlSession.update("member.updateMemberEndYNChange", map);
+	}
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 페이지의 목록의 갯수 
+	 */
+	public ArrayList<Admin> selectAllPostList(int recordCountPerPage, int currentPage) {
+		
+		int offset = ((currentPage-1) * recordCountPerPage);
+		int limit = recordCountPerPage;
+		
+		RowBounds rb = new RowBounds(offset, limit);
+		
+		System.out.println("MEMBER Pageing 처리");
+		
+		return new ArrayList<Admin>(sqlSession.selectList("member.selectAllPostList", null, rb));
+	
 	}
 
 

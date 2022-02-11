@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!-- JSTL Library -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>╧нажажюг ╪╜©О - ╫ц╧неД╥п ╟т╫ц╠ш юш╪╨</title>
+<meta charset="UTF-8">
+<title>К╞╪Лё╪Лё╪Л²≤ Л└°Л ╦ - Л▀°К╞╪М├═К║═ Й╡▄Л▀°Й╦─ Л·▒Л└╠</title>
 
 	<link rel="stylesheet" href="/resources/style/header.css">
     <link rel="stylesheet" href="/resources/style/footer.css">
@@ -62,15 +62,15 @@
 </head>
 <body>
 
-	<%-- <header>
+	<header>
         <%@ include file="/includes/header.jsp" %>
-    </header> --%>
+    </header>
 
 	<section class="inner">
     <form name="writeForm" method="post" action="/discuss/write.do">
         <div>
 	        <div class="title">
-	            <input type="text" name="title" class="write" placeholder="а╕╦Яю╩ ют╥бго╪╪©Д."/>
+	            <input type="text" name="title" class="write" placeholder="Л═°К╙╘Л²└ Л·┘К═╔М∙≤Л└╦Л ■."/>
 	        </div>
 	        
 	        <div class="content">
@@ -79,14 +79,14 @@
         </div>
         
         <div>
-            <input type="submit" value="©о╥А" class="btn">
+            <input type="submit" value="Л≥└Кё▄" class="btn">
         </div>
     </form>
     </section>
 
-	<%-- <footer>
+	<footer>
         <%@ include file="/includes/footer.jsp" %>
-    </footer> --%>
+    </footer>
 
 <!-- JQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

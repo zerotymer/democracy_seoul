@@ -22,5 +22,10 @@ public interface AdminService {
 	ArrayList<Admin> selectAllMemberList();
 
 	int updateMemberEndYNChange(String userId, char endYN);
+
+	ArrayList<Admin> selectAllPostList(int currentPage, int recordCountPerPage);
+
+	HashMap<String, Object> getAdminPageNavi(int currentPage, int recordCountPerPage, int naviSize, int recordTotalCount);
+
 	
 }

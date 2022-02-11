@@ -23,9 +23,9 @@
 } 
 
 .card-item {
-    --COLOR-SUGGEST: var(--COLOR-YELLOW);
-    --COLOR-DISCUSSION: var(--COLOR-RED);
-    --COLOR-SURVEY: var(--COLOR-BLUE);
+    --COLOR-SUGGEST: var(--COLOR-RED);
+    --COLOR-DISCUSSION: var(--COLOR-GREEN);
+    --COLOR-SURVEY: var(--COLOR-YELLOW);
     /* --COLOR-SURVEY: var(--COLOR-GREEN); */
     /* --COLOR-SUGGEST: var(--COLOR-RED); */
 }
@@ -35,23 +35,23 @@
 
 /* SUGGEST: 제안 */
 .card-item.suggest .category {
-    background-color: var(--COLOR-YELLOW);
+    background-color: var(--COLOR-RED);
 }
 
 /* DISCUSSION: 토론 */
 .card-item.discussion .category {
-    background-color: var(--COLOR-RED);
+    background-color: var(--COLOR-GREEN);
 }
 
 /* SURVEY: 투표 */
 .card-item.survey .category {
-    background-color: var(--COLOR-BLUE);
+    background-color: var(--COLOR-YELLOW);
 }
 
 
 
 .rect.suggest {
-    background-color: var(--COLOR-YELLOW);
+    background-color: var(--COLOR-RED);
 }
 
 

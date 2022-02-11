@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- JSTL Library -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¹Î¼­³× ½Ã¹ÎÅä·Ð - ¿À·ù</title>
+<meta charset="UTF-8">
+<title>ë¯¼ì„œë„¤ ì‹œë¯¼í† ë¡  - ì˜¤ë¥˜</title>
 </head>
 <body>
 
 	<script>
-		alert('¿À·ù°¡ ¹ß»ýÇÏ¿´½À´Ï´Ù. Áö¼ÓÀûÀÎ ¿À·ù ¹ß»ý ½Ã °ü¸®ÀÚ¿¡°Ô ¹®ÀÇ ¹Ù¶ø´Ï´Ù.');
+		alert('ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤. ì§€ì†ì ì¸ ì˜¤ë¥˜ ë°œìƒ ì‹œ ê´€ë¦¬ìžì—ê²Œ ë¬¸ì˜ ë°”ëžë‹ˆë‹¤.');
 		window.redirect("/");
 	</script>
 	

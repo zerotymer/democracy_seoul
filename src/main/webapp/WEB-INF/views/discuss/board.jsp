@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!-- JSTL Library -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¹ÎÁÖÁÖÀÇ ¼­¿ï - ½Ã¹ÎÅä·Ð</title>
+<meta charset="UTF-8">
+<title>ë¯¼ì£¼ì£¼ì˜ ì„œìš¸ - ì‹œë¯¼í† ë¡ </title>
 
 	<link rel="stylesheet" href="/resources/style/header.css">
     <link rel="stylesheet" href="/resources/style/footer.css">
@@ -51,7 +51,7 @@
         <div class="content-frame">
             <div class="frame-image">
                 <div class="inner">
-                    <h2>½Ã¹ÎÅä·Ð</h2>
+                    <h2>ì‹œë¯¼í† ë¡ </h2>
                 </div>
             </div>
             <div class="frame-menu">
@@ -63,58 +63,58 @@
                             </a>
                         </li>
                         <li class="menubar-list">
-                            <h3>Âü¿©ÇÏ±â<span class="slick-arrow"></span></h3>      
+                            <h3>ì°¸ì—¬í•˜ê¸°<span class="slick-arrow"></span></h3>      
                                         
                             <!-- Menu -->
                             <ul class="include menu">
                                 <li class="menuitem">
-                                    <a href="">Âü¿©ÇÏ±â</a>
+                                    <a href="">ì°¸ì—¬í•˜ê¸°</a>
                                     <ul class="submenu">
-                                        <li><a href=""></a>½Ã¹ÎÁ¦¾È</li>
-                                        <li><a href=""></a>½Ã¹ÎÅä·Ð</li>
-                                        <li><a href=""></a>¼­¿ï½Ã°¡ ¹¯½À´Ï´Ù</li>
+                                        <li><a href=""></a>ì‹œë¯¼ì œì•ˆ</li>
+                                        <li><a href=""></a>ì‹œë¯¼í† ë¡ </li>
+                                        <li><a href=""></a>ì„œìš¸ì‹œê°€ ë¬»ìŠµë‹ˆë‹¤</li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">°á°úº¸±â</a>
+                                    <a href="">ê²°ê³¼ë³´ê¸°</a>
                                     <ul class="submenu">
-                                        <li><a href="">Á¦¾È°á°ú</a></li>
-                                        <li><a href="">°ø·Ð°á°ú</a></li>
+                                        <li><a href="">ì œì•ˆê²°ê³¼</a></li>
+                                        <li><a href="">ê³µë¡ ê²°ê³¼</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">¾Ë¾Æº¸±â</a>
+                                    <a href="">ì•Œì•„ë³´ê¸°</a>
                                     <ul class="submenu">
-                                        <li><a href="">¹ÎÁÖÁÖÀÇ ¼­¿ï <wbr/>¼Ò°³</a></li>
-                                        <li><a href="" style="font-size: 13px;">¹ÎÁÖÁÖÀÇ ¼­¿ï <wbr/>ÀÌ¾ß±â</a></li>
-                                        <li><a href="">°øÁö»çÇ×</a></li>
-                                        <li><a href="">ÀÚ·á½Ç</a></li>
-                                        <li><a href="">Çà»çÀÏÁ¤</a></li>
+                                        <li><a href="">ë¯¼ì£¼ì£¼ì˜ ì„œìš¸ <wbr/>ì†Œê°œ</a></li>
+                                        <li><a href="" style="font-size: 13px;">ë¯¼ì£¼ì£¼ì˜ ì„œìš¸ <wbr/>ì´ì•¼ê¸°</a></li>
+                                        <li><a href="">ê³µì§€ì‚¬í•­</a></li>
+                                        <li><a href="">ìžë£Œì‹¤</a></li>
+                                        <li><a href="">í–‰ì‚¬ì¼ì •</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">¼­¿ï½Ã¹ÎÈ¸ÀÇ</a>
+                                    <a href="">ì„œìš¸ì‹œë¯¼íšŒì˜</a>
                                     <ul class="submenu">
-                                        <li><a href="">¼­¿ï½Ã¹ÎÈ¸ÀÇ <wbr/>¼Ò°³</a></li>
-                                        <li><a href="">¼­¿ï½Ã¹ÎÈ¸ÀÇ <wbr/>¼Ò½Ä</a></li>
+                                        <li><a href="">ì„œìš¸ì‹œë¯¼íšŒì˜ <wbr/>ì†Œê°œ</a></li>
+                                        <li><a href="">ì„œìš¸ì‹œë¯¼íšŒì˜ <wbr/>ì†Œì‹</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">½Ã¹ÎÂü¿©¿¹»ê</a>
+                                    <a href="">ì‹œë¯¼ì°¸ì—¬ì˜ˆì‚°</a>
                                 </li>
                             </ul>
                         </li>    
                         <li class="menubar-list">
-                            <h3>½Ã¹ÎÅä·Ð<span class="slick-arrow"></span></h3>                        
+                            <h3>ì‹œë¯¼í† ë¡ <span class="slick-arrow"></span></h3>                        
                             <ul class="menu">
                                 <li class="menuitem">
-                                    <a href="">½Ã¹ÎÁ¦¾È</a>
+                                    <a href="">ì‹œë¯¼ì œì•ˆ</a>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">½Ã¹ÎÅä·Ð</a>
+                                    <a href="">ì‹œë¯¼í† ë¡ </a>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">¼­¿ï½Ã°¡ ¹¯½À´Ï´Ù.</a>
+                                    <a href="">ì„œìš¸ì‹œê°€ ë¬»ìŠµë‹ˆë‹¤.</a>
                                 </li>
                             </ul>
                         </li>
@@ -129,37 +129,37 @@
             </div>
             
             <div class="contents-session">
-                <!-- ±ÛÀÛ¼º ¹öÆ° À§Ä¡ -->
+                <!-- ê¸€ìž‘ì„± ë²„íŠ¼ ìœ„ì¹˜ -->
                 <div class="contents--textarea">
-                    <h2>¾îÂ¼°í ÀúÂ¼°í</h2>
-                    <span>À¾³Ä?</span>
+                    <h2>ì–´ì©Œê³  ì €ì©Œê³ </h2>
+                    <span>ìëƒ?</span>
                 </div>
                 <div class="contents--btns">
-                    <button class="btn suggest">½Ã¹ÎÅä·Ð ÀÛ¼ºÇÏ±â</button>
+                    <button class="btn suggest">ì‹œë¯¼í† ë¡  ìž‘ì„±í•˜ê¸°</button>
                 </div>
             </div>
 
             <div class="contents-search">
-                <!-- °Ë»ö À§Ä¡ -->
+                <!-- ê²€ìƒ‰ ìœ„ì¹˜ -->
                 
             </div>
 
             <div class="contents-tag">
-                <!-- ÅÂ±× À§Ä¡ -->
-                <a href="">#ÀÌ°Ô³ª´Ù</a>
-                <a href="">#°ñ¸ñÃ¥¹æ</a>
-                <a href="">#´©±¸½Å°¡</a>
+                <!-- íƒœê·¸ ìœ„ì¹˜ -->
+                <a href="">#ì´ê²Œë‚˜ë‹¤</a>
+                <a href="">#ê³¨ëª©ì±…ë°©</a>
+                <a href="">#ëˆ„êµ¬ì‹ ê°€</a>
             </div>
             
         </div>
         <div class="contents">
             <div class="card-container">
                 <div class="card-item discussion">
-                    <div class="category">Åä·Ð</div>
-                    <div class="title">°ø°øÀå¼Ò ±ÝÁÖ ¾î¶»°Ô »ý°¢ ÇÏ¼¼¿ä?</div>
-                    <div class="content">³»¿ë</div>
+                    <div class="category">í† ë¡ </div>
+                    <div class="title">ê³µê³µìž¥ì†Œ ê¸ˆì£¼ ì–´ë–»ê²Œ ìƒê° í•˜ì„¸ìš”?</div>
+                    <div class="content">ë‚´ìš©</div>
                     <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="Á¦¸ñ" />
+                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="ì œëª©" />
                     </div>
                     <div class="icons">
                         <object class="icon hits auto-hidden"></object>
@@ -171,7 +171,7 @@
                         <object class="icon calendar auto-hidden"></object>
                         <span>2022-01-31 ~ 2022-02-16</span>
                     </div>
-                    <a class="detail-btn" href="">°á°ú º¸±â</a>
+                    <a class="detail-btn" href="">ê²°ê³¼ ë³´ê¸°</a>
                 </div>
             </div>
 
