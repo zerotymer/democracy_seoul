@@ -189,7 +189,7 @@
                             <tbody>
                             <c:forEach items="${requestScope.list }" var="m" varStatus="i">
                                 <tr>
-                                    <th scope="row">${i.count }</th>
+                                    <th scope="row"><td>${i.count }</td></th>
                                     <td>${m.userId }</td>
                                     <td>${m.userName }</td>
                                     <td>${m.nick }</td>
@@ -214,17 +214,21 @@
 
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="/admin/allMemberPageNavi.do" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">>></a>
-                        </li>
+                    	<c:if test="${ preNavi } != 0">
+	                        <li class="page-item">
+	                            <a class="page-link" href="/admin/allMemberList.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
+	                        </li>
+                        </c:if>
+                        <c:forEach items="${ requestScope.navi }" var="m" varStatus="i">
+	                        <li class="page-item">
+	                        	<a class="page-link" href="/admin/allMemberList.do?currentPage=${ m }">${ m }</a>
+	                        </li>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+	                        <li class="page-item">
+	                            <a class="page-link" href="/admin/allMemberList.do?currentPage=${ nextNavi }">>></a>
+	                        </li>
+                        </c:if>
                     </ul>
                 </nav>
             </div>
