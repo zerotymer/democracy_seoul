@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
 
 @Repository
 public class AdminDAO {
@@ -56,7 +56,7 @@ public class AdminDAO {
 
 	public ArrayList<Admin> selectAllMemberList() {
 		
-		return new ArrayList<Admin>(sqlSession.selectList("admin.selectAllMemberList"));
+		return new ArrayList<Admin>(sqlSession.selectList("admin.selectAllMemberList", null, new RowBounds(0, 10)));
 	}
 
 	public int updateMemberEndYNChange(String userId, char endYN) {
@@ -75,18 +75,28 @@ public class AdminDAO {
 	 * 작성일 : 2022.02.10
 	 * Description : 모든 회원 정보 가져오는 페이지의 목록의 갯수 
 	 */
-	public ArrayList<Admin> selectAllPostList(int recordCountPerPage, int currentPage) {
+	public ArrayList<Member> selectAllPostList(int recordCountPerPage, int currentPage) {
 		
 		int offset = ((currentPage-1) * recordCountPerPage);
 		int limit = recordCountPerPage;
-		
 		RowBounds rb = new RowBounds(offset, limit);
-		
-		System.out.println("MEMBER Pageing 처리");
-		
-		return new ArrayList<Admin>(sqlSession.selectList("member.selectAllPostList", null, rb));
+		return new ArrayList<Member>(sqlSession.selectList("admin.selectAllPostList", null, rb));
 	
 	}
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 페이지의 총 게시글 갯수
+	 */
+	public int totalCount() {
+		
+		int recordTotalCount = sqlSession.selectOne("admin.selectMemberTotalCount");
+		
+		return recordTotalCount;
+	}
+	
 
 
 }

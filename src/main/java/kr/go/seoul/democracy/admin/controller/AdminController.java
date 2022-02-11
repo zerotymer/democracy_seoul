@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.go.seoul.democracy.admin.model.service.AdminService;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
 
 @Controller
 public class AdminController {
@@ -29,9 +30,8 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	
-	@Autowired
-	@Qualifier("sqlSessionTemplate")
-	private SqlSessionTemplate sqlSession;
+	
+	
 	
 	/**
 	 * 작성자 : 김영주
@@ -293,62 +293,43 @@ public class AdminController {
 	
 	/**
 	 * 작성자 : 김영주
-	 * 작성일 : 2022.02.07
-	 * Description : 모든 회원 정보 가져오는 메소드
-	 */
-	@RequestMapping(value="/admin/allMemberList.do", method=RequestMethod.GET)
-	public ModelAndView allMemberList(ModelAndView mav)
-	{
-		ArrayList<Admin> list = aService.selectAllMemberList();
-		mav.addObject("list", list);
-		mav.setViewName("admin/adminBoardPage");
-		
-		return mav;
-		
-	}
-	
-	
-	/**
-	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.10
 	 * Description : 모든 회원 정보 가져오는 페이지의 목록의 갯수 + 네비바 메소드
 	 */
-	@RequestMapping(value="/admin/allMemberPageNavi.do")
-	public void allMemberPageNavi(HttpServletRequest request, 
-								  HttpServletResponse response) throws ServletException, IOException
+	@RequestMapping(value="/admin/allMemberList.do")
+	public ModelAndView allMemberPage(HttpServletRequest request, 
+								  HttpServletResponse response,
+								  @RequestParam(defaultValue="1") int currentPage,
+								  ModelAndView mav) throws ServletException, IOException
 	{
-		
-		int currentPage; //현재 페이지 번호
 		int recordCountPerPage = 10; //보여지는 게시글의 갯수
 		int naviSize = 5; //네비 갯수
-		int recordTotalCount = totalCount();//총 게시글 갯수 필요
 		
-		if(request.getParameter("currentPage")==null)
-		{
-			currentPage = 1;
-		}else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
 		
 		//페이지 목록 10개씩 끊는 로직
-		ArrayList<Admin> list = aService.selectAllPostList(currentPage, recordCountPerPage);
-		//네비 바 5개씩 보여주는 로직
-		HashMap<String, Object> map = aService.getAdminPageNavi(currentPage, recordCountPerPage, naviSize, recordTotalCount);
+		ArrayList<Member> list = aService.selectAllPostList(currentPage, recordCountPerPage); //notice에서 변경해야 할 부분
 		
+		int pageTotalCount = (int)Math.ceil(aService.totalCount()/(double)recordCountPerPage); //notice에서 변경해야 할 부분
+
+		int startNavi = currentPage - (currentPage - 1) % naviSize;
+		int endNavi = startNavi + naviSize - 1;
+		endNavi = endNavi < pageTotalCount ? endNavi : pageTotalCount;
 		
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}
+
+		mav.addObject("list", list);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0); 
+		mav.addObject("navi", navi);
+		mav.setViewName("admin/adminBoardPage");
+		
+		return mav;
 	}
 	
-	/**
-	 * 작성자 : 김영주
-	 * 작성일 : 2022.02.10
-	 * Description : 모든 회원 정보 가져오는 페이지의 총 게시글 갯수
-	 */
-	private int totalCount() {
-		
-		int recordTotalCount = sqlSession.selectOne("member.selectMemberTotalCount");
-		
-		return recordTotalCount;
-	}
+	
 
 
 	/**
