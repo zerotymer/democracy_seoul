@@ -322,7 +322,7 @@ public class AdminController {
 
 		mav.addObject("list", list);
 		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
-		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0); 
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mav.addObject("navi", navi);
 		mav.setViewName("admin/adminBoardPage");
 		

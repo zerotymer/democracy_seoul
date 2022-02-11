@@ -189,7 +189,7 @@
                             <tbody>
                             <c:forEach items="${requestScope.list }" var="m" varStatus="i">
                                 <tr>
-                                    <th scope="row"><td>${i.count }</td></th>
+                                    <th scope="row">${i.count }</th>
                                     <td>${m.userId }</td>
                                     <td>${m.userName }</td>
                                     <td>${m.nick }</td>
@@ -214,7 +214,7 @@
 
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                    	<c:if test="${ preNavi } != 0">
+                    	<c:if test="${ preNavi > 0 }">
 	                        <li class="page-item">
 	                            <a class="page-link" href="/admin/allMemberList.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
 	                        </li>
@@ -224,7 +224,7 @@
 	                        	<a class="page-link" href="/admin/allMemberList.do?currentPage=${ m }">${ m }</a>
 	                        </li>
                         </c:forEach>
-                        <c:if test="${ nextNavi } != 0">
+                        <c:if test="${ nextNavi > 0 }">
 	                        <li class="page-item">
 	                            <a class="page-link" href="/admin/allMemberList.do?currentPage=${ nextNavi }">>></a>
 	                        </li>
