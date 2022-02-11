@@ -38,21 +38,26 @@ public class MainController {
     	return "";
     }
 
-    @RequestMapping("/main/list.ajax")
+
+
+
+    @RequestMapping("/main/list.do")
+    public ModelAndView getList(ModelAndView mav) {
+        ArrayList<HashMap<String, Object>> list = service.selectLatestSuggest(4);
+        list.addAll(service.selectLatestDiscuss(4));
+        list.addAll(service.selectLatestProposal(4));
+        mav.setViewName("index");
+        mav.addObject("list", list);
+        return mav;
+    }
+
+    /// AJAX
     @ResponseBody
+    @RequestMapping("/main/list.ajax")
     public ArrayList<HashMap<String, Object>> getList() {
         ArrayList<HashMap<String, Object>> list = service.selectLatestSuggest(4);
         list.addAll(service.selectLatestDiscuss(4));
         list.addAll(service.selectLatestProposal(4));
         return list;
-    }
-
-    @RequestMapping("/main/list.do")
-    @ResponseBody
-    public ModelAndView getList(ModelAndView mav) {
-        ArrayList<HashMap<String, Object>> list = service.selectLatestSuggest(4);
-        list.addAll(service.selectLatestDiscuss(4));
-        list.addAll(service.selectLatestProposal(4));
-        return mav;
     }
 }
