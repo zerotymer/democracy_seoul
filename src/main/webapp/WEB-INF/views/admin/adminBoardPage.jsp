@@ -60,6 +60,9 @@
             width: 100%;
             height: 30px;
         }
+        .notice:hover {
+            cursor: pointer;
+        }
 
         #content {
             float: left;
@@ -143,7 +146,6 @@
                 <div class="menu_bar_inner">
                     BOARD
                     <div class="notice">- 공지사항</div>
-                    <div class="notice">- 게시판 관리</div>
                 </div>
             </div>
         </div>
@@ -196,7 +198,7 @@
                                     <td>${m.email }</td>
                                     <td>${m.enrollDate }</td>
                                     <td>
-                                        <button style="width:100%" class="stateChangeBtn"
+                                        <button style="width:100%; height: 100%;" class="stateChangeBtn"
                                                 data="${m.userId }">${m.endYN }</button>
                                     </td>
                                 </tr>
