@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notice">
+
+	<!-- 
+		NOTICE_NO	공지사항 번호
+		NOTICE_TITLE	제목
+		NOTICE_CONTENT	내용
+		NOTICE_DATE		등록일
+		NOTICE_DEL_YN	삭제 여부
+		NOTICE_THUMBNAIL_NAME	썸네일명
+		NOTICE_THUMBNAIL_PATH	썸네일 경로
+	 -->
+
+	<!-- 공지사항 목록 보여주기 -->
+	<select id="selectAllNoticeList" resultType="notice">
+	  	SELECT 
+	  		notice_title as userId,
+			username as userName,
+			nick as nick,
+			email as email,
+			enrolldate as enrollDate
+	  	FROM NOTICE
+		WHERE NOTICE_DEL_YN ='N' 
+		ORDER BY NOTICE_NO DESC
+	  </select>
+	
+	<!-- totalCount 필요한 로직 -->
+	<select id="selectNoticeTotalCount" resultType="int">
+	  	SELECT 
+	  		COUNT(*)
+	  	FROM NOTICE
+		WHERE NOTICE_DEL_YN='N' 
+		ORDER BY NOTICE_NO DESC
+	</select>
+	
+</mapper>

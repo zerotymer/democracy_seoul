@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 로그인</title>
+<title>관리자 마이페이지</title>
 
 <style>
         .wrapper{
@@ -83,6 +83,17 @@
     </div>
     
     <!-- 탈퇴 버튼 활성화 -->
+    <script>
+	    $('#withDrawBtn').click(function () {
+	    	
+	        if (window.confirm("관리자 '${sessionScope.admin.adminId }'님<br>탈퇴를 진행하시겠습니까?") && window.confirm("탈퇴 후 데이터 복구는 불가능합니다.")) {
+	            location.replace("/admin/adminWithDraw.do");
+	        } else {
+	            alert('탈퇴를 취소하였습니다.');
+	        }
+	
+	    });
+    </script>
 	
 </body>
 </html>
