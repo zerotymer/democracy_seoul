@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.go.seoul.democracy.board.model.vo.BoardNotice;
 import kr.go.seoul.democracy.discuss.model.vo.Discuss;
+import kr.go.seoul.democracy.proposal.model.vo.Proposal;
 
 @Repository
 public class BoardDAO {
@@ -21,15 +22,32 @@ public class BoardDAO {
 	private SqlSessionTemplate sqlSession;
 
 
+
+	public List<BoardNotice> noticeNewsList(int recordCountPage, int currentListPage) {
+		   int offset = (currentListPage-1)*recordCountPage;
+		   RowBounds rb=new RowBounds(offset,recordCountPage);
+		   return sqlSession.selectList("boardNotice.list",null,rb);
+	}
+	
+
+	
+	
+	
+	
 	public int noticeNewsTotalCount() {
-	    return sqlSession.selectOne("board.discussTotalCount");
+	  
+		return sqlSession.selectOne("boardNotice.noticeNewsTotalCount");
 
 	}
 
-	public ArrayList<BoardNotice> noticeNewsList(int pageSize, int currentListPage) {
-		   RowBounds rb=new RowBounds((currentListPage-1)*pageSize,pageSize);
-		   return new ArrayList<BoardNotice>(sqlSession.selectList("board.list",null,rb));
+
+
+
+	public BoardNotice noticeNewsViews(int noticeNewsNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 
 
 
