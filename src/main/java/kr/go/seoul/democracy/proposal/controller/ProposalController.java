@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.proposal.controller;
 
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import kr.go.seoul.common.ImageResizeTemplate;
+import kr.go.seoul.common.transfer.ImageTransferInfo;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
 import kr.go.seoul.democracy.proposal.model.service.ProposalService;
 import kr.go.seoul.democracy.proposal.model.vo.Proposal;
@@ -39,12 +45,16 @@ public class ProposalController {
 	@Qualifier("proposalServiceImpl")
 	private ProposalService pService;	
 	
+	@Autowired
+	@Qualifier("proposalImageTemplate")
+	private ImageResizeTemplate imgTemplate;
+	
 	@RequestMapping(value="/proposal/dw.do", method = RequestMethod.POST)
 	public String test() {
 		return "index";
 	}
 
-	
+	//리스트 불러오기
 	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.GET)
 	public ModelAndView allList(ModelAndView mav,
 			@RequestParam(required=false, defaultValue="1")int curPage) throws Exception{
@@ -55,11 +65,14 @@ public class ProposalController {
 		mav.addObject("list",list);
 		return mav;
 	}
-	
+	// 게시글 불러오기 
 	@RequestMapping(value="/proposal/post.do", method = RequestMethod.GET)
 	public ModelAndView proposalview(
 		@RequestParam(value="proposalNo",defaultValue="1")int proposalNo,
 		HttpSession session) throws Exception {
+		
+		//게시글번호 가져오기
+		Proposal proposal = pService.proposalView(proposalNo);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("proposal/post");
@@ -84,7 +97,7 @@ public class ProposalController {
 		 
 		return "proposal/proposalWrite";
 //	}
-}
+	}
 
 	//글 저장 
 	@RequestMapping(value="/proposal/enroll.do", method=RequestMethod.POST)
@@ -96,6 +109,15 @@ public class ProposalController {
 		return "redirect:/proposal/allList.do";
 	}
 	
+	//썸네일이미지 업로드 
+    @RequestMapping(value = "/proposalThumbnail/imageUpload.do", method = RequestMethod.POST)
+    public void thumbnailUpload(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "img", "proposal");
+        JsonObject json = new JsonObject();
+        json.addProperty("fileName", info.getFileName());
+        json.addProperty("imgUrl", "/upload/proposal/"+info.getFileName("thumbnail"));
+        new Gson().toJson(json,response.getWriter());
+    }
 
 
 	//페이지 수정뷰
@@ -126,13 +148,15 @@ public class ProposalController {
 	
 	//게시글삭제하기 
 	@RequestMapping(value="/proposal/delete.do", method=RequestMethod.POST)
-	public String delete(@RequestParam(defaultValue="1") int proposalNo,HttpSession session) {
+	public String delete(@RequestParam(defaultValue="1") int proposalNo,HttpSession session) throws Exception {
 		Admin admin = (Admin)session.getAttribute("admin");
 		if(admin== null) return "proposal/allList"; 
 		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
 		
-		pService.delete(proposal.getProposalNo());
+		Proposal proposal = pService.proposalView(proposalNo);
 		return "redirect:/proposal/allList";
 	}
+	
+	
 	
 }

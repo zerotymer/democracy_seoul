@@ -72,6 +72,17 @@
 		where proposal_No = #{proposalNo}
 	</update>
 	
-			
+	<select id="commentList" parameterType="kr.go.seoul.democracy.proposal.model.vo.ProposalComment">
+		select
+		comment_no as CommentNo,
+		userId as userId,
+		comment_content as commentContent,
+		comment_date as commnetDate
+		from proposal_comment
+		where proposal_No = #{proposalNo}
+	</select>		
+	
+	
+	
 </mapper>
 	
