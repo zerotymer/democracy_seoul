@@ -76,9 +76,8 @@
 	<!-- 모든 회원 정보 가져오기 -->
 	<select id="selectAllMemberList" resultType="member">
 		SELECT 
-			user_id as userId,
-			user_pwd as userPwd,
-			user_name as userName,
+			userid as userId,
+			username as userName,
 			nick as nick,
 			email as email,
 			enrolldate as enrollDate
@@ -96,5 +95,26 @@
 			user_Id = #{userId}
 	</update>
 	
+	<!-- 페이지 안에 들어갈 목록 갯수 -->
+	<select id="selectAllPostList" resultType="member">
+	  	SELECT 
+	  		userid as userId,
+			username as userName,
+			nick as nick,
+			email as email,
+			enrolldate as enrollDate
+	  	FROM MEMBER
+		WHERE END_YN='N' 
+		ORDER BY USERID ASC
+	  </select>
+	
+	<!-- totalCount 필요한 로직 -->
+	<select id="selectMemberTotalCount" resultType="int">
+	  	SELECT 
+	  		COUNT(*)
+	  	FROM MEMBER
+		WHERE END_YN='N' 
+		ORDER BY USERID ASC
+	</select>
   	
 </mapper>

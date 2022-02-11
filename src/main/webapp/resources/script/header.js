@@ -15,4 +15,16 @@ const gnbSlide = function() {
 
 };
 
+window.addEventListener('load', function() {
+    let menuitems = document.getElementsByClassName('menuitem');
+    Array.from(menuitems).forEach( function(item) {
+        item.addEventListener('click', function () {
+            document.querySelectorAll('.menuitem').forEach( item => item.classList.remove('active'));
+            item.classList.toggle('active');
+        });
+    });
+});
+
+
 gnbSlide();
+

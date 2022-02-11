@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +30,9 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	
+	
+	
+	
 	/**
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.03
@@ -43,7 +49,7 @@ public class AdminController {
 			HttpSession session = request.getSession();
 			session.setAttribute("admin", a);
 			
-			return "admin/adminBoardPage";
+			return "redirect:/admin/allMemberList.do";
 		}else {
 			return "admin/adminLoginFail";
 		}
@@ -93,6 +99,17 @@ public class AdminController {
 			}
 			
 			}
+	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 관리자 정보 수정 페이지로 이동 메소드
+	 */
+	@RequestMapping(value="/admin/adminUpdatePageMove.do")
+	public String updatePageMove() 
+	{
+		return "admin/adminUpdatePage";
 	}
 	
 	
@@ -276,21 +293,45 @@ public class AdminController {
 	
 	/**
 	 * 작성자 : 김영주
-	 * 작성일 : 2022.02.07
-	 * Description : 모든 회원 정보 가져오는 메소드
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 페이지의 목록의 갯수 + 네비바 메소드
 	 */
-	@RequestMapping(value="/admin/allMemberList.do", method=RequestMethod.GET)
-	public ModelAndView allMemberList(ModelAndView mav)
+	@RequestMapping(value="/admin/allMemberList.do")
+	public ModelAndView allMemberPage(HttpServletRequest request, 
+								  HttpServletResponse response,
+								  @RequestParam(defaultValue="1") int currentPage,
+								  ModelAndView mav) throws ServletException, IOException
 	{
-		ArrayList<Admin> list = aService.selectAllMemberList();
+		int recordCountPerPage = 10; //보여지는 게시글의 갯수
+		int naviSize = 5; //네비 갯수
+		
+		
+		//페이지 목록 10개씩 끊는 로직
+		ArrayList<Member> list = aService.selectAllPostList(currentPage, recordCountPerPage); //notice에서 변경해야 할 부분
+		
+		int pageTotalCount = (int)Math.ceil(aService.totalCount()/(double)recordCountPerPage); //notice에서 변경해야 할 부분
+
+		int startNavi = currentPage - (currentPage - 1) % naviSize;
+		int endNavi = startNavi + naviSize - 1;
+		endNavi = endNavi < pageTotalCount ? endNavi : pageTotalCount;
+		
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}
+
 		mav.addObject("list", list);
-		mav.setViewName("admin/allMemberList");
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0); 
+		mav.addObject("navi", navi);
+		mav.setViewName("admin/adminBoardPage");
 		
 		return mav;
-		
 	}
 	
 	
+
+
 	/**
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.07

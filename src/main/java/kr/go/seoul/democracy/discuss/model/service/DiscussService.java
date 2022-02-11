@@ -24,4 +24,8 @@ public interface DiscussService {
 
 	int write(Discuss discuss);
 
+	ArrayList<HashMap<String, Object>> getComment(int discussNo, int currentCommentPage, int pageSize);
+
+	int writeComment(HashMap<String, Object> comment);
+
 }

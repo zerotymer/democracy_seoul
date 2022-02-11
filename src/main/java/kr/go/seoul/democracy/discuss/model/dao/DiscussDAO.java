@@ -49,8 +49,17 @@ public class DiscussDAO {
       return new ArrayList<DiscussFile>(sqlSession.selectList("discuss.fileList"));
    }
 
-public int write(Discuss discuss) {
-	return sqlSession.selectOne("discuss.write", discuss);
-}
+	public int write(Discuss discuss) {
+		return sqlSession.selectOne("discuss.write", discuss);
+	}
+	
+	public ArrayList<HashMap<String, Object>> getComment(int discussNo, int currentCommentPage, int pageSize) {
+		RowBounds rb=new RowBounds((currentCommentPage-1)*pageSize,pageSize);
+	    return new ArrayList<HashMap<String,Object>>(sqlSession.selectList("discuss.commentList",discussNo,rb));
+	}
+
+	public int writeComment(HashMap<String, Object> comment) {
+		return sqlSession.selectOne("discuss.writeComment", comment);
+	}
 
 }

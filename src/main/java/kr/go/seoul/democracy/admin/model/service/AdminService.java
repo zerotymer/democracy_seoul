@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
 
 public interface AdminService {
 
@@ -22,5 +23,9 @@ public interface AdminService {
 	ArrayList<Admin> selectAllMemberList();
 
 	int updateMemberEndYNChange(String userId, char endYN);
+
+	ArrayList<Member> selectAllPostList(int currentPage, int recordCountPerPage);
+
+	int totalCount();
 	
 }

@@ -62,9 +62,9 @@
 </head>
 <body>
 
-	<%-- <header>
+	<header>
         <%@ include file="/includes/header.jsp" %>
-    </header> --%>
+    </header>
 
 	<section class="inner">
     <form name="writeForm" method="post" action="/discuss/write.do">
@@ -84,9 +84,9 @@
     </form>
     </section>
 
-	<%-- <footer>
+	<footer>
         <%@ include file="/includes/footer.jsp" %>
-    </footer> --%>
+    </footer>
 
 <!-- JQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

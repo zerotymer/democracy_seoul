@@ -3,16 +3,21 @@
 @import '/resources/style/color.css';
 @import '/resources/style/icons.css';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
 :root {
-    --HEIGHT-HEADER: 160px;
+    --HEIGHT-HEADER: 140px;
     --HEIGHT-HEADER-SMALL: 80px;
     --HEIGHT-GAP: 20px;
-    --HEIGHT-GNB: 112px;
+    --HEIGHT-GNB: 92px;
 
     --TABLET-SCREEN: 1024px;
     --MOBILE-SCREEN: 768px;
     --SMALL-SCREEN: 480px;
+
+    --COLOR-SUBMENU: #EEE;
+    --COLOR-MOBILE-MENU: #D9E9F7;
+    --COLOR-FONT-DARK: #696969;
 }
 
 @media screen and (max-width: 1024px) {
@@ -121,34 +126,41 @@ section {
 }
 .gnb .menuitem a {
     color: white;
-    font-family: 'Noto Sans KR', sans-serif;
+    font: 400 17px 'Noto Sans KR', sans-serif;
     text-decoration: none;
-    letter-spacing: 0.2em;
+    letter-spacing: -0.03em;
 }
 
 /* Navi : Submenu */
 .gnb .submenu {
     display: none;
     position: relative;
-    margin-top: 40px;
-    /* color: blue; */
+    margin-top: 28px;
     z-index: 99;
     overflow: visible;
     width: 160px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+
 }
 .gnb .submenu li {
     display: inline-block;
-    height: 80px;
+    height: 50px;
     width: 160px;
-    padding: 4px;
-    font: 300 14px/60px 'Noto Sans KR', sans-serif;
+    /* padding: 4px; */
     text-align: center;
     z-index: 101;
+    font: 500 14px/50px 'Noto Sans KR', sans-serif;
+    color: var(--COLOR-FONT-DARK);
 }
-.gnb .menuitem:hover .submenu {
+.gnb .submenu a {
+    font: 500 14px/50px 'Noto Sans KR', sans-serif;
+    color: var(--COLOR-FONT-DARK);
+}
+
+.gnb .menuitem.active .submenu {
     display: flex;
     flex-flow: column;
-    background-color: pink;
+    background-color: var(--COLOR-SUBMENU);
 }
 
 @media screen and (max-width: 1024px) {
@@ -161,12 +173,10 @@ section {
         top: 80px;
         right: 0;
         width: 200px;
-        /* height: 40vh; */
 
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
-
-        background-color: var(--COLOR-BLUE);
+        background-color: var(--COLOR-MOBILE-MENU);
     }
     .gnb .menuitem {
         display: block;
@@ -174,6 +184,9 @@ section {
         width: 100%;
         height: inherit;
         right: 0;
+    }
+    .gnb .menuitem a {
+        color: var(--COLOR-FONT-DARK);
     }
     .gnb .submenu {
         display: none;
@@ -186,9 +199,12 @@ section {
     .gnb .submenu li {
         width: 100%;
     }
+    .gnb .menuitem.active .submenu {
+        display: none;
+    }
 
     .gnb .menuitem:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.4);
     }
     .gnb .menuitem:hover .submenu {
         display: flex;

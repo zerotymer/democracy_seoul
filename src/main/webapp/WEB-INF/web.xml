@@ -15,6 +15,7 @@
 	<filter-mapping>
 		<filter-name>characterEncoding</filter-name>
 		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.ajax</url-pattern>
 	</filter-mapping>
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->

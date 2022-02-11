@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.go.seoul.democracy.admin.model.dao.AdminDAO;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -63,6 +64,21 @@ public class AdminServiceImpl implements AdminService{
 	public int updateMemberEndYNChange(String userId, char endYN) {
 		
 		return aDAO.updateMemberEndYNChange(userId, endYN);
+	}
+
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 게시글 10개씩 끊기
+	 */
+	@Override
+	public ArrayList<Member> selectAllPostList(int currentPage, int recordCountPerPage) {
+		return aDAO.selectAllPostList(recordCountPerPage, currentPage);
+	}
+
+
+	public int totalCount() {
+		return aDAO.totalCount();
 	}
 
 	

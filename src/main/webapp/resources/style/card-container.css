@@ -43,11 +43,12 @@
     height: 46px;
     margin: 16px auto;
     border-radius: 20px;
-    font-size: 17px;
+    font-size: 18px;
     line-height: 46px;
-    font-weight: 500;
+    font-weight: 300;
     text-align: center;
-    letter-spacing: 2px;
+    /* letter-spacing: -0.02em; */
+    letter-spacing: 0.07em;
     color: white;
 }
 
@@ -126,6 +127,7 @@
 }
 
 /* for JavaScript */
+
 .card-item.expand {
     grid-column: span 2;
 }

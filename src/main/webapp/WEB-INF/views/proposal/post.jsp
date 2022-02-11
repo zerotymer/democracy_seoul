@@ -111,8 +111,8 @@
             
 		     <%-- <c:if test="${sessionScope.adminId != null}"> --%>
 			            <div class="adminCon">
-				            	<button clsss="editBtn" a href="/proposal/modify?proposalNo=${proposal.proposalNo}">수정</button>
-				            		<button clsss="delBtn">삭제</button>
+				            	<button clsss="editBtn" id="editBtn">수정</button>
+				            		<button clsss="delBtn" id="delBtn">삭제</button>
 				            	<button clsss="listBtn" id="listBtn">목록</button>
 						</div>
 			<%--  </c:if> --%>
@@ -174,6 +174,19 @@
 		        $("#listBtn").click(function(){
 		            location.href="/proposal/allList.do";
 		        });
+		        
+		        $("#editBtn").click(function(){
+		           formObj.attr("action","/proposal/modify");
+		           formObj.attr("method","get");
+		           formObj.submit();
+		        });
+		        
+		        $("#editBtn").click(function(){
+			           formObj.attr("action","/proposal/delete");
+			           formObj.attr("method","post");
+			           formObj.submit();
+			        });
+		        
 		});
         
     </script>

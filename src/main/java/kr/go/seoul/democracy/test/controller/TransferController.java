@@ -64,7 +64,7 @@ public class TransferController {
         // 비즈니스 로직 - 알아서 만드세요.
         
         System.err.println("test transfer");
-        System.err.println(info);                                                                                       // 이동한 파일 정보
+        System.err.println(info.getAbsolutePath());                                                                                       // 이동한 파일 정보
         return "index";
     }
 
