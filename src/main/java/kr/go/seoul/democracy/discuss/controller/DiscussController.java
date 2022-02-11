@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,19 +36,12 @@ public class DiscussController {
 	@Qualifier(value="basicImageTemplate")
     private ImageResizeTemplate imgTemplate;
 
-	//시민토론 목록 페이지로 이동
-	@RequestMapping(value="/discuss/link.do", method = RequestMethod.GET)
-	public String discussLink() {
-		return "/discuss/list.do";
-	}
-	
 	//시민토론 목록 데이터 가져오기+페이징 처리(더보기)
 	@RequestMapping(value="/discuss/list.do", method = RequestMethod.GET)
 	public ModelAndView discussList(ModelAndView mav, @RequestParam(defaultValue="1") int currentListPage) {
 		//페이징 처리
 		int pageSize=12;
 		int totalCount=dService.discussTotalCount();
-		if(currentListPage==0) currentListPage=1;
 		
 		//시민토론 목록 데이터 가져오기
 		ArrayList<Discuss> list=dService.discussList(pageSize,currentListPage);
@@ -63,11 +57,11 @@ public class DiscussController {
 	
 	//시민토론 게시글 하나 데이터 가져오기+댓글 페이징 처리(더보기)
 	@RequestMapping(value="/discuss/onePost.do", method = RequestMethod.GET)
-	public ModelAndView discussOne(ModelAndView mav,@RequestParam int discussNo,@RequestParam int currentCommentPage) {
+	public ModelAndView discussOne(ModelAndView mav,@RequestParam int discussNo) {
 		//페이징 처리
 		int pageSize=5; //한번에 댓글 몇개씩 보여줄건지
 		int totalCount=dService.commentTotalCount(discussNo); //해당 게시글에 댓글 총 갯수
-		if(currentCommentPage==0) currentCommentPage=1; //게시글 로드할때마다 댓글은 첫 5개씩만 보여준다.
+		int currentCommentPage=1;
 		
 		//데이터 가져오기
 		Discuss discuss=dService.discussOne(discussNo); //게시글 번호로 해당 게시글 찾기
@@ -78,9 +72,10 @@ public class DiscussController {
 		mav.addObject("discuss",discuss);
 		mav.addObject("pro",proComment);
 		mav.addObject("con",conComment);
-		mav.addObject("currentCommentPage",currentCommentPage);
-		mav.addObject("pageSize",pageSize);
-		mav.addObject("pageCount",(int)Math.ceil((double)totalCount/pageSize));
+		mav.addObject("totalComment",totalCount);
+		//mav.addObject("currentCommentPage",currentCommentPage);
+		//mav.addObject("pageSize",pageSize);
+		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/pageSize));
 		mav.addObject("file",file);
 		
 		if(discuss!=null) mav.setViewName("discuss/post"); //해당 게시글을 찾아 게시글 페이지로 이동
@@ -89,9 +84,22 @@ public class DiscussController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/discuss/getComment.do", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<HashMap<String, Object>> getComment(@RequestParam int discussNo,
+								@RequestParam(defaultValue="1") int currentCommentPage){
+		currentCommentPage+=1;
+		int pageSize=5;
+		
+		ArrayList<HashMap<String, Object>> comment=dService.getComment(discussNo,currentCommentPage,pageSize);
+		
+		return comment;
+	}
+	
 	@RequestMapping(value="/discuss/writeComment.do", method = RequestMethod.GET)
 	public ModelAndView writeComment(ModelAndView mav,
-									@RequestParam int discussNo,
+									//@SessionAttribute user,
+									@SessionAttribute int discussNo,
 									@RequestParam String userId,
 									@RequestParam String commentContent,
 									@RequestParam char commentVote) {
@@ -101,6 +109,8 @@ public class DiscussController {
 		comment.put("userId",userId);
 		comment.put("commentContent",commentContent);
 		comment.put("commentVote",commentVote);
+		
+		int result=dService.writeComment(comment);
 		
 		return mav;
 	}
