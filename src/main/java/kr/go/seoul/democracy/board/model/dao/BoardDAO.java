@@ -22,22 +22,12 @@ public class BoardDAO {
 	private SqlSessionTemplate sqlSession;
 
 
-
+	//게시글 리스트 불러오기
 	public List<BoardNotice> noticeNewsList(int recordCountPage, int currentListPage) {
+		   System.out.println("DAO 확인");
 		   int offset = (currentListPage-1)*recordCountPage;
 		   RowBounds rb=new RowBounds(offset,recordCountPage);
-		   return sqlSession.selectList("boardNotice.list",null,rb);
-	}
-	
-
-	
-	
-	
-	
-	public int noticeNewsTotalCount() {
-	  
-		return sqlSession.selectOne("boardNotice.noticeNewsTotalCount");
-
+		   return sqlSession.selectList("board.list",null,rb);//(namespace.id,넣어줄값,그런것들)
 	}
 
 

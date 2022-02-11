@@ -66,7 +66,7 @@
 			        </thead>
 			        <tbody>		       				
 			            <tr>
-			                <td>${ requestScope.list.noticeNewsNo }</td>
+			                <td>${list.noticeNewsNo }</td>
 			                <td><div class="text-ellipsis subject"><a href="/notice/noticeNewsSelectContent.do?noticeNo=(게시물고유번호)&currentPage=(최근페이지)">${ requestScope.boardNotice.noticeNewsTitle }</a></div></td><!-- 누르면 이동하게 -->
 			                <td>(조회수)</td>
 			                <td>(작성일)</td>

@@ -42,36 +42,30 @@ public class BoardController {
 	
 	
 	
-	//공지사항 리스트 
+	//공지사항 목록 리스트 
 	@RequestMapping(value="/board/noticeNewslist.do")
 	public ModelAndView noticeNewsList(ModelAndView mv,@RequestParam(required=false,defaultValue="1")int currentListPage) throws Exception {
 		
-		int recordCountPage=10;
-		int totalCount=bService.noticeNewsTotalCount();
-		if(currentListPage==0) currentListPage=1;
+		System.out.println("목록 불러오기 정상구동");
+		int recordCountPage=10;	//
+		List<BoardNotice> list=bService.noticeNewsList(recordCountPage,currentListPage);//
 		
-		List<BoardNotice> list=bService.noticeNewsList(recordCountPage,currentListPage);
-		
-		mv.addObject("noticeNews",list);
-		mv.addObject("currentListPage",currentListPage);
-		mv.addObject("recordCountPage",recordCountPage);
-		mv.addObject("pageCount",(int)Math.ceil((double)totalCount/recordCountPage));
+		mv.addObject("list",list);
 		mv.setViewName("member/noticeNews");
 		System.out.println(list);
 		return mv;
 	}
-
 	
 	//공지사항 게시글 하나 로직
 	@RequestMapping(value="board/noticeNewsPost.do", method = RequestMethod.GET)
 	public ModelAndView noticeNewsViews(@RequestParam(value="noticeNewsNo",defaultValue="1")int noticeNewsNo,HttpSession session) throws Exception
 	{
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member/noticeNewsContent");
-		mav.addObject("noticeNews", bService.noticeNewsViews(noticeNewsNo));
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/noticeNewsContent");
+		mv.addObject("noticeNews", bService.noticeNewsViews(noticeNewsNo));
 		System.out.println(bService.noticeNewsViews(noticeNewsNo));
-		return mav;
+		return mv;
 	}
 	
 	//공지사항 목록에서 검색하는 메소드
@@ -84,13 +78,6 @@ public class BoardController {
 	
 	
 	
-	//행사 페이지쪽 게시물 가는 코드
-	@RequestMapping(value="/board/noticeCampaignContent")
-	public String noticeCampaignContent() {
-		
-		return "member/noticeCampaineContent";
-	}
-
 	
 	//행사 페이지 목록으로 가는 코드
 	@RequestMapping(value="/board/noticeCampaign.do")
@@ -99,6 +86,17 @@ public class BoardController {
 		return "member/noticeCampaign";
 	}
 	
+	
+	
+	//행사 페이지쪽 게시물 가는 코드
+	@RequestMapping(value="/board/noticeCampaignContent")
+	public String noticeCampaignContent() {
+		
+		return "member/noticeCampaineContent";
+	}
+
+	
+
 	
 
 	

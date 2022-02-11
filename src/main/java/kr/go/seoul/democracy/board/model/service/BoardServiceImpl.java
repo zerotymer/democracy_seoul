@@ -24,15 +24,11 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<BoardNotice> noticeNewsList(int recordCountPage, int currentListPage) {
+		System.out.println("목록구현 정상구동");
 		return bDAO.noticeNewsList(recordCountPage,currentListPage);
 
 	}
 	
-	
-	@Override
-	public int noticeNewsTotalCount() {
-		return bDAO.noticeNewsTotalCount();
-	}
 	
 	
 	@Override

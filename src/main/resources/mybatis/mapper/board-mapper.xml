@@ -9,7 +9,9 @@
 			NOTICE_CONTENT as noticeNewsContent,
 			NOTICE_DATE as noticeNewsDate,
 			NOTICE_DEL_YN  as noticeNewsDelYN
-		FROM NOTICE
+		FROM NOTICE 
+		ORDER BY 
+             noticeNewsNo desc
 	</select>
 	
 	<select id="noticeNewsTotalCount" resultType="int">
