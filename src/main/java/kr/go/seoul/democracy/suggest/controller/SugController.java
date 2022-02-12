@@ -33,7 +33,7 @@ public class SugController {
         return "suggest/sugBoard";
     }
     //글을 작성하는곳
-    @RequestMapping("/suggest/suggestWrite.do")
+    @RequestMapping("/suggest/suggestwrite.do")
     public String sug1() {
         return "suggest/sugWrite";
     }
@@ -41,6 +41,11 @@ public class SugController {
     @RequestMapping("/suggest/suggestview.do")
     public String sug2() {
         return "suggest/sugView";
+    } 
+    // 테스트
+    @RequestMapping("/suggest/suggestest.do")
+    public String sug3() {
+        return "suggest/sugTest";
     }
     
 	/*
