@@ -62,4 +62,11 @@ public class DiscussDAO {
 		return sqlSession.selectOne("discuss.writeComment", comment);
 	}
 
+	public HashMap<String, Object> myComment(int discussNo, String userId) {
+		HashMap<String,Object> map=new HashMap<String,Object>();
+		map.put("discussNo", discussNo);
+		map.put("userId", userId);
+		return sqlSession.selectOne("discuss.writeComment", map);
+	}
+
 }

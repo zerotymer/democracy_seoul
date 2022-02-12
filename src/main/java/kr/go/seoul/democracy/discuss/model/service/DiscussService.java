@@ -28,4 +28,6 @@ public interface DiscussService {
 
 	int writeComment(HashMap<String, Object> comment);
 
+	HashMap<String, Object> myComment(int discussNo, String userId);
+
 }

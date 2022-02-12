@@ -168,14 +168,9 @@
             align-items: center;
             justify-content: center;
         }
-        
-        .btn.get{
+        .get{
             border:0px;
-            
-        }
-        .btn.write{
-            border:1px solid rgba(110, 110, 100);
-            
+            background-color: white;
         }
         
         
@@ -186,13 +181,26 @@
             display:flex;
             flex-direction: row;
         }
+        .form{
+            border:2px solid rgba(20, 160, 134);
+        }
         .input-group-text{
             width:100px;
-            background-color: rgba(69, 49, 250); 
+            background-color: rgba(20, 160, 134);
             color:white;
         }
         .form-control{
             resize:none;
+        }
+        .write{
+            border:1px solid rgba(100, 100, 100);
+            background-color: rgba(20, 160, 134);
+            font-size:13px;
+            color:white;
+        }
+        
+        a{
+        	text-decoration:none;
         }
     </style>
     
@@ -235,18 +243,51 @@
         </div>
         
         <!-- 댓글 작성폼 -->
-        <c:if test="${user }!=null">
-        <form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
-			<div>
-				<div class="input-group">
-                  <span class="input-group-text">댓글</span>
-                  <textarea name="commentContent" class="form-control" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요."></textarea>
-                </div>
-			</div>
-			<button class="btn write" style="font-size:13px;"><!--<i class="xi-pen-o"></i>-->입력</button>
-		</form>
-		</c:if><hr>
+        <c:choose>
         
+	        <c:when test="${user }!=null">
+	        <c:choose>
+	        
+	        	<c:when test="${my }!=null">
+	        		<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+					<div class="input-group">
+						<span id="input-group-text" class="input-group-text form">댓글</span>
+					    <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요.">${my.commentContent }</textarea>
+					    <input name="discussNo" type="hidden" value="${discuss.discussNo}" />
+					    <input class="commentVote" name="vote" type="hidden" value="${my.commentVote}" />
+					    <button class="write" type="submit"><!--<i class="xi-pen-o"></i>-->수정</button>
+				    </div>
+					</form>
+	        	</c:when>
+	        	
+	        	<c:otherwise>
+	        	<a href="#vote">
+	        		<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+					<div class="input-group abled">
+						<span class="input-group-text form">댓글</span>
+					    <textarea name="commentContent" id="disabled" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요." disabled></textarea>
+					    <input name="discussNo" type="hidden" value="${discuss.discussNo}" />
+					    <input class="commentVote" name="vote" type="hidden" value="Y" />
+					    <button class="write" type="submit"><!--<i class="xi-pen-o"></i>-->완료</button>
+				    </div>
+					</form>
+				</a>
+	        	</c:otherwise>
+	        	
+			</c:choose>
+			</c:when>
+			
+			<c:otherwise>
+				<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+				<div class="input-group disabled">
+		            <span class="input-group-text form">댓글</span>
+		            <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="로그인 후 댓글 작성 가능합니다." disabled></textarea>
+		            <button class="write"><!--<i class="xi-pen-o"></i>-->입력</button>
+	            </div>
+				</form>
+			</c:otherwise>
+        
+        </c:choose><hr>
         
         <!-- 댓글 목록 -->
         <div class="comment-container">
@@ -289,7 +330,7 @@
 		
         </div><hr>
         <div class="more">
-        	<button class="btn get" value="1" type="submit"><i class="xi-caret-down-circle-o"></i>더보기</button>
+        	<button class="get" value="1" type="submit"><i class="xi-caret-down-circle-o"></i>더보기</button>
         </div>
 		
     </section>
@@ -306,39 +347,66 @@
     var result1=false;
     var result2=false;
     $('#vote>div:first').click(function(){
-        /*$('#vote>div:first').css('color','black');*/
         if(result1||result2){
             alert('이미 투표하셨습니다. 재투표는 불가합니다.');
         }
         else{
-            result1=confirm('안건에 반대하시겠습니까?');
+            result1=confirm('안건에 찬성하시겠습니까?');
             if(result1){
-                var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 반대하시겠습니까?')
-                if(result){
-                	alert('반대하셨습니다. 투표해 주셔서 감사합니다.');
-                    $('#vote>div:first').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" /></svg>');
-                }
-            }
-        }
-    });
-    
-    $('#vote>div:last').click(function(){
-        /*$('#vote>div:last').css('color','black');*/
-        if(result1||result2){
-            alert('이미 투표하셨습니다. 재투표는 불가합니다.');
-        }
-        else{
-            result2=confirm('안건에 찬성하시겠습니까?');
-            if(result2){
                 var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 찬성하시겠습니까?')
                 if(result){
-                    alert('찬성하셨습니다. 투표해 주셔서 감사합니다.');
-                    $('#vote>div:last').empty();
-                    $('#vote>div:last').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" /></svg>');
+                	alert('찬성하셨습니다. 투표해 주셔서 감사합니다.');
+                    $('#vote>div:first').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" /></svg>');
+                    $('.input-group-text').css('background-color','rgba(69, 49, 250)');
+                    $('.commentVote').val('Y');
+                    $('#disabled').attr("disabled",false);
+                    $('a').removeAttr("href");
+                    
                 }
             }
         }
     });
+    $('#vote>div:last').click(function(){
+        if(result1||result2){
+            alert('이미 투표하셨습니다. 재투표는 불가합니다.');
+        }
+        else{
+            result2=confirm('안건에 반대하시겠습니까?');
+            if(result2){
+                var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 반대하시겠습니까?')
+                if(result){
+                    alert('반대하셨습니다. 투표해 주셔서 감사합니다.');
+                    $('#vote>div:last').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" /></svg>');
+                    $('.input-group-text').css('background-color','rgba(250, 49, 49)');
+                    $('.commentVote').val('N');
+                    $('#disabled').attr("disabled",false);
+                    $('a').removeAttr("href");
+                }
+            }
+        }
+    });
+</script>
+
+
+<!-- 로그인 안하고 댓글 작성 시도 시 로그인 페이지로 이동-->
+<script>
+	$('.disabled').click(function(){
+		alert('로그인 페이지로 이동합니다.');
+		location.replace('/member/goLogin.do');
+	});
+</script>
+
+
+<!-- 작성한 댓글이 있으면 댓글창 색 바꾸기 -->
+<script>
+	window.onload=function(){
+		if($('.commentVote').val()=='N'){
+			$('#input-group-text').css('background-color','rgba(250, 49, 49)');
+		}
+		else if($('.commentVote').val()=='Y'){
+			$('#input-group-text').css('background-color','rgba(69, 49, 250)');
+		}
+	}
 </script>
 
 <!-- 게시글 내용 기호 변환 -->
