@@ -83,3 +83,7 @@
     text-align: center;
     font: 100 14px/40px 'Nanum Gothic', sans-serif;
 }
+
+.search--container .result strong {
+    color: var(--COLOR-FONT-STRONG);
+}

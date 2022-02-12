@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- JSTL Core Library --> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,69 +101,39 @@
             </div>
             <div class="search-result">
                 <div class="search-msg">
-                    "<strong>검색어</strong>"에 대한 검색결과는 '<strong>0</strong>'건입니다.
+                    "<strong>${ requestScope.keyword }</strong>"에 대한 검색결과는 '<strong>${ requestScope.count }</strong>'건입니다.
                 </div>
                 <div>
                     <div class="tab">
-                        <span class="tab-btn active">전체 (0)</span>
-                        <span class="tab-btn">시민제안 (0)</span>
-                        <span class="tab-btn">서울시가 묻습니다 (0)</span>
+                        <span class="tab-btn active">전체 (${ requestScope.count })</span>
+                        <span class="tab-btn">시민제안 (${ requestScope.suggest.size() })</span>
+                        <span class="tab-btn">서울시가 묻습니다 (${ requestScope.proposal.size() })</span>
                     </div>
                     <hr>
                     <div class="result">
-                        <ul>
+                        <ul id="suggest--container">
                             <div>
-                                <h3>시민제안 검색결과 (총 <strong>400</strong>건)</h3>
-                                <span class="more">더보기</span>
+                                <h3>시민제안 검색결과 (총 <strong>${ requestScope.suggest.size() }</strong>건)</h3>
+                                <span class="more" onclick="">더보기</span>
                             </div>
-                            <li>
-                                <p>일회용 배달용기 플라스틱 줄이기</p>
-                                <p>안녕하세요. 저는 <strong>고등학교</strong> 1학년 학생입니다.코로나 장기화로 인해 외식은 줄어들고 가정에서도 음식 배달과 포장주문 이용이 더 늘어 환경파괴의 주범이
-                                    되고 있는 일회용 플라스틱 쓰레기가 급증했습니다. 아파트 재활용 분리수거장만 보더라도 플라스틱 종류에 관계없이 음식물과 비닐도 깨끗이 제거 되지
-                                    않은 채 쌓여 있고, 재활용 쓰레기 트럭에 가득 실린 어마어마한 양들의 쓰레기를 보면서 과연 재활용이 되는 것인지 의문을 갖게 되었습니다.많은 양을
-                                    생산하고 소비한 후에 폐기하거나 재활용하는 것보다 먼저 폐기되거나 재활용할 수 있는 쓰레기 발생...</p>
-                            </li>
-                            <li>
-                                <p>일회용 배달용기 플라스틱 줄이기</p>
-                                <p>안녕하세요. 저는 고등학교 1학년 학생입니다.코로나 장기화로 인해 외식은 줄어들고 가정에서도 음식 배달과 포장주문 이용이 더 늘어 환경파괴의 주범이
-                                    되고 있는 일회용 플라스틱 쓰레기가 급증했습니다. 아파트 재활용 분리수거장만 보더라도 플라스틱 종류에 관계없이 음식물과 비닐도 깨끗이 제거 되지
-                                    않은 채 쌓여 있고, 재활용 쓰레기 트럭에 가득 실린 어마어마한 양들의 쓰레기를 보면서 과연 재활용이 되는 것인지 의문을 갖게 되었습니다.많은 양을
-                                    생산하고 소비한 후에 폐기하거나 재활용하는 것보다 먼저 폐기되거나 재활용할 수 있는 쓰레기 발생...</p>
-                            </li>
-                            <li>
-                                <p>일회용 배달용기 플라스틱 줄이기</p>
-                                <p>안녕하세요. 저는 고등학교 1학년 학생입니다.코로나 장기화로 인해 외식은 줄어들고 가정에서도 음식 배달과 포장주문 이용이 더 늘어 환경파괴의 주범이
-                                    되고 있는 일회용 플라스틱 쓰레기가 급증했습니다. 아파트 재활용 분리수거장만 보더라도 플라스틱 종류에 관계없이 음식물과 비닐도 깨끗이 제거 되지
-                                    않은 채 쌓여 있고, 재활용 쓰레기 트럭에 가득 실린 어마어마한 양들의 쓰레기를 보면서 과연 재활용이 되는 것인지 의문을 갖게 되었습니다.많은 양을
-                                    생산하고 소비한 후에 폐기하거나 재활용하는 것보다 먼저 폐기되거나 재활용할 수 있는 쓰레기 발생...</p>
-                            </li>
+                            <c:forEach items="${ requestScope.suggest }" var="item">
+                                <li>
+                                    <h4 href="">${ item.TITLE }</h4>
+                                    <p>${ item.CONTENT }</p>
+                                </li>
+                            </c:forEach>
                         </ul>
-                        <ul>
+                        <ul id="proposal--container">
                             <div>
-                                <h3>서울시가 묻습니다 검색결과 (총 1건)</h3>
+                                <h3>서울시가 묻습니다 검색결과 (총 ${ requestScope.proposal.size() }건)</h3>
                                 <span class="more">더보기</span>
                             </div>
-                            <li>
-                                <p>일회용 배달용기 플라스틱 줄이기</p>
-                                <p>안녕하세요. 저는 고등학교 1학년 학생입니다.코로나 장기화로 인해 외식은 줄어들고 가정에서도 음식 배달과 포장주문 이용이 더 늘어 환경파괴의 주범이
-                                    되고 있는 일회용 플라스틱 쓰레기가 급증했습니다. 아파트 재활용 분리수거장만 보더라도 플라스틱 종류에 관계없이 음식물과 비닐도 깨끗이 제거 되지
-                                    않은 채 쌓여 있고, 재활용 쓰레기 트럭에 가득 실린 어마어마한 양들의 쓰레기를 보면서 과연 재활용이 되는 것인지 의문을 갖게 되었습니다.많은 양을
-                                    생산하고 소비한 후에 폐기하거나 재활용하는 것보다 먼저 폐기되거나 재활용할 수 있는 쓰레기 발생...</p>
-                            </li>
-                            <li>
-                                <p>일회용 배달용기 플라스틱 줄이기</p>
-                                <p>안녕하세요. 저는 고등학교 1학년 학생입니다.코로나 장기화로 인해 외식은 줄어들고 가정에서도 음식 배달과 포장주문 이용이 더 늘어 환경파괴의 주범이
-                                    되고 있는 일회용 플라스틱 쓰레기가 급증했습니다. 아파트 재활용 분리수거장만 보더라도 플라스틱 종류에 관계없이 음식물과 비닐도 깨끗이 제거 되지
-                                    않은 채 쌓여 있고, 재활용 쓰레기 트럭에 가득 실린 어마어마한 양들의 쓰레기를 보면서 과연 재활용이 되는 것인지 의문을 갖게 되었습니다.많은 양을
-                                    생산하고 소비한 후에 폐기하거나 재활용하는 것보다 먼저 폐기되거나 재활용할 수 있는 쓰레기 발생...</p>
-                            </li>
-                            <li>
-                                <p>일회용 배달용기 플라스틱 줄이기</p>
-                                <p>안녕하세요. 저는 고등학교 1학년 학생입니다.코로나 장기화로 인해 외식은 줄어들고 가정에서도 음식 배달과 포장주문 이용이 더 늘어 환경파괴의 주범이
-                                    되고 있는 일회용 플라스틱 쓰레기가 급증했습니다. 아파트 재활용 분리수거장만 보더라도 플라스틱 종류에 관계없이 음식물과 비닐도 깨끗이 제거 되지
-                                    않은 채 쌓여 있고, 재활용 쓰레기 트럭에 가득 실린 어마어마한 양들의 쓰레기를 보면서 과연 재활용이 되는 것인지 의문을 갖게 되었습니다.많은 양을
-                                    생산하고 소비한 후에 폐기하거나 재활용하는 것보다 먼저 폐기되거나 재활용할 수 있는 쓰레기 발생...</p>
-                            </li>
+                            <c:forEach items="${ requestScope.proposal }" var="item">
+                                <li>
+                                    <h4 href="">${ item.TITLE }</h4>
+                                    <p>${ item.CONTENT }</p>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
@@ -173,11 +144,43 @@
     <footer>
         <%@ include file="/includes/footer.jsp" %>
     </footer>
-    
+
+    <!-- jQuery Library -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/resources/script/header.js"></script>
     <script src="/resources/script/content-frame.js"></script>
     <script>
+        const suggestCount = ${ requestScope.suggest.size() };
+        const proposalCount = ${ requestScope.proposal.size() };
+        const keyword = "${ requestScope.keyword }";
+        var suggsetPage = 3;
+        var proposalPage = 3;
 
+        function createResultItem(data) {
+            let li = document.createElement('li');
+
+            let h4 = li.appendChild(document.createElement('h4'));
+            h4.innerHTML = data.TITLE;
+            h4.setAttribute('href', data.URL);
+
+            let p = li.appendChild(document.createElement('p'));
+            p.innerHTML = data.CONTENT;
+            return li;
+        }
+
+        function loadAjax() {
+            jQuery.ajax({
+                url: '/main/search.ajax',
+                type: 'GET',
+                data: {
+                    keyword: keyword
+                },
+                success: data => console.log(data),
+                error: e => console.log('ajax 통신 실패')
+            });
+        }
+
+        loadAjax();
     </script>
 </body>
 </html>

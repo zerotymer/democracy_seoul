@@ -18,7 +18,7 @@
             <ul class="submenu">
                 <li><a href="/suggest/suggest.do"></a>시민제안</li>
                 <li><a href="/discuss/link.do"></a>시민토론</li>
-                <li><a href="/proposal/proposalAllList.do"></a>서울시가 묻습니다</li>
+                <li><a href="/proposal/allList.do"></a>서울시가 묻습니다</li>
             </ul>
         </li>
         <li class="menuitem">
@@ -55,7 +55,7 @@
             <button class="btn invert searchbtn"></button>
         </li>
         <li class="login">
-            <button class="btn invert loginbtn"></button>
+            <button class="btn invert loginbtn" onclick="location.replace('/member/goLogin.do');"></button>
         </li>
         <li class="menubtn">
             <button id="menubtn" class="btn invert menubtn"></button>
