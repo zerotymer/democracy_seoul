@@ -4,7 +4,330 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>민주주의 서울 - 시민제안</title>
+
+
+<title>시민제안 &gt; 시민제안 등록 | 민주주의 서울</title>
+<script type="text/javascript" src="/cso/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    
+    var tag     = {};
+    var counter = 0;
+    
+    $(document).ready(function () {
+        
+        document.getElementById("main_addr_depth1").disabled = true;
+        $("#main_addr_depth1 option:eq(0)").attr("selected", "selected");
+        document.getElementById("main_addr_depth2").disabled = true;
+        $("#main_addr_depth2").html("<option value='0'>선택</option>");
+        document.getElementById("main_addr_depth3").disabled = true;
+        $("#main_addr_depth3").html("<option value='0'>선택</option>");
+        $('#main_addr_depth1').css("background-color", "#e6e6e6");
+        $('#main_addr_depth2').css("background-color", "#e6e6e6");
+        $('#main_addr_depth3').css("background-color", "#e6e6e6");
+    
+        var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;
+    
+        function addCheck (value) {
+            if( !pattern_spc.test(value)){
+                return true
+            }else{
+                alert("특수문자는 입력 불가능 합니다.!!!");
+                return false
+            }
+        }
+        
+        if($("input:checkbox[id='chkEmail']").is(":checked") == true){
+             $("#emailTr").show();
+        }else{
+             $("#emailTr").hide();              
+        }
+        // 삭제 버튼 
+        // 삭제 버튼은 비동기적 생성이므로 document 최초 생성시가 아닌 검색을 통해 이벤트를 구현시킨다.
+        $(document).on("click", ".del-btn", function (e) {
+            var index = $(this).attr("idx");
+            tag[index] = "";
+            $(this).parent().remove();
+        });
+        
+        
+        $(function(){
+            $("#addrCheckBox").click(function(){
+                var chk = $(this).is(":checked");//.attr('checked');
+                if(chk){
+                    
+                    document.getElementById("main_addr_depth1").disabled = false;
+                    document.getElementById("main_addr_depth2").disabled = false;
+                    document.getElementById("main_addr_depth3").disabled = false;
+                    $('#main_addr_depth1').css("background-color", "#ffffff");
+                    $('#main_addr_depth2').css("background-color", "#ffffff");
+                    $('#main_addr_depth3').css("background-color", "#ffffff");
+                    
+                    
+                }else{
+                    
+                    document.getElementById("main_addr_depth1").disabled = true;
+                    $("#main_addr_depth1 option:eq(0)").attr("selected", "selected");
+                    document.getElementById("main_addr_depth2").disabled = true;
+                    $("#main_addr_depth2").html("<option value='0'>선택</option>");
+                    document.getElementById("main_addr_depth3").disabled = true;
+                    $("#main_addr_depth3").html("<option value='0'>선택</option>");
+                    $('#main_addr_depth1').css("background-color", "#e6e6e6");
+                    $('#main_addr_depth2').css("background-color", "#e6e6e6");
+                    $('#main_addr_depth3').css("background-color", "#e6e6e6");
+                }
+            });
+        });
+    })
+
+    //formcheck
+    function dataSubmit() {
+        
+        var frm = document.frm;
+        
+        if( isFieldCheck(frm.title,"제목을 입력하세요.")) {
+            document.getElementById("suggest_tit").focus();
+            return false; 
+        }
+        
+        /*
+        if( isFieldCheck(frm.sugg_contact1,"휴대폰 번호를 입력하세요.")) { 
+            document.getElementById("sugg_contact1").focus();
+            return false; 
+        }
+        if( isFieldCheck(frm.sugg_contact2,"휴대폰 번호를 입력하세요.")) {
+            document.getElementById("sugg_contact2").focus();
+            return false; 
+        }
+        if( isFieldCheck(frm.sugg_contact3,"휴대폰 번호를 입력하세요.")) {
+            document.getElementById("sugg_contact3").focus();
+            return false; 
+        }        
+        */
+        
+        if( isFieldCheck(frm.sugg_contact1,"휴대폰 번호 첫자리를 입력하세요.")) { 
+            document.getElementById("sugg_contact1").focus();
+            return false; 
+        }
+        if( isFieldCheck(frm.sugg_contact2,"휴대폰 번호 중간자리를 입력하세요.")) {
+            document.getElementById("sugg_contact2").focus();
+            return false; 
+        }
+        if( isFieldCheck(frm.sugg_contact3,"휴대폰 번호 끝자리를 입력하세요.")) {
+            document.getElementById("sugg_contact3").focus();
+            return false; 
+        }
+        if($("input:checkbox[id='chkKakao']").is(":checked") == true){
+            $('#chk_kakao_val').val('Y');            
+        }else{
+            $('#chk_kakao_val').val('N');                           
+        }       
+        if($("input:checkbox[id='chkEmail']").is(":checked") == true){
+            if( isFieldCheck(frm.sugg_email1,"이메일 첫자리를 입력하세요.")) {
+                document.getElementById("sugg_email1").focus();
+                return false; 
+            }           
+            if( isFieldCheck(frm.sugg_email2,"이메일 끝자리를 입력하세요.")) {
+                document.getElementById("sugg_email2").focus();
+                return false; 
+            }
+            $('#chk_email_val').val('Y');
+        }else{
+            $('#chk_email_val').val('N');           
+        }
+        
+
+        oEditors.getById["ir1"].exec("UPDATE_IR_FIELD", []);
+        frm.content.value = document.getElementById("ir1").value;
+        
+        var str = strip_tags(frm.content.value, '');
+        if( str == '' ){
+            alert('내용을 입력하세요');
+//          frm.content.focus();
+            return false;
+        }
+        
+        if( document.getElementById("suggest_tit").value.length < 5){
+            alert("제목을 5자 이상 입력하세요. ");
+            document.getElementById("suggest_tit").focus();
+            return false;
+        }
+
+        var sugg_contact = frm.sugg_contact1.value + "_" + frm.sugg_contact2.value + "_" + frm.sugg_contact3.value;
+        $("#sugg_contact").val(sugg_contact);
+        
+        var sugg_email = frm.sugg_email1.value + "@" + frm.sugg_email2.value;
+        $('#sugg_email').val(sugg_email);
+        $('#hashTagArr').val($('#hero-demo').val());
+        
+        var main_addr_depth1 = "";
+        var main_addr_depth2 = "";
+        var main_addr_depth3 = "";
+        var final_choice = ""; // 관련지역 최종 위치
+        
+        if($("input:checkbox[id='addrCheckBox']").is(":checked") == true){
+            if($('#main_addr_depth2').val() == '0'){
+                alert('지역관련 체크시 [구] or [동] 까지 선택하여야 합니다.')
+                return;
+            }else{
+                main_addr_depth1 = $('#main_addr_depth1').val();
+                main_addr_depth2 = $('#main_addr_depth2').val();
+                main_addr_depth3 = $('#main_addr_depth3').val();
+                
+                if (main_addr_depth3 != "") {
+                    final_choice = main_addr_depth3;
+                } else if (main_addr_depth2 != "") {
+                    final_choice = main_addr_depth2;
+                } else {
+                    final_choice = main_addr_depth1;
+                }
+                
+                $('#addr_code').val(final_choice);
+            }
+        }
+        
+        if( !confirm("등록 하시겠습니까?") ){
+            return;
+        }
+        
+        if (frm.value == "y") {
+            alert("등록 중입니다. ");
+            return false;
+        }
+        var hostUrl = "https://democracy.seoul.go.kr/front/suggest/freeSuggestInsertFrm.do";
+        var up_params = {content: document.getElementById("ir1").value, file1: document.getElementById("suggest_file").value,hostUrl:hostUrl };
+        var tmp_data = new FormData(frm);
+        
+        $.ajax({
+            //url: 'http://api73.eseoul.go.kr:5500/UPServer/',   dev
+            url: 'https://api73.eseoul.go.kr:5443/UPServer/', // real
+            enctype: 'multipart/form-data',
+    		processData: false,
+    		contentType: false,
+            type: 'post',
+            crossDomain: true,
+            data:tmp_data,
+            cache: false,
+            error:function(request,status,error){
+                alert("--->code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                frm.value = "y";
+            },
+            success: function(res){
+                var data_result = JSON.parse(res);
+                if (data_result.privacy[0].isPriv == '0') {
+                    frm.value = "y";
+                    frm.submit();
+                } else {
+                	if(data_result.privacy[0].privType == '5'){
+                        frm.value = "y";
+                        frm.submit();
+                	}
+                	else{
+                		alert('작성하신 제안 내용 및 파일에 개인정보 및 금칙어가 포함되어 있어 등록이 거부되었습니다.');
+                	}
+                }
+            }
+        });
+    }
+
+    function titleInsert(value) {
+        if (value == "제목을 입력하세요") {
+            $("#title").val('');
+        }
+    } 
+    
+    // 임시 저장
+    function temporary() {
+        
+        var frm = document.frm;
+        if( isFieldCheck(frm.title,"제목을 입력하세요. ") ) { return false; }
+        oEditors.getById["ir1"].exec("UPDATE_IR_FIELD", []);
+        frm.content.value = document.getElementById("ir1").value;
+        
+        var str = strip_tags(frm.content.value, '');
+        if( str == '' ){
+            alert('내용을 입력하세요');
+            return false;
+        }
+        //if( isFieldCheck(frm.content,"내용을 입력하세요. ") ) { return false; }
+        
+        if (confirm("임시저장을 하게되면 현재 제안글은 등록 되지 않습니다. \n그래도 임시저장 하시겠습니까? ")) {
+            if (frm.value == "y") {
+                alert("등록 중입니다. ");
+                return false;
+            }
+            frm.value = "y";
+            frm.action = "/front/suggest/suggestInsertTmp.do";
+            frm.submit();   
+            
+        } else {
+            return false;
+        }
+    }
+    
+    function digit_check(evt){
+        var code = evt.which?evt.which:event.keyCode;
+        if(code < 48 || code > 57){
+            return false;
+        }
+    }
+    
+    function check(){
+        document.getElementById('suggest_file').click();
+    }
+    //카카오톡,이메일 체크
+    function chkFunction(val){
+        if(val == 'k'){
+            if($("input:checkbox[id='chkKakao']").is(":checked") == true){
+                $("#chk_kakao_val").val('Y');
+            }else{
+                $("#chk_kakao_val").val('N');                   
+            }           
+        }else if(val == 'e'){
+             if($("input:checkbox[id='chkEmail']").is(":checked") == true){
+                $("#emailTr").show();
+                $("#chk_email_val").val('Y');
+             }else{
+                $("#emailTr").hide();
+                $("#chk_email_val").val('N');                 
+             }   
+        }
+    //document.getElementById('phoneTr').hide
+    }
+    
+    function enterkey() {
+        if (window.event.keyCode == 13) {
+             // 엔터키가 눌렸을 때 실행할 내용
+            //alert('asdf');
+        }
+    }
+    
+    function get_addr_depth(sDeptDepth, sDeptPCode, selectTagPre) {
+        if(sDeptPCode !=""){
+            if (sDeptDepth == 3 && sDeptPCode == "") {
+                $("#"+selectTagPre+sDeptDepth).html("");
+            } else if (sDeptDepth == 2 && sDeptPCode == "") {
+                    $("#"+selectTagPre+sDeptDepth).html("");
+                    $("#"+selectTagPre+(sDeptDepth-1)).html("");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/front/suggest/getAddrList.do",
+                    data: "sDeptDepth="+sDeptDepth+"&sDeptPCode="+sDeptPCode,
+                    success: function(html) {
+                        $("#"+selectTagPre+sDeptDepth).html(html);
+                    }
+                });
+            }
+        }
+    }
+
+    </script>
+<link rel="stylesheet" type="text/css" media="all"
+	href="//www.seoul.go.kr/seoulgnb/seoul-common-gnb.css">
+
+
+
+
 <link rel="stylesheet" href="/resources/style/header.css">
 <link rel="stylesheet" href="/resources/style/footer.css">
 <link rel="stylesheet" href="/resources/style/color.css">
@@ -35,6 +358,17 @@ section {
 	/* overflow: scroll; */
 }
 </style>
+
+<!--////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+
+<!--  -->
+
 </head>
 <body>
 	<header>
@@ -117,9 +451,9 @@ section {
 				<div class="info-lst">
 					<ul>
 						<li>정치적 목적, 특정인 또는 단체에 대한 비방·명예훼손, 상업성 광고, 유사한 내용을 반복적으로 올리는
-							경우, 욕설·음란물 등 불건전한 게시물은 관리자에 의해 삭제될 수 있습니다.<br>
-						<a href="#" onclick="layerShow('layer03')"
-							title="홈페이지 운영 활성화에 관한 조례">(자세히 보기)</a>
+							경우, 욕설·음란물 등 불건전한 게시물은 관리자에 의해 삭제될 수 있습니다.<br> <a href="#"
+							onclick="layerShow('layer03')" title="홈페이지 운영 활성화에 관한 조례">(자세히
+								보기)</a>
 						</li>
 						<li><span style="color: blue">민원, 불편, 개선</span>, 부조리 신고, 홍보
 							등은 <a href="https://eungdapso.seoul.go.kr/" target="_blank">응답소</a>
@@ -228,19 +562,26 @@ section {
 								</td>
 							</tr>
 
-							<tr>
-								<th scope="row">내용<span class="ico-ess-mark">필수항목</span></th>
-								<td>
-									<div id="editor">
-										<label for="content" class="hidden"></label>
-										<textarea name="content" id="content" cols="1000" rows="30"
-											style="display: none; min-width: 260px; ime-mode: active;"></textarea>
-										<label for="ir1" class="hidden"></label>
-										<textarea name="ir1" id="ir1" cols="110" rows="30"
-											style="width: 100%; height: 400px; display: none; ime-mode: active;"></textarea>
-										<iframe frameborder="0" scrolling="no" title="editor"
-											style="width: 100%; height: 453px;"
-											src="/oasis/SEditor/SEditorSkin.html"></iframe>
+	<tr>
+		<th scope="row">내용<span class="ico-ess-mark">필수항목</span></th>
+			<td>
+				<div id="editor">
+					<script>
+					 
+					//글쓰기 폼으로 이동하게 하는 함수
+					$(document).ready(function(){    
+					        $("#btnWrite").click(function(){
+					            location.href="/proposal/proposalWrite.do";
+					        });
+					});
+					 
+					</script>
+				<!-- 	
+				<iframe frameborder="0" scrolling="no" title="editor"
+						style="width: 100%; height: 453px;"
+						src="/oasis/SEditor/SEditorSkin.html">
+				</iframe>
+				 -->
 									</div>
 								</td>
 							</tr>
@@ -263,16 +604,8 @@ section {
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<th scope="row"><label for="hero-demo">태그추가</label><span>(최대10개)</span></th>
-								<td><textarea id="hero-demo" name="hero-demo"
-										style="height: 60px;" class="tag-editor-hidden-src"></textarea>
-									<ul class="tag-editor ui-sortable">
-										<li style="width: 1px">&nbsp;</li>
-										<li class="placeholder"><div style="color: #757575;">해시태그를
-												입력하세여</div></li>
-									</ul></td>
-							</tr>
+							
+							
 							<tr>
 								<th scope="row">관련지역</th>
 								<td>
@@ -310,7 +643,7 @@ section {
 											wtx-context="F51653C1-1F2C-4F73-9D7E-D2B8A0AF4852"><option
 													value="0">선택</option></select>
 										</span> <span class="txt-table-info">지역과 관련한 시민제안일 경우에는 해당 지역을
-											선택해 주십시오. (구 또는 동까지 선택 가능)</span>
+											선택해 주십시오. (구 또는 동까지 선택 가능) </span>
 									</div>
 								</td>
 							</tr>
@@ -322,57 +655,20 @@ section {
 				<!-- //테이블 영역 -->
 
 				<div class="btn-area">
-					<div class="fl">
-						<a href="/front/allSuggest/list.do" class="btn btn-line1 btn-prev"
-							title="시민제안 등록 이전으로 이동" onclick="history.back(); return false;">이전</a>
-						<!--<a href="/front/allSuggest/list.do" class="btn btn-line1 btn-prev" title="시민제안 등록 이전으로 이동">목록</a> -->
-					</div>
+					
 					<button type="button" class="btn btn-solid2 xlg"
 						onclick="dataSubmit(); return false;">
 						<span>등록하기</span>
 					</button>
-
 				</div>
 			</div>
-
-			<!-- 사이드바 -->
-
-
-			<aside id="sidebar" class="sidebar">
-
-
-				
-
-				<div class="side-btm">
-					<ul>
-						<li><a href="/front/intro/faq/induList.do">민주주의 서울 소개</a></li>
-						<li><a href="/front/intro/faq/induList.do#faq">자주묻는 질문</a></li>
-					</ul>
-					<p>
-						<a href="/front/seoulAsk/seoulAsk_list.do"
-							title="서울시가 묻습니다! 서울시가 시민에게 직접 묻습니다. 참여하고 공감하면 정책이 실행됩니다. 자세히보기"
-							target="_blank"><img
-							src="/assets/front/images/common/img_side_banner.png"
-							title="서울시가 묻습니다"
-							alt="서울시가 묻습니다! 서울시가 시민에게 직접 묻습니다. 참여하고 공감하면 정책이 실행됩니다. 자세히보기"></a>
-					</p>
-
-				</div>
-
-			</aside>
-
-
-
-
-			<!-- //사이드바 -->
-
 		</div>
 
 
 
 
 
-<!-- 여기까지 -->
+		<!-- 여기까지 -->
 
 
 
