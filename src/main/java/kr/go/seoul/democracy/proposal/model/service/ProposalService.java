@@ -16,7 +16,12 @@ public interface ProposalService {
 	 void insert(Proposal proposal)throws Exception;
 	 
 	 //게시글수정
-	public int modify(Proposal proposal);
+	 void modify(Proposal proposal)throws Exception;
+	 
+	 //게시글삭제 
+	void delete(int proposalNo);
+
+	
 
 
 

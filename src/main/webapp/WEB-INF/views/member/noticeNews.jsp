@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>소식</title>
+<title>공지사항</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
@@ -26,20 +26,19 @@
       <div id="content">
          <div class="box-title">
             <p class="tit-small"></p>
-            <p class="tit-big">소식</p>
+            <p class="tit-big">공지사항</p>
          </div>
          
          <div class="notice-top">
          	 <div class="box-button">
 				<button class="btn-notice">
-					<a href="/notice/noticeNewslist.do">공지사항</a>
+					<a href="/board/noticeNewslist.do">공지사항</a>
 				</button>
 			 </div>
 		 </div>
-		
 		<div class="area-notice">
 			<div class="box-search">
-				<form action="" method="get"><!--공지사항 검색기능-->
+				<form action="/board/noticeNewsListSearch.do" method="get"><!--공지사항 검색기능-->
 					<div class="select-search">
 						<select name="type">
 							<option value="subject">글제목</option>
@@ -65,10 +64,10 @@
 			                <th width="150">작성일</th>
 			            </tr>
 			        </thead>
-			        <tbody>		        
+			        <tbody>		       				
 			            <tr>
-			                <td>(게시물 고유번호)</td>
-			                <td><div class="text-ellipsis subject"><a href="/notice/noticeNewsSelectContent.do?noticeNo=(게시물고유번호)&currentPage=(최근페이지)">(제목)</a></div></td><!-- 누르면 이동하게 -->
+			                <td>${ requestScope.list.noticeNewsNo }</td>
+			                <td><div class="text-ellipsis subject"><a href="/notice/noticeNewsSelectContent.do?noticeNo=(게시물고유번호)&currentPage=(최근페이지)">${ requestScope.boardNotice.noticeNewsTitle }</a></div></td><!-- 누르면 이동하게 -->
 			                <td>(조회수)</td>
 			                <td>(작성일)</td>
 			            </tr>

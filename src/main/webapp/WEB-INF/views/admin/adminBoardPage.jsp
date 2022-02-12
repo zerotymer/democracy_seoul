@@ -60,6 +60,9 @@
             width: 100%;
             height: 30px;
         }
+        .notice:hover {
+            cursor: pointer;
+        }
 
         #content {
             float: left;
@@ -143,7 +146,6 @@
                 <div class="menu_bar_inner">
                     BOARD
                     <div class="notice">- 공지사항</div>
-                    <div class="notice">- 게시판 관리</div>
                 </div>
             </div>
         </div>
@@ -189,14 +191,14 @@
                             <tbody>
                             <c:forEach items="${requestScope.list }" var="m" varStatus="i">
                                 <tr>
-                                    <th scope="row">${i.count }</th>
+                                    <th scope="row">${(i.count) + (requestScope.countResult) }</th>
                                     <td>${m.userId }</td>
                                     <td>${m.userName }</td>
                                     <td>${m.nick }</td>
                                     <td>${m.email }</td>
                                     <td>${m.enrollDate }</td>
                                     <td>
-                                        <button style="width:100%" class="stateChangeBtn"
+                                        <button style="width:100%; height: 100%;" class="stateChangeBtn"
                                                 data="${m.userId }">${m.endYN }</button>
                                     </td>
                                 </tr>
@@ -214,17 +216,21 @@
 
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="/admin/allMemberPageNavi.do" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">>></a>
-                        </li>
+                    	<c:if test="${ preNavi > 0 }">
+	                        <li class="page-item">
+	                            <a class="page-link" href="/admin/allMemberList.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
+	                        </li>
+                        </c:if>
+                        <c:forEach items="${ requestScope.navi }" var="m" varStatus="i">
+	                        <li class="page-item">
+	                        	<a class="page-link" href="/admin/allMemberList.do?currentPage=${ m }">${ m }</a>
+	                        </li>
+                        </c:forEach>
+                        <c:if test="${ nextNavi > 0 }">
+	                        <li class="page-item">
+	                            <a class="page-link" href="/admin/allMemberList.do?currentPage=${ nextNavi }">>></a>
+	                        </li>
+                        </c:if>
                     </ul>
                 </nav>
             </div>

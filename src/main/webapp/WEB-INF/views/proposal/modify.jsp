@@ -7,7 +7,10 @@
     <title>게시글 수정</title>
     <link rel="stylesheet" href="/resources/style/content-frame.css">
     <link rel="stylesheet" href="/resources/style/proposal/post-write.css">
-
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="content-frame">
@@ -88,7 +91,7 @@
             <!-- DHH: 다흐ㅎ흐 -->
            <br>
             <h1 style="text-align: center;">글쓰기</h1><br><br><br><br>
-   				 <form action='<c:url value='/proposal/modify.do'/>' method="post">
+   				 <form action='<c:url value='/proposal/update.do'/>' method="post">
 					  <input type="text" name="proposalTitle" class="title" placeholder="제목을 입력하세요" value="${proposal.proposalTitle }" >    
 				        <br>
 				        	<hr width="800px">

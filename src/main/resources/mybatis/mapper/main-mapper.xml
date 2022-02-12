@@ -7,8 +7,8 @@
 			'suggest' as CATEGORY,
 			suggest_title as TITLE,
 		    suggest_content as CONTENT,
-		    suggest_start as STARTDATE,
-		    suggest_end as ENDDATE,
+		    TO_CHAR(suggest_start, 'YYYY-MM-DD') as STARTDATE,
+		    TO_CHAR(suggest_end, 'YYYY-MM-DD') as ENDDATE,
 		    NVL(HIT_COUNT, 0) as HITCOUNT,
 			NVL("COMMENTS", 0) as COMMENTCOUNT,
 			NVL("HEARTS", 0) as HEARTCOUNT,
@@ -36,8 +36,8 @@
 			'discussion' as CATEGORY,
 			discuss_title as TITLE,
 			discuss_content as CONTENT,
-			discuss_start as STARTDATE,
-			discuss_end as ENDDATE,
+			TO_CHAR(discuss_start, 'YYYY-MM-DD') as STARTDATE,
+			TO_CHAR(discuss_end, 'YYYY-MM-DD') as ENDDATE,
 			NVL(HIT_COUNT, 0) as HITCOUNT,
 			NVL("COMMENTS", 0) as COMMENTCOUNT,
 			'0' as HEARTCOUNT,
@@ -60,8 +60,8 @@
 			'survey' as CATEGORY,
 			proposal_title as TITLE,
 			proposal_content as CONTENT,
-			proposal_start as STARTDATE,
-			proposal_end as ENDDATE,
+			TO_CHAR(proposal_start, 'YYYY-MM-DD') as STARTDATE,
+			TO_CHAR(proposal_end, 'YYYY-MM-DD') as ENDDATE,
 			NVL(HIT_COUNT, 0) as HITCOUNT,
 			NVL("COMMENTS", 0) as COMMENTCOUNT,
 			'0' as HEARTCOUNT,
@@ -78,4 +78,84 @@
 			ORDER BY proposal_date DESC)
 		WHERE ROWNUM BETWEEN 1 AND #{_parameter}
 	</select>
+
+	<select id="searchAll" resultType="hashmap">
+		SELECT
+			'suggest' AS "CATEGORY",
+			suggest_no AS "BOARDNO",
+			suggest_title AS "TITLE",
+			suggest_content AS "CONTENT"
+		FROM
+			SUGGESTION
+		WHERE suggest_title LIKE '%${_parameter}%'
+		   OR suggest_content LIKE '%${_parameter}%'
+
+		UNION
+
+		SELECT
+			'discussion' AS "CATEGORY",
+			discuss_no AS "BOARDNO",
+			discuss_title AS "TITLE",
+			discuss_content AS "CONTENT"
+		FROM
+			DISCUSSION
+		WHERE discuss_title LIKE '%${_parameter}%'
+		   OR discuss_content LIKE'%${_parameter}%'
+
+		UNION
+
+		SELECT
+			'proposal' AS "CATEGORY",
+			proposal_no AS "BOARDNO",
+			proposal_title AS "TITLE",
+			proposal_content AS "CONTENT"
+		FROM
+			PROPOSAL
+		WHERE proposal_title LIKE '%${_parameter}%'
+		   OR proposal_content LIKE '%${_parameter}%'
+	</select>
+
+	<select id="_searchAll" resultType="hashmap">
+		SELECT
+			CATEGORY as CATEGORY,
+			BOARDNO as BOARDNO,
+			TITLE as TITLE,
+			CONTENT as CONTENT
+		FROM (
+				 SELECT
+					 'SUGGEST' AS "CATEGORY",
+					 suggest_no AS "BOARDNO",
+					 suggest_title AS "TITLE",
+					 suggest_content AS "CONTENT"
+				 FROM
+					 SUGGESTION
+				 WHERE suggest_title LIKE '%${_parameter}%'
+					OR suggest_content LIKE '%${_parameter}%'
+
+				 UNION
+
+				 SELECT
+					 'discussion' AS "CATEGORY",
+					 discuss_no AS "BOARDNO",
+					 discuss_title AS "TITLE",
+					 discuss_content AS "CONTENT"
+				 FROM
+					 DISCUSSION
+				 WHERE discuss_title LIKE '%${_parameter}%'
+					OR discuss_content LIKE'%${_parameter}%'
+
+				 UNION
+
+				 SELECT
+					 'proposal' AS "CATEGORY",
+					 proposal_no AS "BOARDNO",
+					 proposal_title AS "TITLE",
+					 proposal_content AS "CONTENT"
+				 FROM
+					 PROPOSAL
+				 WHERE proposal_title LIKE '%${_parameter}%'
+					OR proposal_content LIKE '%${_parameter}%'
+			 )
+	</select>
+
 </mapper>

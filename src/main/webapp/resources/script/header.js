@@ -26,8 +26,5 @@ window.addEventListener('load', function() {
 });
 
 
-
-
-
 gnbSlide();
 

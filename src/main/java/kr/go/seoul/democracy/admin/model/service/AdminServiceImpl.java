@@ -3,13 +3,12 @@ package kr.go.seoul.democracy.admin.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.go.seoul.democracy.admin.model.dao.AdminDAO;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -67,20 +66,20 @@ public class AdminServiceImpl implements AdminService{
 		return aDAO.updateMemberEndYNChange(userId, endYN);
 	}
 
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.10
+	 * Description : 모든 회원 정보 가져오는 게시글 10개씩 끊기
+	 */
 	@Override
-	public ArrayList<Admin> selectAllPostList(int currentPage, int recordCountPerPage) {
+	public ArrayList<Member> selectAllPostList(int currentPage, int recordCountPerPage) {
 		return aDAO.selectAllPostList(recordCountPerPage, currentPage);
-		//전체 글 목록 10개씩 끊어서
-	}
-
-	@Override
-	public HashMap<String, Object> getAdminPageNavi(int currentPage, int recordCountPerPage, int naviSize, int recordTotalCount) {
-		
-		return null;
-		//네비바(5개)
 	}
 
 
+	public int totalCount() {
+		return aDAO.totalCount();
+	}
 
 	
 

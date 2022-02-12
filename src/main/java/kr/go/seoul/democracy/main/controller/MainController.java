@@ -4,7 +4,9 @@ import kr.go.seoul.democracy.main.model.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,26 +35,53 @@ public class MainController {
     	return "main/search";
     }
     
-    @RequestMapping("/main/search.do")
+    @RequestMapping("/main/search.go")
     public String search() {
-    	return "";
+    	return "main/search";
     }
 
-    @RequestMapping("/main/list.ajax")
+
+
+
+    @RequestMapping("/main/list.do")
+    public ModelAndView getList(ModelAndView mav) {
+        ArrayList<HashMap<String, Object>> list = service.selectLatestSuggest(4);
+        list.addAll(service.selectLatestDiscuss(4));
+        list.addAll(service.selectLatestProposal(4));
+        mav.setViewName("index");
+        mav.addObject("list", list);
+        return mav;
+    }
+
     @ResponseBody
-    public ArrayList<HashMap<String, Object>> getList() {
+    @RequestMapping("/main/list.ajax")
+    public ArrayList<HashMap<String, Object>> getListAjax() {
         ArrayList<HashMap<String, Object>> list = service.selectLatestSuggest(4);
         list.addAll(service.selectLatestDiscuss(4));
         list.addAll(service.selectLatestProposal(4));
         return list;
     }
 
-    @RequestMapping("/main/list.do")
+    @RequestMapping("/main/search.do")
+    public ModelAndView getSearch(ModelAndView mav,
+                                  @RequestParam (defaultValue="") String keyword,
+                                  @RequestParam (defaultValue="1") int currentPage,
+                                  @RequestParam (defaultValue="5") int pageSize) {
+        ArrayList<HashMap<String, Object>> list = service.selectSearchKeyword(currentPage, pageSize, keyword);
+        mav.setViewName("main/search.jsp");
+        mav.addObject("list", list);
+    	return mav;
+    }
+
     @ResponseBody
-    public ModelAndView getList(ModelAndView mav) {
-        ArrayList<HashMap<String, Object>> list = service.selectLatestSuggest(4);
-        list.addAll(service.selectLatestDiscuss(4));
-        list.addAll(service.selectLatestProposal(4));
-        return mav;
+    @RequestMapping("/main/search.ajax")
+    public ArrayList<HashMap<String, Object>> getSearchAjax(
+            @RequestParam (defaultValue="") String keyword,
+            @RequestParam (defaultValue="1") int currentPage,
+            @RequestParam (defaultValue="5") int pageSize) {
+
+        if (keyword.equals("")) return new ArrayList<HashMap<String, Object>>();
+
+        return service.selectSearchKeyword(currentPage, pageSize, keyword);
     }
 }

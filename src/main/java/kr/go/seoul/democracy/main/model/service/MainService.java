@@ -7,4 +7,6 @@ public interface MainService {
     ArrayList<HashMap<String, Object>> selectLatestSuggest(int count) ;
     ArrayList<HashMap<String, Object>> selectLatestDiscuss(int count) ;
     ArrayList<HashMap<String, Object>> selectLatestProposal(int count) ;
+
+    ArrayList<HashMap<String, Object>> selectSearchKeyword(int currentPage, int pageSize, String keyword) ;
 }

@@ -54,7 +54,6 @@
 			</list>
 		</constructor-arg>
 	</bean>
-	
 
 	<!-- config -->
 	<aop:config>
@@ -79,8 +78,6 @@
 			<aop:before method="encryptPasswordForAdmin" 		pointcut-ref="adminEncryptionPointCut" />
 			<aop:before method="encryptPasswordForHashMap" 		pointcut-ref="allHashMapPointCut" />
 		</aop:aspect>
-
-
 	</aop:config>
 
 	<aop:aspectj-autoproxy />

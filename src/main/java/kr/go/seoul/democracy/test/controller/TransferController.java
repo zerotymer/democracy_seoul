@@ -117,13 +117,10 @@ public class TransferController {
         ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "upload", "ckeditor");           // 자동 이름 생성
 
         JsonObject json = new JsonObject();
-        String url = "/upload/ckeditor/" + info.getFileName();
-//        System.out.println(url);
+        String url = "/upload/ckeditor/" + info.getFileName("max");
         json.addProperty("url", url);
         json.addProperty("uploaded", 1);
         json.addProperty("fileName", info.getOriginalFileName());
         new Gson().toJson(json, response.getWriter());
-//        System.err.println("img transfer");
-//        System.err.println(info);
     }
 }

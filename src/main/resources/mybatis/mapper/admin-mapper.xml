@@ -96,7 +96,7 @@
 	</update>
 	
 	<!-- 페이지 안에 들어갈 목록 갯수 -->
-	<select id="selectAllPostList" parameterType="java.util.List" resultType="member">
+	<select id="selectAllPostList" resultType="member">
 	  	SELECT 
 	  		userid as userId,
 			username as userName,
@@ -104,8 +104,17 @@
 			email as email,
 			enrolldate as enrollDate
 	  	FROM MEMBER
-			WHERE END_YN='N' ORDER BY USERID ASC ;
+		WHERE END_YN='N' 
+		ORDER BY USERID ASC
 	  </select>
 	
+	<!-- totalCount 필요한 로직 -->
+	<select id="selectMemberTotalCount" resultType="int">
+	  	SELECT 
+	  		COUNT(*)
+	  	FROM MEMBER
+		WHERE END_YN='N' 
+		ORDER BY USERID ASC
+	</select>
   	
 </mapper>

@@ -35,10 +35,15 @@ public class ProposalServiceImpl implements ProposalService {
 
 
 	@Override 
-	public int modify(Proposal proposal) { 
-		return 0;
+	public void modify(Proposal proposal) { 
+		pDAO.modify(proposal);
 		
-		// pDAO.modify(proposal);
+	}
+
+	@Override
+	public void delete(int proposalNo) {
+		pDAO.delete(proposalNo);
+		
 	}
 	
 
