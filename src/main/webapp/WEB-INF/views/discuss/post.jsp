@@ -60,7 +60,7 @@
             color:rgba(160, 160, 130);
         }
         
-        #vote{
+        .vote{
             width:80%;
             height:24px;
             margin-top:7%;
@@ -71,25 +71,38 @@
             justify-content: center;
             text-align: center;
         }
-        #vote>div:first-of-type{
-            width:60%;
+        .vote.reverse{
+        	flex-direction: row-reverse;
+        }
+        
+        .graph{
+            width:50%;
             height:100%;
             margin:auto 0;
             padding-top:2px;
-            background-color:rgba(69, 49, 250);
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
             color:white;
         }
-        #vote>div:last-of-type{
-            width:40%;
-            height:100%;
-            margin:auto 0;
-            padding-top:2px;
-            background-color:rgba(250, 49, 49);
+        .votePro{
+        	background-color:rgba(69, 49, 250);
+        	border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .voteCon{
+        	background-color: rgba(250, 49, 49);
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
-            color:white;
+        }
+        .vote.reverse .votePro{
+        	border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        	border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .vote.reverse .voteCon{
+        	border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        	border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
         }
         
         .contents{
@@ -106,6 +119,10 @@
             margin:0 auto;
             display:flex;
             flex-direction: row;
+        }
+        
+        .comment-container.reverse{
+        	flex-direction:row-reverse;
         }
         
         .comments{
@@ -131,7 +148,14 @@
         	flex-direction: row-reverse;
         	background-color: rgba(250, 49, 49);
         }
-        
+        .comment-container.reverse .comment.pro{
+        	flex-direction: row-reverse;
+        	margin-left:3%;
+        }
+        .comment-container.reverse .comment.con{
+        	flex-direction: row;
+        	margin-left:0;
+        }
         .comment .content {
             width:85%;
             height:100%;
@@ -222,14 +246,14 @@
             </div>
           </div>
 
-          <div id="vote">
-            <div>
+          <div class="vote">
+            <div class="votePro graph">
                 <svg style="width:18px;height:18px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" />
                 </svg>
             </div>
             
-            <div>
+            <div class="voteCon graph">
                 <svg style="width:18px;height:18px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" />
                 </svg>
@@ -261,7 +285,7 @@
 	        	</c:when>
 	        	
 	        	<c:otherwise>
-	        	<a href="#vote">
+	        	<a href=".vote">
 	        		<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
 					<div class="input-group abled">
 						<span class="input-group-text form">댓글</span>
@@ -346,7 +370,33 @@
 <script>
     var result1=false;
     var result2=false;
-    $('#vote>div:first').click(function(){
+    var discussNo=${discuss.discussNo};
+    var voteTotal=${vote.get('voteTotal')};
+	var votePro=${vote.get('votePro')};
+	var voteCon=${vote.get('voteCon')};
+    
+	
+    window.onload=function(){
+		$('.votePro').width(votePro/voteTotal*100+'%');
+	    $('.voteCon').width(voteCon/voteTotal*100+'%');
+	    
+	    
+	    if(voteCon>votePro){
+	    	$('.comment-container').addClass('reverse');
+	    	$('.vote').addClass('reverse');
+	    }
+	    
+	    /* 작성한 댓글이 있으면 댓글창 색 바꾸기 */
+		if($('.commentVote').val()=='N'){
+			$('#input-group-text').css('background-color','rgba(250, 49, 49)');
+		}
+		else if($('.commentVote').val()=='Y'){
+			$('#input-group-text').css('background-color','rgba(69, 49, 250)');
+		}
+	}
+    
+    
+    $('.votePro').click(function(){
         if(result1||result2){
             alert('이미 투표하셨습니다. 재투표는 불가합니다.');
         }
@@ -356,17 +406,29 @@
                 var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 찬성하시겠습니까?')
                 if(result){
                 	alert('찬성하셨습니다. 투표해 주셔서 감사합니다.');
-                    $('#vote>div:first').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" /></svg>');
+                    $('.votePro').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" /></svg>');
                     $('.input-group-text').css('background-color','rgba(69, 49, 250)');
                     $('.commentVote').val('Y');
                     $('#disabled').attr("disabled",false);
                     $('a').removeAttr("href");
-                    
+                    $.ajax({
+            			url : "/discuss/vote.ajax",
+            			type: "get",
+            			data : {votePro:1,voteCon:0,discussNo:discussNo},
+            			success : function(data){
+            				voteTotal++;
+            				votePro++;
+            				$('.votePro').width(votePro/voteTotal*100+'%');
+            			},
+            			error : function(data){
+            				alert('투표 결과를 반영하지 못했습니다. - 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+            			}	
+            		});
                 }
             }
         }
     });
-    $('#vote>div:last').click(function(){
+    $('.voteCon').click(function(){
         if(result1||result2){
             alert('이미 투표하셨습니다. 재투표는 불가합니다.');
         }
@@ -376,11 +438,24 @@
                 var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 반대하시겠습니까?')
                 if(result){
                     alert('반대하셨습니다. 투표해 주셔서 감사합니다.');
-                    $('#vote>div:last').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" /></svg>');
+                    $('.voteCon').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" /></svg>');
                     $('.input-group-text').css('background-color','rgba(250, 49, 49)');
                     $('.commentVote').val('N');
                     $('#disabled').attr("disabled",false);
                     $('a').removeAttr("href");
+                    $.ajax({
+            			url : "/discuss/vote.ajax",
+            			type: "get",
+            			data : {votePro:0,voteCon:1,discussNo:discussNo},
+            			success : function(data){
+            				voteTotal++;
+            				voteCon++;
+            				$('.voteCon').width(voteCon/voteTotal*100+'%');
+            			},
+            			error : function(data){
+            				alert('투표 결과를 반영하지 못했습니다. - 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+            			}	
+            		});
                 }
             }
         }
@@ -396,18 +471,6 @@
 	});
 </script>
 
-
-<!-- 작성한 댓글이 있으면 댓글창 색 바꾸기 -->
-<script>
-	window.onload=function(){
-		if($('.commentVote').val()=='N'){
-			$('#input-group-text').css('background-color','rgba(250, 49, 49)');
-		}
-		else if($('.commentVote').val()=='Y'){
-			$('#input-group-text').css('background-color','rgba(69, 49, 250)');
-		}
-	}
-</script>
 
 <!-- 게시글 내용 기호 변환 -->
 <script language="javascript">
@@ -425,11 +488,12 @@
 <script>
 	$('#getComment').click(function(){
 		var currentCommentPage=$('#getComment').val();
+		var discussNo=${discuss.discussNo};
 		
 		$.ajax({
 			url : "/discuss/getComment.do",
 			type: "get",
-			data : {currentCommentPage:currentCommentPage},
+			data : {currentCommentPage:currentCommentPage,discussNo:discussNo},
 			success : function(data){
 				for(var i=0;i<data.length;i++){
 					if(data[i].comment_vote=='Y'){

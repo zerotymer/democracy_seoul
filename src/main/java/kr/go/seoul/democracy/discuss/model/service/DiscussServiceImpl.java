@@ -71,4 +71,14 @@ public class DiscussServiceImpl implements DiscussService {
 		return dDAO.myComment(discussNo,userId);
 	}
 
+	@Override
+	public int vote(HashMap<String, Object> vote) {
+		return dDAO.vote(vote);
+	}
+
+	@Override
+	public HashMap<String, Object> getVote(int discussNo) {
+		return dDAO.getVote(discussNo);
+	}
+
 }
