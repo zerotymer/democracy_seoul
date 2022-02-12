@@ -1,43 +1,49 @@
 package kr.go.seoul.democracy.suggest.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+
 import kr.go.seoul.democracy.suggest.vo.Sug;
 
 @Repository("sugDAO")
 public class SugDAO {
-    /// FIELDs
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
+	//
     private SqlSessionTemplate sqlSession;
 
-    /// CONSTRUCTGORs
-    @Autowired
-    public SugDAO(@Qualifier("sqlSessionTemplate") SqlSessionTemplate sqlSession) {
-        this.sqlSession = sqlSession;
-    }
+	public Sug proposalView(int SugNo) {
+		return sqlSession.selectOne("proposal.proposalView",SugNo);
+	}
 
-    /// METHODs
+    //
     public String selectSysdate() {
         return sqlSession.selectOne("sug.date");
     }
 
     //@@미완성
-	public ArrayList<Sug> selectAllNoticeList(int recordCountPerPage, int currentPage) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Sug> selectList(int recordCountPage, int curPage) {
+		int offset = (curPage-1)*recordCountPage;
+		RowBounds rows = new RowBounds(offset,recordCountPage);
+		return sqlSession.selectList("sug.selectAllList",null,rows);
 	}
 
-	public int noticeTotalCount() {
-		// TODO Auto-generated method stub
-		int recordTotalCount = sqlSession.selectOne("notice.selectNoticeTotalCount");
+	public void insert(Sug sug) {
+		System.err.println(sug);
+		sqlSession.insert("sug.insert",sug);
 		
-		return recordTotalCount;
 	}
+
+	
+
+
 
 }
 
