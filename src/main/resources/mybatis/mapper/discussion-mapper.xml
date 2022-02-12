@@ -80,8 +80,22 @@
 	</insert>
 	
 	<insert id="writeComment" parameterType="hashmap">
-		insert into discussion values
-		(#{discussNo},discuss_comment_seq.nextval,#{userId},#{commentContent},#{commentVote},current_date)
+		merge into discuss_comment using dual
+		on (userid=#{userId})
+		when matched then
+		    update set comment_content=#{commentContent},
+		               comment_date=current_date
+		when not matched then
+		    insert (discuss_no,comment_no,userid,comment_content,comment_vote,comment_date)
+		    values (#{discussNo},discuss_comment_seq.nextval,#{userId},#{commentContent},#{commentVote},current_date);
 	</insert>
+	
+	<select id="myComment" parameterType="hashmap" resultType="hashmap">
+		select
+			comment_content as commentContent,
+			comment_vote as commentVote
+		from discuss_comment
+		where discuss_no=#{discussNo} and userid=#{userId}
+	</select>
 	
 </mapper>

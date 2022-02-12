@@ -66,4 +66,9 @@ public class DiscussServiceImpl implements DiscussService {
 		return dDAO.writeComment(comment);
 	}
 
+	@Override
+	public HashMap<String, Object> myComment(int discussNo, String userId) {
+		return dDAO.myComment(discussNo,userId);
+	}
+
 }

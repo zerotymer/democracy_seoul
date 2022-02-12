@@ -29,9 +29,9 @@ public class HitsDAO {
         HitsTableData table = new HitsTableData(tableName, boardNo);
         int exist = session.selectOne("hits.isExist", table);
         switch (exist) {
-            case 0: exist = session.insert("hits.insertBoard", table);
-            case 1: exist = session.update("hits.updateBoard", table);
-            default: return exist;
+            case 0: exist = session.insert("hits.insertBoard", table); break;
+            case 1: exist = session.update("hits.updateBoard", table); break;
         }
+        return exist;
     }
 }

@@ -23,6 +23,7 @@ import com.google.gson.JsonObject;
 import kr.go.seoul.common.ImageResizeTemplate;
 import kr.go.seoul.common.transfer.ImageTransferInfo;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
 import kr.go.seoul.democracy.discuss.model.service.DiscussService;
 import kr.go.seoul.democracy.discuss.model.vo.Discuss;
 import kr.go.seoul.democracy.discuss.model.vo.DiscussFile;
@@ -57,7 +58,9 @@ public class DiscussController {
 	
 	//시민토론 게시글 하나 데이터 가져오기+댓글 페이징 처리(더보기)
 	@RequestMapping(value="/discuss/onePost.do", method = RequestMethod.GET)
-	public ModelAndView discussOne(ModelAndView mav,@RequestParam int discussNo) {
+	public ModelAndView discussOne(ModelAndView mav,
+								@RequestParam int discussNo,
+								@SessionAttribute Member user) {
 		//페이징 처리
 		int pageSize=5; //한번에 댓글 몇개씩 보여줄건지
 		int totalCount=dService.commentTotalCount(discussNo); //해당 게시글에 댓글 총 갯수
@@ -78,12 +81,19 @@ public class DiscussController {
 		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/pageSize));
 		mav.addObject("file",file);
 		
+		if(user!=null) {
+			String userId=user.getUserId();
+			HashMap<String, Object> comment=dService.myComment(discussNo,userId);
+			if(comment!=null) mav.addObject("my",comment);
+		}
+		
 		if(discuss!=null) mav.setViewName("discuss/post"); //해당 게시글을 찾아 게시글 페이지로 이동
 		else mav.setViewName("discuss/error"); //해당 게시글을 찾지 못했을 경우 에러 페이지로 이동
 		
 		return mav;
 	}
 	
+	//댓글 더보기
 	@RequestMapping(value="/discuss/getComment.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<HashMap<String, Object>> getComment(@RequestParam int discussNo,
@@ -96,13 +106,16 @@ public class DiscussController {
 		return comment;
 	}
 	
+	//댓글 작성
 	@RequestMapping(value="/discuss/writeComment.do", method = RequestMethod.GET)
 	public ModelAndView writeComment(ModelAndView mav,
-									//@SessionAttribute user,
-									@SessionAttribute int discussNo,
-									@RequestParam String userId,
+									@SessionAttribute Member user,
+									@RequestParam int discussNo,
 									@RequestParam String commentContent,
-									@RequestParam char commentVote) {
+									@RequestParam String vote) {
+		
+		String userId=user.getUserId();
+		char commentVote=vote.charAt(0);
 		
 		HashMap<String,Object> comment=new HashMap<>();
 		comment.put("discussNo", discussNo);
