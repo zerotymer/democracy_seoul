@@ -50,7 +50,7 @@ public class DiscussDAO {
    }
 
 	public int write(Discuss discuss) {
-		return sqlSession.selectOne("discuss.write", discuss);
+		return sqlSession.insert("discuss.write", discuss);
 	}
 	
 	public ArrayList<HashMap<String, Object>> getComment(int discussNo, int currentCommentPage, int pageSize) {
@@ -59,7 +59,7 @@ public class DiscussDAO {
 	}
 
 	public int writeComment(HashMap<String, Object> comment) {
-		return sqlSession.selectOne("discuss.writeComment", comment);
+		return sqlSession.insert("discuss.writeComment", comment);
 	}
 
 	public HashMap<String, Object> myComment(int discussNo, String userId) {
@@ -67,6 +67,14 @@ public class DiscussDAO {
 		map.put("discussNo", discussNo);
 		map.put("userId", userId);
 		return sqlSession.selectOne("discuss.writeComment", map);
+	}
+
+	public int vote(HashMap<String, Object> vote) {
+		return sqlSession.update("discuss.vote", vote);
+	}
+
+	public HashMap<String, Object> getVote(int discussNo) {
+		return sqlSession.selectOne("discuss.getVote", discussNo);
 	}
 
 }

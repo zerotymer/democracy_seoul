@@ -60,7 +60,8 @@ public class DiscussController {
 	@RequestMapping(value="/discuss/onePost.do", method = RequestMethod.GET)
 	public ModelAndView discussOne(ModelAndView mav,
 								@RequestParam int discussNo,
-								@SessionAttribute Member user) {
+								//@SessionAttribute Member user
+								@RequestParam String userId) {
 		//페이징 처리
 		int pageSize=5; //한번에 댓글 몇개씩 보여줄건지
 		int totalCount=dService.commentTotalCount(discussNo); //해당 게시글에 댓글 총 갯수
@@ -71,18 +72,19 @@ public class DiscussController {
 		ArrayList<HashMap<String, Object>> proComment = dService.proComment(discussNo,pageSize,currentCommentPage);
 		ArrayList<HashMap<String, Object>> conComment=dService.conComment(discussNo,pageSize,currentCommentPage); //게시글 번호로 해당 게시글의 반대 댓글 목록 가져오기
 		ArrayList<DiscussFile> file=dService.file(discussNo); //게시글 번호로 해당 게시글의 파일 목록 가져오기
+		HashMap<String,Object> vote=dService.getVote(discussNo);
 		
 		mav.addObject("discuss",discuss);
 		mav.addObject("pro",proComment);
 		mav.addObject("con",conComment);
-		mav.addObject("totalComment",totalCount);
+		mav.addObject("vote",vote);
 		//mav.addObject("currentCommentPage",currentCommentPage);
 		//mav.addObject("pageSize",pageSize);
 		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/pageSize));
 		mav.addObject("file",file);
 		
-		if(user!=null) {
-			String userId=user.getUserId();
+		if(userId!=null) {
+			//String userId=user.getUserId();
 			HashMap<String, Object> comment=dService.myComment(discussNo,userId);
 			if(comment!=null) mav.addObject("my",comment);
 		}
@@ -93,8 +95,23 @@ public class DiscussController {
 		return mav;
 	}
 	
+	//투표하기
+	@RequestMapping(value="/discuss/vote.ajax", method = RequestMethod.GET)
+	@ResponseBody
+	public int vote(@RequestParam int discussNo,
+									@RequestParam(defaultValue="0") int votePro,
+									@RequestParam(defaultValue="0") int voteCon){
+		HashMap<String,Object> vote=new HashMap<String,Object>();
+		vote.put("discussNo", discussNo);
+		vote.put("votePro", votePro);
+		vote.put("voteCon", voteCon);
+		int result=dService.vote(vote);
+		
+		return result;
+	}
+	
 	//댓글 더보기
-	@RequestMapping(value="/discuss/getComment.do", method = RequestMethod.GET)
+	@RequestMapping(value="/discuss/getComment.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<HashMap<String, Object>> getComment(@RequestParam int discussNo,
 								@RequestParam(defaultValue="1") int currentCommentPage){
@@ -153,7 +170,8 @@ public class DiscussController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/discuss/imageUpload.do", method = RequestMethod.POST)
+	//게시글  작성 시 이미지 불러오기
+	@RequestMapping(value = "/discuss/imageUpload.ajax", method = RequestMethod.POST)
     public void ajaxImageUpload(HttpServletRequest request,
                                 HttpServletResponse response) throws IOException {
         ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "upload", "discussImg");
@@ -165,8 +183,6 @@ public class DiscussController {
         json.addProperty("uploaded", 1);
         json.addProperty("fileName", info.getOriginalFileName());
         new Gson().toJson(json, response.getWriter());
-        System.err.println("img transfer");
-        System.err.println(info);
     }
 		
 }

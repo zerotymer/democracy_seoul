@@ -87,7 +87,7 @@
 		               comment_date=current_date
 		when not matched then
 		    insert (discuss_no,comment_no,userid,comment_content,comment_vote,comment_date)
-		    values (#{discussNo},discuss_comment_seq.nextval,#{userId},#{commentContent},#{commentVote},current_date);
+		    values (#{discussNo},discuss_comment_seq.nextval,#{userId},#{commentContent},#{commentVote},current_date)
 	</insert>
 	
 	<select id="myComment" parameterType="hashmap" resultType="hashmap">
@@ -96,6 +96,25 @@
 			comment_vote as commentVote
 		from discuss_comment
 		where discuss_no=#{discussNo} and userid=#{userId}
+	</select>
+	
+	<update id="vote" parameterType="hashmap">
+		update discuss_vote set
+			vote_pro=vote_pro+#{votePro},
+			vote_con=vote_con+#{voteCon},
+			vote_total=vote_total+1
+		where discuss_no=#{discussNo}
+	</update>
+	
+	<select id="getVote" resultType="hashmap">
+		select count(*) from discuss_comment where discuss_no=3
+		union
+		select
+			vote_pro as votePro,
+			vote_con as voteCon,
+			vote_total as voteTotal
+		from discuss_comment
+		where discuss_no=#{value}
 	</select>
 	
 </mapper>

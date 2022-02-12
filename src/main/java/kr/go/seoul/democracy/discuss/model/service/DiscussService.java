@@ -30,4 +30,8 @@ public interface DiscussService {
 
 	HashMap<String, Object> myComment(int discussNo, String userId);
 
+	int vote(HashMap<String, Object> vote);
+
+	HashMap<String, Object> getVote(int discussNo);
+
 }
