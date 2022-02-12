@@ -89,36 +89,31 @@
             <br>
             	<h1 style="text-align: center;">글쓰기</h1><br><br><br><br>
 					<form action="/proposal/enroll.do" method="post">
-				   		 <div style="text-align:center;">
+				   		<div style="text-align:center;">
 				    	
-				        	<input type="text" name="proposalTitle" class="title" placeholder="제목을 입력하세요" >    
-				       			 <br>
-				        			<hr width="800px">
-										<div class="textBox">			          
-					             			<textarea id="ckeditor" class="ckeditor" name="proposalContent" ></textarea> 
-				                				</div>
-													<br>
-										  				<button type="submit" class="commit" style="float: right;" a href="/proposal/enroll">
-										    				  글작성
-										  				</button>
-				  									</div>
-												</form>  
-								 <!-- 이미지 업로드 -->
-								   	<input type="file" id="thumbnailImg" placeholder="이미지썸네일"/>
-								<button id="thumbBtn">업로드</button>
-							<img id="thumbImg">								
+				        	<input type="text" name="proposalTitle" class="title" placeholder="제목을 입력하세요" > <br>
+		        			<hr width="800px">
+							<div class="textBox">			          
+		             			<textarea id="ckeditor" class="ckeditor" name="proposalContent" ></textarea> 
+	                		</div><br>
+							<button type="submit" class="commit" style="float: right;" a href="/proposal/enroll"> 글작성</button>
+			  			</div>
+					<input type="hidden" name="proposalThumbnail" id="thumbnail"/>
+					
+					</form>  
+					
+							<!-- 이미지 업로드 -->
+					<input type="file" id="thumbnailImg" placeholder="이미지썸네일"/>
+					<button id="thumbBtn">업로드</button>							
         				<br><br><br>
         		<br><br><br>
            	</div>
-         </div>
+     
     </section>
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
 	<script src="https://cdn.ckeditor.com/ckeditor5/11.1.0/classic/ckeditor.js"></script>
     <script src="/resources/script/content-frame.js"></script>
+   			 
    			 <script>
     
 			    $("#thumbBtn").click(function(){
@@ -138,8 +133,7 @@
 			    	    contentType: false,
 			    		success: function(data){
 			    			var json = JSON.parse(data);
-			    			document.getElementById('thumbImg').src = json.imgUrl;
-							console.log(json.fileName);
+			    			document.getElementById('thumbnail').value = json.imgUrl;
 							alert("업로드 성공");
 			    		}
 			    		
