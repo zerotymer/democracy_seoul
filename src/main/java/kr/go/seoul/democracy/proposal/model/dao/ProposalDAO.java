@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import kr.go.seoul.democracy.proposal.model.vo.Proposal;
+import kr.go.seoul.democracy.proposal.model.vo.ProposalComment;
 
 @Repository("proposalDAO")
 public class ProposalDAO {
@@ -51,7 +52,12 @@ public class ProposalDAO {
 	 sqlSession.update("proposal.delete",proposalNo); 
 	 }
 
+	 public List<ProposalComment> comlist(int userId){
+		  return sqlSession.selectList("proposalComment",userId);
+	 }
+	
+	public void comWrite(Proposal ProposalComment) {
+		sqlSession.insert("proposalComment",ProposalComment);
+	}
 	 
-	
-	
 }
