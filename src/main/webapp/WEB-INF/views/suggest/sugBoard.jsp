@@ -126,8 +126,8 @@
             <div class="contents-session">
                 <!-- 글작성 버튼 위치 -->
                 <div class="contents--textarea">
-                    <h2>어쩌고 저쩌고</h2>
-                    <span>읍냐?</span>
+                    <h2>시민 여러분의 적극적인 제안으로 서울이 바뀝니다!</h2>
+                    <span>여러분의 의견은 제안해주세요</span>
                 </div>
                 <div class="contents--btns">
                     <button class="btn suggest" onclick="location.href='suggestwrite.do' ">시민 제안하기</button>
@@ -141,9 +141,9 @@
 
             <div class="contents-tag">
                 <!-- 태그 위치 -->
-                <a href="">#이게나다</a>
-                <a href="">#골목책방</a>
-                <a href="">#누구신가</a>
+                <a href="">#하기나에</a>
+                <a href="">#Summer Night</a>
+                <a href="">#꿈이 뭐야</a>
             </div>
             
         </div>
@@ -154,14 +154,12 @@
 
 				<c:forEach items="${requestScope.list}" var="sug" varStatus="i"> 
 		            <div class="card-item survey">
-		                <div class="category"> 설문</div>
+		                <div class="category"> 제안</div>
 		                <div class="title">
 		                	<a class="sugTitle">${sug.sugTitle }</a>
 		                </div>
 		                <div class="content">${sug.sugContent }</div>
-		                <div class="thumnail">
-	                        <img src="${sug.sugThumbnail }" alt="제목" />
-	                    </div>
+		                
 		                <div class="icons">
 		                    <object class="icon hits auto-hidden"></object>
 		                    <span>200</span>
@@ -170,9 +168,9 @@
 		                    <object class="icon comment"></object>
 		                    <span>10</span>
 		                    <object class="icon calendar auto-hidden"></object>
-		                    <span> ${sug.sugStart } ~ ${sug.sugEnd }</span>
+		                    <span> ${sug.sugStart} ~ ${sug.sugEnd}</span>
 	                    </div>
-	                    <a class="detail-btn" href="/sug/post.do?sugNo=${sug.sugNo}">
+	                    <a class="detail-btn" href="/suggest/suggestview.do?sugNum=${sug.sugNum}">
                         			결과 보기 
                    		</a>
       				</div>
@@ -180,10 +178,7 @@
                
             </div>
 						
-							 
-			
-						
-            <div class="contents-navbar"></div>
+				
         </div>
         
         
