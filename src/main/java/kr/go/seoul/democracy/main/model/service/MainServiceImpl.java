@@ -33,4 +33,9 @@ public class MainServiceImpl implements MainService {
     public ArrayList<HashMap<String, Object>> selectLatestProposal(int count) {
         return mDAO.selectLatestProposal(count);
     }
+
+    @Override
+    public ArrayList<HashMap<String, Object>> selectSearchKeyword(int currentPage, int pageSize, String keyword) {
+        return mDAO.selectSearchKeyword(currentPage, pageSize, keyword);
+    }
 }

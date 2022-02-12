@@ -1,5 +1,7 @@
 package kr.go.seoul.democracy.common;
 
+import kr.go.seoul.democracy.adminNotice.model.vo.AdminNotice;
+import kr.go.seoul.democracy.board.model.vo.BoardNotice;
 import kr.go.seoul.democracy.common.model.service.HitsService;
 import kr.go.seoul.democracy.common.model.service.HitsServiceImpl;
 import kr.go.seoul.democracy.discuss.model.vo.Discuss;
@@ -22,7 +24,7 @@ public class HitsAdvice {
     /// FIELDs
     private HitsService hService;
 
-    /// CONSTRUCTORs
+    /// CONSTRUCTORsdgk
     @Autowired
     public HitsAdvice(@Qualifier("hitsServiceImpl") HitsServiceImpl hService) {
         this.hService = hService;   // Service가 아닌 ServiceImpl을 호출하여 AOP 차단
@@ -30,21 +32,25 @@ public class HitsAdvice {
     }
 
     /// POINTCUT & Weaver
-    @Pointcut("execution(kr.go.seoul.democracy.suggest.vo.Sug kr..service.*.*(..))")
-    public void suggetPointCut() {}
+    // Suggest
+    @Pointcut("execution(kr..Sug kr..service.*.*(..))")
+    public void suggestPointCut() {}
 
+    @After("suggestPointCut()")
     public void hitSuggest(JoinPoint jp) {
         if (!(jp.getArgs()[0] instanceof Sug)) return;
 
         Sug value = (Sug) jp.getArgs()[0];
         if (value == null) return;
 
-        hService.addCountHitsTable("SUGGEST_HITS", 1);                                           // TODO: REVISE
+        hService.addCountHitsTable("SUGGEST_HITS", );                                           // TODO: REVISE
     }
 
-    @Pointcut("execution(kr.go.seoul.democracy.discuss.model.vo.Discuss kr..service.*.*(..))")
+    // Discuss
+    @Pointcut("execution(kr..Discuss kr..service.*.*(..))")
     public void discussPointCut() {}
 
+    @After("discussPointCut()")
     public void hitDiscuss(JoinPoint jp) {
         if (!(jp.getArgs()[0] instanceof Discuss)) return;
 
@@ -54,11 +60,13 @@ public class HitsAdvice {
         hService.addCountHitsTable("DISCUSSION_HITS", value.getDiscussNo());
     }
 
-    @Pointcut("execution(kr.go.seoul.democracy.proposal.model.vo.Proposal kr..service.*.*(..))")      // TODO: model
+    // Proposal
+    @Pointcut("execution(kr..Proposal kr..service.*.*(..))")      // TODO: model
     public void proposalPointCut() {}
 
+    @After("proposalPointCut()")
     public void hitProposal(JoinPoint jp) {
-        if (!(jp.getArgs()[0] instanceof kr.go.seoul.democracy.proposal.model.vo.Proposal)) return;
+        if (!(jp.getArgs()[0] instanceof Proposal)) return;
 
         Proposal value = (Proposal) jp.getArgs()[0];
         if (value == null) return;
@@ -66,5 +74,19 @@ public class HitsAdvice {
         hService.addCountHitsTable("PROPOSAL_HITS", value.getProposalNo());
     }
 
+    // Notice
+    @Pointcut("execution(kr..BoardNotice kr..service.*.*(..))")
+    public void noticePointCut() {}
 
+    @After("noticePointCut()")
+    public void hitNotice(JoinPoint jp) {
+        if (!(jp.getArgs()[0] instanceof BoardNotice)) return;
+
+        BoardNotice value = (BoardNotice) jp.getArgs()[0];
+        if (value == null) return;
+
+        hService.addCountHitsTable("NOTICE_HITS", value.getNoticeNewsNo());
+    }
+
+    // NEWS
 }
