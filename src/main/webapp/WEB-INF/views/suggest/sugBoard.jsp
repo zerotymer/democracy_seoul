@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,7 +130,7 @@
                     <span>읍냐?</span>
                 </div>
                 <div class="contents--btns">
-                    <button class="btn suggest">시민 제안하기</button>
+                    <button class="btn suggest" onclick="location.href='suggestwrite.do' ">시민 제안하기</button>
                 </div>
             </div>
 
@@ -146,264 +147,54 @@
             </div>
             
         </div>
+        
+        
         <div class="contents">
             <div class="card-container">
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-                <div class="card-item suggest">
-                    <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
-                    <div class="content">내용</div>
-                    <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
-                    </div>
-                    <div class="icons">
-                        <object class="icon hits auto-hidden"></object>
-                        <span>212</span>
-                        <object class="icon heart"></object>
-                        <span>11</span>
-                        <object class="icon comment"></object>
-                        <span>12</span>
-                        <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
-                    </div>
-                    <a class="detail-btn" href="">
-                        상세보기
-                    </a>
-                </div>
-            </div>
 
+				<c:forEach items="${requestScope.list}" var="sug" varStatus="i"> 
+		            <div class="card-item survey">
+		                <div class="category"> 설문</div>
+		                <div class="title">
+		                	<a class="sugTitle">${sug.sugTitle }</a>
+		                </div>
+		                <div class="content">${sug.sugContent }</div>
+		                <div class="thumnail">
+	                        <img src="${sug.sugThumbnail }" alt="제목" />
+	                    </div>
+		                <div class="icons">
+		                    <object class="icon hits auto-hidden"></object>
+		                    <span>200</span>
+		                    <object class="icon heart"></object>
+		                    <span>10</span>
+		                    <object class="icon comment"></object>
+		                    <span>10</span>
+		                    <object class="icon calendar auto-hidden"></object>
+		                    <span> ${sug.sugStart } ~ ${sug.sugEnd }</span>
+	                    </div>
+	                    <a class="detail-btn" href="/sug/post.do?sugNo=${sug.sugNo}">
+                        			결과 보기 
+                   		</a>
+      				</div>
+           		</c:forEach> 
+               
+            </div>
+						
+							 
+			
+						
             <div class="contents-navbar"></div>
         </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </section>
 
     <footer>

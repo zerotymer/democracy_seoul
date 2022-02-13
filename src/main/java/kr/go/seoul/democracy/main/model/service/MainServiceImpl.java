@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.main.model.service;
 
 import kr.go.seoul.democracy.main.model.dao.MainDAO;
+import kr.go.seoul.democracy.main.model.vo.KeywordType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,17 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public ArrayList<HashMap<String, Object>> selectSearchKeyword(int currentPage, int pageSize, String keyword) {
-        return mDAO.selectSearchKeyword(currentPage, pageSize, keyword);
+    public ArrayList<HashMap<String, Object>> selectSearchKeyword(String keyword) {
+        return mDAO.selectSearchKeyword(keyword);
+    }
+
+    @Override
+    public ArrayList<HashMap<String, Object>> selectSearchKeyword(int currentPage, int pageSize, String keyword, KeywordType type) {
+        return mDAO.selectSearchKeyword(currentPage, pageSize, keyword, type);
+    }
+
+    @Override
+    public int selectCountKeyword(String keyword) {
+        return mDAO.selectCountKeyword(keyword);
     }
 }
