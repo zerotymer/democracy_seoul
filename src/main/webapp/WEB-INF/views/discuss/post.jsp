@@ -320,8 +320,8 @@
         	<c:forEach var="proComment" items="${proComment}">
             <div class="comment pro">
                 <div class="content">
-                    <div class="text">${proComment.get(commentContent)}</div>
-                    <div class="id">${proComment.get(userId)}</div>
+                    <div class="text">${proComment.get("commentContent")}</div>
+                    <div class="id">${proComment.get("userId")}</div>
                 </div>
                 <div class="icon">
                 	<div class="img">
@@ -338,8 +338,8 @@
 		<c:forEach var="conComment" items="${conComment}">
             <div class="comment con">
                 <div class="content">
-                    <div class="text">${conComment.get(commentContent)}</div>
-                    <div class="id">${conComment.get(userId)}</div>
+                    <div class="text">${conComment.get("commentContent")}</div>
+                    <div class="id">${conComment.get("userId")}</div>
                 </div>
                 <div class="icon">
                 	<div class="img">
@@ -469,6 +469,11 @@
 		alert('로그인 페이지로 이동합니다.');
 		location.replace('/member/goLogin.do');
 	});
+</script>
+
+
+<script>
+	alert('${msg}');
 </script>
 
 

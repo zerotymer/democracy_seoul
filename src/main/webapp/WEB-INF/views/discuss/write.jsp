@@ -111,7 +111,7 @@
         
         <div class="upload">
             <div class="thumbnail file">
-                <input id="thumbnail" name="discussThumbnailPath" type="file"/>
+                <input id="thumbnail" name="discussThumbnailPath" type="file" accept="image/*"/>
                 <input id="fileName" name="discussThumbnailName" type="hidden"/>
             </div>
             <div class="iconImg">
@@ -120,11 +120,10 @@
                     <path fill="currentColor" d="M7 19L12 14L13.88 15.88C13.33 16.79 13 17.86 13 19H7M10 10.5C10 9.67 9.33 9 8.5 9S7 9.67 7 10.5 7.67 12 8.5 12 10 11.33 10 10.5M13.09 20H6V4H13V9H18V13.09C18.33 13.04 18.66 13 19 13C19.34 13 19.67 13.04 20 13.09V8L14 2H6C4.89 2 4 2.9 4 4V20C4 21.11 4.89 22 6 22H13.81C13.46 21.39 13.21 20.72 13.09 20M18 15V18H15V20H18V23H20V20H23V18H20V15H18Z" />
                     </svg>
                 </div>
-                <button class="label uploadImg">썸네일 업로드</button>
+                <button type="button" class="label uploadImg">썸네일 업로드</button>
             </div>
             <div  class="pdf file">
-                <input id="pdf" name="pdf" type="file"/>
-                <input id="hiddenFile" name="fileName" type="hidden"/>
+                <input id="pdf" name="filePath" type="file"/>
             </div>
             <div class="iconPdf">
                 <div class="icon">
@@ -132,7 +131,7 @@
                     <path fill="currentColor" d="M14,2L20,8V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H14M18,20V9H13V4H6V20H18M12,12L16,16H13.5V19H10.5V16H8L12,12Z" />
                     </svg>
                 </div>
-                <button class="label uploadPdf">파일 업로드</button>
+                <button type="button" class="label uploadPdf">파일 업로드</button>
             </div>
 	    </div>
         </div>
@@ -178,9 +177,13 @@
 		    contentType: false,
 			success: function(data){
 				var json = JSON.parse(data);
+				$('#thumbnail').prop("type","hidden");
 				document.getElementById('thumbnail').value = json.imgUrl;
 				$('#fileName').val(json.fileName);
 				alert("업로드 성공");
+			},
+			error : function(data){
+				alert("업로드 실패 - 지속적인 문제 발생 시 관리자에게 문의 바랍니다.");
 			}
 		});
 	});
@@ -192,7 +195,7 @@
 		    return;
 		}
 		const formdata = new FormData();
-		formdata.append('img', file.files[0])
+		formdata.append('file', file.files[0])
 		
 		$.ajax({
 			url: "/discuss/thumbnailUpload.ajax",
@@ -202,9 +205,16 @@
 		    contentType: false,
 			success: function(data){
 				var json = JSON.parse(data);
-				document.getElementById('thumbnail').value = json.imgUrl;
-				$('#fileName').val(json.fileName);
-				alert("업로드 성공");
+				if(result>0){
+					$('#pdf').prop("type","hidden");
+					alert(json.originalName+" 업로드 성공");
+				}
+				else{
+					alert('업로드 실패 - 지속적인 문제 발생 시 관리자에게 문의 바랍니다.');
+				}
+			},
+			error : function(data){
+				alert("업로드 실패 - 지속적인 문제 발생 시 관리자에게 문의 바랍니다.");
 			}
 		});
 	});

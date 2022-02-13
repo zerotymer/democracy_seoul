@@ -77,4 +77,11 @@ public class DiscussDAO {
 		return sqlSession.selectOne("discuss.getVote", discussNo);
 	}
 
+	public int fileUpload(String name, String path) {
+		HashMap<String,Object> map=new HashMap<String,Object>();
+		map.put("fileName", name);
+		map.put("filePath", path);
+		return sqlSession.update("discuss.fileUpload", map);
+	}
+
 }

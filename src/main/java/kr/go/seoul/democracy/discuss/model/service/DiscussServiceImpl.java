@@ -81,4 +81,9 @@ public class DiscussServiceImpl implements DiscussService {
 		return dDAO.getVote(discussNo);
 	}
 
+	@Override
+	public int fileUpload(String name, String path) {
+		return dDAO.fileUpload(name,path);
+	}
+
 }

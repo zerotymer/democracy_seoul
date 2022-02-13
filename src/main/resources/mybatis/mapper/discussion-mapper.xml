@@ -115,4 +115,9 @@
 		where discuss_no=#{value}
 	</select>
 	
+	<insert id="fileUpload" parameterType="hashmap">
+		insert into discuss_file values
+		(3,discuss_file_seq.nextval,#{fileName},#{filePath})
+	</insert>
+	
 </mapper>

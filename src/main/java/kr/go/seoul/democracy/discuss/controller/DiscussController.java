@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import kr.go.seoul.common.FileTransferTemplate;
 import kr.go.seoul.common.ImageResizeTemplate;
 import kr.go.seoul.common.transfer.FileTransferInfo;
 import kr.go.seoul.common.transfer.ImageTransferInfo;
@@ -44,7 +45,7 @@ public class DiscussController {
 	
 	@Autowired
 	@Qualifier("fileTransferTemplate")
-	private kr.go.seoul.common.FileTransferTemplate FileTransferTemplate;
+	private FileTransferTemplate fileTransferTemplate;
 
 	//시민토론 목록 데이터 가져오기+페이징 처리(더보기)
 	@RequestMapping(value="/discuss/list.do", method = RequestMethod.GET)
@@ -151,6 +152,9 @@ public class DiscussController {
 		
 		int result=dService.writeComment(comment);
 		
+		if(result>0) mav.addObject("msg","댓글 작성 완료");
+		else mav.addObject("msg","댓글 작성 실패");
+		
 		return mav;
 	}
 	
@@ -207,10 +211,14 @@ public class DiscussController {
 	//파일 업로드
 	@RequestMapping(value = "/discuss/thumbnailUpload.ajax", method = RequestMethod.POST)
     public void fileUpload(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		FileTransferInfo info = (FileTransferInfo) imgTemplate.fileTransfer(request, "file", "discuss");
+		FileTransferInfo info = (FileTransferInfo) fileTransferTemplate.fileTransfer(request, "file", "discuss");
+        String name=info.getFileName();
+        String path=info.getAbsolutePath();
+        String originalName=info.getOriginalFileName();
+        int result=dService.fileUpload(name,path);
         JsonObject json = new JsonObject();
-        json.addProperty("fileName", info.getFileName());
-        json.addProperty("fileUrl", "/upload/discuss/"+info.getFileName("file"));
-        new Gson().toJson(json,response.getWriter());
+        json.addProperty("result",result);
+        json.addProperty("originalName",originalName);
+		new Gson().toJson(json,response.getWriter());
     }
 }
