@@ -38,9 +38,9 @@
 								<li class="menuitem">
 									<a href="">참여하기</a>
 									<ul class="submenu">
-										<li><a href=""></a>시민제안</li>
-										<li><a href=""></a>시민토론</li>
-										<li><a href=""></a>서울시가 묻습니다</li>
+										<li><a href="/suggest/suggest.do">시민제안</a></li>
+										<li><a href="/discuss/list.do">시민토론</a></li>
+										<li><a href="/proposal/allList.do">서울시가 묻습니다</a></li>
 									</ul>
 								</li>
 								<li class="menuitem">
