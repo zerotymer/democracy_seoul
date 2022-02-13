@@ -211,7 +211,9 @@
                                 <tr>
                                     <th scope="row">ㅁ</th>
                                     <td>${(i.count) + (requestScope.countResult) }</td>
-                                    <td>${n.noticeTitle}</td>
+                                    <td>
+                                    	<a href="/notice/noticeViewPageMove.do">${n.noticeTitle}</a>
+                                    </td>
                                     <td>${n.noticeDate }</td>
                                     <td>${n.noticeDelYN }</td>
                                 </tr>

@@ -50,6 +50,8 @@ public class AdminNoticeDAO {
 		//map.put("noticeTitle", noticeTitle);
 		//map.put("noticeContent", noticeContent);
 		
+		System.out.println(adminNotice);
+		
 		return sqlSession.insert("notice.insertNoticeWrite", adminNotice);
 	}
 

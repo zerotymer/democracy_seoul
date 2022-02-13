@@ -111,6 +111,17 @@ public class AdminNoticeController {
 		return mav;
 	}
 	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.12
+	 * Description : 공지사항을 볼 수 있는 페이지로 이동
+	 */
+	@RequestMapping(value="/notice/noticeViewPageMove.do")
+	public String noticeViewPageMove()
+	{
+		return "notice/noticeCkeditorWrite";
+	}
+	
 	
 	
 	
