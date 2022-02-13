@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="suggest2">
+	<insert id="insertPost" parameterType="hashmap">
+		INSERT INTO SUGGESTION
+		VALUES ( suggestion_seq.nextval, #{TTTLE}, #{USERID}, #{CONTENT}, CURRENT_DATE, CURRENT_DATE, CURRENT_DATE + 14, 'N', 0, 0 )
+	</insert>
+	<update id="updatePost" parameterType="hashmap">
+		UPDATE SUGGESTION
+		SET suggest_title = #{TTTLE}, suggest_content = #{CONTENT}
+		WHERE suggest_no = #{BOARDNO}
+	</update>
+</mapper>

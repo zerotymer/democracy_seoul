@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,12 +115,12 @@ section {
                     <br><br>
                     <div class="title">
                      	<h5>서울시가 묻습니다.</h5> 
-                        	<div class="proposalTitle">${ requestScope.sug.sugTitle}</div>
+                        	<div class="sugTitle">${ requestScope.suggest.suggestTitle}</div>
                     </div>
                    
                 </div><br>
                 		<div class="date">
-                    		투표기간 : ${ requestScope.sug.sugStart} ~ ${ requestScope.sug.sugEnd} 
+                    		투표기간 : ${ requestScope.suggest.suggestStart} ~ ${ requestScope.suggest.suggestEnd} 
                			</div>
                 	
                 		<br>
@@ -133,7 +134,7 @@ section {
 
            		 <hr>
             <article class="view_content">
-              	${ requestScope.sug.sugContent }
+              	${ requestScope.suggest.suggestContent }
                 <br>
                 <button class="survey">
                   		  test <i class="back"></i>
