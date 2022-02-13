@@ -3,124 +3,126 @@ package kr.go.seoul.democracy.suggest.vo;
 import java.sql.Date;
 
 public class Sug {
-	private int sugNum;
-	private String sugTitle;
+	private int suggestNo;
+	private String suggestTitle;
 	private String userId;
-	private String sugContent;
-	private Date sugDate;
-	private Date sugStart;
-	private Date sugEnd;
-	private char sugDelYN;
-	private int sugGory;
-	private int sugArea;
-
-
-	public Sug(int sugNum, String sugTitle, String userId, String sugContent, Date sugDate, Date sugStart, Date sugEnd,
-			char sugDelYN, int sugGory, int sugArea) {
+	private String suggestContent;
+	private Date suggestDate;
+	private Date suggestStart;
+	private Date suggestEnd;
+	private char suggestDelYN;
+	private int suggestGory;
+	private int suggestArea;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Sug(int suggestNo, String suggestTitle, String userId, String suggestContent, Date suggestDate,
+			Date suggestStart, Date suggestEnd, char suggestDelYN, int suggestGory, int suggestArea) {
 		super();
-		this.sugNum = sugNum;
-		this.sugTitle = sugTitle;
+		this.suggestNo = suggestNo;
+		this.suggestTitle = suggestTitle;
 		this.userId = userId;
-		this.sugContent = sugContent;
-		this.sugDate = sugDate;
-		this.sugStart = sugStart;
-		this.sugEnd = sugEnd;
-		this.sugDelYN = sugDelYN;
-		this.sugGory = sugGory;
-		this.sugArea = sugArea;
-
-
+		this.suggestContent = suggestContent;
+		this.suggestDate = suggestDate;
+		this.suggestStart = suggestStart;
+		this.suggestEnd = suggestEnd;
+		this.suggestDelYN = suggestDelYN;
+		this.suggestGory = suggestGory;
+		this.suggestArea = suggestArea;
 	}
+
+
+
+
 	public Sug() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	/// GETTER_SETTER
-	public int getSugNum() {
-		return sugNum;
-	}
 
-	public void setSugNum(int sugNum) {
-		this.sugNum = sugNum;
-	}
 
-	public String getSugTitle() {
-		return sugTitle;
-	}
-
-	public void setSugTitle(String sugTitle) {
-		this.sugTitle = sugTitle;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getSugContent() {
-		return sugContent;
-	}
-
-	public void setSugContent(String sugContent) {
-		this.sugContent = sugContent;
-	}
-
-	public Date getSugDate() {
-		return sugDate;
-	}
-
-	public void setSugDate(Date sugDate) {
-		this.sugDate = sugDate;
-	}
-
-	public Date getSugStart() {
-		return sugStart;
-	}
-
-	public void setSugStart(Date sugStart) {
-		this.sugStart = sugStart;
-	}
-
-	public Date getSugEnd() {
-		return sugEnd;
-	}
-
-	public void setSugEnd(Date sugEnd) {
-		this.sugEnd = sugEnd;
-	}
-
-	public char getSugDelYN() {
-		return sugDelYN;
-	}
-
-	public void setSugDelYN(char sugDelYN) {
-		this.sugDelYN = sugDelYN;
-	}
-
-	public int getSugGory() {
-		return sugGory;
-	}
-
-	public void setSugGory(int sugGory) {
-		this.sugGory = sugGory;
-	}
-
-	public int getSugArea() {
-		return sugArea;
-	}
-
-	public void setSugArea(int sugArea) {
-		this.sugArea = sugArea;
-	}
 
 	@Override
 	public String toString() {
-		return "Sug [sugNum=" + sugNum + ", sugTitle=" + sugTitle + ", userId=" + userId + ", sugContent=" + sugContent
-				+ ", sugDate=" + sugDate + ", sugStart=" + sugStart + ", sugEnd=" + sugEnd + ", sugDelYN=" + sugDelYN
-				+ ", sugGory=" + sugGory + ", sugArea=" + sugArea + "]";
+		return "Sug [suggestNo=" + suggestNo + ", suggestTitle=" + suggestTitle + ", userId=" + userId
+				+ ", suggestContent=" + suggestContent + ", suggestDate=" + suggestDate + ", suggestStart="
+				+ suggestStart + ", suggestEnd=" + suggestEnd + ", suggestDelYN=" + suggestDelYN + ", suggestGory="
+				+ suggestGory + ", suggestArea=" + suggestArea + "]";
+	}
+	
+	
+	
+	
+	public int getSuggestNo() {
+		return suggestNo;
+	}
+	public void setSuggestNo(int suggestNo) {
+		this.suggestNo = suggestNo;
+	}
+	public String getSuggestTitle() {
+		return suggestTitle;
+	}
+	public void setSuggestTitle(String suggestTitle) {
+		this.suggestTitle = suggestTitle;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getSuggestContent() {
+		return suggestContent;
+	}
+	public void setSuggestContent(String suggestContent) {
+		this.suggestContent = suggestContent;
+	}
+	public Date getSuggestDate() {
+		return suggestDate;
+	}
+	public void setSuggestDate(Date suggestDate) {
+		this.suggestDate = suggestDate;
+	}
+	public Date getSuggestStart() {
+		return suggestStart;
+	}
+	public void setSuggestStart(Date suggestStart) {
+		this.suggestStart = suggestStart;
+	}
+	public Date getSuggestEnd() {
+		return suggestEnd;
+	}
+	public void setSuggestEnd(Date suggestEnd) {
+		this.suggestEnd = suggestEnd;
+	}
+	public char getSuggestDelYN() {
+		return suggestDelYN;
+	}
+	public void setSuggestDelYN(char suggestDelYN) {
+		this.suggestDelYN = suggestDelYN;
+	}
+	public int getSuggestGory() {
+		return suggestGory;
+	}
+	public void setSuggestGory(int suggestGory) {
+		this.suggestGory = suggestGory;
+	}
+	public int getSuggestArea() {
+		return suggestArea;
+	}
+	public void setSuggestArea(int suggestArea) {
+		this.suggestArea = suggestArea;
 	}
 
+	
+	
+	
+	
 }

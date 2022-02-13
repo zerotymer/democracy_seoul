@@ -34,4 +34,8 @@ public interface DiscussService {
 
 	HashMap<String, Object> getVote(int discussNo);
 
+	int fileUpload(String name, String path);
+
+	ArrayList<Discuss> getList(int currentListPage, int pageSize);
+
 }

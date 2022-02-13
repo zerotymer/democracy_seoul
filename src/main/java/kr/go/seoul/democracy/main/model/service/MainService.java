@@ -13,6 +13,6 @@ public interface MainService {
     ArrayList<HashMap<String, Object>> selectSearchKeyword(String keyword);
     ArrayList<HashMap<String, Object>> selectSearchKeyword(int currentPage, int pageSize, String keyword, KeywordType type);
 
-    int selectCountKeyword(String keyword);
+    int selectCountKeyword(String keyword, KeywordType type);
 
 }

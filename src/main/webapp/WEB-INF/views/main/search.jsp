@@ -105,32 +105,36 @@
                 </div>
                 <div>
                     <div class="tab">
-                        <span class="tab-btn active">전체 (${ requestScope.count })</span>
-                        <span class="tab-btn">시민제안 (${ requestScope.suggest.size() })</span>
-                        <span class="tab-btn">서울시가 묻습니다 (${ requestScope.proposal.size() })</span>
+                        <span class="tab-btn active" onclick="changeTab(this);" type="all">전체 (${ requestScope.count })</span>
+                        <span class="tab-btn" onclick="changeTab(this);" type="suggest">시민제안 (${ requestScope.suggestCount })</span>
+                        <span class="tab-btn" onclick="changeTab(this);" type="proposal">서울시가 묻습니다 (${ requestScope.proposalCount })</span>
                     </div>
                     <hr>
                     <div class="result">
                         <ul id="suggest--container">
-                            <div>
-                                <h3>시민제안 검색결과 (총 <strong>${ requestScope.suggest.size() }</strong>건)</h3>
-                                <span class="more" onclick="">더보기</span>
-                            </div>
+                            <c:if test="${ requestScope.suggestCount > 3 }">
+                                <div>
+                                    <h3>시민제안 검색결과 (총 <strong>${ requestScope.suggestCount }</strong>건)</h3>
+                                    <span id="suggestMore" class="more" onclick="moreSuggest();">더보기</span>
+                                </div>
+                            </c:if>
                             <c:forEach items="${ requestScope.suggest }" var="item">
                                 <li>
-                                    <h4 href="">${ item.TITLE }</h4>
+                                    <h4><a href="${ item.URL }">${ item.TITLE }</a></h4>
                                     <p>${ item.CONTENT }</p>
                                 </li>
                             </c:forEach>
                         </ul>
-                        <ul id="proposal--container">
-                            <div>
-                                <h3>서울시가 묻습니다 검색결과 (총 ${ requestScope.proposal.size() }건)</h3>
-                                <span class="more">더보기</span>
-                            </div>
+                        <ul id="proposal--container"> 
+                            <c:if test="${ requestScope.proposalCount > 3 }">
+                                <div>
+                                    <h3>서울시가 묻습니다. 검색결과 (총 <strong>${ requestScope.proposalCount }</strong>건)</h3>
+                                    <span id="proposalMore" class="more" onclick="moreProposal();">더보기</span>
+                                </div>
+                            </c:if>
                             <c:forEach items="${ requestScope.proposal }" var="item">
                                 <li>
-                                    <h4 href="">${ item.TITLE }</h4>
+                                    <h4><a href="${ item.URL }">${ item.TITLE }</a></h4>
                                     <p>${ item.CONTENT }</p>
                                 </li>
                             </c:forEach>
@@ -150,37 +154,80 @@
     <script src="/resources/script/header.js"></script>
     <script src="/resources/script/content-frame.js"></script>
     <script>
-        const suggestCount = ${ requestScope.suggest.size() };
-        const proposalCount = ${ requestScope.proposal.size() };
+        const suggestCount = ${ requestScope.suggestCount };
+        const proposalCount = ${ requestScope.proposalCount };
         const keyword = "${ requestScope.keyword }";
-        var suggsetPage = 3;
-        var proposalPage = 3;
+        var suggsetPage = 1;
+        var proposalPage = 1;
 
-        function createResultItem(data) {
-            let li = document.createElement('li');
+        function insertResultItem(data, parent) {
+            let li = parent.appendChild(document.createElement('li'));
 
             let h4 = li.appendChild(document.createElement('h4'));
-            h4.innerHTML = data.TITLE;
-            h4.setAttribute('href', data.URL);
+            let a = h4.appendChild(document.createElement('a'));
+            a.href = data.URL;
+            a.innerHTML = data.TITLE;
 
             let p = li.appendChild(document.createElement('p'));
             p.innerHTML = data.CONTENT;
             return li;
         }
 
-        function loadAjax() {
+        function moreSuggest() {
             jQuery.ajax({
                 url: '/main/search.ajax',
                 type: 'GET',
                 data: {
-                    keyword: keyword
+                    keyword: keyword,
+                    keywordType: 'suggest',
+                    currentPage: ++suggsetPage,
+                    pageSize: 3,
                 },
-                success: data => console.log(data),
+                success: data => data.forEach(item => insertResultItem(item, document.getElementById('suggest--container'))),
                 error: e => console.log('ajax 통신 실패')
             });
+
+            (suggsetPage * 3 >= suggestCount) && document.getElementById('suggestMore').classList.add('hidden');
+        }
+        function moreProposal() {
+            jQuery.ajax({
+                url: '/main/search.ajax',
+                type: 'GET',
+                data: {
+                    keyword: keyword,
+                    keywordType: 'proposal',
+                    currentPage: ++proposalPage,
+                    pageSize: 3,
+                },
+                success: data => data.forEach(item => insertResultItem(item, document.getElementById('proposal--container'))),
+                error: e => console.log('ajax 통신 실패')
+            });
+
+            (proposalPage * 3 >= proposalCount) && document.getElementById('proposalMore').classList.add('hidden');
         }
 
-        loadAjax();
+        function changeTab(element) {
+            Array.from(document.getElementsByClassName('tab-btn')).forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+            
+            switch(element.getAttribute('type')) {
+                case 'suggest':
+                    document.getElementById('suggest--container').classList.remove('hidden');
+                    document.getElementById('proposal--container').classList.add('hidden');
+                    break;
+                case 'proposal':
+                    document.getElementById('suggest--container').classList.add('hidden');
+                    document.getElementById('proposal--container').classList.remove('hidden');
+                    break;
+                case 'all':
+                default:
+                    document.getElementById('suggest--container').classList.remove('hidden');
+                    document.getElementById('proposal--container').classList.remove('hidden');
+                    break;
+            }
+
+            
+        }
     </script>
 </body>
 </html>

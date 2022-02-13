@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <title>민주주의 서울 - 시민토론</title>
 
 	<link rel="stylesheet" href="/resources/style/header.css">
@@ -38,6 +39,17 @@
             width: 100%;
             min-height: 90vh;
             /* overflow: scroll; */
+        }
+        
+        .more{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .get{
+            border:0px;
+            background-color: white;
+            font-size:20px;
         }
     </style>
     
@@ -134,9 +146,11 @@
                     <h2>어쩌고 저쩌고</h2>
                     <span>읍냐?</span>
                 </div>
+                <c:if test="${admin!=null }">
                 <div class="contents--btns">
                     <button class="btn suggest">시민토론 작성하기</button>
                 </div>
+                </c:if>
             </div>
 
             <div class="contents-search">
@@ -154,12 +168,13 @@
         </div>
         <div class="contents">
             <div class="card-container">
+            	<c:forEach var="list" items="${list}">
                 <div class="card-item discussion">
                     <div class="category">토론</div>
-                    <div class="title">공공장소 금주 어떻게 생각 하세요?</div>
+                    <div class="title">${list.discussTitle }</div>
                     <div class="content">내용</div>
                     <div class="thumnail">
-                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
+                        <img src="${list.discussThumbnailPath }" alt="제목" />
                     </div>
                     <div class="icons">
                         <object class="icon hits auto-hidden"></object>
@@ -169,13 +184,17 @@
                         <object class="icon comment"></object>
                         <span>12</span>
                         <object class="icon calendar auto-hidden"></object>
-                        <span>2022-01-31 ~ 2022-02-16</span>
+                        <span>${list.discussStart } ~ ${list.discussEnd }</span>
                     </div>
                     <a class="detail-btn" href="">결과 보기</a>
                 </div>
+                </c:forEach>
             </div>
+            
+            <div class="more">
+        		<button class="get" value="1"><i class="xi-caret-down-circle-o"></i>더보기</button>
+        	</div>
 
-            <div class="contents-navbar"></div>
         </div>
     </section>
 
@@ -188,5 +207,59 @@
     <script src="/resources/script/card-container.js"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!-- 로그인한 관리자만 작성 가능 -->
+    <script>
+    	var admin=${admin};
+    	$('.btn.suggest').click(function(){
+    		if(admin!=null){
+    			location.replace('/discuss/writeForm.do');
+    		}
+    		else{
+    			var result=confirm('로그인이 필요한 기능입니다. 로그인 하시겠습니까?');
+    			if(result){
+    				alert('로그인 페이지로 이동합니다.');
+    				location.replace('/member/goLogin.do');
+    			}
+    		}
+    	});
+    </script>
+    
+    <!-- 목록 더보기 -->
+    <script>
+    $('.get').click(function(){
+		var currentListPage=$('.get').val();
+		var pageLimit=${pageCount};
+		
+		if(pageLimit>=currentListPage){
+			$.ajax({
+				url : "/discuss/getList.ajax",
+				type: "get",
+				data : {currentListPage:currentListPage},
+				success : function(data){
+					var json = JSON.parse(data);
+					var discuss=json.discuss;
+					for(var i=0;i<discuss.length;i++){
+						$('<div class="card-item discussion"><div class="category">토론</div><div class="title">'
+						+${discuss[i].discussTitle }
+						+'</div><div class="content">내용</div><div class="thumnail"><img src="'
+						+${discuss[i].discussThumbnailPath }
+						+'" alt="제목" /></div><div class="icons"><object class="icon hits auto-hidden"></object><span>212</span><object class="icon heart"></object><span>11</span><object class="icon comment"></object><span>12</span><object class="icon calendar auto-hidden"></object><span>'
+			            +${discuss[i].discussStart }
+						+' ~ '
+						+${discuss[i].discussEnd }
+						+'</span></div><a class="detail-btn" href="">결과 보기</a></div>').appendTo('.card-container');
+					}
+					$('.get').val(currentCommentPage+1);
+				},
+				error : function(data){
+					alert('게시글 목록을 불러오지 못하였습니다. 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+				}	
+			});
+		}
+		else{
+			alert('더이상 불러올 게시글 목록이 없습니다.');
+		}
+	});
+    </script>
 </body>
 </html>
