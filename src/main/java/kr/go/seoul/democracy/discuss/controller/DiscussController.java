@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.go.seoul.common.ImageResizeTemplate;
+import kr.go.seoul.common.transfer.FileTransferInfo;
 import kr.go.seoul.common.transfer.ImageTransferInfo;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
 import kr.go.seoul.democracy.common.model.vo.Member;
@@ -34,8 +35,16 @@ public class DiscussController {
 	private DiscussService dService;
 	
 	@Autowired
-	@Qualifier(value="basicImageTemplate")
+	@Qualifier("basicImageTemplate")
     private ImageResizeTemplate imgTemplate;
+	
+	@Autowired
+	@Qualifier("discussionImageTemplate")
+	private ImageResizeTemplate thumbnailTemplate;
+	
+	@Autowired
+	@Qualifier("fileTransferTemplate")
+	private kr.go.seoul.common.FileTransferTemplate FileTransferTemplate;
 
 	//시민토론 목록 데이터 가져오기+페이징 처리(더보기)
 	@RequestMapping(value="/discuss/list.do", method = RequestMethod.GET)
@@ -60,8 +69,7 @@ public class DiscussController {
 	@RequestMapping(value="/discuss/onePost.do", method = RequestMethod.GET)
 	public ModelAndView discussOne(ModelAndView mav,
 								@RequestParam int discussNo,
-								//@SessionAttribute Member user
-								@RequestParam String userId) {
+								@SessionAttribute Member user) {
 		//페이징 처리
 		int pageSize=5; //한번에 댓글 몇개씩 보여줄건지
 		int totalCount=dService.commentTotalCount(discussNo); //해당 게시글에 댓글 총 갯수
@@ -78,13 +86,14 @@ public class DiscussController {
 		mav.addObject("pro",proComment);
 		mav.addObject("con",conComment);
 		mav.addObject("vote",vote);
+		mav.addObject("totalCount",totalCount);
 		//mav.addObject("currentCommentPage",currentCommentPage);
 		//mav.addObject("pageSize",pageSize);
 		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/pageSize));
 		mav.addObject("file",file);
 		
-		if(userId!=null) {
-			//String userId=user.getUserId();
+		if(user!=null) {
+			String userId=user.getUserId();
 			HashMap<String, Object> comment=dService.myComment(discussNo,userId);
 			if(comment!=null) mav.addObject("my",comment);
 		}
@@ -174,15 +183,34 @@ public class DiscussController {
 	@RequestMapping(value = "/discuss/imageUpload.ajax", method = RequestMethod.POST)
     public void ajaxImageUpload(HttpServletRequest request,
                                 HttpServletResponse response) throws IOException {
-        ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "upload", "discussImg");
+        ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "upload", "discuss");
 
         JsonObject json = new JsonObject();
-        String url = "/upload/discussImg/" + info.getFileName();
+        String url = "/upload/discuss/" + info.getFileName();
 
         json.addProperty("url", url);
         json.addProperty("uploaded", 1);
         json.addProperty("fileName", info.getOriginalFileName());
         new Gson().toJson(json, response.getWriter());
     }
-		
+	
+	//썸네일 업로드
+	@RequestMapping(value = "/discuss/thumbnailUpload.ajax", method = RequestMethod.POST)
+    public void thumbnailUpload(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "img", "discuss");
+        JsonObject json = new JsonObject();
+        json.addProperty("fileName", info.getFileName());
+        json.addProperty("imgUrl", "/upload/discuss/"+info.getFileName("thumbnail"));
+        new Gson().toJson(json,response.getWriter());
+    }
+	
+	//파일 업로드
+	@RequestMapping(value = "/discuss/thumbnailUpload.ajax", method = RequestMethod.POST)
+    public void fileUpload(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		FileTransferInfo info = (FileTransferInfo) imgTemplate.fileTransfer(request, "file", "discuss");
+        JsonObject json = new JsonObject();
+        json.addProperty("fileName", info.getFileName());
+        json.addProperty("fileUrl", "/upload/discuss/"+info.getFileName("file"));
+        new Gson().toJson(json,response.getWriter());
+    }
 }

@@ -107,8 +107,6 @@
 	</update>
 	
 	<select id="getVote" resultType="hashmap">
-		select count(*) from discuss_comment where discuss_no=3
-		union
 		select
 			vote_pro as votePro,
 			vote_con as voteCon,
