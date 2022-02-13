@@ -9,5 +9,7 @@ public interface AdminNoticeService {
 	ArrayList<AdminNotice> selectAllNoticeList(int currentPage, int recordCountPerPage);
 
 	int noticeTotalCount();
+
+	int insertNoticeWrite(AdminNotice adminNotice);
 	
 }

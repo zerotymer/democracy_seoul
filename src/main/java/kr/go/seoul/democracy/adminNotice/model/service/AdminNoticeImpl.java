@@ -23,4 +23,9 @@ public class AdminNoticeImpl implements AdminNoticeService{
 		return nDAO.noticeTotalCount();
 	}
 
+	@Override
+	public int insertNoticeWrite(AdminNotice adminNotice) {
+		return nDAO.insertNoticeWrite(adminNotice);
+	}
+
 }

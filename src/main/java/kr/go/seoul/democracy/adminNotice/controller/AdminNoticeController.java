@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -67,5 +68,54 @@ public class AdminNoticeController {
 		
 		return mav;
 	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.12
+	 * Description : 공지사항 글 작성 페이지로 이동
+	 */
+	@RequestMapping(value="/notice/noticeWritePageMove.do")
+	public String noticeWritePageMove()
+	{
+		return "notice/noticeCkeditorWrite";
+	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.12
+	 * Description : 공지사항 글 작성 
+	 */
+	@RequestMapping(value="/notice/noticeWrite.do")
+	public ModelAndView noticeWrite(//@RequestParam String noticeContent,
+							  		//@RequestParam String noticeTitle,
+									AdminNotice adminNotice,
+							  		ModelAndView mav)
+	{
+		int result = nService.insertNoticeWrite(adminNotice);
+		
+		String location = "notice/noticeBoardPage.jsp";
+		
+		if(result>0)
+		{
+			mav.addObject("noticeMsg", "작성이 완료되었습니다");
+			mav.addObject("location", location);
+			
+		}else {
+			
+			mav.addObject("noticeMsg", "작성에 실패하였습니다");
+			mav.addObject("location", location);
+		}
+		
+		mav.setViewName("notice/noticeMsg"); //return 대신
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

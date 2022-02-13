@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.adminNotice.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,6 +41,16 @@ public class AdminNoticeDAO {
 		int recordTotalCount = sqlSession.selectOne("notice.selectNoticeTotalCount");
 		
 		return recordTotalCount;
+	}
+
+	public int insertNoticeWrite(AdminNotice adminNotice) {
+		
+		//HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//map.put("noticeTitle", noticeTitle);
+		//map.put("noticeContent", noticeContent);
+		
+		return sqlSession.insert("notice.insertNoticeWrite", adminNotice);
 	}
 
 }

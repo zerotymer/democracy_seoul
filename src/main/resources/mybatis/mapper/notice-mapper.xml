@@ -32,4 +32,11 @@
 		ORDER BY NOTICE_NO DESC
 	</select>
 	
+	<!-- 공지사항 작성 -->
+	<insert id="insertNoticeWrite" parameterType="notice">
+		INSERT INTO 
+			NOTICE 
+		VALUES (NOTICE_SEQ.NEXTVAL, #{noticeTitle}, #{noticeContent}, current_date, 'N', '1', '2')
+	</insert>
+	
 </mapper>
