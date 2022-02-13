@@ -46,7 +46,7 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public int selectCountKeyword(String keyword) {
-        return mDAO.selectCountKeyword(keyword);
+    public int selectCountKeyword(String keyword, KeywordType type) {
+        return mDAO.selectCountKeyword(keyword, type);
     }
 }

@@ -47,7 +47,13 @@ public class MainDAO {
                 template.selectList(mybatisId, keyword, new RowBounds((currentPage - 1) * pageSize, pageSize)));
     }
 
-    public int selectCountKeyword(String keyword){
-        return template.selectOne("main.countSearchAll", keyword);
+    public int selectCountKeyword(String keyword, KeywordType type){
+        String mybatisId = null;
+        switch (type) {
+            case SUGGEST: mybatisId = "main.countSearchSuggest"; break;
+            case DISCUSSION: mybatisId = "main.countSearchDiscussion"; break;
+            case PROPOSAL: mybatisId = "main.countSearchProposal"; break;
+        }
+        return template.selectOne(mybatisId, keyword);
     }
 }
