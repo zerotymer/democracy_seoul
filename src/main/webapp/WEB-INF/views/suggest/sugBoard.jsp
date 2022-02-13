@@ -156,9 +156,9 @@
 		            <div class="card-item survey">
 		                <div class="category"> 제안</div>
 		                <div class="title">
-		                	<a class="sugTitle">${sug.sugTitle }</a>
+		                	<a class="sugTitle">${suggest.suggestTitle }</a>
 		                </div>
-		                <div class="content">${sug.sugContent }</div>
+		                <div class="content">${suggest.suggestContent }</div>
 		                
 		                <div class="icons">
 		                    <object class="icon hits auto-hidden"></object>
@@ -168,9 +168,9 @@
 		                    <object class="icon comment"></object>
 		                    <span>10</span>
 		                    <object class="icon calendar auto-hidden"></object>
-		                    <span> ${sug.sugStart} ~ ${sug.sugEnd}</span>
+		                    <span> ${suggest.suggestStart} ~ ${suggest.suggestEnd}</span>
 	                    </div>
-	                    <a class="detail-btn" href="/suggest/suggestview.do?sugNum=${sug.sugNum}">
+	                    <a class="detail-btn" href="/suggest/suggestview.do?sugNum=${suggest.suggestNo}">
                         			결과 보기 
                    		</a>
       				</div>

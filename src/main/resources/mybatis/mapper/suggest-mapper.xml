@@ -1,4 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="suggest">
+<!-- SQL QUERYS -->
+	
+	<select id="selectAllList" parameterType="sug" resultType="sug">
+	SELECT 
+			suggest_no as suggestNo,
+ 		 	suggest_title as suggestTitle,
+ 		 	suggest_content as suggestContent,
+ 		 	suggest_date as suggestDate,
+ 		 	suggest_start as suggestStart,
+ 		 	suggest_end as suggestEnd,
+ 		 	suggest_del_YN as suggestDelYN
+	FROM 
+		SUGGESTION
+		
+	</select>
+	
+	<select id="sugView" resultType="sug">
+	SELECT
+			suggest_no as suggestNo,
+ 		 	suggest_title as suggestTitle,
+ 		 	suggest_content as suggestContent,
+ 		 	suggest_date as suggestDate,
+ 		 	suggest_start as suggestStart,
+ 		 	suggest_end as suggestEnd,
+ 		 	suggest_del_YN as suggestDelYN
+ 	FROM
+ 		SUGGESTION
+ 	WHERE
+ 		suggest_No = #{suggestNo}
+
+	
+	</select>
+	
+	<select id="sugCnt" parameterType="int" resultType="int">
+	SELECT COUNT (*) FROM suggest WHERE suggest_del_YN='n'
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="insert" parameterType="int">
+		insert into suggest  
+		values (
+			suggest_SEQ.NEXTVAL,
+			#{suggestTitle}, 
+			#{suggestContent},
+			current_date,
+			current_date,
+			current_date + 14,
+			'N')
+		
+	</insert>
+	
+	<!-- 게시글수정 -->
+	<update id="modify" parameterType="sug">
+		update suggest set
+			suggestTitle = #{suggestTitle},
+	 		suggestContent = #{suggestContent}
+		where suggest_No = #{suggestNo}
+	
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<update id="delete" parameterType="sug">
+		update suggest set
+			suggestDelYN='Y'
+		where suggest_No = #{suggestNo}
+	</update>
+	
+	
+	<!-- 댓글목록 -->
+	<select id="commentList" parameterType="kr.go.seoul.democracy.suggest.vo.SugComment">
+		select
+			comment_no as CommentNo,
+			userId as userId,
+			comment_content as commentContent,
+			comment_date as commnetDate
+		from suggestComment
+		where suggest_No = #{suggestNo}
+	</select>		
+	
+	<insert id="commentWrite" parameterType="kr.go.seoul.democracy.suggest.vo.SugComment">
+		insert into
+		 suggestComment(proposlNo,commentNo,userId,commentContent)
+		 values(
+		 suggestComment_SEQ.NEXTVAL,
+		 #{suggestNo},
+		 #{userId},
+		 #{commentContent})
+	</insert>
 </mapper>
+
+

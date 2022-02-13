@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kr.go.seoul.democracy.suggest.dao.SugDAO;
 import kr.go.seoul.democracy.suggest.vo.Sug;
+import kr.go.seoul.democracy.suggest.vo.SugComment;
 
 @Service("sugServiceImpl")
 public class SugServiceImpl implements SugService {
@@ -20,8 +21,8 @@ public class SugServiceImpl implements SugService {
     private SugDAO sDAO;
 
 	@Override
-	public Sug sugView(int sugNo) {
-			return sDAO.proposalView(sugNo);
+	public Sug sugView(int suggestNo) {
+			return sDAO.sugView(suggestNo);
 	}
 	
 	@Override
@@ -35,6 +36,30 @@ public class SugServiceImpl implements SugService {
 		sDAO.insert(sug);
 	}
 
+
+	@Override 
+	public void modify(Sug sug) { 
+		sDAO.modify(sug);
+		
+	}
+
+	@Override
+	public void delete(int suggestNo) {
+		sDAO.delete(suggestNo);
+		
+	}
+
+	@Override
+	public List<SugComment> comlist(int userId) {
+			return sDAO.comlist(userId);
+	}
+
+	@Override
+	public void comWrite(Sug SugComment) {
+		sDAO.comWrite(SugComment);
+		
+	}
+	
 
 
 
