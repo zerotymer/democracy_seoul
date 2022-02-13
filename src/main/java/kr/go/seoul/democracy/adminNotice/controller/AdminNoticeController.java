@@ -45,9 +45,9 @@ public class AdminNoticeController {
 		
 		
 		//페이지 목록 10개씩 끊는 로직
-		ArrayList<AdminNotice> list = nService.selectAllNoticeList(currentPage, recordCountPerPage); //notice에서 변경해야 할 부분
+		ArrayList<AdminNotice> list = nService.selectAllNoticeList(currentPage, recordCountPerPage); 
 		
-		int pageTotalCount = (int)Math.ceil(nService.noticeTotalCount()/(double)recordCountPerPage); //notice에서 변경해야 할 부분
+		int pageTotalCount = (int)Math.ceil(nService.noticeTotalCount()/(double)recordCountPerPage); 
 
 		int startNavi = currentPage - (currentPage - 1) % naviSize;
 		int endNavi = startNavi + naviSize - 1;

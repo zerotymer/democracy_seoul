@@ -27,7 +27,7 @@ public class AdminNoticeDAO {
 		int offset = ((currentPage-1) * recordCountPerPage);
 		int limit = recordCountPerPage;
 		RowBounds rb = new RowBounds(offset, limit);
-		return new ArrayList<AdminNotice>(sqlSession.selectList("admin.selectAllNoticeList", null, rb));
+		return new ArrayList<AdminNotice>(sqlSession.selectList("notice.selectAllNoticeList", null, rb));
 	}
 	
 	/**

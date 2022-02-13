@@ -124,6 +124,11 @@
             height: 100%;
             padding: 20px;
         }
+        
+        .stateChangeBtn{
+        	width: 100%;
+            height: 100%;
+        }
     </style>
 
 </head>
@@ -134,20 +139,27 @@
         <div class="main_logo">
             <img src="/resources/images/admin/adminmain_logo.png">
         </div>
+        
+        <!-- 사이드 메뉴바 -->
         <div class="menu_bar">
             <div class="menu_bar_memberMNGM">
                 <div class="menu_bar_inner">
                     MEMBER<br>
-                    - 회원관리
+                    <a href="/admin/allMemberList.do">
+                		- 회원관리
+                	</a>
                 </div>
                 <div class="menu_bar_inner">
                     BOARD
-                    <div class="notice">- 공지사항</div>
-                    <div class="notice">- 게시판 관리</div>
+                    <a href="/notice/allMemberList.do">
+                    	<div class="notice">- 공지사항</div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- 메뉴 상단 -->
     <div id="content">
         <div class="info">
             <div class="menu_info">
@@ -166,6 +178,8 @@
                 </a>
             </div>
         </div>
+        
+        <!-- 게시판 내용 -->
         <div class="board">
             <div class="board_content">
 
@@ -175,30 +189,23 @@
                         <table class="table">
                             <thead>
                             <tr>
+                            	<th scope="col"></th>
                                 <th scope="col">No</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">이름</th>
-                                <th scope="col">닉네임</th>
-                                <th scope="col">이메일</th>
-                                <th scope="col">가입일</th>
-                                <th scope="col">탈퇴버튼</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">등록일</th>
+                                <th scope="col">삭제여부</th>
                             </tr>
                             </thead>
 
 
                             <tbody>
-                            <c:forEach items="${requestScope.list }" var="m" varStatus="i">
+                            <c:forEach items="${requestScope.list }" var="n" varStatus="i">
                                 <tr>
-                                    <th scope="row">${(i.count) + (requestScope.countResult) }</th>
-                                    <td>${m.userId }</td>
-                                    <td>${m.userName }</td>
-                                    <td>${m.nick }</td>
-                                    <td>${m.email }</td>
-                                    <td>${m.enrollDate }</td>
-                                    <td>
-                                        <button style="width:100%; height: 100%;" class="stateChangeBtn"
-                                                data="${m.userId }">${m.endYN }</button>
-                                    </td>
+                                    <th scope="row">ㅁ</th>
+                                    <td>${(i.count) + (requestScope.countResult) }</td>
+                                    <td>${n.noticeTitle}</td>
+                                    <td>${n.noticeDate }</td>
+                                    <td>${n.noticeDelYN }</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -207,7 +214,7 @@
                     </c:when>
 
                     <c:otherwise>
-                        <H3>저장된 회원 리스트가 없습니다.</H3>
+                        <H3>작성된 공지사항이 없습니다.</H3>
                     </c:otherwise>
 
                 </c:choose>
@@ -216,17 +223,17 @@
                     <ul class="pagination justify-content-center">
                     	<c:if test="${ preNavi > 0 }">
 	                        <li class="page-item">
-	                            <a class="page-link" href="/admin/allMemberList.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
+	                            <a class="page-link" href="/notice/allMemberList.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
 	                        </li>
                         </c:if>
                         <c:forEach items="${ requestScope.navi }" var="m" varStatus="i">
 	                        <li class="page-item">
-	                        	<a class="page-link" href="/admin/allMemberList.do?currentPage=${ m }">${ m }</a>
+	                        	<a class="page-link" href="/notice/allMemberList.do?currentPage=${ m }">${ m }</a>
 	                        </li>
                         </c:forEach>
                         <c:if test="${ nextNavi > 0 }">
 	                        <li class="page-item">
-	                            <a class="page-link" href="/admin/allMemberList.do?currentPage=${ nextNavi }">>></a>
+	                            <a class="page-link" href="/notice/allMemberList.do?currentPage=${ nextNavi }">>></a>
 	                        </li>
                         </c:if>
                     </ul>
@@ -245,35 +252,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
-<!-- 탈퇴 버튼 변경 ajax -->
-<script>
-    $('.stateChangeBtn').click(function () {
 
-        var userId = $(this).attr('data');
-        var endYN = $(this).html();
-
-
-        $.ajax({
-            url: "/admin/memberEndYNChange.do",
-            data: {"userId": userId, "endYN": endYN},
-            type: "post",
-            context: this,
-            success: function (result) {
-
-                if (result != 'false') {
-                    $(this).html(result);
-                } else {
-                    console.log("데이터 변경 실패");
-                }
-
-            },
-            error: function () {
-                console.log('ajax 통신 문제 발생');
-            }
-        })
-
-    });
-</script>
 
 
 </body>

@@ -15,11 +15,9 @@
 	<!-- 공지사항 목록 보여주기 -->
 	<select id="selectAllNoticeList" resultType="notice">
 	  	SELECT 
-	  		notice_title as userId,
-			username as userName,
-			nick as nick,
-			email as email,
-			enrolldate as enrollDate
+	  		notice_title as noticeTitle,
+			notice_date as noticeDate,
+			notice_del_yn as noticeDelYN
 	  	FROM NOTICE
 		WHERE NOTICE_DEL_YN ='N' 
 		ORDER BY NOTICE_NO DESC
