@@ -36,4 +36,6 @@ public interface DiscussService {
 
 	int fileUpload(String name, String path);
 
+	ArrayList<Discuss> getList(int currentListPage, int pageSize);
+
 }

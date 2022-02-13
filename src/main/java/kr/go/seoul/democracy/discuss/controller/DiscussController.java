@@ -66,6 +66,18 @@ public class DiscussController {
 		return mav;
 	}
 	
+	//댓글 더보기
+	@RequestMapping(value="/discuss/getList.ajax", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<Discuss> getList(@RequestParam(defaultValue="1") int currentListPage){
+		currentListPage++;
+		int pageSize=12;
+		
+		ArrayList<Discuss> list=dService.getList(currentListPage,pageSize);
+		
+		return list;
+	}
+	
 	//시민토론 게시글 하나 데이터 가져오기+댓글 페이징 처리(더보기)
 	@RequestMapping(value="/discuss/onePost.do", method = RequestMethod.GET)
 	public ModelAndView discussOne(ModelAndView mav,
@@ -109,8 +121,8 @@ public class DiscussController {
 	@RequestMapping(value="/discuss/vote.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public int vote(@RequestParam int discussNo,
-									@RequestParam(defaultValue="0") int votePro,
-									@RequestParam(defaultValue="0") int voteCon){
+					@RequestParam(defaultValue="0") int votePro,
+					@RequestParam(defaultValue="0") int voteCon){
 		HashMap<String,Object> vote=new HashMap<String,Object>();
 		vote.put("discussNo", discussNo);
 		vote.put("votePro", votePro);
@@ -124,7 +136,7 @@ public class DiscussController {
 	@RequestMapping(value="/discuss/getComment.ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<HashMap<String, Object>> getComment(@RequestParam int discussNo,
-								@RequestParam(defaultValue="1") int currentCommentPage){
+									@RequestParam(defaultValue="1") int currentCommentPage){
 		currentCommentPage+=1;
 		int pageSize=5;
 		
@@ -209,7 +221,7 @@ public class DiscussController {
     }
 	
 	//파일 업로드
-	@RequestMapping(value = "/discuss/thumbnailUpload.ajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/discuss/fileUpload.ajax", method = RequestMethod.POST)
     public void fileUpload(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		FileTransferInfo info = (FileTransferInfo) fileTransferTemplate.fileTransfer(request, "file", "discuss");
         String name=info.getFileName();

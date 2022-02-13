@@ -84,4 +84,9 @@ public class DiscussDAO {
 		return sqlSession.update("discuss.fileUpload", map);
 	}
 
+	public ArrayList<Discuss> getList(int currentListPage, int pageSize) {
+		RowBounds rb=new RowBounds((currentListPage-1)*pageSize,pageSize);
+	    return new ArrayList<Discuss>(sqlSession.selectList("discuss.getList",null,rb));
+	}
+
 }
