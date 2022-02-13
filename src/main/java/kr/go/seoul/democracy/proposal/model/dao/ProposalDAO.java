@@ -51,7 +51,8 @@ public class ProposalDAO {
 	 public void delete(int proposalNo) {
 	 sqlSession.update("proposal.delete",proposalNo); 
 	 }
-
+	 
+	/* 댓글쓰기 */
 	 public List<ProposalComment> comlist(int userId){
 		  return sqlSession.selectList("proposalComment",userId);
 	 }
@@ -59,5 +60,7 @@ public class ProposalDAO {
 	public void comWrite(Proposal ProposalComment) {
 		sqlSession.insert("proposalComment",ProposalComment);
 	}
+
+
 	 
 }
