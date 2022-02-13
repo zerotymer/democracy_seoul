@@ -30,4 +30,12 @@ public interface DiscussService {
 
 	HashMap<String, Object> myComment(int discussNo, String userId);
 
+	int vote(HashMap<String, Object> vote);
+
+	HashMap<String, Object> getVote(int discussNo);
+
+	int fileUpload(String name, String path);
+
+	ArrayList<Discuss> getList(int currentListPage, int pageSize);
+
 }

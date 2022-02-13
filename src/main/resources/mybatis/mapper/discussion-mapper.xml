@@ -87,7 +87,7 @@
 		               comment_date=current_date
 		when not matched then
 		    insert (discuss_no,comment_no,userid,comment_content,comment_vote,comment_date)
-		    values (#{discussNo},discuss_comment_seq.nextval,#{userId},#{commentContent},#{commentVote},current_date);
+		    values (#{discussNo},discuss_comment_seq.nextval,#{userId},#{commentContent},#{commentVote},current_date)
 	</insert>
 	
 	<select id="myComment" parameterType="hashmap" resultType="hashmap">
@@ -96,6 +96,47 @@
 			comment_vote as commentVote
 		from discuss_comment
 		where discuss_no=#{discussNo} and userid=#{userId}
+	</select>
+	
+	<update id="vote" parameterType="hashmap">
+		update discuss_vote set
+			vote_pro=vote_pro+#{votePro},
+			vote_con=vote_con+#{voteCon},
+			vote_total=vote_total+1
+		where discuss_no=#{discussNo}
+	</update>
+	
+	<select id="getVote" resultType="hashmap">
+		select
+			vote_pro as votePro,
+			vote_con as voteCon,
+			vote_total as voteTotal
+		from discuss_comment
+		where discuss_no=#{value}
+	</select>
+	
+	<insert id="fileUpload" parameterType="hashmap">
+		merge into discuss_file using dual
+		on (discuss_no=discuss_seq.currval+1)
+		when matched then
+			update set file_name=#{fileName},
+		               file_path=#{filePath}
+		insert (discuss_no,file_no,file_name,file_path)
+		    values (discuss_seq.currval+1,discuss_comment_seq.nextval,#{fileName},#{filePath})
+	</insert>
+	
+	<select id="getList" resultType="discuss">
+		select discuss_no as discussNo,
+			discuss_title as discussTitle,
+			userid as userId,
+			discuss_content as discussContent,
+			discuss_date as discussDate,
+			discuss_start as discussStart,
+			discuss_end as discussEnd,
+			discuss_thumbnail_name as discussThumbnailName,
+			discuss_thumbnail_path as discussThumbnailPath
+		from discussion
+		where discuss_del_yn='N'
 	</select>
 	
 </mapper>

@@ -1,17 +1,41 @@
 package kr.go.seoul.democracy.suggest.service;
 
-import java.util.ArrayList;
+
+import java.util.List;
+
 
 import kr.go.seoul.democracy.suggest.vo.Sug;
-
-
+import kr.go.seoul.democracy.suggest.vo.SugComment;
 
 public interface SugService {
+
+
+	List<Sug> selectAllList(int curPage, int recordCountPage) throws Exception;
+
+
+	Sug sugView(int suggestNo) throws Exception;
+
+
 	
-	ArrayList<Sug> selectAllNoticeList(int currentPage, int recordCountPerPage);
+	
+	void insert(Sug sug) throws Exception;
 
-	int noticeTotalCount();
+	
+	
+	
+	
+	void modify(Sug sug)throws Exception;
+	 
+	
+	
+	
+	
+	void delete(int suggestNo);
+
+	 public List<SugComment> comlist(int userId);
+	 
+	 public void comWrite(Sug SugComment);
+
 	
 
-
-}
+	}
