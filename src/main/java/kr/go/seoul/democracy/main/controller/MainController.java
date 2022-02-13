@@ -38,9 +38,6 @@ public class MainController {
     	return "main/search";
     }
 
-
-
-
     @RequestMapping("/main/list.do")
     public ModelAndView getList(ModelAndView mav) {
         ArrayList<HashMap<String, Object>> list = service.selectLatestSuggest(4);
@@ -93,7 +90,11 @@ public class MainController {
         mav.setViewName("main/search");
         mav.addObject("suggest", suggest);
         mav.addObject("proposal", proposal);
-        mav.addObject("count", service.selectCountKeyword(keyword));
+        int suggestCount = service.selectCountKeyword(keyword, KeywordType.SUGGEST);
+        int proposalCount = service.selectCountKeyword(keyword, KeywordType.PROPOSAL);
+        mav.addObject("suggestCount", suggestCount);
+        mav.addObject("proposalCount", proposalCount);
+        mav.addObject("count", suggestCount + proposalCount);
         mav.addObject("keyword", keyword);
     	return mav;
     }
@@ -101,22 +102,24 @@ public class MainController {
     @ResponseBody
     @RequestMapping("/main/search.ajax")
     public ArrayList<HashMap<String, Object>> getSearchAjax(
-            @RequestParam (defaultValue="") String keyword) {
+                        @RequestParam (defaultValue="") String keyword,
+                        @RequestParam (defaultValue="2") int currentPage,
+                        @RequestParam (defaultValue="3") int pageSize,
+                        @RequestParam (defaultValue="SUGGEST") String keywordType) {
 
         if (keyword.length() < 2) return new ArrayList<HashMap<String, Object>>();
+        KeywordType type = KeywordType.valueOf(keywordType.toUpperCase());
+        ArrayList<HashMap<String, Object>> list = service.selectSearchKeyword(currentPage, pageSize, keyword, type);
 
-        ArrayList<HashMap<String, Object>> list = service.selectSearchKeyword(keyword);
         // 키워드 강조 및 추가
         list.stream().forEach(item -> {
             item.put("TITLE", ((String)item.get("TITLE")).replaceAll(keyword, String.format("<strong>%s</strong>", keyword)));
             item.put("CONTENT", ((String)item.get("CONTENT")).replaceAll(keyword, String.format("<strong>%s</strong>", keyword)));
             switch(item.get("CATEGORY").toString()) {
                 case "SUGGEST":
-                    item.put("URL", String.format("/suggest/suggestview.do?sugNum=%s", item.get("BOARDNO")));
-                    break;
+                    item.put("URL", String.format("/suggest/suggestview.do?sugNum=%s", item.get("BOARDNO"))); break;
                 case "PROPOSAL":
-                    item.put("URL", String.format("/proposal/post.do?proposalNo=%s", item.get("BOARDNO")));
-                    break;
+                    item.put("URL", String.format("/proposal/post.do?proposalNo=%s", item.get("BOARDNO"))); break;
             }
         });
         return list;
