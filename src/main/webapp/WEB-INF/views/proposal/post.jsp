@@ -135,13 +135,13 @@
         </div>
 
      	<div class="comment">
-            <input type="hidden" name="proposalNo" class="proposalNo" value="" />
-            <div class="userNick">${ requestScope.member.user }</div>
-            <span class="today">  </span>
-            <textarea class="content" placeholder="댓글을 입력하세요." style="resize : none; width: 99%; height: 80%; border:0;">
+            <input type="hidden" name="proposalNo" class="proposalNo" />
+            <div class="userNick" id="userId">${ requestScope.member.user }</div>
+            <span class="today"> </span>
+            <textarea class="content" placeholder="댓글을 입력하세요." userId="${requestScope.member.user}" id="comment" style="resize : none; width: 99%; height: 80%; border:0;">
             </textarea>
             <div align="right">
-            <button type="submit" value="reg">등록</button>
+            <button onclick="addComment();">등록</button>
             </div>
         </div>
 
@@ -152,7 +152,7 @@
         <div class="commentContainer" id="container">
         
          
-        	<c:forEach items="${commentList }" var="item">
+        	<c:forEach items="${commentList}" var="item">
         	<div>
 	         	<input type="hidden" name="proposalNo" class="proposalNo" value="${item.PROPOSALNO }" />
 	            <div class="userId">${item.USERID}</div>
@@ -236,12 +236,18 @@
 
  		
    	    function addComment(){
+   	    	var comment = document.getElementById('comment');
    	    	$.ajax({
    	    	type:'post',
-   	    	url: "/proposal/writeComment",
+   	    	url: "/proposal/writeComment.do",
    	    	data: {
-   	    		proposalNo:proposalNo,
-   	    		comment:
+   	    		proposalNo: proposalNo,
+   	    		comment: comment.value
+   	    	},
+   	    	success : function(data){
+   	    	
+   	    		if(data) alert('댓글이 등록했습니다.');
+   	    		
    	    	}
    	    	
    	    		

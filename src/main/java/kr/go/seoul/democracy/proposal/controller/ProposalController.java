@@ -102,17 +102,18 @@ public class ProposalController {
 	
 	// 댓글전송
 	@RequestMapping(value="/proposal/writeComment.do", method=RequestMethod.POST)
-	public String comment(@RequestParam int proposalNo,
+	public void comment(@RequestParam int proposalNo,
 			@RequestParam String comment, 
-			@SessionAttribute("user") Member member) throws Exception{ 
+			@SessionAttribute("user") Member member,
+			HttpServletResponse response) throws Exception{ 
 		
 		ProposalComment pcomment = new ProposalComment();
 		pcomment.setProposalNo(proposalNo);
 		pcomment.setUserId(member.getUserId());
 		pcomment.setCommentContent(comment);
-		
+		System.out.println(pcomment);
+		response.getWriter().println(true);
 		pService.comWrite(pcomment);
-		return "redirect:/proposal/post.do?proposalNo="+proposalNo;
 	}
 	
 	//댓글더보기
