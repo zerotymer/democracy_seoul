@@ -1,9 +1,10 @@
 /* ICON SVG IMAGES */
 .btn {
-    --IMAGE-URL-MENU: url('/resources/icons/menu.svg');
-    --IMAGE-URL-LOGIN: url('/resources/icons/login.svg');
-    --IMAGE-URL-LOGOUT: url('/resources/icons/logout.svg');
-    --IMAGE-URL-SEARCH: url('/resources/icons/search.svg');   
+    --IMAGE-URL-MENU:       url('/resources/icons/menu.svg');
+    --IMAGE-URL-LOGIN:      url('/resources/icons/account-lock-open.svg');
+    --IMAGE-URL-LOGOUT:     url('/resources/icons/account-lock.svg');
+    --IMAGE-URL-SEARCH:     url('/resources/icons/archive-search.svg');   
+    --IMAGE-URL-ACCOUNT:    url('/resources/icons/account-details.svg');
 }
 
 .icon.heart {

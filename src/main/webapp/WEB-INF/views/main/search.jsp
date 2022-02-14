@@ -32,44 +32,44 @@
                             </a>
                         </li>
                         <li class="menubar-list">
-                            <h3>참여하기<span class="slick-arrow"></span></h3>      
+                            <h3>검색하기<span class="slick-arrow"></span></h3>
                                         
                             <!-- Menu -->
                             <ul class="include menu">
                                 <li class="menuitem">
-                                    <a href="">참여하기</a>
+                                    <a>참여하기</a>
                                     <ul class="submenu">
-                                        <li><a href=""></a>시민제안</li>
-                                        <li><a href=""></a>시민토론</li>
-                                        <li><a href=""></a>서울시가 묻습니다</li>
+                                        <li><a href="/suggest/suggest.do">시민제안</a></li>
+                                        <li><a href="/discuss/list.do">시민토론</a></li>
+                                        <li><a href="/proposal/allList.do">서울시가 묻습니다</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">결과보기</a>
+                                    <a>결과보기</a>
                                     <ul class="submenu">
                                         <li><a href="">제안결과</a></li>
                                         <li><a href="">공론결과</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">알아보기</a>
+                                    <a>알아보기</a>
                                     <ul class="submenu">
-                                        <li><a href="">민주주의 서울 <wbr/>소개</a></li>
+                                        <li><a href="/main/introduce.do">민주주의 서울 <wbr/>소개</a></li>
                                         <li><a href="" style="font-size: 13px;">민주주의 서울 <wbr/>이야기</a></li>
-                                        <li><a href="">공지사항</a></li>
-                                        <li><a href="">자료실</a></li>
-                                        <li><a href="">행사일정</a></li>
+                                        <li><a href="/board/goNoticeNews.do">공지사항</a></li>
+                                        <li><a href="/board/referenceList.do">자료실</a></li>
+                                        <li><a href="/board/noticeCampaign.do">행사일정</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">서울시민회의</a>
+                                    <a>서울시민회의</a>
                                     <ul class="submenu">
-                                        <li><a href="">서울시민회의 <wbr/>소개</a></li>
-                                        <li><a href="">서울시민회의 <wbr/>소식</a></li>
+                                        <li><a href="/main/introduce.do">서울시민회의 <wbr/>소개</a></li>
+                                        <li><a href="/board/seoulNews.do">서울시민회의 <wbr/>소식</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">시민참여예산</a>
+                                    <a href="/main/budget.go">시민참여예산</a>
                                 </li>
                             </ul>
                         </li>    
@@ -94,54 +94,57 @@
 
         <div class="search--container inner">
             <div class="search-bar">
-                <input type="text" placeholder="검색" />
-                <button>
-                    검색
-                </button>
+                <form action="/main/search.do" method="get">
+                    <input type="text" placeholder="검색" name="keyword" value="${ requestScope.keyword }"/>
+                    <button class="btn searchBtn">검색</button>
+                </form>
             </div>
-            <div class="search-result">
-                <div class="search-msg">
-                    "<strong>${ requestScope.keyword }</strong>"에 대한 검색결과는 '<strong>${ requestScope.count }</strong>'건입니다.
-                </div>
-                <div>
-                    <div class="tab">
-                        <span class="tab-btn active" onclick="changeTab(this);" type="all">전체 (${ requestScope.count })</span>
-                        <span class="tab-btn" onclick="changeTab(this);" type="suggest">시민제안 (${ requestScope.suggestCount })</span>
-                        <span class="tab-btn" onclick="changeTab(this);" type="proposal">서울시가 묻습니다 (${ requestScope.proposalCount })</span>
+
+            <c:if test="${ requestScope.keyword.length() > 0}">
+                <div class="search-result">
+                    <div class="search-msg">
+                        "<strong>${ requestScope.keyword }</strong>"에 대한 검색결과는 '<strong>${ requestScope.count }</strong>'건입니다.
                     </div>
-                    <hr>
-                    <div class="result">
-                        <ul id="suggest--container">
-                            <c:if test="${ requestScope.suggestCount > 3 }">
-                                <div>
-                                    <h3>시민제안 검색결과 (총 <strong>${ requestScope.suggestCount }</strong>건)</h3>
-                                    <span id="suggestMore" class="more" onclick="moreSuggest();">더보기</span>
-                                </div>
-                            </c:if>
-                            <c:forEach items="${ requestScope.suggest }" var="item">
-                                <li>
-                                    <h4><a href="${ item.URL }">${ item.TITLE }</a></h4>
-                                    <p>${ item.CONTENT }</p>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                        <ul id="proposal--container"> 
-                            <c:if test="${ requestScope.proposalCount > 3 }">
-                                <div>
-                                    <h3>서울시가 묻습니다. 검색결과 (총 <strong>${ requestScope.proposalCount }</strong>건)</h3>
-                                    <span id="proposalMore" class="more" onclick="moreProposal();">더보기</span>
-                                </div>
-                            </c:if>
-                            <c:forEach items="${ requestScope.proposal }" var="item">
-                                <li>
-                                    <h4><a href="${ item.URL }">${ item.TITLE }</a></h4>
-                                    <p>${ item.CONTENT }</p>
-                                </li>
-                            </c:forEach>
-                        </ul>
+                    <div>
+                        <div class="tab">
+                            <span class="tab-btn active" onclick="changeTab(this);" type="all">전체 (${ requestScope.count })</span>
+                            <span class="tab-btn" onclick="changeTab(this);" type="suggest">시민제안 (${ requestScope.suggestCount })</span>
+                            <span class="tab-btn" onclick="changeTab(this);" type="proposal">서울시가 묻습니다 (${ requestScope.proposalCount })</span>
+                        </div>
+                        <hr>
+                        <div class="result">
+                            <ul id="suggest--container">
+                                <c:if test="${ requestScope.suggestCount > 3 }">
+                                    <div>
+                                        <h3>시민제안 검색결과 (총 <strong>${ requestScope.suggestCount }</strong>건)</h3>
+                                        <span id="suggestMore" class="more" onclick="moreSuggest();">더보기</span>
+                                    </div>
+                                </c:if>
+                                <c:forEach items="${ requestScope.suggest }" var="item">
+                                    <li>
+                                        <h4><a href="${ item.URL }">${ item.TITLE }</a></h4>
+                                        <p>${ item.CONTENT }</p>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                            <ul id="proposal--container">
+                                <c:if test="${ requestScope.proposalCount > 3 }">
+                                    <div>
+                                        <h3>서울시가 묻습니다. 검색결과 (총 <strong>${ requestScope.proposalCount }</strong>건)</h3>
+                                        <span id="proposalMore" class="more" onclick="moreProposal();">더보기</span>
+                                    </div>
+                                </c:if>
+                                <c:forEach items="${ requestScope.proposal }" var="item">
+                                    <li>
+                                        <h4><a href="${ item.URL }">${ item.TITLE }</a></h4>
+                                        <p>${ item.CONTENT }</p>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </c:if>
         </div>
     </section>
 

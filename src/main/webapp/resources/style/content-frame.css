@@ -73,6 +73,7 @@ section {
     padding: 0;
     list-style: none;
     color: var(--COLOR-FONT-GRAY);
+    font: 100 15px/1.5 'Noto Sans KR', sans-serif;
 }
 .menubar a {
     text-decoration: none;
@@ -272,7 +273,7 @@ Content-Session: 글작성 버튼
     margin: 0 auto;
 }
 
-.content--block .detail-btn {
+.detail-btn {
     display: block;
     width: 280px;
     height: 60px;
@@ -284,7 +285,7 @@ Content-Session: 글작성 버튼
     font: 100 20px/60px 'Noto Sans KR';
 
 }
-.content--block .detail-btn a {
+.detail-btn a {
     text-decoration: none;
     color: white;
 }
@@ -293,5 +294,6 @@ Content-Session: 글작성 버튼
     list-style: none;
     padding: none;
 }
+
 
 
