@@ -216,16 +216,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <!-- 로그인한 관리자만 작성 가능 -->
     <script>
-    	var admin=${admin};
+    	var admin = ${admin != null};
+    	
+    	console.log(admin);
     	$('.btn.suggest').click(function(){
-    		if(admin!=null){
-    			location.replace('/discuss/writeForm.do');
+    		if(admin){
+    			location.href='/discuss/writeForm.do';
     		}
     		else{
-    			var result=confirm('로그인이 필요한 기능입니다. 로그인 하시겠습니까?');
+    			var result=confirm('관리자 로그인이 필요한 기능입니다. 로그인 하시겠습니까?');
     			if(result){
-    				alert('로그인 페이지로 이동합니다.');
-    				location.replace('/member/goLogin.do');
+    				alert('관리자 로그인 페이지로 이동합니다.');
+    				location.href='/test/admintest.do';
     			}
     		}
     	});
@@ -248,17 +250,7 @@
 					var json = JSON.parse(data);
 					var discuss=json.discuss;
 					for(var i=0;i<discuss.length;i++){
-						$("<div class='card-item discussion'><div class='category'>토론</div><div class='title'>"
-						+${discuss[i].discussTitle }
-						+"</div><div class='content'>내용</div><div class='thumnail'><img src='"
-						+${discuss[i].discussThumbnailPath }
-						+"' alt='제목' /></div><div class='icons'><object class='icon hits auto-hidden'></object><span>212</span><object class='icon heart'></object><span>11</span><object class='icon comment'></object><span>12</span><object class='icon calendar auto-hidden'></object><span>"
-			            +${discuss[i].discussStart }
-						+" ~ "
-						+${discuss[i].discussEnd }
-						+"</span></div><a class='detail-btn' href='/discuss/onePost.do?discussNo="
-						+${discuss[i].discussNo}
-						+"'>결과 보기</a></div>").appendTo('.card-container');
+						$("<div class='card-item discussion'><div class='category'>토론</div><div class='title'>"+${discuss[i].discussTitle }+"</div><div class='content'>내용</div><div class='thumnail'><img src='"+${discuss[i].discussThumbnailPath }+"' alt='제목' /></div><div class='icons'><object class='icon hits auto-hidden'></object><span>212</span><object class='icon heart'></object><span>11</span><object class='icon comment'></object><span>12</span><object class='icon calendar auto-hidden'></object><span>"+${discuss[i].discussStart }+" ~ "+${discuss[i].discussEnd }+"</span></div><a class='detail-btn' href='/discuss/onePost.do?discussNo="+${discuss[i].discussNo}+"'>결과 보기</a></div>").appendTo('.card-container');
 					}
 					$('.get').val(currentListPage+1);
 				},
