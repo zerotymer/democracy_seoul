@@ -82,4 +82,9 @@
     background-color: red;
     text-align: center;
     font: 100 14px/40px 'Nanum Gothic', sans-serif;
+    cursor: pointer;
+}
+
+.search--container .result strong {
+    color: var(--COLOR-FONT-STRONG);
 }

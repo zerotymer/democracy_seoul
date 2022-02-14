@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.go.seoul.democracy.proposal.model.dao.ProposalDAO;
 import kr.go.seoul.democracy.proposal.model.vo.Proposal;
+import kr.go.seoul.democracy.proposal.model.vo.ProposalComment;
 
 @Service("proposalServiceImpl")
 public class ProposalServiceImpl implements ProposalService {
@@ -45,7 +46,18 @@ public class ProposalServiceImpl implements ProposalService {
 		pDAO.delete(proposalNo);
 		
 	}
-	
+
+	@Override
+	public List<ProposalComment> comlist(int userId) {
+			return pDAO.comlist(userId);
+	}
+
+	@Override
+	public void comWrite(Proposal ProposalComment) {
+		pDAO.comWrite(ProposalComment);
+		
+	}
+
 
 	
 

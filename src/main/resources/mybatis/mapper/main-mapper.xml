@@ -78,4 +78,93 @@
 			ORDER BY proposal_date DESC)
 		WHERE ROWNUM BETWEEN 1 AND #{_parameter}
 	</select>
+	<select id="searchAll" resultType="hashmap">
+		SELECT
+			'suggest' AS "CATEGORY",
+			suggest_no AS "BOARDNO",
+			suggest_title AS "TITLE",
+			suggest_content AS "CONTENT"
+		FROM
+			SUGGESTION
+		WHERE suggest_title LIKE '%${_parameter}%'
+		   OR suggest_content LIKE '%${_parameter}%'
+
+		UNION
+
+		SELECT
+			'discussion' AS "CATEGORY",
+			discuss_no AS "BOARDNO",
+			discuss_title AS "TITLE",
+			discuss_content AS "CONTENT"
+		FROM
+			DISCUSSION
+		WHERE discuss_title LIKE '%${_parameter}%'
+		   OR discuss_content LIKE'%${_parameter}%'
+
+		UNION
+
+		SELECT
+			'proposal' AS "CATEGORY",
+			proposal_no AS "BOARDNO",
+			proposal_title AS "TITLE",
+			proposal_content AS "CONTENT"
+		FROM
+			PROPOSAL
+		WHERE proposal_title LIKE '%${_parameter}%'
+		   OR proposal_content LIKE '%${_parameter}%'
+	</select>
+
+	<select id="searchAllSuggest" resultType="hashmap">
+		SELECT
+			'suggest' AS "CATEGORY",
+			suggest_no AS "BOARDNO",
+			suggest_title AS "TITLE",
+			suggest_content AS "CONTENT"
+		FROM
+			SUGGESTION
+		WHERE suggest_title LIKE '%${_parameter}%'
+		   OR suggest_content LIKE '%${_parameter}%'
+	</select>
+	<select id="searchAllDiscussion" resultType="hashmap">
+		SELECT
+			'discussion' AS "CATEGORY",
+			discuss_no AS "BOARDNO",
+			discuss_title AS "TITLE",
+			discuss_content AS "CONTENT"
+		FROM
+			DISCUSSION
+		WHERE discuss_title LIKE '%${_parameter}%'
+		   OR discuss_content LIKE'%${_parameter}%'
+	</select>
+	<select id="searchAllProposal" resultType="hashmap">
+		SELECT
+			'proposal' AS "CATEGORY",
+			proposal_no AS "BOARDNO",
+			proposal_title AS "TITLE",
+			proposal_content AS "CONTENT"
+		FROM
+			PROPOSAL
+		WHERE proposal_title LIKE '%${_parameter}%'
+		   OR proposal_content LIKE '%${_parameter}%'
+	</select>
+	<select id="countSearchSuggest" resultType="int">
+		SELECT count(*)
+		FROM SUGGESTION
+		WHERE suggest_title LIKE '%${_parameter}%'
+		   OR suggest_content LIKE '%${_parameter}%'
+	</select>
+	<select id="countSearchDiscussion" resultType="int">
+		SELECT count(*)
+		FROM DISCUSSION
+		WHERE discuss_title LIKE '%${_parameter}%'
+		   OR discuss_content LIKE'%${_parameter}%'
+	</select>
+	<select id="countSearchProposal" resultType="int">
+		SELECT count(*)
+		FROM PROPOSAL
+		WHERE proposal_title LIKE '%${_parameter}%'
+		   OR proposal_content LIKE '%${_parameter}%'
+	</select>
+
+
 </mapper>

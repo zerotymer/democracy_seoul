@@ -196,7 +196,7 @@
                                     <td>${m.email }</td>
                                     <td>${m.enrollDate }</td>
                                     <td>
-                                        <button style="width:100%" class="stateChangeBtn"
+                                        <button style="width:100%; height: 100%;" class="stateChangeBtn"
                                                 data="${m.userId }">${m.endYN }</button>
                                     </td>
                                 </tr>

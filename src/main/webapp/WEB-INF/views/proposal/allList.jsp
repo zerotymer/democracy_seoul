@@ -178,7 +178,7 @@
 		                </div>
 		                <div class="content">${proposal.proposalContent }</div>
 		                <div class="thumnail">
-	                        <img src="/upload/test/1643868555859_thumbnail.jpg" alt="제목" />
+	                        <img src="${ proposal.proposalThumbnail }" alt="제목" />
 	                    </div>
 		                <div class="icons">
 		                    <object class="icon hits auto-hidden"></object>

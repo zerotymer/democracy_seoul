@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,8 +33,10 @@ import com.google.gson.JsonObject;
 import kr.go.seoul.common.ImageResizeTemplate;
 import kr.go.seoul.common.transfer.ImageTransferInfo;
 import kr.go.seoul.democracy.admin.model.vo.Admin;
+import kr.go.seoul.democracy.common.model.vo.Member;
 import kr.go.seoul.democracy.proposal.model.service.ProposalService;
 import kr.go.seoul.democracy.proposal.model.vo.Proposal;
+import kr.go.seoul.democracy.proposal.model.vo.ProposalComment;
 import oracle.jdbc.logging.annotations.Log;
 
 @Controller("proposalController")
@@ -54,31 +57,46 @@ public class ProposalController {
 		return "index";
 	}
 
+	
 	//리스트 불러오기
 	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.GET)
 	public ModelAndView allList(ModelAndView mav,
 			@RequestParam(required=false, defaultValue="1")int curPage) throws Exception{
 			
 		int recordCountPage = 9;
+		//int totalCount =pService.proposalTotalCount();
+		
 		List<Proposal> list = pService.selectAllList(curPage,recordCountPage);
-		mav.setViewName("proposal/allList");
 		mav.addObject("list",list);
+		mav.addObject("recordCountPage",recordCountPage);
+		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/recordCountPage));
+		mav.setViewName("proposal/allList");
 		return mav;
+		
+		
 	}
-	// 게시글 불러오기 
+	// 게시글 불러오기  + 댓글 추가 
 	@RequestMapping(value="/proposal/post.do", method = RequestMethod.GET)
-	public ModelAndView proposalview(
+	public ModelAndView proposalview(		
 		@RequestParam(value="proposalNo",defaultValue="1")int proposalNo,
 		HttpSession session) throws Exception {
-		
 		//게시글번호 가져오기
-		Proposal proposal = pService.proposalView(proposalNo);
 		
+		Proposal proposal = pService.proposalView(proposalNo);
+			
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("proposal/post");
 		mav.addObject("proposal", pService.proposalView(proposalNo));
+
 		return mav;
 	}
+	
+	@RequestMapping(value="/proposal/write.do", method=RequestMethod.POST)
+	public String comment(@RequestParam int proposalNo,@RequestParam String userId,Proposal proposalComment, @SessionAttribute("user") Member member) throws Exception{ 
+		pService.comWrite(proposalComment);
+		return "redirect:/proposal/post?userId="+member.getUserId();
+	}
+	
 	
 	//게시글 작성화면 
 	@RequestMapping(value="/proposal/proposalWrite.do")
@@ -117,18 +135,18 @@ public class ProposalController {
         json.addProperty("fileName", info.getFileName());
         json.addProperty("imgUrl", "/upload/proposal/"+info.getFileName("thumbnail"));
         new Gson().toJson(json,response.getWriter());
+        
     }
 
 
 	//페이지 수정뷰
 	@RequestMapping(value="/proposal/modify.do", method=RequestMethod.GET)
 	public String modify(@RequestParam(defaultValue="1") int proposalNo,Model model,HttpSession session) throws Exception{
-		//세션확인 
-		Admin admin = (Admin)session.getAttribute("admin");
-		if(admin== null) return "proposal/allList"; 
-		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
-		//비지니스로직 
-		Proposal proposal = pService.proposalView(proposalNo);
+		/*
+		 * //세션확인 Admin admin = (Admin)session.getAttribute("admin"); if(admin== null)
+		 * return "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
+		 * admin.getAdminGrade() != '1') return "proposal/allList"; //비지니스로직
+		 */		Proposal proposal = pService.proposalView(proposalNo);
 		model.addAttribute("proposal",proposal);
 		return "proposal/modify";
 	}
@@ -137,25 +155,30 @@ public class ProposalController {
 	@RequestMapping(value="/proposal/update.do", method=RequestMethod.POST)
 	public String postModify(Proposal proposal,RedirectAttributes rttr,HttpSession session) throws Exception {
 		
-		Admin admin = (Admin)session.getAttribute("admin");
-		if(admin== null) return "proposal/allList"; 
-		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
-		
+		/*
+		 * Admin admin = (Admin)session.getAttribute("admin"); if(admin== null) return
+		 * "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
+		 * admin.getAdminGrade() != '1') return "proposal/allList";
+		 */
 		pService.modify(proposal);
 		//rttr.addFlashAttribute("result","modify success");
-		return "redirect:/proposal/post?proposalNo="+proposal.getProposalNo();	
+		return "redirect:/proposal/post.do?proposalNo="+proposal.getProposalNo();	
 	}
 	
 	//게시글삭제하기 
-	@RequestMapping(value="/proposal/delete.do", method=RequestMethod.POST)
+	@RequestMapping(value="/proposal/delete.do", method=RequestMethod.GET)
 	public String delete(@RequestParam(defaultValue="1") int proposalNo,HttpSession session) throws Exception {
-		Admin admin = (Admin)session.getAttribute("admin");
-		if(admin== null) return "proposal/allList"; 
-		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
-		
-		Proposal proposal = pService.proposalView(proposalNo);
-		return "redirect:/proposal/allList";
+		/*
+		 * Admin admin = (Admin)session.getAttribute("admin"); if(admin== null) return
+		 * "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
+		 * admin.getAdminGrade() != '1') return "proposal/allList";
+		 */
+		pService.delete(proposalNo);
+		System.out.println(proposalNo);
+		return "redirect:/proposal/allList.do";
 	}
+	
+	
 	
 	
 	

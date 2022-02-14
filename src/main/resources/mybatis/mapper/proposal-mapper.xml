@@ -11,10 +11,11 @@
  		 	proposal_date as proposalDate,
  		 	proposal_start as proposalStart,
  		 	proposal_end as proposalEnd,
- 		 	proposal_del_YN as proposalDelYN
+ 		 	proposal_del_YN as proposalDelYN,
+ 		 	proposal_Thumbnail as proposalThumbnail
 	FROM 
 		PROPOSAL
-	
+	where proposal_del_YN ='N'
  	ORDER BY 
             proposalNo desc
 	</select>
@@ -59,8 +60,8 @@
 	<!-- 게시글수정처리 -->
 	<update id="modify" parameterType="proposal">
 		update proposal set
-		proposalTitle = #{proposalTitle},
- 		proposalContent = #{proposalContent}
+			proposal_Title = #{proposalTitle},
+	 		proposal_Content = #{proposalContent}
 		where proposal_No = #{proposalNo}
 	
 	</update>
@@ -68,21 +69,31 @@
 	<!-- 게시글 삭제 -->
 	<update id="delete" parameterType="proposal">
 		update proposal set
-		proposalDelYN='Y'
+			proposal_Del_YN='Y'
 		where proposal_No = #{proposalNo}
 	</update>
 	
+	
+	<!-- 댓글목록 -->
 	<select id="commentList" parameterType="kr.go.seoul.democracy.proposal.model.vo.ProposalComment">
 		select
-		comment_no as CommentNo,
-		userId as userId,
-		comment_content as commentContent,
-		comment_date as commnetDate
-		from proposal_comment
+			comment_no as CommentNo,
+			userId as userId,
+			comment_content as commentContent,
+			comment_date as commnetDate
+		from proposalComment
 		where proposal_No = #{proposalNo}
 	</select>		
 	
-	
-	
+	<!-- 댓글작성 -->
+	<insert id="commentWrite" parameterType="kr.go.seoul.democracy.proposal.model.vo.ProposalComment">
+		insert into
+		 proposalComment(proposlNo,commentNo,userId,commentContent)
+		 values(
+		 proposalComment_SEQ.NEXTVAL,
+		 #{proposalNo},
+		 #{userId},
+		 #{commentContent})
+	</insert>
 </mapper>
 	

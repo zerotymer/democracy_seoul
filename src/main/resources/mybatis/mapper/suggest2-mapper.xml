@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="suggest2">
+	<insert id="insertPost" parameterType="kr.go.seoul.democracy.suggest2.model.vo.Suggest">
+		INSERT INTO SUGGESTION
+		VALUES ( suggestion_seq.nextval, #{suggestTitle}, #{userId}, #{suggestContent}, CURRENT_DATE, CURRENT_DATE, CURRENT_DATE + 14, 'N', #{suggestGory}, #{suggestLocal} )
+	</insert>
+	<update id="updatePost" parameterType="kr.go.seoul.democracy.suggest2.model.vo.Suggest">
+		UPDATE SUGGESTION
+		SET suggest_title = #{suggestTitle}, suggest_content = #{suggestContent}
+		WHERE suggest_no = #{suggestNo} AND userid = #{userId}
+	</update>
+	<select id="selectPost" parameterType="int" resultType="kr.go.seoul.democracy.suggest2.model.vo.Suggest">
+		SELECT
+			suggest_no as suggestNo,
+			suggest_title as suggestTitle,
+		    userid as userId,
+		    suggest_content as suggestContent,
+			suggest_gory as suggestGory,
+		    suggest_local as suggestLocal
+		FROM SUGGESTION
+		WHERE suggest_no = #{suggestNo}
+	</select>
+</mapper>

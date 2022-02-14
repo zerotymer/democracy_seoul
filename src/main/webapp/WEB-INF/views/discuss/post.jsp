@@ -60,7 +60,7 @@
             color:rgba(160, 160, 130);
         }
         
-        #vote{
+        .vote{
             width:80%;
             height:24px;
             margin-top:7%;
@@ -71,25 +71,38 @@
             justify-content: center;
             text-align: center;
         }
-        #vote>div:first-of-type{
-            width:60%;
+        .vote.reverse{
+        	flex-direction: row-reverse;
+        }
+        
+        .graph{
+            width:50%;
             height:100%;
             margin:auto 0;
             padding-top:2px;
-            background-color:rgba(69, 49, 250);
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
             color:white;
         }
-        #vote>div:last-of-type{
-            width:40%;
-            height:100%;
-            margin:auto 0;
-            padding-top:2px;
-            background-color:rgba(250, 49, 49);
+        .votePro{
+        	background-color:rgba(69, 49, 250);
+        	border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .voteCon{
+        	background-color: rgba(250, 49, 49);
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
-            color:white;
+        }
+        .vote.reverse .votePro{
+        	border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        	border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .vote.reverse .voteCon{
+        	border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        	border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
         }
         
         .contents{
@@ -106,6 +119,10 @@
             margin:0 auto;
             display:flex;
             flex-direction: row;
+        }
+        
+        .comment-container.reverse{
+        	flex-direction:row-reverse;
         }
         
         .comments{
@@ -131,7 +148,14 @@
         	flex-direction: row-reverse;
         	background-color: rgba(250, 49, 49);
         }
-        
+        .comment-container.reverse .comment.pro{
+        	flex-direction: row-reverse;
+        	margin-left:3%;
+        }
+        .comment-container.reverse .comment.con{
+        	flex-direction: row;
+        	margin-left:0;
+        }
         .comment .content {
             width:85%;
             height:100%;
@@ -168,14 +192,9 @@
             align-items: center;
             justify-content: center;
         }
-        
-        .btn.get{
+        .get{
             border:0px;
-            
-        }
-        .btn.write{
-            border:1px solid rgba(110, 110, 100);
-            
+            background-color: white;
         }
         
         
@@ -186,13 +205,26 @@
             display:flex;
             flex-direction: row;
         }
+        .form{
+            border:2px solid rgba(20, 160, 134);
+        }
         .input-group-text{
             width:100px;
-            background-color: rgba(69, 49, 250); 
+            background-color: rgba(20, 160, 134);
             color:white;
         }
         .form-control{
             resize:none;
+        }
+        .write{
+            border:1px solid rgba(100, 100, 100);
+            background-color: rgba(20, 160, 134);
+            font-size:13px;
+            color:white;
+        }
+        
+        a{
+        	text-decoration:none;
         }
     </style>
     
@@ -214,14 +246,14 @@
             </div>
           </div>
 
-          <div id="vote">
-            <div>
+          <div class="vote">
+            <div class="votePro graph">
                 <svg style="width:18px;height:18px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" />
                 </svg>
             </div>
             
-            <div>
+            <div class="voteCon graph">
                 <svg style="width:18px;height:18px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" />
                 </svg>
@@ -235,18 +267,51 @@
         </div>
         
         <!-- 댓글 작성폼 -->
-        <c:if test="${user }!=null">
-        <form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
-			<div>
-				<div class="input-group">
-                  <span class="input-group-text">댓글</span>
-                  <textarea name="commentContent" class="form-control" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요."></textarea>
-                </div>
-			</div>
-			<button class="btn write" style="font-size:13px;"><!--<i class="xi-pen-o"></i>-->입력</button>
-		</form>
-		</c:if><hr>
+        <c:choose>
         
+	        <c:when test="${user }!=null">
+	        <c:choose>
+	        
+	        	<c:when test="${my }!=null">
+	        		<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+					<div class="input-group">
+						<span id="input-group-text" class="input-group-text form">댓글</span>
+					    <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요.">${my.commentContent }</textarea>
+					    <input name="discussNo" type="hidden" value="${discuss.discussNo}" />
+					    <input class="commentVote" name="vote" type="hidden" value="${my.commentVote}" />
+					    <button class="write" type="submit"><!--<i class="xi-pen-o"></i>-->수정</button>
+				    </div>
+					</form>
+	        	</c:when>
+	        	
+	        	<c:otherwise>
+	        	<a href=".vote">
+	        		<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+					<div class="input-group abled">
+						<span class="input-group-text form">댓글</span>
+					    <textarea name="commentContent" id="disabled" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요." disabled></textarea>
+					    <input name="discussNo" type="hidden" value="${discuss.discussNo}" />
+					    <input class="commentVote" name="vote" type="hidden" value="Y" />
+					    <button class="write" type="submit"><!--<i class="xi-pen-o"></i>-->완료</button>
+				    </div>
+					</form>
+				</a>
+	        	</c:otherwise>
+	        	
+			</c:choose>
+			</c:when>
+			
+			<c:otherwise>
+				<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+				<div class="input-group disabled">
+		            <span class="input-group-text form">댓글</span>
+		            <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="로그인 후 댓글 작성 가능합니다." disabled></textarea>
+		            <button class="write"><!--<i class="xi-pen-o"></i>-->입력</button>
+	            </div>
+				</form>
+			</c:otherwise>
+        
+        </c:choose><hr>
         
         <!-- 댓글 목록 -->
         <div class="comment-container">
@@ -255,8 +320,8 @@
         	<c:forEach var="proComment" items="${proComment}">
             <div class="comment pro">
                 <div class="content">
-                    <div class="text">${proComment.get(commentContent)}</div>
-                    <div class="id">${proComment.get(userId)}</div>
+                    <div class="text">${proComment.get("commentContent")}</div>
+                    <div class="id">${proComment.get("userId")}</div>
                 </div>
                 <div class="icon">
                 	<div class="img">
@@ -273,8 +338,8 @@
 		<c:forEach var="conComment" items="${conComment}">
             <div class="comment con">
                 <div class="content">
-                    <div class="text">${conComment.get(commentContent)}</div>
-                    <div class="id">${conComment.get(userId)}</div>
+                    <div class="text">${conComment.get("commentContent")}</div>
+                    <div class="id">${conComment.get("userId")}</div>
                 </div>
                 <div class="icon">
                 	<div class="img">
@@ -289,7 +354,7 @@
 		
         </div><hr>
         <div class="more">
-        	<button class="btn get" value="1" type="submit"><i class="xi-caret-down-circle-o"></i>더보기</button>
+        	<button class="get" value="1"><i class="xi-caret-down-circle-o"></i>더보기</button>
         </div>
 		
     </section>
@@ -305,41 +370,127 @@
 <script>
     var result1=false;
     var result2=false;
-    $('#vote>div:first').click(function(){
-        /*$('#vote>div:first').css('color','black');*/
+    var discussNo=${discuss.discussNo};
+    var voteTotal=${vote.get('voteTotal')};
+	var votePro=${vote.get('votePro')};
+	var voteCon=${vote.get('voteCon')};
+    
+	
+    window.onload=function(){
+		$('.votePro').width(votePro/voteTotal*100+'%');
+	    $('.voteCon').width(voteCon/voteTotal*100+'%');
+	    
+	    
+	    if(voteCon>votePro){
+	    	$('.comment-container').addClass('reverse');
+	    	$('.vote').addClass('reverse');
+	    }
+	    
+	    /* 작성한 댓글이 있으면 댓글창 색 바꾸기 */
+		if($('.commentVote').val()=='N'){
+			$('#input-group-text').css('background-color','rgba(250, 49, 49)');
+		}
+		else if($('.commentVote').val()=='Y'){
+			$('#input-group-text').css('background-color','rgba(69, 49, 250)');
+		}
+	}
+    
+    
+    $('.votePro').click(function(){
         if(result1||result2){
             alert('이미 투표하셨습니다. 재투표는 불가합니다.');
         }
         else{
-            result1=confirm('안건에 반대하시겠습니까?');
+            result1=confirm('안건에 찬성하시겠습니까?');
             if(result1){
-                var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 반대하시겠습니까?')
+                var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 찬성하시겠습니까?')
                 if(result){
-                	alert('반대하셨습니다. 투표해 주셔서 감사합니다.');
-                    $('#vote>div:first').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" /></svg>');
+                	alert('찬성하셨습니다. 투표해 주셔서 감사합니다.');
+                    $('.votePro').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" /></svg>');
+                    $('.input-group-text').css('background-color','rgba(69, 49, 250)');
+                    $('.commentVote').val('Y');
+                    $('#disabled').attr("disabled",false);
+                    $('a').removeAttr("href");
+                    $.ajax({
+            			url : "/discuss/vote.ajax",
+            			type: "get",
+            			data : {votePro:1,voteCon:0,discussNo:discussNo},
+            			success : function(data){
+            				var json = JSON.parse(data);
+            				if(json.result>0){
+            					voteTotal++;
+                				votePro++;
+                				$('.votePro').width(votePro/voteTotal*100+'%');
+            				}
+            				else{
+            					alert('투표 결과를 반영하지 못했습니다. - 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+            				}
+            			},
+            			error : function(data){
+            				alert('투표 결과를 반영하지 못했습니다. - 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+            			}	
+            		});
                 }
             }
         }
     });
-    
-    $('#vote>div:last').click(function(){
-        /*$('#vote>div:last').css('color','black');*/
+    $('.voteCon').click(function(){
         if(result1||result2){
             alert('이미 투표하셨습니다. 재투표는 불가합니다.');
         }
         else{
-            result2=confirm('안건에 찬성하시겠습니까?');
+            result2=confirm('안건에 반대하시겠습니까?');
             if(result2){
-                var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 찬성하시겠습니까?')
+                var result=confirm('한번 투표 시 재투표가 불가합니다. 정말 반대하시겠습니까?')
                 if(result){
-                    alert('찬성하셨습니다. 투표해 주셔서 감사합니다.');
-                    $('#vote>div:last').empty();
-                    $('#vote>div:last').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" /></svg>');
+                    alert('반대하셨습니다. 투표해 주셔서 감사합니다.');
+                    $('.voteCon').html('<svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" /></svg>');
+                    $('.input-group-text').css('background-color','rgba(250, 49, 49)');
+                    $('.commentVote').val('N');
+                    $('#disabled').attr("disabled",false);
+                    $('a').removeAttr("href");
+                    $.ajax({
+            			url : "/discuss/vote.ajax",
+            			type: "get",
+            			data : {votePro:0,voteCon:1,discussNo:discussNo},
+            			success : function(data){
+            				var json = JSON.parse(data);
+            				if(json.result>0){
+            					voteTotal++;
+            					voteCon++;
+                				$('.voteCon').width(voteCon/voteTotal*100+'%');
+            				}
+            				else{
+            					alert('투표 결과를 반영하지 못했습니다. - 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+            				}
+            			},
+            			error : function(data){
+            				alert('투표 결과를 반영하지 못했습니다. - 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+            			}	
+            		});
                 }
             }
         }
     });
 </script>
+
+
+<!-- 로그인 안하고 댓글 작성 시도 시 로그인 페이지로 이동-->
+<script>
+	$('.disabled').click(function(){
+		alert('로그인 페이지로 이동합니다.');
+		location.replace('/member/goLogin.do');
+	});
+</script>
+
+
+<script>
+	var msg=${msg};
+	if(msg!=null){
+		alert(msg);
+	}
+</script>
+
 
 <!-- 게시글 내용 기호 변환 -->
 <script language="javascript">
@@ -355,36 +506,45 @@
 
 <!-- 댓글 더보기 -->
 <script>
-	$('#getComment').click(function(){
-		var currentCommentPage=$('#getComment').val();
+	$('.get').click(function(){
+		var currentCommentPage=$('.get').val();
+		var discussNo=${discuss.discussNo};
+		var totalCount=${totalCount};
 		
-		$.ajax({
-			url : "/discuss/getComment.do",
-			type: "get",
-			data : {currentCommentPage:currentCommentPage},
-			success : function(data){
-				for(var i=0;i<data.length;i++){
-					if(data[i].comment_vote=='Y'){
-						$('<div class="comment pro"><div class="content"><div class="text">'
-						+data[i].commentContent
-						+'</div><div class="id">'
-						+data[i].userId
-						+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" /></svg></div></div></div>').appendTo('#comments-pro');
+		if(totalCount/5>=currentCommentPage){
+			$.ajax({
+				url : "/discuss/getComment.do",
+				type: "get",
+				data : {currentCommentPage:currentCommentPage,discussNo:discussNo},
+				success : function(data){
+					var json = JSON.parse(data);
+					var comment=json.comment;
+					for(var i=0;i<comment.length;i++){
+						if(comment[i].comment_vote=='Y'){
+							$('<div class="comment pro"><div class="content"><div class="text">'
+							+comment[i].commentContent
+							+'</div><div class="id">'
+							+comment[i].userId
+							+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" /></svg></div></div></div>').appendTo('#comments-pro');
+						}
+						else if(comment[i].comment_vote=='N'){
+							$('<div class="comment con"><div class="content"><div class="text">'
+							+comment[i].commentContent
+							+'</div><div class="id">'
+							+comment[i].userId
+							+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" /></svg></div></div></div>').appendTo('#comments-con');
+						}
 					}
-					else if(data[i].comment_vote=='N'){
-						$('<div class="comment con"><div class="content"><div class="text">'
-						+data[i].commentContent
-						+'</div><div class="id">'
-						+data[i].userId
-						+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" /></svg></div></div></div>').appendTo('#comments-con');
-					}
-				}
-				$('#getComment').val(currentCommentPage+1);
-			},
-			error : function(data){
-				alert('댓글을 불러오지 못하였습니다. 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
-			}	
-		});
+					$('.get').val(currentCommentPage+1);
+				},
+				error : function(data){
+					alert('댓글을 불러오지 못하였습니다. 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+				}	
+			});
+		}
+		else{
+			alert('더이상 불러올 댓글 목록이 없습니다.');
+		}
 	});
 
 </script>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.go.seoul.democracy.proposal.model.vo.Proposal;
+import kr.go.seoul.democracy.proposal.model.vo.ProposalComment;
 
 public interface ProposalService {
 	//게시글 목록 
@@ -21,7 +22,10 @@ public interface ProposalService {
 	 //게시글삭제 
 	void delete(int proposalNo);
 
-	
+	public List<ProposalComment> comlist(int userId);
+	 
+	public void comWrite(Proposal ProposalComment);
+
 
 
 

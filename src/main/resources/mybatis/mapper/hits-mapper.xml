@@ -3,7 +3,7 @@
 <mapper namespace="hits">
 	<insert id="insertBoard" parameterType="kr.go.seoul.democracy.common.model.vo.HitsTableData">
 		INSERT INTO ${ boardName }
-		VALUES ( #{boardNo}, 0, current_date )
+		VALUES ( #{boardNo}, 1, current_date )
 	</insert>
 	<update id="updateBoard" parameterType="kr.go.seoul.democracy.common.model.vo.HitsTableData">
 		UPDATE ${ boardName }

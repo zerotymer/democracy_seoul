@@ -57,7 +57,7 @@
 }
 .adminCon button {
 	margin-right : 5px;
-	 border:1px solid var(--COLOR-BORDER);
+	border:1px solid var(--COLOR-BORDER);
 	background-color: white;
 	padding :5px;
 }
@@ -104,9 +104,8 @@ padding :15px;
 
 .reg{
    margin-right: 10px;
- 
    border:1px solid var(--COLOR-BORDER);
 	background-color: white;
-	padding :3px;
+	padding :5px;
    
 }
