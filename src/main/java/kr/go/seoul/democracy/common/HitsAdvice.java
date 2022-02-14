@@ -36,7 +36,7 @@ public class HitsAdvice {
     @Pointcut("execution(kr..Sug kr..service.*.*(..))")
     public void suggestPointCut() {}
 
-    //@After("suggestPointCut()")
+    @After("suggestPointCut()")
     public void hitSuggest(JoinPoint jp) {
         if (!(jp.getArgs()[0] instanceof Sug)) return;
 
@@ -50,7 +50,7 @@ public class HitsAdvice {
     @Pointcut("execution(kr..Discuss kr..service.*.*(..))")
     public void discussPointCut() {}
 
-    //@After("discussPointCut()")
+    @After("discussPointCut()")
     public void hitDiscuss(JoinPoint jp) {
         if (!(jp.getArgs()[0] instanceof Discuss)) return;
 
@@ -64,7 +64,7 @@ public class HitsAdvice {
     @Pointcut("execution(kr..Proposal kr..service.*.*(..))")      // TODO: model
     public void proposalPointCut() {}
 
-    //@After("proposalPointCut()")
+    @After("proposalPointCut()")
     public void hitProposal(JoinPoint jp) {
         if (!(jp.getArgs()[0] instanceof Proposal)) return;
 
@@ -78,7 +78,7 @@ public class HitsAdvice {
     @Pointcut("execution(kr..BoardNotice kr..service.*.*(..))")
     public void noticePointCut() {}
 
-    //@After("noticePointCut()")
+    @After("noticePointCut()")
     public void hitNotice(JoinPoint jp) {
         if (!(jp.getArgs()[0] instanceof BoardNotice)) return;
 

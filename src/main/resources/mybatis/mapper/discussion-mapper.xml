@@ -111,7 +111,7 @@
 			vote_pro as votePro,
 			vote_con as voteCon,
 			vote_total as voteTotal
-		from discuss_comment
+		from discuss_vote
 		where discuss_no=#{value}
 	</select>
 	
