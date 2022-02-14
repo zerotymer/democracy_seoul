@@ -15,11 +15,10 @@
 	<!-- 공지사항 목록 보여주기 -->
 	<select id="selectAllNoticeList" resultType="notice">
 	  	SELECT 
-	  		notice_title as userId,
-			username as userName,
-			nick as nick,
-			email as email,
-			enrolldate as enrollDate
+	  		notice_no as noticeNo,
+	  		notice_title as noticeTitle,
+			notice_date as noticeDate,
+			notice_del_yn as noticeDelYN
 	  	FROM NOTICE
 		WHERE NOTICE_DEL_YN ='N' 
 		ORDER BY NOTICE_NO DESC
@@ -33,5 +32,47 @@
 		WHERE NOTICE_DEL_YN='N' 
 		ORDER BY NOTICE_NO DESC
 	</select>
+	
+	<!-- 공지사항 작성 -->
+	<insert id="insertNoticeWrite" parameterType="notice">
+		INSERT INTO 
+			NOTICE 
+		VALUES (NOTICE_SEQ.NEXTVAL, #{noticeTitle}, #{noticeContent}, current_date, 'N', '1', '2')
+	</insert>
+	
+	<!-- 공지사항 제목 클릭 시 하나의 공지사항 보여주기 -->
+	<select id="selectOneNotice" parameterType="int" resultType="notice">
+		SELECT 
+			NOTICE_NO as noticeNo,
+			NOTICE_TITLE as noticeTitle,
+			NOTICE_CONTENT as noticeContent,
+			NOTICE_DATE as noticeDate,
+			NOTICE_DEL_YN as noticeDelYN,
+			NOTICE_THUMBNAIL_NAME as noticeThumbnailName,
+			NOTICE_THUMBNAIL_PATH as noticeThumbnailPath
+		FROM NOTICE
+		WHERE notice_no = #{noticeNo}
+	</select>
+	
+	<!-- 공지사항 수정 -->
+	<update id="noticeUpdate" parameterType="notice">
+		UPDATE
+			NOTICE
+		SET 
+			notice_title = #{noticeTitle},
+			notice_content = #{noticeContent}
+		WHERE
+			notice_no = #{noticeNo}
+	</update>
+	
+	<!-- 공지사항 삭제 버튼 (한 개) -->
+	<update id="noticeDelete" parameterType="notice">
+		UPDATE
+			NOTICE
+		SET
+			notice_del_yn = 'Y'
+		WHERE 
+			notice_no = #{noticeNo} AND notice_title = #{noticeTitle} AND notice_content = #{noticeContent}
+	</update>
 	
 </mapper>

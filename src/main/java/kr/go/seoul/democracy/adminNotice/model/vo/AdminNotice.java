@@ -10,21 +10,21 @@ public class AdminNotice {
 	private String noticeTitle;
 	private String noticeContent;
 	private Date noticeDate;
-	private char delYN;
+	private char noticeDelYN;
 	private String noticeThumbnailName;
 	private String noticeThumbnailPath;
 	
 	/// CONSTRUCTORs
 	public AdminNotice() 
 	{	super();	}
-	public AdminNotice(int noticeNo, String noticeTitle, String noticeContent, Date noticeDate, char delYN,
+	public AdminNotice(int noticeNo, String noticeTitle, String noticeContent, Date noticeDate, char noticeDelYN,
 			String noticeThumbnailName, String noticeThumbnailPath) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.noticeDate = noticeDate;
-		this.delYN = delYN;
+		this.noticeDelYN = noticeDelYN;
 		this.noticeThumbnailName = noticeThumbnailName;
 		this.noticeThumbnailPath = noticeThumbnailPath;
 	}
@@ -55,11 +55,11 @@ public class AdminNotice {
 	public void setNoticeDate(Date noticeDate) {
 		this.noticeDate = noticeDate;
 	}
-	public char getDelYN() {
-		return delYN;
+	public char getNoticeDelYN() {
+		return noticeDelYN;
 	}
-	public void setDelYN(char delYN) {
-		this.delYN = delYN;
+	public void setNoticeDelYN(char delYN) {
+		this.noticeDelYN = delYN;
 	}
 	public String getNoticeThumbnailName() {
 		return noticeThumbnailName;
@@ -79,7 +79,7 @@ public class AdminNotice {
 	@Override
 	public String toString() {
 		return "AdminNotice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
-				+ ", noticeDate=" + noticeDate + ", delYN=" + delYN + ", noticeThumbnailName=" + noticeThumbnailName
+				+ ", noticeDate=" + noticeDate + ", noticeDelYN=" + noticeDelYN + ", noticeThumbnailName=" + noticeThumbnailName
 				+ ", noticeThumbnailPath=" + noticeThumbnailPath + "]";
 	}
 	
