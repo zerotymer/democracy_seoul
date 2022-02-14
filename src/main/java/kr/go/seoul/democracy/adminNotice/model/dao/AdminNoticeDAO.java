@@ -55,4 +55,9 @@ public class AdminNoticeDAO {
 		return sqlSession.insert("notice.insertNoticeWrite", adminNotice);
 	}
 
+	public int noticeUpdate(AdminNotice an) {
+		
+		return sqlSession.update("notice.noticeUpdate",an);
+	}
+
 }

@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.go.seoul.democracy.adminNotice.model.service.AdminNoticeService;
@@ -119,8 +121,41 @@ public class AdminNoticeController {
 	@RequestMapping(value="/notice/noticeViewPageMove.do")
 	public String noticeViewPageMove()
 	{
-		return "notice/noticeCkeditorWrite";
+		return "notice/noticeCkeditorView";
 	}
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.14
+	 * Description : 공지사항을 볼 수 있는 페이지로 이동
+	 */
+	@RequestMapping(value="/notice/noticeUpdate.do", method = RequestMethod.POST)
+	public void noticeUpdate(@RequestParam String noticeTitle,
+							 @RequestParam String noticeContent,
+							 @SessionAttribute AdminNotice adminNotice,
+							 Model model)
+	{
+		int noticeNo = adminNotice.getNoticeNo();
+		
+		AdminNotice an = new AdminNotice();
+		an.setNoticeTitle(noticeTitle);
+		an.setNoticeContent(noticeContent);
+		
+		int result = nService.noticeUpdate(an);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

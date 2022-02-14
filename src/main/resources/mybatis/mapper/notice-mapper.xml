@@ -39,4 +39,16 @@
 		VALUES (NOTICE_SEQ.NEXTVAL, #{noticeTitle}, #{noticeContent}, current_date, 'N', '1', '2')
 	</insert>
 	
+	<!-- 공지사항 수정 -->
+	<update id="noticeUpdate" parameterType="notice">
+		UPDATE
+			NOTICE
+		SET 
+			notice_title = #{noticeTitle},
+			notiec_content = #{noticeContent}
+		WHERE
+			notice_no = #{notice_no}
+	</update>
+	
+	
 </mapper>
