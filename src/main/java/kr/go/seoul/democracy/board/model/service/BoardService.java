@@ -26,7 +26,6 @@ public interface BoardService {
 	
 	int totalSearchTitleCount(BoardNotice boardNotice);
 	
-	
     List<BoardNotice> noticeNewsListSearchContent(int recordCountPerPage, int currentPage, BoardNotice boardNotice) throws Exception;
 	
 	int totalSearchContentCount(BoardNotice boardNotice);
