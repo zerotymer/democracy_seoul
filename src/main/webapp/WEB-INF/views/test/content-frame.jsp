@@ -35,15 +35,15 @@
                             <!-- Menu -->
                             <ul class="include menu">
                                 <li class="menuitem">
-                                    <a href="">참여하기</a>
+                                    <a>참여하기</a>
                                     <ul class="submenu">
-                                        <li><a href=""></a>시민제안</li>
-                                        <li><a href=""></a>시민토론</li>
-                                        <li><a href=""></a>서울시가 묻습니다</li>
+                                        <li><a href="/suggest/suggest.do">시민제안</a></li>
+                                        <li><a href="/discuss/list.do">시민토론</a></li>
+                                        <li><a href="/proposal/allList.do">서울시가 묻습니다</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">결과보기</a>
+                                    <a>결과보기</a>
                                     <ul class="submenu">
                                         <li><a href="">제안결과</a></li>
                                         <li><a href="">공론결과</a></li>
@@ -52,18 +52,18 @@
                                 <li class="menuitem">
                                     <a href="">알아보기</a>
                                     <ul class="submenu">
-                                        <li><a href="">민주주의 서울 <wbr/>소개</a></li>
+                                        <li><a href="/main/introduce.do">민주주의 서울 <wbr/>소개</a></li>
                                         <li><a href="" style="font-size: 13px;">민주주의 서울 <wbr/>이야기</a></li>
-                                        <li><a href="">공지사항</a></li>
-                                        <li><a href="">자료실</a></li>
-                                        <li><a href="">행사일정</a></li>
+                                        <li><a href="/board/goNoticeNews.do">공지사항</a></li>
+                                        <li><a href="/board/referenceList.do">자료실</a></li>
+                                        <li><a href="/board/noticeCampaign.do">행사일정</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
                                     <a href="">서울시민회의</a>
                                     <ul class="submenu">
-                                        <li><a href="">서울시민회의 <wbr/>소개</a></li>
-                                        <li><a href="">서울시민회의 <wbr/>소식</a></li>
+                                        <li><a href="/main/introduce.do">서울시민회의 <wbr/>소개</a></li>
+                                        <li><a href="/board/seoulNews.do">서울시민회의 <wbr/>소식</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
@@ -75,13 +75,13 @@
                             <h3>서브메뉴<span class="slick-arrow"></span></h3>                        
                             <ul class="menu">
                                 <li class="menuitem">
-                                    <a href="">시민제안</a>
+                                    <a href="/suggest/suggest.do">시민제안</a>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">시민토론</a>
+                                    <a href="/discuss/list.do">시민토론</a>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">서울시가 묻습니다.</a>
+                                    <a href="/proposal/allList.do">서울시가 묻습니다.</a>
                                 </li>
                             </ul>
                         </li>

@@ -64,10 +64,16 @@ public class ProposalController {
 			@RequestParam(required=false, defaultValue="1")int curPage) throws Exception{
 			
 		int recordCountPage = 9;
+		//int totalCount =pService.proposalTotalCount();
+		
 		List<Proposal> list = pService.selectAllList(curPage,recordCountPage);
-		mav.setViewName("proposal/allList");
 		mav.addObject("list",list);
+		mav.addObject("recordCountPage",recordCountPage);
+		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/recordCountPage));
+		mav.setViewName("proposal/allList");
 		return mav;
+		
+		
 	}
 	// 게시글 불러오기  + 댓글 추가 
 	@RequestMapping(value="/proposal/post.do", method = RequestMethod.GET)
@@ -136,12 +142,11 @@ public class ProposalController {
 	//페이지 수정뷰
 	@RequestMapping(value="/proposal/modify.do", method=RequestMethod.GET)
 	public String modify(@RequestParam(defaultValue="1") int proposalNo,Model model,HttpSession session) throws Exception{
-		//세션확인 
-		Admin admin = (Admin)session.getAttribute("admin");
-		if(admin== null) return "proposal/allList"; 
-		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
-		//비지니스로직 
-		Proposal proposal = pService.proposalView(proposalNo);
+		/*
+		 * //세션확인 Admin admin = (Admin)session.getAttribute("admin"); if(admin== null)
+		 * return "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
+		 * admin.getAdminGrade() != '1') return "proposal/allList"; //비지니스로직
+		 */		Proposal proposal = pService.proposalView(proposalNo);
 		model.addAttribute("proposal",proposal);
 		return "proposal/modify";
 	}
@@ -150,24 +155,27 @@ public class ProposalController {
 	@RequestMapping(value="/proposal/update.do", method=RequestMethod.POST)
 	public String postModify(Proposal proposal,RedirectAttributes rttr,HttpSession session) throws Exception {
 		
-		Admin admin = (Admin)session.getAttribute("admin");
-		if(admin== null) return "proposal/allList"; 
-		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
-		
+		/*
+		 * Admin admin = (Admin)session.getAttribute("admin"); if(admin== null) return
+		 * "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
+		 * admin.getAdminGrade() != '1') return "proposal/allList";
+		 */
 		pService.modify(proposal);
 		//rttr.addFlashAttribute("result","modify success");
-		return "redirect:/proposal/post?proposalNo="+proposal.getProposalNo();	
+		return "redirect:/proposal/post.do?proposalNo="+proposal.getProposalNo();	
 	}
 	
 	//게시글삭제하기 
-	@RequestMapping(value="/proposal/delete.do", method=RequestMethod.POST)
+	@RequestMapping(value="/proposal/delete.do", method=RequestMethod.GET)
 	public String delete(@RequestParam(defaultValue="1") int proposalNo,HttpSession session) throws Exception {
-		Admin admin = (Admin)session.getAttribute("admin");
-		if(admin== null) return "proposal/allList"; 
-		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
-		
-		Proposal proposal = pService.proposalView(proposalNo);
-		return "redirect:/proposal/allList";
+		/*
+		 * Admin admin = (Admin)session.getAttribute("admin"); if(admin== null) return
+		 * "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
+		 * admin.getAdminGrade() != '1') return "proposal/allList";
+		 */
+		pService.delete(proposalNo);
+		System.out.println(proposalNo);
+		return "redirect:/proposal/allList.do";
 	}
 	
 	

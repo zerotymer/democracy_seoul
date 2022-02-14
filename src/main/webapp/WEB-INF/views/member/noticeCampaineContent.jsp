@@ -32,29 +32,29 @@
          	<div class="box-notice">
 	         	<div class="notice-top">
 	         		<div class="box-subject">
-	         			<p>(행사이름)</p>
+	         			<p>${board.eventTitle }</p>
 	         		</div>
 	         		<div class="box-notice-info">
 	         			<div class="box-gray">(조회수)</div>
-	         			<span>(조회수)</span>
+	         			<span>0</span>
 	         		</div>
 	         		<div class="box-notice-info">
 	         			<div class="box-gray">(작성일)</div>
-	         			<span>(작성일)</span>
+	         			<span>${board.eventDate }</span>
 	         		</div>
 	         	</div>
 	         	
 	         	<div class="box-content">
 	         		<div class="img-box">
-	         			<img alt="" src="/assets/images/campaign01.jpg">
+	         			<img alt="" src="/upload/board/event/${board.eventThumbnailName }.png">
 	         		</div>
-	         		<p> (내용)</p>
+	         		<p> ${board.eventContent }</p>
 	         	</div>
          	</div>
          	
          	<div class="box-button">
          		<button class="btn-m">
-	         		<a href="/notice/noticeCampaignAllSelect.do?currentPage=(최근페이지)">목록</a>
+	         		<a href="/board/noticeCampaign.do?currentPage=${currentNo}">목록</a>
 	         	</button>
          	</div>
         	

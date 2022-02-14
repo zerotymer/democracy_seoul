@@ -57,7 +57,7 @@ public class ProposalServiceImpl implements ProposalService {
 		pDAO.comWrite(ProposalComment);
 		
 	}
-	
+
 
 	
 

@@ -15,7 +15,7 @@
  		 	proposal_Thumbnail as proposalThumbnail
 	FROM 
 		PROPOSAL
-	
+	where proposal_del_YN ='N'
  	ORDER BY 
             proposalNo desc
 	</select>
@@ -60,8 +60,8 @@
 	<!-- 게시글수정처리 -->
 	<update id="modify" parameterType="proposal">
 		update proposal set
-			proposalTitle = #{proposalTitle},
-	 		proposalContent = #{proposalContent}
+			proposal_Title = #{proposalTitle},
+	 		proposal_Content = #{proposalContent}
 		where proposal_No = #{proposalNo}
 	
 	</update>
@@ -69,7 +69,7 @@
 	<!-- 게시글 삭제 -->
 	<update id="delete" parameterType="proposal">
 		update proposal set
-			proposalDelYN='Y'
+			proposal_Del_YN='Y'
 		where proposal_No = #{proposalNo}
 	</update>
 	
@@ -85,6 +85,7 @@
 		where proposal_No = #{proposalNo}
 	</select>		
 	
+	<!-- 댓글작성 -->
 	<insert id="commentWrite" parameterType="kr.go.seoul.democracy.proposal.model.vo.ProposalComment">
 		insert into
 		 proposalComment(proposlNo,commentNo,userId,commentContent)
