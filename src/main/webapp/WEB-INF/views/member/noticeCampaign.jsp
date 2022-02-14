@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,14 +32,14 @@
          <div class="notice-top">
          	 <div class="box-button">
 				<button class="btn-campaign">
-					<a href="/notice/noticeCampaignAllSelect.do">행사 안내</a>
+					<a href="/board/noticeCampaign.do">행사 안내</a>
 				</button>
 			 </div>
 		 </div>
 		
         <div class="area-campaign">
         	<div class="box-search">
-				<form  action="/notice/noticeCampaignSearch.do" method="get">
+				<form  action="/board/noticeCampaignListSearch.do" method="get">
 					<div class="select-search">
 						<select name="type">
 							<option value="subject">글제목</option>
@@ -55,32 +56,53 @@
 				</form>
 			 </div>
 			 
-			 <div class="box-campaign-list">	        
-			 	<div class="box-campaign">
-			 		<a href="/notice/CampaignContent.do?campaignNo=(게시글 번호)&currentPage=(최근페이지)"><!-- 누르면 이동 -->
-			 			<div class="img-campaign">
-				 			<img alt="" src="images">
-				 		</div>
-				 		<div class="txt-campaign">
-				 			<p>(제목)</p>
-				 			<p>(등록일자)</p>
-				 		</div>
-			 		</a>
-			 	</div>
+			 <div class="box-campaign-list">	
+			 	 <c:forEach items="${requestScope.list}" var="item" varStatus="i">	       				
+			           	<div class="box-campaign">
+					 		<a href="/board/noticeCampaignContent.do?eventNo=${item.eventNo}&currentNo=${currentNo}"><!-- 누르면 이동 -->
+					 			<div class="img-campaign">
+						 			<img alt="" src="/upload/board/event/${item.eventThumbnailName }.png">
+						 		</div>
+						 		<div class="txt-campaign">
+						 			<p>${item.eventTitle }</p>
+						 			<p>${item.eventDate }</p>
+						 		</div>
+					 		</a>
+					 	</div>
+			      </c:forEach>     
 			 </div>
-			 
-			 <div id="page_wrap">
-		        <ul class="page_ul">
-		            <li></li>
-		        </ul>
-		    </div>
+			 		<nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                    	<c:if test="${ preNavi > 0 }">
+	                        <li class="page-item">
+	                            <a class="page-link" href="/board/noticeCampaign.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
+	                        </li>
+                        </c:if>
+                        <c:forEach items="${ requestScope.navi }" var="m" varStatus="i">
+	                        <li class="page-item">
+	                        	<a class="page-link" href="/board/noticeCampaign.do?currentPage=${ m }">${ m }</a>
+	                        </li>
+                        </c:forEach>
+                        <c:if test="${ nextNavi > 0 }">
+	                        <li class="page-item">
+	                            <a class="page-link" href="/board/noticeCampaign.do?currentPage=${ nextNavi }">>></a>
+	                        </li>
+                        </c:if>
+                    </ul>
+                </nav>   
         </div> 
-         
-         
       </div>
       
       <!-- footer -->
    </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
 </body>
 </html>
