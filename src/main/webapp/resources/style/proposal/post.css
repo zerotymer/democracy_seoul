@@ -4,8 +4,6 @@
     
 }
 
-
-
 .container{
    
     margin: 40px;
@@ -25,7 +23,6 @@
    
 .contentTitle{
     margin-left: 50px;  
-   
 }
 
 .title{
@@ -82,7 +79,7 @@
     padding: 15px;
 }
 
-.comment{   
+ .comment{   
 width: 95%;
 height: 140px;
 margin:0 auto; 
@@ -92,20 +89,27 @@ box-shadow: 4px 4px 4px rgba(236, 240, 241, 0.5);
 margin-bottom: 20px;
 padding :15px;
 
-}
+} 
 
-.ccontent:focus{
-    outline: none;
-    width: 100%;
-    height: 20px;
-    resize: none;
-    
-}
 
 .reg{
-   margin-right: 10px;
+   margin-right: 20px;
    border:1px solid var(--COLOR-BORDER);
 	background-color: white;
-	padding :5px;
+	margin : 0 auto;
    
 }
+
+
+.commentContainer{
+   
+    margin: 40px;
+   	border:1px solid var(--COLOR-BORDER);
+    border-radius: 12px;
+    box-sizing: border-box;
+   	box-shadow: 4px 4px 4px rgba(236, 240, 241, 0.5);
+    min-height: 200px;
+    min-width: 200px;
+
+} 
+

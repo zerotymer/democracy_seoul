@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -61,21 +62,25 @@ public class ProposalController {
 	//리스트 불러오기
 	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.GET)
 	public ModelAndView allList(ModelAndView mav,
-			@RequestParam(required=false, defaultValue="1")int curPage) throws Exception{
+			@RequestParam(required=false, defaultValue="1")int curPage
+			) throws Exception{
 			
 		int recordCountPage = 9;
-		//int totalCount =pService.proposalTotalCount();
+		//int totalCount = pService.commentTotalCount();
+		
 		
 		List<Proposal> list = pService.selectAllList(curPage,recordCountPage);
 		mav.addObject("list",list);
 		mav.addObject("recordCountPage",recordCountPage);
 		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/recordCountPage));
 		mav.setViewName("proposal/allList");
+		
+		
 		return mav;
 		
 		
 	}
-	// 게시글 불러오기  + 댓글 추가 
+	// 게시글 불러오기  
 	@RequestMapping(value="/proposal/post.do", method = RequestMethod.GET)
 	public ModelAndView proposalview(		
 		@RequestParam(value="proposalNo",defaultValue="1")int proposalNo,
@@ -83,19 +88,46 @@ public class ProposalController {
 		//게시글번호 가져오기
 		
 		Proposal proposal = pService.proposalView(proposalNo);
-			
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("proposal/post");
 		mav.addObject("proposal", pService.proposalView(proposalNo));
-
+		
+		//댓글가져오는갯수
+		int commentCount=5;
+		ArrayList<HashMap<String, Object>> comment = pService.getComment(proposalNo,1,commentCount);
+		mav.addObject("commentCount",pService.commentTotalCount(proposalNo));
+		mav.addObject("commentList",comment);
 		return mav;
 	}
 	
-	@RequestMapping(value="/proposal/write.do", method=RequestMethod.POST)
-	public String comment(@RequestParam int proposalNo,@RequestParam String userId,Proposal proposalComment, @SessionAttribute("user") Member member) throws Exception{ 
-		pService.comWrite(proposalComment);
-		return "redirect:/proposal/post?userId="+member.getUserId();
+	// 댓글전송
+	@RequestMapping(value="/proposal/writeComment.do", method=RequestMethod.POST)
+	public String comment(@RequestParam int proposalNo,
+			@RequestParam String comment, 
+			@SessionAttribute("user") Member member) throws Exception{ 
+		
+		ProposalComment pcomment = new ProposalComment();
+		pcomment.setProposalNo(proposalNo);
+		pcomment.setUserId(member.getUserId());
+		pcomment.setCommentContent(comment);
+		
+		pService.comWrite(pcomment);
+		return "redirect:/proposal/post.do?proposalNo="+proposalNo;
 	}
+	
+	//댓글더보기
+	@RequestMapping(value="/proposal/getComment.ajax", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<HashMap<String,Object>> getComment(@RequestParam int proposalNo,
+	@RequestParam(defaultValue="1")int currentCommentPage){
+		
+		int pageSize=3;
+		ArrayList<HashMap<String, Object>> comment = pService.getComment(proposalNo,currentCommentPage,pageSize);
+		
+		
+		return comment;
+	}
+	
 	
 	
 	//게시글 작성화면 

@@ -6,9 +6,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+  
     <title>Insert title here</title>
     <link rel="stylesheet" href="/resources/style/content-frame.css">
-    <link rel="stylesheet" href="/resources/style/proposal/post.css">
+     <link rel="stylesheet" href="/resources/style/proposal/post.css">
     <link rel="stylesheet" type="text/css" href="fontawesome-free-5.15.1-web/css/fontawesome.min.css">
 </head>
 <body>
@@ -88,14 +90,13 @@
 <section>
     <div class="inner">
        
-        <div class="container">
+        <div class="container" >
             <div class="contentTitle">
                 <br><br>
                 <div class="title">
                     <h5>서울시가 묻습니다.</h5>
-                    <div class="proposalTitle">${ requestScope.proposal.proposalTitle}</div>
+                    <div class="proposalTitle">${requestScope.proposal.proposalTitle}</div>
                 </div>
-
             </div><br>
             <div class="date">
                 투표기간 : ${ requestScope.proposal.proposalStart} ~ ${ requestScope.proposal.proposalEnd}
@@ -113,82 +114,144 @@
 	                <button class="listBtn" id="listBtn">목록</button>
 	            </div>
          <%--  	</c:if> --%>
-            <hr>
+           <hr style="color: #CCC">
+          
+          
             <article class="view_content">
 
            ${ requestScope.proposal.proposalContent }
                 <br>
                 <button class="survey">
-                    설문조사 <i class="far fa-thumbs-up"></i>
+                  		  설문조사 	
                 </button>
             </article>
         </div>
+
+  		
+        <hr style="color: #CCC">
 
         <div class="sug">
             당신의 의견을 전달해주세요
         </div>
 
-        <div class="comment">
-            <input type="hidden" name="bno" class="bno" value="" />
-            <div class="userNick">${ requestScope.member.nick }</div>
-            <input type="hidden" name="proposalNo" class="proposalNo" value="proposalNo" />
-            <input type="hidden" name="name" value="" />
-            <span class="today">
-                   
-                </span>
-            <textarea class="ccontent" style="width: 99%; border:0;">
+     	<div class="comment">
+            <input type="hidden" name="proposalNo" class="proposalNo" value="" />
+            <div class="userNick">${ requestScope.member.user }</div>
+            <span class="today">  </span>
+            <textarea class="content" placeholder="댓글을 입력하세요." style="resize : none; width: 99%; height: 80%; border:0;">
             </textarea>
-            <button value="reg">등록</button>
+            <div align="right">
+            <button type="submit" value="reg">등록</button>
+            </div>
         </div>
 
-        <hr style="color: #CCC">
-        <!— 댓글영역 —>
-        <div id="replyList"></div>
-    </div>
+        
+        <hr style="color: #CCC;">
+        
+         <!-- 댓글 목록 -->
+        <div class="commentContainer" id="container">
+        
+         
+        	<c:forEach items="${commentList }" var="item">
+        	<div>
+	         	<input type="hidden" name="proposalNo" class="proposalNo" value="${item.PROPOSALNO }" />
+	            <div class="userId">${item.USERID}</div>
+	            <div class="date">${item.REGDATE}</div> 
+	            <div class="text">${item.CONTENT}</div>
+            </div>
+            </c:forEach>
+            
+        </div>
+        
+        <div class="more">
+        	<button class="get" value="1" onclick="getList();">더보기</button>
+        </div>
+		
+	</div>
 </section>
+        
+        
+    
 
 
-<script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="/resources/script/content-frame.js"></script>
 <script>
     var proposalNo = ${ proposal.proposalNo };
-    function listReply(num) {
-        var path = 'path';
-        var proposalNo = ${ proposal.proposalNo };
+    var bLogin = ${ sessionScope.user != null };
+    var totalCount = ${commentCount};
+    var curPage = 1;
+    
 
-        $.ajax({
-            url: path + "/reply/list.do",
-            type: "get",
-            data: {
-                proposalNo: proposalNo,
-                curPage: num
-            },
-            success: function (result) {
-                // responseText가 result에 저장됨.
-                $("#listReply").html(result);
-            }
-        });
-    }
+   		
+   		function getList(){
+   	    	if(totalCount <= curPage * 5) return ; // 이미 모든값을 가져와서 가져올 필요가 없음 
+   	    	
+   			curPage += 1;
+   	    	$.ajax({
+   	    		url: "/proposal/getComment.ajax",
+   	    		type: "get",
+   	    		data:{currentCommentPage: curPage,
+   	    		proposalNo:proposalNo},
+   	    		success: function(data){
+   	    			for(var item of data) {
+   	    				insertComment(item);
+   	    			}			
+   	    		}
+   	    	
+   	    	})
+   	    	
+   	    };
+   	    
+   	    // 값을 data에 저장(for each안에 있는 모든 값들을) 암기하기!!!!! 
+   	    function insertComment(data) {
+   	    	console.log(data);
+   	    	
+   	    	var div = document.createElement('div');
+   	    	var input = document.createElement('input');
+   	    	input.setAttribute('type','hidden');
+   	    	input.name = 'proposalNo';
+   	    	input.classList.add('proposalNo');
+   	    	input.value = data.PROPOSALNO;
+   	    	div.appendChild(input);
+   	    	
+   	    	var div2 = document.createElement('div');
+   	    	div2.classList.add('userId');
+   	    	div2.innerText=data.USERID;
+   	    	div.appendChild(div2);
+   	    	
+   	    	var div3 = document.createElement('div');
+   	    	div3.classList.add('date');
+   	    	div3.innerText=data.REGDATE;
+   	    	div.appendChild(div3);
+   	    	
+   	    	var div4 = document.createElement('div');
+   	    	div4.classList.add('text');
+   	    	div4.innerText=data.CONTENT;
+   	    	div.appendChild(div4);
+   	    	
+   	    	document.getElementById('container').appendChild(div);
+   	    	
+   	    }
 
-    //글목록으로 이동하게 하는 함수
-    $(document).ready(function(){
-        $("#listBtn").click(function(){
-            location.href="/proposal/allList.do";
-        });
+ 		
+   	    function addComment(){
+   	    	$.ajax({
+   	    	type:'post',
+   	    	url: "/proposal/writeComment",
+   	    	data: {
+   	    		proposalNo:proposalNo,
+   	    		comment:
+   	    	}
+   	    	
+   	    		
+   	    	});
+   	    }
+   	    
+    
+    </script>
+    
+    
 
-        $("#editBtn").click(function(){
-            location.href="/proposal/modify.do?proposalNo="+proposalNo;
-        });
-
-        $("#delBtn").click(function(){
-            location.href="/proposal/delete.do?proposalNo="+proposalNo;
-        });
-    })
-
-
-</script>
 </body>
 </html>
