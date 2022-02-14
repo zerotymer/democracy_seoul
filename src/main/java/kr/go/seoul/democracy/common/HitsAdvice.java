@@ -43,7 +43,7 @@ public class HitsAdvice {
         Sug value = (Sug) jp.getArgs()[0];
         if (value == null) return;
 
-        hService.addCountHitsTable("SUGGEST_HITS", value.getSugNum());                                                  // TODO: REVISE
+        //hService.addCountHitsTable("SUGGEST_HITS", 1);                                                  // TODO: REVISE
     }
 
     // Discuss
