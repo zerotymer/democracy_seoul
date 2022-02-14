@@ -105,7 +105,10 @@ public class MemberController {
 		  return "member/memberUpdateEmail";
 	  }
 	  
-	  
+	
+	
+	 
+	
 		//메인 화면에서 마이 페이지로 이동하는 로직
 		@RequestMapping(value="/member/goMyPage.do",method=RequestMethod.GET)
 		public String goMyPage(HttpServletRequest request,Model model) {
@@ -120,7 +123,7 @@ public class MemberController {
 		}
 		
 		
-		//메인페이지에서 정보 수정으로 이동하는 로직
+		//마이페이지에서 정보 수정으로 이동하는 로직
 		@RequestMapping(value="/member/goMyPageUpdate.do",method=RequestMethod.GET)
 		public String goMyPageUpdate(HttpServletRequest request,Model model) {
 			HttpSession session = request.getSession();
@@ -149,11 +152,11 @@ public class MemberController {
 		System.out.println("로그인 성공");
 		HttpSession session = request.getSession();
 		session.setAttribute("user",m);//
-		return "redirect:/member/goHome.do";
+		return "redirect:/";
 		//return "redirect:/member/goMyPage.do";
 	}else {
 		model.addAttribute("msg","로그인의 실패하였습니다.아이디와 비밀번호 확인해주세요.");
-		model.addAttribute("location","/");
+		model.addAttribute("location","/member/goLogin.do");
 		return "member/msg";
 	}
 	
@@ -180,7 +183,7 @@ public class MemberController {
 		}else
 		{
 			mav.addObject("msg","회원 가입 실패-지속적인 문제 발생시 관리자에게 문의-");
-			mav.addObject("location","/member/joinPage.do");			
+			mav.addObject("location","/");			
 	}
 		mav.setViewName("member/msg");
 		
@@ -351,7 +354,7 @@ public class MemberController {
 				return "member/memberSearchPwdEmailCheck";
 			}else {//아이디 찾기 실패할시
 				model.addAttribute("msg","비밀번호 찾기 실패하였습니다.이메일과 이름을 확인해주세요.");
-				model.addAttribute("location","/member/goMemberSearchId.do");
+				model.addAttribute("location","/member/goMemberSearchPwd.do");
 				return "member/msg";
 			} 
 		  
@@ -422,7 +425,7 @@ public class MemberController {
 			    session = request.getSession(true);
 		    	session.setAttribute("EmailResult", true);
 				model.addAttribute("msg","이메일 변경에 성공하였습니다.");
-				model.addAttribute("location","/");
+				model.addAttribute("location","/member/goMyPage.do");
 				return "member/msg";
 
 			}else
@@ -441,12 +444,7 @@ public class MemberController {
 	
 	
 	
-	  
-	  //임시 메인페이지 이동
-	 @RequestMapping(value="/member/goHome.do")
-	  public String goHome() {
-		  return "member/memberHome";
-	  }
+
 	
 	
 	
@@ -465,6 +463,7 @@ public class MemberController {
 		System.out.println(m.toString());
 		MemberProfile mf = mService.selcetMemberProfile(m);
 		memberProfile.setUserId(m.getUserId());
+		try {
         ImageTransferInfo info = (ImageTransferInfo) imgTemplate.fileTransfer(request, "img", "profile");
         System.out.println(info.getFileName());
         memberProfile.setProfileName(info.getFileName());
@@ -474,6 +473,10 @@ public class MemberController {
         else
         	mService.updateMemberProfile(memberProfile);//있으면 수정해준다.
         return "redirect:/member/goMyPage.do";
+		}
+		catch(Exception e) {
+			return "redirect:/member/goMyPage.do";
+		}
     }
     
     
@@ -511,7 +514,7 @@ public class MemberController {
 			session = request.getSession(true);
 		    session.setAttribute("MyPagePwdResult", true);
 			model.addAttribute("msg","이메일 변경에 성공하였습니다.");
-			model.addAttribute("location","/");
+			model.addAttribute("location","/member/goMypage.do");//
 			return "member/msg";
 			}else
 			{  System.out.println("비밀번호 재설정 실패");
@@ -569,7 +572,7 @@ public class MemberController {
 			}else
 			{
 				model.addAttribute("msg", "비밀번호가 일치하지 않습니다. 재확인해주세요");
-				model.addAttribute("location", "/member/myPageWithdraw.do");
+				model.addAttribute("location", "/member/goMypageWithdraw.do");
 			}
 			
 			return "member/msg";
@@ -606,16 +609,16 @@ public class MemberController {
 			  
 				if(result>0)
 				{   
-				System.out.println("비밀번호 재설정 성공");
+				System.out.println("닉네임 재설정 성공");
 				session = request.getSession(true);
 			    session.setAttribute("nickResult", true);
 				model.addAttribute("msg","닉네임 변경에 성공하였습니다.");
-				model.addAttribute("location","/");
+				model.addAttribute("location","/member/goMypage.do");
 				return "member/msg";
 				}else
-				{  System.out.println("비밀번호 재설정 실패");
+				{  System.out.println("닉네임 재설정 실패");
 					response.getWriter().print(false);
-					return "redirect:/member/goMyPage.do";
+					return "/member/goMypage.do";
 				}
 				
 			   

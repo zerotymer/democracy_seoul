@@ -34,7 +34,7 @@
 					<tr class="profile">
 						<td>사진</td>
 						<td class="profile-img">	
-									<img class="profile-img2" src="/upload/profile/${mf.profileName }.png">
+									<img class="profile-img2" src="/upload/profile/${mf.profileName }">
 						</td>
 						<td>
 							<p>프로필 사진을 등록해 주세요.</p>

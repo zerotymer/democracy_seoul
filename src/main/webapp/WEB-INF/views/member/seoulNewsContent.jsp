@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>행사 안내</title>
+<title>서울시민회의</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
@@ -19,48 +19,42 @@
 
 
 
-	<div id="wrap">
-   
+
+
+
+	<div id="wrap">   
 		<!-- header -->
-		
+
 		<div id="content">
 			<div class="box-title">
 				<p class="tit-small"></p>
-				<p class="tit-big">행사 안내</p>
+				<p class="tit-big">서울시민회의</p>
 			</div>
-         
+         	
          	<div class="box-notice">
 	         	<div class="notice-top">
 	         		<div class="box-subject">
-	         			<p>${board.eventTitle }</p>
-	         		</div>
-	         		<div class="box-notice-info">
-	         			<div class="box-gray">(조회수)</div>
-	         			<span>0</span>
-	         		</div>
-	         		<div class="box-notice-info">
-	         			<div class="box-gray">(작성일)</div>
-	         			<span>${board.eventDate }</span>
+	         			<p>${ seoulNews.seoulTitle }</p>
 	         		</div>
 	         	</div>
-	         	
 	         	<div class="box-content">
-	         		<div class="img-box">
-	         			<img alt="" src="/upload/board/event/${board.eventThumbnailName }.png">
-	         		</div>
-	         		<p> ${board.eventContent }</p>
+	         		<p class= "file-add">
+	         			<img src="/resources/icons/book-open.svg" alt="첨부파일">
+	         			<a href="" title="첨부파일로 이동">"파일제목.pdf"</a>
+	         			<span class="file-size">(크기MB)</span>
+	         	   </p>
+	         	   <div class="box-content">
+	         		<p>${seoulNews.seoulContent}</p>
 	         	</div>
+	         </div>
          	</div>
          	
          	<div class="box-button">
          		<button class="btn-m">
-	         		<a href="/board/noticeCampaign.do?currentPage=${currentNo}">목록</a>
+	         		<a href="/board/seoulNews.do?currentPage=${currentNo}">목록</a>
 	         	</button>
          	</div>
-        	
 		</div>
-      
-		<!-- footer -->
 
 	</div>
 	

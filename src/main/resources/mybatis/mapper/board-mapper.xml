@@ -15,7 +15,79 @@
 	</select>
 	
 	<select id="noticeNewsTotalCount" resultType="int">
-		select count(*) from NOTICE
+		select count(*) from NOTICE 
+		where NOTICE_DEL_YN = 'N'
+	</select>
+	
+	<select id="selectBoardNotice" parameterType="int" resultType="boardNotice">
+		select 
+			NOTICE_NO as noticeNewsNo,
+			NOTICE_TITLE as noticeNewsTitle,
+			NOTICE_CONTENT as noticeNewsContent,
+			NOTICE_DATE as noticeNewsDate,
+			NOTICE_DEL_YN  as noticeNewsDelYN 
+		from NOTICE
+		where NOTICE_NO = #{val}
+	</select>
+	
+	
+	<!-- 검색 -->
+	<select id="noticeNewsListSearch" parameterType="boardNotice" resultType="boardNotice">
+                
+                SELECT 
+	                NOTICE_NO as noticeNewsNo,
+					NOTICE_TITLE as noticeNewsTitle,
+					NOTICE_CONTENT as noticeNewsContent,
+					NOTICE_DATE as noticeNewsDate,
+					NOTICE_DEL_YN  as noticeNewsDelYN 
+                FROM NOTICE 
+                WHERE (NOTICE_TITLE LIKE '%${noticeNewsTitle}%' and NOTICE_DEL_YN='N')
+			    or (NOTICE_CONTENT LIKE '%${noticeNewsContent}%' and NOTICE_DEL_YN='N')
+	</select>
+	
+	<select id="noticeNewsListSearchCount" parameterType="boardNotice" resultType="int">
+			 SELECT COUNT(*) as count FROM NOTICE 
+             WHERE (NOTICE_TITLE LIKE '%${noticeNewsTitle}%' and NOTICE_DEL_YN='N')
+			    or (NOTICE_CONTENT LIKE '%${noticeNewsContent}%' and NOTICE_DEL_YN='N')
+	</select>
+	
+	
+		<!-- 검색 -->
+	<select id="noticeNewsListSearchTitle" parameterType="boardNotice" resultType="boardNotice">
+                
+                SELECT 
+	                NOTICE_NO as noticeNewsNo,
+					NOTICE_TITLE as noticeNewsTitle,
+					NOTICE_CONTENT as noticeNewsContent,
+					NOTICE_DATE as noticeNewsDate,
+					NOTICE_DEL_YN  as noticeNewsDelYN 
+                FROM NOTICE 
+                WHERE NOTICE_TITLE LIKE '%${noticeNewsTitle}%' and NOTICE_DEL_YN='N'
+	</select>
+	
+	<select id="noticeNewsListSearchTitleCount" parameterType="boardNotice" resultType="int">
+			 SELECT COUNT(*) as count FROM NOTICE 
+             WHERE NOTICE_TITLE LIKE '%${noticeNewsTitle}%' and NOTICE_DEL_YN='N'
+			
+	</select>
+	
+	
+		<!-- 검색 -->
+	<select id="noticeNewsListSearchContent" parameterType="boardNotice" resultType="boardNotice">
+                
+                SELECT 
+	                NOTICE_NO as noticeNewsNo,
+					NOTICE_TITLE as noticeNewsTitle,
+					NOTICE_CONTENT as noticeNewsContent,
+					NOTICE_DATE as noticeNewsDate,
+					NOTICE_DEL_YN  as noticeNewsDelYN 
+                FROM NOTICE 
+                WHERE NOTICE_CONTENT LIKE '%${noticeNewsContent}%' and NOTICE_DEL_YN='N'
+	</select>
+	
+	<select id="noticeNewsListSearchContentCount" parameterType="boardNotice" resultType="int">
+			 SELECT COUNT(*) as count FROM NOTICE 
+             WHERE NOTICE_CONTENT LIKE '%${noticeNewsContent}%' and NOTICE_DEL_YN='N'
 	</select>
 	
 	

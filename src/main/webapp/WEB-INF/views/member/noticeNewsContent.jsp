@@ -34,7 +34,7 @@
          	<div class="box-notice">
 	         	<div class="notice-top">
 	         		<div class="box-subject">
-	         			<p>(글제목)</p>
+	         			<p>${board.noticeNewsTitle}</p>
 	         		</div>
 	         	</div>
 	         	<div class="box-content">
@@ -44,14 +44,14 @@
 	         			<span class="file-size">(크기MB)</span>
 	         	   </p>
 	         	   <div class="box-content">
-	         		<p>(글내용)</p>
+	         		<p>${board.noticeNewsContent}</p>
 	         	</div>
 	         </div>
          	</div>
          	
          	<div class="box-button">
          		<button class="btn-m">
-	         		<a href="/views/notice/noticeNewsAllSelect.do?currentPage=(최근페이지)">목록</a>
+	         		<a href="/board/goNoticeNews.do?currentPage=${currentNo}">목록</a>
 	         	</button>
          	</div>
 		</div>

@@ -35,9 +35,56 @@ public class BoardDAO {
 
 	public BoardNotice noticeNewsViews(int noticeNewsNo) {
 		// TODO Auto-generated method stub
-		return null;
+		BoardNotice boardNotice = sqlSession.selectOne("board.selectBoardNotice",noticeNewsNo);
+		return boardNotice;
 	}
 
+
+
+
+	public int noticeTotalCount() {
+		// TODO Auto-generated method stub
+		int recordTotalCount = sqlSession.selectOne("board.noticeNewsTotalCount");
+	
+		return recordTotalCount;
+		
+	}
+
+
+
+	//검색
+	public List<BoardNotice> noticeNewsListSearch(int recordCountPerPage, int currentPage, BoardNotice boardNotice ) {
+			System.out.println("DAO 확인");
+		   int offset = (currentPage-1)*recordCountPerPage;
+		   RowBounds rb=new RowBounds(offset,recordCountPerPage);
+		   return sqlSession.selectList("board.noticeNewsListSearch",boardNotice,rb);
+	}
+
+	public int noticeSerchCount(BoardNotice boardNotice) {
+		return sqlSession.selectOne("board.noticeNewsListSearchCount",boardNotice);
+	}
+
+	//검색 제목
+	public List<BoardNotice> noticeNewsListSearchTitle(int recordCountPerPage, int currentPage, BoardNotice boardNotice ) {
+	   int offset = (currentPage-1)*recordCountPerPage;
+	   RowBounds rb=new RowBounds(offset,recordCountPerPage);
+	   return sqlSession.selectList("board.noticeNewsListSearchTitle",boardNotice,rb);
+}
+
+	public int noticeSearchTitleCount(BoardNotice boardNotice) {
+		return sqlSession.selectOne("board.noticeNewsListSearchTitleCount",boardNotice);
+	}
+	
+	
+	public List<BoardNotice> noticeNewsListSearchContent(int recordCountPerPage, int currentPage, BoardNotice boardNotice ) {
+		   int offset = (currentPage-1)*recordCountPerPage;
+		   RowBounds rb=new RowBounds(offset,recordCountPerPage);
+		   return sqlSession.selectList("board.noticeNewsListSearchContent",boardNotice,rb);
+	}
+
+		public int noticeSearchContentCount(BoardNotice boardNotice) {
+			return sqlSession.selectOne("board.noticeNewsListSearchContentCount",boardNotice);
+		}
 
 
 
