@@ -1,5 +1,6 @@
 package kr.go.seoul.democracy.suggest2.model.dao;
 
+import kr.go.seoul.democracy.suggest2.model.vo.Suggest;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,8 +27,8 @@ public class SuggestDAO {
      * @return 
      * @author 신현진
      */
-    public int insertPost(HashMap<String, Object> param) {
-        return template.insert("suggest.insertPost", param);
+    public int insertPost(Suggest suggest) {
+        return template.insert("suggest2.insertPost", suggest);
     }
 
     /**
@@ -36,8 +37,12 @@ public class SuggestDAO {
      * @return
      * @author 신현진
      */
-    public int updatePost(HashMap<String, Object> param) {
-        return template.update("suggest.updatePost", param);
+    public int updatePost(Suggest suggest) {
+        return template.update("suggest2.updatePost", suggest);
+    }
+
+    public Suggest selectPost(int suggestNo) {
+        return template.selectOne("suggest2.selectPost", suggestNo);
     }
 
 }
