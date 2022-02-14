@@ -22,9 +22,10 @@ public interface ProposalService {
 	 //게시글삭제 
 	void delete(int proposalNo);
 
-	 public List<ProposalComment> comlist(int userId);
+	public List<ProposalComment> comlist(int userId);
 	 
-	 public void comWrite(Proposal ProposalComment);
+	public void comWrite(Proposal ProposalComment);
+
 
 
 

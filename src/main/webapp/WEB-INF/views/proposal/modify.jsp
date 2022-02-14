@@ -90,25 +90,21 @@
         <div class="container inner" >
             <!-- DHH: 다흐ㅎ흐 -->
            <br>
-            <h1 style="text-align: center;">글쓰기</h1><br><br><br><br>
-   				 <form action='<c:url value='/proposal/update.do'/>' method="post">
+            <h1 style="text-align: center;">수정하기</h1><br><br><br><br>
+ 				<form action="/proposal/update.do" method="post">
 					  <input type="text" name="proposalTitle" class="title" placeholder="제목을 입력하세요" value="${proposal.proposalTitle }" >    
-				        <br>
-				        	<hr width="800px">
-								<div class="textBox">			          
-					             <textarea id="ckeditor" class="ckeditor" name="proposalContent"  value="${proposal.proposalContent }"></textarea> 
-				                </div>
-							 <br>
-				
+				       		 <br>
+				        		<hr width="800px"> 
+				        		<div class="textBox">			          
+					             		<textarea id="ckeditor" class="ckeditor" name="proposalContent">${proposal.proposalContent }</textarea> 
+				                </div><br>
 				   		<input type="hidden" name="proposalNo" value="${proposal.proposalNo}">
 				   	<button type="submit" class="commit" style="float: right;" a href="/proposal/allList">
 				    				  수정하기
-				  			</button>
+				  	</button>
+				</form> 
 				  	</div>
-				</form>  
-
-        		<br><br><br><br><br><br>
-
+				<br><br><br><br><br><br>
            </div>
          </div>
     </section>
