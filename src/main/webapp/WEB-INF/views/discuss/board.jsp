@@ -42,14 +42,21 @@
         }
         
         .more{
+        	margin-top:20px;
             display:flex;
             align-items: center;
             justify-content: center;
         }
         .get{
-            border:0px;
+        	padding:10px;
+        	padding-left:20px;
+        	padding-right:25px;
+            border:1px solid rgba(150, 150, 120);
+            border-radius:10px;
             background-color: white;
             font-size:20px;
+            font-weight:bold;
+            color:rgba(50, 50, 40);
         }
     </style>
     
@@ -186,11 +193,11 @@
                         <object class="icon calendar auto-hidden"></object>
                         <span>${list.discussStart } ~ ${list.discussEnd }</span>
                     </div>
-                    <a class="detail-btn" href="">결과 보기</a>
+                    <a class="detail-btn" href="/discuss/onePost.do?discussNo=${list.discussNo}">결과 보기</a>
                 </div>
                 </c:forEach>
             </div>
-            
+            <hr>
             <div class="more">
         		<button class="get" value="1"><i class="xi-caret-down-circle-o"></i>더보기</button>
         	</div>
@@ -209,16 +216,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <!-- 로그인한 관리자만 작성 가능 -->
     <script>
-    	var admin=${admin};
+    	var admin = ${admin != null};
+    	
+    	console.log(admin);
     	$('.btn.suggest').click(function(){
-    		if(admin!=null){
-    			location.replace('/discuss/writeForm.do');
+    		if(admin){
+    			location.href='/discuss/writeForm.do';
     		}
     		else{
-    			var result=confirm('로그인이 필요한 기능입니다. 로그인 하시겠습니까?');
+    			var result=confirm('관리자 로그인이 필요한 기능입니다. 로그인 하시겠습니까?');
     			if(result){
-    				alert('로그인 페이지로 이동합니다.');
-    				location.replace('/member/goLogin.do');
+    				alert('관리자 로그인 페이지로 이동합니다.');
+    				location.href='/test/admintest.do';
     			}
     		}
     	});
@@ -229,8 +238,10 @@
     $('.get').click(function(){
 		var currentListPage=$('.get').val();
 		var pageLimit=${pageCount};
+		console.log(currentListPage);
+		console.log(pageLimit);
 		
-		if(pageLimit>=currentListPage){
+		if(pageLimit>currentListPage){
 			$.ajax({
 				url : "/discuss/getList.ajax",
 				type: "get",
@@ -239,17 +250,9 @@
 					var json = JSON.parse(data);
 					var discuss=json.discuss;
 					for(var i=0;i<discuss.length;i++){
-						$('<div class="card-item discussion"><div class="category">토론</div><div class="title">'
-						+${discuss[i].discussTitle }
-						+'</div><div class="content">내용</div><div class="thumnail"><img src="'
-						+${discuss[i].discussThumbnailPath }
-						+'" alt="제목" /></div><div class="icons"><object class="icon hits auto-hidden"></object><span>212</span><object class="icon heart"></object><span>11</span><object class="icon comment"></object><span>12</span><object class="icon calendar auto-hidden"></object><span>'
-			            +${discuss[i].discussStart }
-						+' ~ '
-						+${discuss[i].discussEnd }
-						+'</span></div><a class="detail-btn" href="">결과 보기</a></div>').appendTo('.card-container');
+						$("<div class='card-item discussion'><div class='category'>토론</div><div class='title'>"+${discuss[i].discussTitle }+"</div><div class='content'>내용</div><div class='thumnail'><img src='"+${discuss[i].discussThumbnailPath }+"' alt='제목' /></div><div class='icons'><object class='icon hits auto-hidden'></object><span>212</span><object class='icon heart'></object><span>11</span><object class='icon comment'></object><span>12</span><object class='icon calendar auto-hidden'></object><span>"+${discuss[i].discussStart }+" ~ "+${discuss[i].discussEnd }+"</span></div><a class='detail-btn' href='/discuss/onePost.do?discussNo="+${discuss[i].discussNo}+"'>결과 보기</a></div>").appendTo('.card-container');
 					}
-					$('.get').val(currentCommentPage+1);
+					$('.get').val(currentListPage+1);
 				},
 				error : function(data){
 					alert('게시글 목록을 불러오지 못하였습니다. 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');

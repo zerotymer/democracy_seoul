@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -53,7 +54,7 @@ public class DiscussController {
 		//페이징 처리
 		int pageSize=12;
 		int totalCount=dService.discussTotalCount();
-		
+
 		//시민토론 목록 데이터 가져오기
 		ArrayList<Discuss> list=dService.discussList(pageSize,currentListPage);
 		
@@ -82,12 +83,12 @@ public class DiscussController {
 	@RequestMapping(value="/discuss/onePost.do", method = RequestMethod.GET)
 	public ModelAndView discussOne(ModelAndView mav,
 								@RequestParam int discussNo,
-								@SessionAttribute Member user) {
+								HttpServletRequest request) {
 		//페이징 처리
 		int pageSize=5; //한번에 댓글 몇개씩 보여줄건지
 		int totalCount=dService.commentTotalCount(discussNo); //해당 게시글에 댓글 총 갯수
 		int currentCommentPage=1;
-		
+
 		//데이터 가져오기
 		Discuss discuss=dService.discussOne(discussNo); //게시글 번호로 해당 게시글 찾기
 		ArrayList<HashMap<String, Object>> proComment = dService.proComment(discussNo,pageSize,currentCommentPage);
@@ -98,13 +99,15 @@ public class DiscussController {
 		mav.addObject("discuss",discuss);
 		mav.addObject("pro",proComment);
 		mav.addObject("con",conComment);
-		mav.addObject("vote",vote);
+		if(vote!=null) mav.addObject("vote",vote);
 		mav.addObject("totalCount",totalCount);
 		//mav.addObject("currentCommentPage",currentCommentPage);
 		//mav.addObject("pageSize",pageSize);
 		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/pageSize));
 		mav.addObject("file",file);
 		
+		HttpSession session=request.getSession();
+		Member user=(Member)session.getAttribute("user");
 		if(user!=null) {
 			String userId=user.getUserId();
 			HashMap<String, Object> comment=dService.myComment(discussNo,userId);
@@ -177,7 +180,7 @@ public class DiscussController {
 	}
 	
 	//시민토론 게시글 작성
-	@RequestMapping(value="/discuss/write.do", method = RequestMethod.GET)
+	@RequestMapping(value="/discuss/write.do")
 	public ModelAndView write(ModelAndView mav,
 							@SessionAttribute Admin admin,
 							@RequestParam String title,

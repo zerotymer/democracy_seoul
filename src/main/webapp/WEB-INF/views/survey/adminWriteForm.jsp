@@ -38,7 +38,7 @@
         	
         	//질문 10개까지 제한
         	if(qNo<11){
-                var oneSurvey = "<div class='one-survey'>"+qNo+". <input class='contentQ' type='text'><div class='box-btn'><button type='button' class='checkbox'>중복선택</button><button type='button' class='radio'>단일선택</button><button type='button' class='text'>단답식</button><button type='button' class='textarea'>서술형</button><button type='button' class='delete'>삭제</button><button type='button' class='change' style='display:none;'>변경</button></div><input class='input_type' type='hidden'/><input class='question' type='hidden'/></div><br>"
+                var oneSurvey = "<div class='one-survey'>"+qNo+". <input class='contentQ' type='text'><div class='box-btn'><button type='button' class='checkbox'>중복선택</button><button type='button' class='radio'>단일선택</button><button type='button' class='text'>단답식</button><button type='button' class='textarea'>서술형</button><button type='button' class='delete'>삭제</button><button type='button' class='change' style='display:none;'>변경</button><button type='button' class='complete'>완료</button></div><input class='input_type' name='question_input_type' type='hidden'/><input class='question' name='question_content' type='hidden'/></div><br>"
                 qNo++;
                 
                 //질문폼 생성
@@ -49,22 +49,38 @@
                 	var content="<input type='text' class='content'/><br>";
                 	
                 	//qNo번 질문의 답변 타입 저장
-                	$(this).parent().next(".input_type").val(qNo+'/'+1);
+                	$(this).parent().next(".input_type").val(qNo-1+'/'+1);
                 	
                 	//qNo번 질문의 문항 내용 입력폼 생성
                 	$(this).parent().parent('.one-survey').append(content);
                 	
-                	//방금 추가된 입력폼에 입력한 내용
-                	var content=$(this).parent().parent('.one-survey').children('.content').last().val();
-
                 	//qNo번 질문의 문항 내용 저장
-                	$(this).parent().next(".question").val(qNo+'/'+content+'/');
-                	
+                	$(this).parent().siblings(".question").val(qNo-1);
+                	var result=$(this).parent().siblings(".question").val();
+
                 	$(this).text('추가');
                 	$(this).siblings('.radio').css('display','none');
                 	$(this).siblings('.text').css('display','none');
                 	$(this).siblings('.textarea').css('display','none');
                 	$(this).siblings('.change').css('display','inline-block');
+                	
+                	$('.complete').click(function(){
+                		
+                		$(this).parent().siblings('.content').each(function(index){
+                			var content=$(this).parent().siblings('.content').val();
+                		});
+                		console.log(content);
+                		//입력폼에 입력한 내용
+                		/* var content=$(this).parent().siblings('.content').val(); */
+                		
+                		
+                		/* var result=$(this).siblings('.question').val();
+                		
+                		$(this).siblings('.question').val(result+'/'+content);
+                		var re=$(this).siblings('.question').val();
+                		console.log(re); */
+                		$(this).text('수정');
+                	});
                 });
 
               	//문항타입 단일선택 선택 시
@@ -143,10 +159,16 @@
                 	$(this).siblings('.text').css('display','inline-block');
                 	$(this).siblings('.textarea').css('display','inline-block');
                 	$(this).css('display','none');
+                	$(this).parent().siblings('.content').remove();
                 });
                 
                 $('.delete').click(function(){
                 	$(this).parents('.one-survey').children('.content').last().remove();
+                	$(this).parents('.one-survey').children('.complete').last().remove();
+                	var no=$("input[class='content']").length;
+                	var qnoContent=$(this).parent().next('.question').val();
+                	console.log(qnoContent);
+                	var content=qnoContent.split('/')[no-1];
                 })
         	}
         	else{
@@ -154,6 +176,11 @@
         	}
         });
         
+        $('.survey-delete-btn').click(function(){
+        	$(this).siblings('#surveyWrap').children('.one-survey').last().remove();
+        	$(this).siblings('#surveyWrap').children('br').last().remove();
+        	qNo--;
+        });
     </script>
 
 </body>
