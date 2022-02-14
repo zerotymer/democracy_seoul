@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="event">
+		<!-- 공지사항 목록 --> 
+	<select id="list" parameterType="event" resultType="event">
+		SELECT 
+		    EVENT_NO as eventNo,
+			EVENT_TITLE as eventTitle,
+			EVENT_CONTENT as eventContent,
+			EVENT_DATE as eventDate,
+			EVENT_DEL_YN  as eventDelYN,
+			EVENT_THUMBNAIL_NAME as eventThumbnailName,
+			EVENT_THUMBNAIL_PATH as eventThumbnailPath
+		FROM EVENT 
+		ORDER BY 
+             eventNo desc
+	</select>
+	
+	<select id="eventTotalCount" resultType="int">
+		select count(*) from EVENT 
+		where EVENT_DEL_YN = 'N'
+	</select>
+	
+	<select id="selectEvent" parameterType="int" resultType="event">
+		select 
+			EVENT_NO as eventNo,
+			EVENT_TITLE as eventTitle,
+			EVENT_CONTENT as eventContent,
+			EVENT_DATE as eventDate,
+			EVENT_DEL_YN  as eventDelYN,
+			EVENT_THUMBNAIL_NAME as eventThumbnailName,
+			EVENT_THUMBNAIL_PATH as eventThumbnailPath
+		from EVENT
+		where EVENT_NO = #{val}
+	</select>
+	
+	
+	
+		<!-- 검색 제목 -->
+	<select id="eventListSearchTitle" parameterType="event" resultType="event">
+                
+                SELECT 
+	                EVENT_NO as eventNo,
+					EVENT_TITLE as eventTitle,
+					EVENT_CONTENT as eventContent,
+					EVENT_DATE as eventDate,
+					EVENT_DEL_YN  as eventDelYN, 
+					EVENT_THUMBNAIL_NAME as eventThumbnailName,
+		        	EVENT_THUMBNAIL_PATH as eventThumbnailPath
+                FROM EVENT 
+                WHERE EVENT_TITLE LIKE '%${eventTitle}%' and EVENT_DEL_YN='N'
+	</select>
+	
+	<select id="eventListSearchTitleCount" parameterType="event" resultType="int">
+			 SELECT COUNT(*) as count FROM EVENT 
+             WHERE EVENT_TITLE LIKE '%${eventTitle}%' and EVENT_DEL_YN='N'
+			
+	</select>
+	
+	
+		<!-- 검색  제목  내용-->
+	<select id="eventListSearchAll" parameterType="event" resultType="event">
+                
+                SELECT 
+	                EVENT_NO as eventNo,
+					EVENT_TITLE as eventTitle,
+					EVENT_CONTENT as eventContent,
+					EVENT_DATE as eventDate,
+					EVENT_DEL_YN  as eventDelYN, 
+					EVENT_THUMBNAIL_NAME as eventThumbnailName,
+		        	EVENT_THUMBNAIL_PATH as eventThumbnailPath
+                FROM EVENT 
+                WHERE (EVENT_TITLE LIKE '%${eventTitle}%' and EVENT_DEL_YN='N')
+			    or (EVENT_CONTENT LIKE '%${eventContent}%' and EVENT_DEL_YN='N')
+	</select>
+	
+	<select id="totalSearchCount" parameterType="event" resultType="int">
+			 SELECT COUNT(*) as count FROM EVENT 
+             WHERE (EVENT_TITLE LIKE '%${eventTitle}%' and EVENT_DEL_YN='N')
+			 or (EVENT_CONTENT LIKE '%${eventContent}%' and EVENT_DEL_YN='N')
+			
+	</select>
+	
+			<!-- 검색 내용 -->
+	<select id="eventListSearchContent" parameterType="event" resultType="event">
+                
+                SELECT 
+	                EVENT_NO as eventNo,
+					EVENT_TITLE as eventTitle,
+					EVENT_CONTENT as eventContent,
+					EVENT_DATE as eventDate,
+					EVENT_DEL_YN  as eventDelYN, 
+					EVENT_THUMBNAIL_NAME as eventThumbnailName,
+		        	EVENT_THUMBNAIL_PATH as eventThumbnailPath
+                FROM EVENT 
+                WHERE EVENT_CONTENT LIKE '%${eventContent}%' and EVENT_DEL_YN='N'
+	</select>
+	
+	<select id="totalSearchContentCount" parameterType="event" resultType="int">
+			 SELECT COUNT(*) as count FROM EVENT 
+             WHERE EVENT_CONTENT LIKE '%${eventContent}%' and EVENT_DEL_YN='N'
+			
+	</select>
+	
+	
+	
+</mapper>

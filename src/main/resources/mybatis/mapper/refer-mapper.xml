@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="referenceroom">
+
+	<select id="list" parameterType="referenceroom" resultType="referenceroom">
+		SELECT 
+		    REFER_NO as referNo,
+			REFER_TITLE as referTitle,
+			REFER_CONTENT as referContent,
+			REFER_DATE as referDate,
+			REFER_DEL_YN  as referDelYN
+		FROM REFERENCEROOM
+		ORDER BY 
+             referNo desc
+	</select>
+	
+	<select id="referTotalCount" resultType="int">
+		select count(*) from REFERENCEROOM 
+		where REFER_DEL_YN = 'N'
+	</select>
+	
+	<select id="selectRefer" parameterType="int" resultType="referenceroom">
+		select 
+			REFER_NO as referNo,
+			REFER_TITLE as referTitle,
+			REFER_CONTENT as referContent,
+			REFER_DATE as referDate,
+			REFER_DEL_YN  as referDelYN
+		from REFERENCEROOM
+		where REFER_NO = #{val}
+	</select>
+
+
+
+
+	
+		<!-- 검색 제목 -->
+	<select id="referenceroomSearchTitle" parameterType="referenceroom" resultType="referenceroom">
+                
+                SELECT 
+	                REFER_NO as referNo,
+					REFER_TITLE as referTitle,
+					REFER_CONTENT as referContent,
+					REFER_DATE as referDate,
+					REFER_DEL_YN  as referDelYN
+                FROM REFERENCEROOM 
+                WHERE REFER_TITLE LIKE '%${referTitle}%' and REFER_DEL_YN='N'
+	</select>
+	
+	<select id="totalSearchTitleCount" parameterType="referenceroom" resultType="int">
+			 SELECT COUNT(*) as count FROM REFERENCEROOM 
+             WHERE REFER_TITLE LIKE '%${referTitle}%' and REFER_DEL_YN='N'
+			
+	</select>
+	
+	
+			<!-- 검색  제목  내용-->
+	<select id="referenceroomSearchAll" parameterType="referenceroom" resultType="referenceroom">
+                
+                SELECT 
+	                REFER_NO as referNo,
+					REFER_TITLE as referTitle,
+					REFER_CONTENT as referContent,
+					REFER_DATE as referDate,
+					REFER_DEL_YN  as referDelYN
+                FROM REFERENCEROOM 
+                WHERE (REFER_TITLE LIKE '%${referTitle}%' and REFER_DEL_YN='N')
+			    or (REFER_CONTENT LIKE '%${referContent}%' and REFER_DEL_YN='N')
+	</select>
+	
+	<select id="totalSearchCount" parameterType="referenceroom" resultType="int">
+			 SELECT COUNT(*) as count FROM REFERENCEROOM 
+             WHERE (REFER_TITLE LIKE '%${referTitle}%' and REFER_DEL_YN='N')
+			 or (REFER_CONTENT LIKE '%${referContent}%' and REFER_DEL_YN='N')
+			
+	</select>
+	
+	
+	
+	
+			<!-- 검색 내용 -->
+	<select id="referenceroomSearchContent" parameterType="referenceroom" resultType="referenceroom">
+                
+                SELECT 
+	                REFER_NO as referNo,
+					REFER_TITLE as referTitle,
+					REFER_CONTENT as referContent,
+					REFER_DATE as referDate,
+					REFER_DEL_YN  as referDelYN
+                FROM REFERENCEROOM 
+                WHERE REFER_CONTENT LIKE '%${referContent}%' and REFER_DEL_YN='N'
+	</select>
+	
+	<select id="totalSearchContentCount" parameterType="referenceroom" resultType="int">
+			 SELECT COUNT(*) as count FROM REFERENCEROOM 
+             WHERE REFER_CONTENT LIKE '%${referContent}%' and REFER_DEL_YN='N'
+			
+	</select>
+	
+
+
+
+
+
+</mapper>

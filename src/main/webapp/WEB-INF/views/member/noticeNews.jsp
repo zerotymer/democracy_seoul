@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,6 +13,10 @@
 <link rel="stylesheet" href="/resources/style/member/default.css">
 <link rel="stylesheet" href="/resources/style/member/common.css">
 <link rel="stylesheet" href="/resources/style/member/noticeNews.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/CKEditor/member/ui.js"></script>
 </head>
@@ -32,7 +37,7 @@
          <div class="notice-top">
          	 <div class="box-button">
 				<button class="btn-notice">
-					<a href="/board/noticeNewslist.do">공지사항</a>
+					<a href="/board/goNoticeNewslist.do">공지사항</a>
 				</button>
 			 </div>
 		 </div>
@@ -64,21 +69,38 @@
 			                <th width="150">작성일</th>
 			            </tr>
 			        </thead>
-			        <tbody>		       				
+			        <tbody>	
+			       	 <c:forEach items="${requestScope.list}" var="item" varStatus="i">	       				
 			            <tr>
-			                <td>${ requestScope.list.noticeNewsNo }</td>
-			                <td><div class="text-ellipsis subject"><a href="/notice/noticeNewsSelectContent.do?noticeNo=(게시물고유번호)&currentPage=(최근페이지)">${ requestScope.boardNotice.noticeNewsTitle }</a></div></td><!-- 누르면 이동하게 -->
-			                <td>(조회수)</td>
-			                <td>(작성일)</td>
+			                <td>${i.count}</td>
+			                <td><div class="text-ellipsis subject"><a href="/board/goNoticeNewsDetail.do?noticeNo=${item.noticeNewsNo}&currentNo=${currentNo}">${ item.noticeNewsTitle }</a></div></td><!-- 누르면 이동하게 -->
+			                <td>0</td>
+			                <td>${item.noticeNewsDate }</td>
+			               
 			            </tr>
+			          </c:forEach>
 			        </tbody>
 			    </table>
 			
-			    <div id="page_wrap">
-					<ul class="page_ul">
-					<li></li>
-	 				</ul>
-			    </div>
+			   <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                    	<c:if test="${ preNavi > 0 }">
+	                        <li class="page-item">
+	                            <a class="page-link" href="/board/goNoticeNews.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
+	                        </li>
+                        </c:if>
+                        <c:forEach items="${ requestScope.navi }" var="m" varStatus="i">
+	                        <li class="page-item">
+	                        	<a class="page-link" href="/board/goNoticeNews.do?currentPage=${ m }">${ m }</a>
+	                        </li>
+                        </c:forEach>
+                        <c:if test="${ nextNavi > 0 }">
+	                        <li class="page-item">
+	                            <a class="page-link" href="/board/goNoticeNews.do?currentPage=${ nextNavi }">>></a>
+	                        </li>
+                        </c:if>
+                    </ul>
+                </nav>
 			</div>
 		</div>
 		
@@ -86,6 +108,14 @@
       
       <!-- footer -->
    </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
 </body>
 </html>
