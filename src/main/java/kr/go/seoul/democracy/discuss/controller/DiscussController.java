@@ -98,7 +98,7 @@ public class DiscussController {
 		mav.addObject("discuss",discuss);
 		mav.addObject("pro",proComment);
 		mav.addObject("con",conComment);
-		mav.addObject("vote",vote);
+		if(vote!=null) mav.addObject("vote",vote);
 		mav.addObject("totalCount",totalCount);
 		//mav.addObject("currentCommentPage",currentCommentPage);
 		//mav.addObject("pageSize",pageSize);

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <title>민주주의 서울 - 시민토론 게시글 <${discuss.discussTitle}></title>
 
     <link rel="stylesheet" href="/resources/style/header.css">
@@ -81,6 +82,9 @@
             margin:auto 0;
             padding-top:2px;
             color:white;
+            display:flex;
+            justify-content: center;
+            text-align: center;
         }
         .votePro{
         	background-color:rgba(69, 49, 250);
@@ -199,7 +203,7 @@
         
         
         /*댓글 작성폼*/
-        #commentWrite{
+        .commentWrite{
         	width:100%;
             height:110px;
             display:flex;
@@ -260,9 +264,7 @@
             </div>
           </div>
 
-          <div id="contents" class="contents">
-          	
-          </div>
+          <div id="contents" class="contents">${discuss.discussContent }</div>
 
         </div>
         
@@ -273,7 +275,7 @@
 	        <c:choose>
 	        
 	        	<c:when test="${my }!=null">
-	        		<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+	        		<form class="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
 					<div class="input-group">
 						<span id="input-group-text" class="input-group-text form">댓글</span>
 					    <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요.">${my.commentContent }</textarea>
@@ -285,8 +287,8 @@
 	        	</c:when>
 	        	
 	        	<c:otherwise>
-	        	<a href=".vote">
-	        		<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+	        	<!-- <a href=".vote"> -->
+	        		<form class="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
 					<div class="input-group abled">
 						<span class="input-group-text form">댓글</span>
 					    <textarea name="commentContent" id="disabled" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요." disabled></textarea>
@@ -295,20 +297,20 @@
 					    <button class="write" type="submit"><!--<i class="xi-pen-o"></i>-->완료</button>
 				    </div>
 					</form>
-				</a>
+				<!-- </a> -->
 	        	</c:otherwise>
 	        	
 			</c:choose>
 			</c:when>
 			
 			<c:otherwise>
-				<form id="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+				<div class="commentWrite">
 				<div class="input-group disabled">
 		            <span class="input-group-text form">댓글</span>
 		            <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="로그인 후 댓글 작성 가능합니다." disabled></textarea>
 		            <button class="write"><!--<i class="xi-pen-o"></i>-->입력</button>
 	            </div>
-				</form>
+				</div>
 			</c:otherwise>
         
         </c:choose><hr>
@@ -396,7 +398,7 @@
 	}
     
     
-    $('.votePro').click(function(){
+    $('.votePro.graph').click(function(){
         if(result1||result2){
             alert('이미 투표하셨습니다. 재투표는 불가합니다.');
         }
@@ -434,7 +436,7 @@
             }
         }
     });
-    $('.voteCon').click(function(){
+    $('.voteCon.graph').click(function(){
         if(result1||result2){
             alert('이미 투표하셨습니다. 재투표는 불가합니다.');
         }
@@ -493,8 +495,8 @@
 
 
 <!-- 게시글 내용 기호 변환 -->
-<script language="javascript">
-	var content="{{discuss.discussContent}}";
+<script>
+	var content=${discuss.discussContent};
 	content=content.replaceAll("&lt;","<");
 	content=content.replaceAll("&gt;",">");
 	content=content.replaceAll("&amp;lt;","<");
@@ -510,8 +512,9 @@
 		var currentCommentPage=$('.get').val();
 		var discussNo=${discuss.discussNo};
 		var totalCount=${totalCount};
+		if(totalCount=0) totalCount=1;
 		
-		if(totalCount/5>=currentCommentPage){
+		if((totalCount/5)>currentCommentPage){
 			$.ajax({
 				url : "/discuss/getComment.do",
 				type: "get",
@@ -521,18 +524,10 @@
 					var comment=json.comment;
 					for(var i=0;i<comment.length;i++){
 						if(comment[i].comment_vote=='Y'){
-							$('<div class="comment pro"><div class="content"><div class="text">'
-							+comment[i].commentContent
-							+'</div><div class="id">'
-							+comment[i].userId
-							+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" /></svg></div></div></div>').appendTo('#comments-pro');
+							$('<div class="comment pro"><div class="content"><div class="text">'+comment[i].commentContent+'</div><div class="id">'+comment[i].userId+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" /></svg></div></div></div>').appendTo('#comments-pro');
 						}
 						else if(comment[i].comment_vote=='N'){
-							$('<div class="comment con"><div class="content"><div class="text">'
-							+comment[i].commentContent
-							+'</div><div class="id">'
-							+comment[i].userId
-							+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" /></svg></div></div></div>').appendTo('#comments-con');
+							$('<div class="comment con"><div class="content"><div class="text">'+comment[i].commentContent+'</div><div class="id">'+comment[i].userId+'</div></div><div class="icon"><div class="img"><svg style="width:18px;height:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z" /></svg></div></div></div>').appendTo('#comments-con');
 						}
 					}
 					$('.get').val(currentCommentPage+1);
