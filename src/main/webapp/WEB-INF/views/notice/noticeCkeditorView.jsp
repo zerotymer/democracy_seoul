@@ -187,8 +187,9 @@
         <div class="board">
             <div class="board_content">
 				<form action="/notice/noticeUpdate.do" method="post">
-			 		<input type="text" name="noticeTitle" placeholder="${sessionScope.adminNotice.noticeTitle}"/>${sessionScope.adminNotice.noticeTitle}
-			    	<textarea name="noticeContent" id="editor" placeholder="${sessionScope.adminNotice.noticeContent}">${sessionScope.adminNotice.noticeContent}</textarea>
+					<input type="hidden" name="noticeNo" value=""/>
+			 		<input type="text" name="noticeTitle"/>${requestScope.adminNotice.noticeTitle}
+			    	<textarea name="noticeContent" id="editor">${requestScope.adminNotice.noticeContent}</textarea>
 			    	<input type="submit" value="수정"/>
 			    </form>
 			    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>

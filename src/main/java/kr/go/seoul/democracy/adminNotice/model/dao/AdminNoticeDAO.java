@@ -54,10 +54,16 @@ public class AdminNoticeDAO {
 		
 		return sqlSession.insert("notice.insertNoticeWrite", adminNotice);
 	}
+	
+
+	public AdminNotice selectOneNotice(int noticeNo) {
+		return sqlSession.selectOne("notice.selectOneNotice", noticeNo);
+	}
 
 	public int noticeUpdate(AdminNotice an) {
 		
 		return sqlSession.update("notice.noticeUpdate",an);
 	}
+
 
 }

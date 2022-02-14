@@ -11,7 +11,10 @@ public interface AdminNoticeService {
 	int noticeTotalCount();
 
 	int insertNoticeWrite(AdminNotice adminNotice);
+	
+	AdminNotice selectOneNotice(int noticeNo);
 
 	int noticeUpdate(AdminNotice an);
+
 	
 }

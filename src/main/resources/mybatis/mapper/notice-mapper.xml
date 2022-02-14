@@ -15,6 +15,7 @@
 	<!-- 공지사항 목록 보여주기 -->
 	<select id="selectAllNoticeList" resultType="notice">
 	  	SELECT 
+	  		notice_no as noticeNo,
 	  		notice_title as noticeTitle,
 			notice_date as noticeDate,
 			notice_del_yn as noticeDelYN
@@ -38,6 +39,20 @@
 			NOTICE 
 		VALUES (NOTICE_SEQ.NEXTVAL, #{noticeTitle}, #{noticeContent}, current_date, 'N', '1', '2')
 	</insert>
+	
+	<!-- 공지사항 제목 클릭 시 하나의 공지사항 보여주기 -->
+	<select id="selectOneNotice" parameterType="int" resultType="notice">
+		SELECT 
+			NOTICE_NO as noticeNo,
+			NOTICE_TITLE as noticeTitle,
+			NOTICE_CONTENT as noticeContent,
+			NOTICE_DATE as noticeDate,
+			NOTICE_DEL_YN as noticeDelYN,
+			NOTICE_THUMBNAIL_NAME as noticeThumbnailName,
+			NOTICE_THUMBNAIL_PATH as noticeThumbnailPath
+		FROM NOTICE
+		WHERE notice_no = #{noticeNo}
+	</select>
 	
 	<!-- 공지사항 수정 -->
 	<update id="noticeUpdate" parameterType="notice">

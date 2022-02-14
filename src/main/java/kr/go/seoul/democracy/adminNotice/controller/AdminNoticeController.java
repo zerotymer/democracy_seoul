@@ -49,7 +49,6 @@ public class AdminNoticeController {
 		
 		//페이지 목록 10개씩 끊는 로직
 		ArrayList<AdminNotice> list = nService.selectAllNoticeList(currentPage, recordCountPerPage); 
-		
 		int pageTotalCount = (int)Math.ceil(nService.noticeTotalCount()/(double)recordCountPerPage); 
 
 		int startNavi = currentPage - (currentPage - 1) % naviSize;
@@ -95,7 +94,7 @@ public class AdminNoticeController {
 	{
 		int result = nService.insertNoticeWrite(adminNotice);
 		
-		String location = "notice/noticeBoardPage.jsp";
+		String location = "notice/noticeBoardPage";
 		
 		if(result>0)
 		{
@@ -124,25 +123,53 @@ public class AdminNoticeController {
 		return "notice/noticeCkeditorView";
 	}
 	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.12
+	 * Description : 공지사항을 볼 수 있는 페이지
+	 */
+	@RequestMapping(value="/notice/noticeViewPage.do")
+	public ModelAndView noticeViewPage(@RequestParam int noticeNo,
+									   ModelAndView mav)
+	{
+		AdminNotice notice = nService.selectOneNotice(noticeNo);
+		mav.addObject("adminNotice", notice);
+		mav.setViewName("notice/noticeCkeditorView");
+		return mav;
+	}
+	
 	
 	/**
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.14
-	 * Description : 공지사항을 볼 수 있는 페이지로 이동
+	 * Description : 공지사항 수정 페이지
 	 */
 	@RequestMapping(value="/notice/noticeUpdate.do", method = RequestMethod.POST)
-	public void noticeUpdate(@RequestParam String noticeTitle,
-							 @RequestParam String noticeContent,
-							 @SessionAttribute AdminNotice adminNotice,
-							 Model model)
+	public String noticeUpdate(@RequestParam int noticeNo,
+							   @RequestParam String noticeTitle,
+							   @RequestParam String noticeContent,
+							   Model model)
 	{
-		int noticeNo = adminNotice.getNoticeNo();
-		
 		AdminNotice an = new AdminNotice();
+		an.setNoticeNo(noticeNo);
 		an.setNoticeTitle(noticeTitle);
 		an.setNoticeContent(noticeContent);
 		
 		int result = nService.noticeUpdate(an);
+		
+		if(result>0)
+		{
+			model.addAttribute("noticeMsg","게시판(공지사항) 수정 완료");
+			model.addAttribute("location", "/notice/noticeCkeditorView");
+			
+		}else {
+			
+			model.addAttribute("noticeMsg", "게시판(공지사항) 수정 실패");
+			model.addAttribute("location", "/notice/noticeCkeditorView");
+		}
+		
+		
+		return "notice/noticeMsg";
 		
 	}
 	

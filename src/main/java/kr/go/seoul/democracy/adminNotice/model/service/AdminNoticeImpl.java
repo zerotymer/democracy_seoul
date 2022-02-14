@@ -27,10 +27,17 @@ public class AdminNoticeImpl implements AdminNoticeService{
 	public int insertNoticeWrite(AdminNotice adminNotice) {
 		return nDAO.insertNoticeWrite(adminNotice);
 	}
+	
+	@Override
+	public AdminNotice selectOneNotice(int noticeNo) {
+		System.out.println("service" + noticeNo);
+		return nDAO.selectOneNotice(noticeNo);
+	}
 
 	@Override
 	public int noticeUpdate(AdminNotice an) {
 		return nDAO.noticeUpdate(an);
 	}
+
 
 }
