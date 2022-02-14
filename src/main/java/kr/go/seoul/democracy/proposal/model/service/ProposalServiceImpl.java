@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.proposal.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +48,21 @@ public class ProposalServiceImpl implements ProposalService {
 		
 	}
 
+
 	@Override
-	public List<ProposalComment> comlist(int userId) {
-			return pDAO.comlist(userId);
+	public void comWrite(ProposalComment pcomment) {
+		pDAO.comWrite(pcomment);
+		
 	}
 
 	@Override
-	public void comWrite(Proposal ProposalComment) {
-		pDAO.comWrite(ProposalComment);
-		
+	public ArrayList<HashMap<String, Object>> getComment(int proposalNo, int currentCommentPage, int pageSize) {
+		return pDAO.getComment(proposalNo,currentCommentPage,pageSize);
+	}
+
+	@Override
+	public int commentTotalCount(int proposalNo) {
+		return pDAO.commentTotalCount(proposalNo);
 	}
 
 

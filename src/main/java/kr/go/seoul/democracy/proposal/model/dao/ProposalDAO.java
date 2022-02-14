@@ -52,15 +52,24 @@ public class ProposalDAO {
 	 sqlSession.update("proposal.delete",proposalNo); 
 	 }
 	 
-	/* 댓글쓰기 */
-	 public List<ProposalComment> comlist(int userId){
-		  return sqlSession.selectList("proposalComment",userId);
-	 }
 	
-	public void comWrite(Proposal ProposalComment) {
-		sqlSession.insert("proposalComment",ProposalComment);
+	public void comWrite(ProposalComment pcomment) {
+		sqlSession.insert("proposal.commentWrite",pcomment);
 	}
 
+	public ArrayList<HashMap<String, Object>> _getComment(int proposalNo, int currentCommentPage, int pageSize) {
+		RowBounds rb=new RowBounds((currentCommentPage-1)*pageSize,pageSize);
+		return new ArrayList<HashMap<String,Object>>(sqlSession.selectList("proposal.commentList",proposalNo,rb));
+	}
 
+	public int commentTotalCount(int proposalNo) {
+		return sqlSession.selectOne("proposal.commentTotalCount",proposalNo);
+	}
+
+	public ArrayList<HashMap<String, Object>> getComment(int proposalNo, int currentCommentPage, int pageSize) {
+		RowBounds rb = new RowBounds((currentCommentPage-1)*pageSize,pageSize);
+		return new ArrayList<HashMap<String,Object>>(sqlSession.selectList("proposal.commentAllList",proposalNo,rb));
+	}
+	
 	 
 }

@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.proposal.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import kr.go.seoul.democracy.proposal.model.vo.Proposal;
@@ -22,9 +23,12 @@ public interface ProposalService {
 	 //게시글삭제 
 	void delete(int proposalNo);
 
-	public List<ProposalComment> comlist(int userId);
 	 
-	public void comWrite(Proposal ProposalComment);
+	public void comWrite(ProposalComment pcomment);
+
+	ArrayList<HashMap<String, Object>> getComment(int proposalNo, int currentCommentPage, int pageSize);
+
+	int commentTotalCount(int proposalNo);
 
 
 
