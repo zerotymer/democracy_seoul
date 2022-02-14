@@ -94,7 +94,7 @@ public class AdminNoticeController {
 	{
 		int result = nService.insertNoticeWrite(adminNotice);
 		
-		String location = "notice/noticeBoardPage";
+		String location = "notice/allMemberList.do";
 		
 		if(result>0)
 		{
@@ -160,20 +160,49 @@ public class AdminNoticeController {
 		if(result>0)
 		{
 			model.addAttribute("noticeMsg","게시판(공지사항) 수정 완료");
-			model.addAttribute("location", "/notice/noticeCkeditorView");
 			
 		}else {
 			
 			model.addAttribute("noticeMsg", "게시판(공지사항) 수정 실패");
-			model.addAttribute("location", "/notice/noticeCkeditorView");
 		}
 		
 		
-		return "notice/noticeMsg";
+		return "notice/noticeCkeditorView";
 		
 	}
 	
 	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.14
+	 * Description : 공지사항 삭제 페이지
+	 */
+	@RequestMapping(value="/notice/noticeDelete.do", method = RequestMethod.POST)
+	public String noticeDelete(@RequestParam int noticeNo,
+				   			   @RequestParam String noticeTitle,
+				   			   @RequestParam String noticeContent,
+				   			   Model model)
+	{
+		AdminNotice an = new AdminNotice();
+		an.setNoticeNo(noticeNo);
+		an.setNoticeTitle(noticeTitle);
+		an.setNoticeContent(noticeContent);
+		
+		int result = nService.noticeDelete(an);
+		
+		if(result>0)
+		{
+			model.addAttribute("noticeMsg", noticeTitle+" 삭제 완료");
+		
+		}else {
+		
+			model.addAttribute("noticeMsg", noticeTitle+" 삭제 실패");
+		}
+		
+		
+		return "notice/noticeBoardPage";
+	
+	}
 	
 	
 	

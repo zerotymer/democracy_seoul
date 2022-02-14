@@ -60,10 +60,19 @@
 			NOTICE
 		SET 
 			notice_title = #{noticeTitle},
-			notiec_content = #{noticeContent}
+			notice_content = #{noticeContent}
 		WHERE
-			notice_no = #{notice_no}
+			notice_no = #{noticeNo}
 	</update>
 	
+	<!-- 공지사항 삭제 버튼 (한 개) -->
+	<update id="noticeDelete" parameterType="notice">
+		UPDATE
+			NOTICE
+		SET
+			notice_del_yn = 'Y'
+		WHERE 
+			notice_no = #{noticeNo} AND notice_title = #{noticeTitle} AND notice_content = #{noticeContent}
+	</update>
 	
 </mapper>

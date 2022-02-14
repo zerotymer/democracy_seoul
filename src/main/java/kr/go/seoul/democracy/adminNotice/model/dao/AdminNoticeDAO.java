@@ -65,5 +65,16 @@ public class AdminNoticeDAO {
 		return sqlSession.update("notice.noticeUpdate",an);
 	}
 
+	public int noticeDelete(AdminNotice an) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("noticeNo", an.getNoticeNo());
+		map.put("noticeTitle", an.getNoticeTitle());
+		map.put("noticeContent", an.getNoticeContent());
+		
+		return sqlSession.update("notice.noticeDelete", map);
+	}
+
 
 }

@@ -30,13 +30,17 @@ public class AdminNoticeImpl implements AdminNoticeService{
 	
 	@Override
 	public AdminNotice selectOneNotice(int noticeNo) {
-		System.out.println("service" + noticeNo);
 		return nDAO.selectOneNotice(noticeNo);
 	}
 
 	@Override
 	public int noticeUpdate(AdminNotice an) {
 		return nDAO.noticeUpdate(an);
+	}
+
+	@Override
+	public int noticeDelete(AdminNotice an) {
+		return nDAO.noticeDelete(an);
 	}
 
 

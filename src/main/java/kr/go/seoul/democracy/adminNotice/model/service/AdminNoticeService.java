@@ -16,5 +16,7 @@ public interface AdminNoticeService {
 
 	int noticeUpdate(AdminNotice an);
 
+	int noticeDelete(AdminNotice an);
+
 	
 }
