@@ -45,7 +45,7 @@
 		UPDATE
 			ADMIN
 		SET
-			ADMIN_GRADE = 'Y'
+			ADMIN_GRADE = 'W'
 		WHERE 
 			ADMIN_ID = #{adminId} AND ADMIN_PWD = #{adminPwd}
 	</update>

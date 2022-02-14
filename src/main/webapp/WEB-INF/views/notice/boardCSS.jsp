@@ -105,9 +105,10 @@
         .board_content{
             background-color: white;
             width: 100%;
-            height: 100%;
+            height: 90%;
             padding: 20px;
         }
+        
     </style>
 
 </head>
@@ -228,6 +229,7 @@
                         </li>
                       </ul>
                     </nav>
+            	</div>
                     
                 </div>
             </div>

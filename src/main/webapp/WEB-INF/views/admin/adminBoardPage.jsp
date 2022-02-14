@@ -127,6 +127,12 @@
             height: 100%;
             padding: 20px;
         }
+        
+        .stateChangeBtn{
+        	width: 100%;
+            height: 25px;
+            margin : 0px;
+        }
     </style>
 
 </head>
@@ -141,11 +147,15 @@
             <div class="menu_bar_memberMNGM">
                 <div class="menu_bar_inner">
                     MEMBER<br>
-                    - 회원관리
+                    <a href="/admin/allMemberList.do">
+                		- 회원관리
+                	</a>
                 </div>
                 <div class="menu_bar_inner">
                     BOARD
-                    <div class="notice">- 공지사항</div>
+                    <a href="/notice/allMemberList.do">
+                    	<div class="notice">- 공지사항</div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -198,7 +208,7 @@
                                     <td>${m.email }</td>
                                     <td>${m.enrollDate }</td>
                                     <td>
-                                        <button style="width:100%; height: 100%;" class="stateChangeBtn"
+                                        <button class="stateChangeBtn"
                                                 data="${m.userId }">${m.endYN }</button>
                                     </td>
                                 </tr>

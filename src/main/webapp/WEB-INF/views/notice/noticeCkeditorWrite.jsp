@@ -186,68 +186,24 @@
         <!-- 게시판 내용 -->
         <div class="board">
             <div class="board_content">
-				<div class="writeBtn">
-            		<a href="/notice/noticeWritePageMove.do">
-            			<button>글 작성</button>
-            		</a>
-            	</div>
-                <c:choose>
-                    <c:when test="${!requestScope.list.isEmpty() }">
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                            	<th scope="col"></th>
-                                <th scope="col">No</th>
-                                <th scope="col">제목</th>
-                                <th scope="col">등록일</th>
-                                <th scope="col">삭제여부</th>
-                            </tr>
-                            </thead>
-
-
-                            <tbody>
-                            <c:forEach items="${requestScope.list }" var="n" varStatus="i">
-                                <tr>
-                                    <th scope="row">ㅁ</th>
-                                    <td>${(i.count) + (requestScope.countResult) }</td>
-                                    <td>
-                                    	<a href="/notice/noticeViewPage.do?noticeNo=${ n.noticeNo }">${n.noticeTitle}</a>
-                                    </td>
-                                    <td>${n.noticeDate }</td>
-                                    <td>${n.noticeDelYN }</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-
-                    </c:when>
-
-                    <c:otherwise>
-                        <H3>작성된 공지사항이 없습니다.</H3>
-                    </c:otherwise>
-
-                </c:choose>
-
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                    	<c:if test="${ preNavi > 0 }">
-	                        <li class="page-item">
-	                            <a class="page-link" href="/notice/allMemberList.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
-	                        </li>
-                        </c:if>
-                        <c:forEach items="${ requestScope.navi }" var="m" varStatus="i">
-	                        <li class="page-item">
-	                        	<a class="page-link" href="/notice/allMemberList.do?currentPage=${ m }">${ m }</a>
-	                        </li>
-                        </c:forEach>
-                        <c:if test="${ nextNavi > 0 }">
-	                        <li class="page-item">
-	                            <a class="page-link" href="/notice/allMemberList.do?currentPage=${ nextNavi }">>></a>
-	                        </li>
-                        </c:if>
-                    </ul>
-                </nav>
+				<form action="/notice/noticeWrite.do" method="post">
+					<input type="hidden" name="noticeNo"/>
+			 		<input type="text" name="noticeTitle" placeholder="제목을 작성하세요"/>
+			    	<textarea name="noticeContent" id="editor" placeholder="내용을 작성하세요"></textarea>
+			    	<input type="submit" value="작성"/>
+			    </form>
+			    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+			    <script>
+			        ClassicEditor
+			            .create( document.querySelector( '#editor' ), {
+			                ckfinder: {
+			                    uploadUrl: '/ckeditor/imgUpload.do'
+			                }
+			            })
+			            .catch( error => {
+			                console.error( error );
+			            });
+			    </script>
             </div>
         </div>
     </div>
