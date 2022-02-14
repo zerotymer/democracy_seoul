@@ -24,15 +24,11 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<BoardNotice> noticeNewsList(int recordCountPage, int currentListPage) {
+		System.out.println("목록구현 정상구동");
 		return bDAO.noticeNewsList(recordCountPage,currentListPage);
 
 	}
 	
-	
-	@Override
-	public int noticeNewsTotalCount() {
-		return bDAO.noticeNewsTotalCount();
-	}
 	
 	
 	@Override
@@ -40,7 +36,68 @@ public class BoardServiceImpl implements BoardService {
 		
 		return bDAO.noticeNewsViews(noticeNewsNo);
 	}
+
+
+
+	@Override
+	public int totalCount() {
+		// TODO Auto-generated method stub
+		return bDAO.noticeTotalCount();
+	}
+
+
+
+	@Override
+	public List<BoardNotice> noticeNewsListSearch(int recordCountPerPage, int currentPage, BoardNotice boardNotice) throws Exception {
+		
+		return bDAO. noticeNewsListSearch(recordCountPerPage,currentPage,boardNotice);
+
+	}
+
+
+
+	@Override
+	public int totalSerchCount(BoardNotice boardNotice) {
+		// TODO Auto-generated method stub
+		return bDAO.noticeSerchCount(boardNotice);
+	}
+
+
+
+	@Override
+	public List<BoardNotice> noticeNewsListSearchTitle(int recordCountPerPage, int currentPage, BoardNotice boardNotice)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return bDAO.noticeNewsListSearchTitle(recordCountPerPage, currentPage, boardNotice);
+	}
+
+
+
+	@Override
+	public int totalSearchTitleCount(BoardNotice boardNotice) {
+		// TODO Auto-generated method stub
+		return bDAO.noticeSearchTitleCount(boardNotice);
+	}
 	
+	
+	@Override
+	public List<BoardNotice> noticeNewsListSearchContent(int recordCountPerPage, int currentPage, BoardNotice boardNotice)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return bDAO.noticeNewsListSearchContent(recordCountPerPage, currentPage, boardNotice);
+	}
+
+
+
+	@Override
+	public int totalSearchContentCount(BoardNotice boardNotice) {
+		// TODO Auto-generated method stub
+		return bDAO.noticeSearchContentCount(boardNotice);
+	}
+
+
+	
+
 	
 
 

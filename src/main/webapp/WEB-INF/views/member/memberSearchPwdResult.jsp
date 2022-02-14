@@ -50,8 +50,8 @@
 	<div class="bg-color">
 		<div class="box-white">
 			<div class="tab-search">
-				<a href="/member/goMemberSearchPwdChange.do">비밀번호 변경</a>
-			</div>
+				<a href="/member/goMemberSearchPwdResult.do">비밀번호 변경</a>
+			</div>/
 			<div class="box-result">
 				<p>비밀번호 재설정</p>
 				<form action="/member/memberUpdatePassword.do" onsubmit="return Validation();" method="post">

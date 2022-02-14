@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="seoulNews">
+	<!-- 공지사항 목록 --> 
+	<select id="list" parameterType="seoulNews" resultType="seoulNews">
+		SELECT 
+		    NEWS_NO as seoulNewsNo,
+			NEWS_TITLE as seoulTitle,
+			NEWS_CONTENT as seoulContent,
+			NEWS_DATE as seoulDate,
+			NEWS_DEL_YN  as seoulDelYN
+		FROM NEWS 
+		ORDER BY 
+             seoulNewsNo desc
+	</select>
+	
+	<select id="seoulNewsTotalCount" resultType="int">
+		select count(*) from NEWS 
+		where NEWS_DEL_YN = 'N'
+	</select>
+	
+	<select id="selectSeoulNews" parameterType="int" resultType="seoulNews">
+		select 
+			NEWS_NO as seoulNewsNo,
+			NEWS_TITLE as seoulTitle,
+			NEWS_CONTENT as seoulContent,
+			NEWS_DATE as seoulDate,
+			NEWS_DEL_YN  as seoulDelYN
+		from NEWS
+		where NEWS_NO = #{val}
+	</select>
+	
+	
+	
+	
+	
+		<!-- 검색 제목 -->
+	<select id="seoulNewsListSearchTitle" parameterType="seoulNews" resultType="seoulNews">
+                
+                SELECT 
+	                NEWS_NO as seoulNewsNo,
+					NEWS_TITLE as seoulTitle,
+					NEWS_CONTENT as seoulContent,
+					NEWS_DATE as seoulDate,
+					NEWS_DEL_YN  as seoulDelYN
+                FROM NEWS 
+                WHERE NEWS_TITLE LIKE '%${seoulTitle}%' and NEWS_DEL_YN='N'
+	</select>
+	
+	<select id="totalSearchTitleCount" parameterType="seoulNews" resultType="int">
+			 SELECT COUNT(*) as count FROM NEWS 
+             WHERE NEWS_TITLE LIKE '%${seoulTitle}%' and NEWS_DEL_YN='N'
+			
+	</select>
+	
+	
+	
+			<!-- 검색  제목  내용-->
+	<select id="seoulNewsListSearchAll" parameterType="seoulNews" resultType="seoulNews">
+                
+                SELECT 
+	                NEWS_NO as seoulNewsNo,
+					NEWS_TITLE as seoulTitle,
+					NEWS_CONTENT as seoulContent,
+					NEWS_DATE as seoulDate,
+					NEWS_DEL_YN  as seoulDelYN
+                FROM NEWS 
+                WHERE (NEWS_TITLE LIKE '%${seoulTitle}%' and NEWS_DEL_YN='N')
+			    or (NEWS_CONTENT LIKE '%${seoulContent}%' and NEWS_DEL_YN='N')
+	</select>
+	
+	<select id="totalSearchCount" parameterType="seoulNews" resultType="int">
+			 SELECT COUNT(*) as count FROM NEWS 
+             WHERE (NEWS_TITLE LIKE '%${seoulTitle}%' and NEWS_DEL_YN='N')
+			 or (NEWS_CONTENT LIKE '%${seoulContent}%' and NEWS_DEL_YN='N')
+			
+	</select>
+	
+	
+			<!-- 검색 내용 -->
+	<select id="seoulNewsListSearchContent" parameterType="seoulNews" resultType="seoulNews">
+                
+                SELECT 
+	                NEWS_NO as seoulNewsNo,
+					NEWS_TITLE as seoulTitle,
+					NEWS_CONTENT as seoulContent,
+					NEWS_DATE as seoulDate,
+					NEWS_DEL_YN  as seoulDelYN
+                FROM NEWS 
+                WHERE NEWS_CONTENT LIKE '%${seoulContent}%' and NEWS_DEL_YN='N'
+	</select>
+	
+	<select id="totalSearchContentCount" parameterType="seoulNews" resultType="int">
+			 SELECT COUNT(*) as count FROM NEWS 
+             WHERE NEWS_CONTENT LIKE '%${seoulContent}%' and NEWS_DEL_YN='N'
+			
+	</select>
+	
+	
+	</mapper>
