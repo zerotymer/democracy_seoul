@@ -152,11 +152,11 @@ public class MemberController {
 		System.out.println("로그인 성공");
 		HttpSession session = request.getSession();
 		session.setAttribute("user",m);//
-		return "redirect:/";
+		return "member/memberLogin";
 		//return "redirect:/member/goMyPage.do";
 	}else {
 		model.addAttribute("msg","로그인의 실패하였습니다.아이디와 비밀번호 확인해주세요.");
-		model.addAttribute("location","/member/goLogin.do");
+		model.addAttribute("location","redirect:/");
 		return "member/msg";
 	}
 	

@@ -62,7 +62,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("member/noticeNews");
+		mv.setViewName("board/noticeNews");
 	
 		return mv;
 	}
@@ -75,7 +75,7 @@ public class BoardController {
 		BoardNotice boardNotice = bService.noticeNewsViews(noticeNo);
 		mv.addObject("board",boardNotice);
 		mv.addObject("currentNo",curretnPageNo);
-		mv.setViewName("member/noticeNewsContent");
+		mv.setViewName("board/noticeNewsContent");
 		return mv;
 	}
 	
@@ -86,7 +86,7 @@ public class BoardController {
 	{
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/noticeNewsContent");
+		mv.setViewName("board/noticeNewsContent");
 		mv.addObject("noticeNews", bService.noticeNewsViews(noticeNewsNo));
 		System.out.println(bService.noticeNewsViews(noticeNewsNo));
 		return mv;
@@ -135,7 +135,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("member/noticeNews");
+		mv.setViewName("board/noticeNews");
 	
 		return mv;
 		
@@ -164,7 +164,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("member/noticeCampaign");
+		mv.setViewName("board/noticeCampaign");
 		return mv;
 	}
 	
@@ -178,7 +178,7 @@ public class BoardController {
 		Event event = eService.eventNewsViews(eventNo);
 		mv.addObject("currentNo",curretnPageNo);//
 		mv.addObject("board",event);
-		mv.setViewName("member/noticeCampaineContent");
+		mv.setViewName("board/noticeCampaineContent");
 		return mv;
 	}
 	
@@ -226,7 +226,7 @@ public class BoardController {
 			mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 			mv.addObject("navi", navi);
 			mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-			mv.setViewName("member/noticeCampaign");
+			mv.setViewName("board/noticeCampaign");
 		
 			return mv;
 			
@@ -256,7 +256,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("member/seoulNews");
+		mv.setViewName("board/seoulNews");
 		return mv;
 	}
 	
@@ -269,7 +269,7 @@ public class BoardController {
 		SeoulNews seoulNews = sService.seoulNewsNewsViews(seoulNewsNo);
 		mv.addObject("seoulNews",seoulNews);
 		mv.addObject("currentNo",curretnPageNo);//
-		mv.setViewName("member/seoulNewsContent");
+		mv.setViewName("board/seoulNewsContent");
 		return mv;
 	}
 	
@@ -321,7 +321,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("member/seoulNews");
+		mv.setViewName("board/seoulNews");
 	
 		return mv;
 		
@@ -352,7 +352,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("member/referenceroom");
+		mv.setViewName("board/referenceroom");
 		return mv;
 	}
 	
@@ -365,7 +365,7 @@ public class BoardController {
 		Referenceroom referenceroom = rService.referViews(referNo);
 		mv.addObject("referenceroom",referenceroom);
 		mv.addObject("currentNo",curretnPageNo);//
-		mv.setViewName("member/referenceroomContent");
+		mv.setViewName("board/referenceroomContent");
 		return mv;
 	}
 	
@@ -417,7 +417,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("member/referenceroom");
+		mv.setViewName("board/referenceroom");
 	
 		return mv;
 		
