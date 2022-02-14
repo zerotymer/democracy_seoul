@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.suggest2.model.service;
 
 import kr.go.seoul.democracy.suggest2.model.dao.SuggestDAO;
+import kr.go.seoul.democracy.suggest2.model.vo.Suggest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,17 @@ public class SuggestServiceImpl implements SuggestService {
 
     /// METHODs
     @Override
-    public boolean insertPost(HashMap<String, Object> params) {
-        return sDAO.insertPost(params) > 0;
+    public boolean insertPost(Suggest suggest) {
+        return sDAO.insertPost(suggest) > 0;
     }
 
     @Override
-    public boolean updatePost(HashMap<String, Object> params) {
-        return sDAO.updatePost(params) > 0;
+    public boolean updatePost(Suggest suggest) {
+        return sDAO.updatePost(suggest) > 0;
+    }
+
+    @Override
+    public Suggest selectPost(int suggestNo) {
+        return sDAO.selectPost(suggestNo);
     }
 }

@@ -77,7 +77,7 @@
 						<tr>
 							<td>사진</td>
 							<td class="profile-img">													
-									<img class="profile-img2" src="/upload/profile/${mf.profileName }.png">
+									<img class="profile-img2" src="/upload/profile/${mf.profileName }">
 							</td>
 							<td>
 								<p>

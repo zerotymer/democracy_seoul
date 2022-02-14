@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>자료실</title>
+<title>서울시민회의</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
@@ -28,13 +28,13 @@
 		<div id="content">
 			<div class="box-title">
 				<p class="tit-small"></p>
-				<p class="tit-big">자료실</p>
+				<p class="tit-big">서울시민회의</p>
 			</div>
          	
          	<div class="box-notice">
 	         	<div class="notice-top">
 	         		<div class="box-subject">
-	         			<p>(글제목)</p>
+	         			<p>${ seoulNews.seoulTitle }</p>
 	         		</div>
 	         	</div>
 	         	<div class="box-content">
@@ -44,14 +44,14 @@
 	         			<span class="file-size">(크기MB)</span>
 	         	   </p>
 	         	   <div class="box-content">
-	         		<p>(글내용)</p>
+	         		<p>${seoulNews.seoulContent}</p>
 	         	</div>
 	         </div>
          	</div>
          	
          	<div class="box-button">
          		<button class="btn-m">
-	         		<a href="/views/notice/noticeNewsAllSelect.do?currentPage=(최근페이지)">목록</a>
+	         		<a href="/board/seoulNews.do?currentPage=${currentNo}">목록</a>
 	         	</button>
          	</div>
 		</div>
