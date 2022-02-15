@@ -75,6 +75,9 @@
 	</select>
 	
 	<insert id="write" parameterType="discuss">
+		<selectKey resultType="int" keyProperty="discussNo" order="AFTER">
+			select max(discuss_no) from discussion
+		</selectKey>
 		insert into discussion values
 		(discuss_seq.nextval,#{discussTitle},#{adminNo},#{discussContent},current_date,current_date,current_date+14,'N',#{discussThumbnailName},#{discussThumbnailPath})
 	</insert>
@@ -122,15 +125,18 @@
 	</select>
 	
 	<insert id="fileUpload" parameterType="hashmap">
-		merge into discuss_file using dual
-		on (discuss_no=discuss_seq.currval+1)
-		when matched then
-			update set file_name=#{fileName},
-		               file_path=#{filePath}
-		when not matched then
-			insert (discuss_no,file_no,file_name,file_path)
-		    values (discuss_seq.currval+1,discuss_comment_seq.nextval,#{fileName},#{filePath})
+		<selectKey resultType="int" keyProperty="fileNo" order="AFTER">
+			select max(file_no) from discuss_file
+		</selectKey>
+		insert into discuss_file
+		    values (3,discuss_file_seq.nextval,#{fileName},#{filePath})
 	</insert>
+	
+	<update id="fileUpdate" parameterType="hashmap">
+		update discuss_file
+		set discuss_no=#{discussNo}
+		where file_no=#{fileNo}
+	</update>
 	
 	<select id="getList" resultType="discuss">
 		select discuss_no as discussNo,

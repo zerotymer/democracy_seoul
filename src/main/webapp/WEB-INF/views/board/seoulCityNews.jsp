@@ -55,7 +55,7 @@
                                     <a>결과보기</a>
                                     <ul class="submenu">
                                         <li><a href="/suggest2/listExpired.do">제안결과</a></li>
-                                        <li><a href="">공론결과</a></li>
+                                        <li><a href="/proposal/resultList.do">공론결과</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">

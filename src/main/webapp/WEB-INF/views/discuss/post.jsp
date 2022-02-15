@@ -301,7 +301,7 @@
 	        	<a href="#vote">
 					<div class="input-group abled">
 						<span class="input-group-text form">댓글</span>
-					    <textarea name="commentContent" id="disabled" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요." disabled></textarea>
+					    <textarea name="commentContent" id="disabled" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="투표 후 댓글을 작성하세요." disabled></textarea>
 					    <input name="discussNo" type="hidden" value="${discuss.discussNo}" />
 					    <input class="commentVote" name="vote" type="hidden" value="Y" />
 					    <button type="button" class="write">완료</button>
@@ -498,6 +498,7 @@
 			success : function(data){
 				var json = JSON.parse(data);
 				alert('댓글이 등록되었습니다.');
+				$('.write').text('수정');
 				if(vote=='Y'){
 					$("<div class='comment pro'><div class='content'><div class='text'>"
 					+commentContent
