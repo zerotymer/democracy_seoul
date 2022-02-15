@@ -69,6 +69,9 @@
                 		$(this).parent().siblings('.content').each(function(index){
                 			var content=$(this).parent().siblings('.content').val();
                 		});
+                		$('body').on('load','.content',function(event){
+                			var content=$()
+                		});
                 		console.log(content);
                 		//입력폼에 입력한 내용
                 		/* var content=$(this).parent().siblings('.content').val(); */

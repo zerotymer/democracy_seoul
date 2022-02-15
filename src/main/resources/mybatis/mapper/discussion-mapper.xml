@@ -6,7 +6,7 @@
 	<select id="list" resultType="discuss">
 		select discuss_no as discussNo,
 			discuss_title as discussTitle,
-			userid as userId,
+			admin_no as adminNo,
 			discuss_content as discussContent,
 			discuss_date as discussDate,
 			discuss_start as discussStart,
@@ -24,7 +24,7 @@
 	<select id="onePost" resultType="discuss">
 		select discuss_no as discussNo,
 			discuss_title as discussTitle,
-			userid as userId,
+			admin_no as adminNo,
 			discuss_content as discussContent,
 			discuss_date as discussDate,
 			discuss_start as discussStart,
@@ -76,7 +76,7 @@
 	
 	<insert id="write" parameterType="discuss">
 		insert into discussion values
-		(discuss_seq.nextval,#{discussTitle},#{userId},#{discussContent},current_date,current_date,current_date+14,'N',#{discussThumbnailName},#{discussThumbnailPath})
+		(discuss_seq.nextval,#{discussTitle},#{adminNo},#{discussContent},current_date,current_date,current_date+14,'N',#{discussThumbnailName},#{discussThumbnailPath})
 	</insert>
 	
 	<insert id="writeComment" parameterType="hashmap">
@@ -84,6 +84,7 @@
 		on (userid=#{userId})
 		when matched then
 		    update set comment_content=#{commentContent},
+		    		   comment_vote=#{commentVote},
 		               comment_date=current_date
 		when not matched then
 		    insert (discuss_no,comment_no,userid,comment_content,comment_vote,comment_date)
@@ -134,7 +135,7 @@
 	<select id="getList" resultType="discuss">
 		select discuss_no as discussNo,
 			discuss_title as discussTitle,
-			userid as userId,
+			admin_no as adminNo,
 			discuss_content as discussContent,
 			discuss_date as discussDate,
 			discuss_start as discussStart,

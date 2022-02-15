@@ -191,12 +191,24 @@
 		  
 		 function sendEmail(){
 			 //alert('확인');
+			 
+			 console.log('aa');
 			
 			 const m= document.getElementById('email').value;//이메일 가져오고
-			 fetch("http://localhost/member/memberSendEmail.do?email="+m).then((response)=>
-					console.log(response)		 
+			 console.log(m);
+			 $.ajax({
+					type : "get",
+					url : "/member/memberSendEmail.do",
+					data : {"email":m},
+					error : function(error) {
+						console.log("error");
+					},
+					success : function() {
+						
+					}
+				});
 			 
-			 );
+			 
 			 alert('인증 이메일이 전송되었습니다.');
 			 
 			 
@@ -217,7 +229,7 @@
 						 console.log("success");
 						 const checkNum = data;
 						 const m= document.getElementById('emailRe').value;
-						 console.log(checkNum)
+						 console.log(checkNum);
 						 if(m==checkNum){
 							 val =true;
 							 alert("일치");

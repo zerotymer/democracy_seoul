@@ -216,7 +216,7 @@
         
         
         /*댓글 작성폼*/
-        .commentWrite{
+        .input-group{
         	width:100%;
             height:110px;
             display:flex;
@@ -263,7 +263,7 @@
             </div>
           </div>
 
-          <div class="vote">
+          <div class="vote" id="vote">
             <div class="votePro graph">
                 <svg style="width:18px;height:18px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z" />
@@ -288,42 +288,36 @@
 	        <c:choose>
 	        
 	        	<c:when test="${my!=null }">
-	        		<form class="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
 					<div class="input-group">
 						<span id="input-group-text" class="input-group-text form">댓글</span>
-					    <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요.">${my.commentContent }</textarea>
-					    <input name="discussNo" type="hidden" value="${discuss.discussNo}" />
-					    <input class="commentVote" name="vote" type="hidden" value="${my.commentVote}" />
-					    <button class="write" type="submit">수정</button>
+					    <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요.">${my.COMMENTCONTENT }</textarea>
+					    <input name="discussNo" type="hidden" value=${discuss.discussNo} />
+					    <input class="commentVote" name="vote" type="hidden" value=${my.COMMENTVOTE} />
+					    <button type="button" class="write">수정</button>
 				    </div>
-					</form>
 	        	</c:when>
 	        	
 	        	<c:otherwise>
-	        	<!-- <a href=".vote"> -->
-	        		<form class="commentWrite" name="commentWriteForm" method="post" action="/discuss/writeComment.do">
+	        	<a href="#vote">
 					<div class="input-group abled">
 						<span class="input-group-text form">댓글</span>
 					    <textarea name="commentContent" id="disabled" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="댓글을 작성하세요." disabled></textarea>
 					    <input name="discussNo" type="hidden" value="${discuss.discussNo}" />
 					    <input class="commentVote" name="vote" type="hidden" value="Y" />
-					    <button class="write" type="submit">완료</button>
+					    <button type="button" class="write">완료</button>
 				    </div>
-					</form>
-				<!-- </a> -->
+				</a>
 	        	</c:otherwise>
 	        	
 			</c:choose>
 			</c:when>
 			
 			<c:otherwise>
-				<div class="commentWrite">
 				<div class="input-group disabled">
 		            <span class="input-group-text form">댓글</span>
 		            <textarea name="commentContent" class="form-control form" aria-label="With textarea" cols="60" rows="4" maxlength="500" placeholder="로그인 후 댓글 작성 가능합니다." disabled></textarea>
 		            <button type="button" class="write"><!--<i class="xi-pen-o"></i>-->입력</button>
 	            </div>
-				</div>
 			</c:otherwise>
         
         </c:choose><hr>
@@ -410,7 +404,7 @@
     
     
     $('.votePro').click(function(){
-        if(result1||result2){
+        if(result1||result2&&result){
             alert('이미 투표하셨습니다. 재투표는 불가합니다.');
         }
         else{
@@ -430,8 +424,10 @@
             			data : {votePro:votePro+1,voteCon:voteCon,discussNo:discussNo},
             			success : function(data){
             				var json = JSON.parse(data);
+            				votePro++;
             				voteTotal++;
             				$('.votePro').width(votePro/voteTotal*100+'%');
+            				$('.voteCon').width(voteCon/voteTotal*100+'%');
             			},
             			error : function(data){
             				alert('2투표 결과를 반영하지 못했습니다. - 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
@@ -465,6 +461,7 @@
             				var json = JSON.parse(data);
             				voteCon++;
         					voteTotal++;
+        					$('.votePro').width(votePro/voteTotal*100+'%');
             				$('.voteCon').width(voteCon/voteTotal*100+'%');
             			},
             			error : function(data){
@@ -487,13 +484,38 @@
 	});
 </script>
 
-
+<!-- 댓글 작성 -->
 <script>
-	var msg=${msg};
-	if(msg!=null){
-		alert(msg);
-	}
+	$('.write').click(function(){
+		var commentContent=$('textarea').val();
+		var discussNo=${discuss.discussNo};
+		var vote=$('.commentVote').val();
+		
+		$.ajax({
+			url : "/discuss/writeComment.ajax",
+			type: "get",
+			data : {discussNo:discussNo,commentContent:commentContent,vote:vote},
+			success : function(data){
+				var json = JSON.parse(data);
+				alert('댓글이 등록되었습니다.');
+				if(vote=='Y'){
+					$("<div class='comment pro'><div class='content'><div class='text'>"
+					+commentContent
+					+"</div><div class='id'>${user.userId}</div></div><div class='icon'><div class='img'><svg style='width:18px;height:18px' viewBox='0 0 24 24'><path fill='currentColor' d='M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z' /></svg></div></div></div>").prependTo('#comments-pro');
+				}
+				else if(vote=='N'){
+					$("<div class='comment con'><div class='content'><div class='text'>"
+					+commentContent
+					+"</div><div class='id'>${user.userId}</div></div><div class='icon'><div class='img'><svg style='width:18px;height:18px' viewBox='0 0 24 24'><path fill='currentColor' d='M19,15V3H23V15H19M15,3A2,2 0 0,1 17,5V15C17,15.55 16.78,16.05 16.41,16.41L9.83,23L8.77,21.94C8.5,21.67 8.33,21.3 8.33,20.88L8.36,20.57L9.31,16H3C1.89,16 1,15.1 1,14V12C1,11.74 1.05,11.5 1.14,11.27L4.16,4.22C4.46,3.5 5.17,3 6,3H15M15,5H5.97L3,12V14H11.78L10.65,19.32L15,14.97V5Z' /></svg></div></div></div>").prependTo('#comments-con');
+				}
+			},
+			error : function(data){
+				alert('댓글을 등록하지 못했습니다. - 지속적인 오류 발생 시 관리자에게 문의 바랍니다.');
+			}	
+		});
+	});
 </script>
+
 
 
 <!-- 게시글 내용 기호 변환 -->
@@ -512,7 +534,6 @@
 <script>
 	$('.get').click(function(){
 		var currentCommentPage=$('.get').val();
-		var discussNo=${discuss.discussNo};
 		var totalCount=${totalCount};
 		if(totalCount=0) totalCount=1;
 		

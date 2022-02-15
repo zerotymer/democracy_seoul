@@ -66,7 +66,7 @@ public class DiscussDAO {
 		HashMap<String,Object> map=new HashMap<String,Object>();
 		map.put("discussNo", discussNo);
 		map.put("userId", userId);
-		return sqlSession.selectOne("discuss.writeComment", map);
+		return sqlSession.selectOne("discuss.myComment", map);
 	}
 
 	public int vote(HashMap<String, Object> vote) {
