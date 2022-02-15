@@ -69,14 +69,15 @@
             </div>
             <div class="update">
                 <H3>정보수정</H3>
-                	관리자 등급 &nbsp; ${sessionScope.admin.adminGrade }<br>
+                	관리자 등급 &nbsp; ${sessionScope.admin.adminGrade != "1" ? "최고 관리자" : "일반 관리자"} <br>
                 	ID &nbsp; ${sessionScope.admin.adminId }<br>
 					이름 &nbsp; ${sessionScope.admin.adminName }<br>
             </div>
             <div class="enter">
 		                비밀번호 <input type="password" size="12"/><br>
 		                비밀번호 재확인 <input type="password" size="12"/><br>
-		         <input type="reset" value="취소"/><input type="submit" value="완료"/><br>
+		         <input type="reset" value="취소"/><input type="submit" value="완료"/><br><br>
+		         <button><a href="/admin/adminLogout.do">로그아웃</a></button><br>
 		         <input type="button" value="탈퇴" id="withDrawBtn"/>
             </div>
         </div>
