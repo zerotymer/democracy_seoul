@@ -65,8 +65,7 @@ public class AdminDAO {
 		
 		map.put("userId", userId);
 		map.put("endYN", endYN);
-		
-		return sqlSession.update("member.updateMemberEndYNChange", map);
+		return sqlSession.update("admin.updateMemberEndYNChange", map);
 	}
 	
 	

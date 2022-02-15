@@ -3,9 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!-- jQuery 라이브러리 -->
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
+
 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,14 +19,15 @@
     <style>
         .wrapper {
             width: 100%;
-            height: 750px;
+            height: 800px;
         }
 
         .menu {
-            width: 200px;
-            height: 600px;
+            width: 250px;
+            height: 650px;
             background-color: #3F51B5;
             float: left;
+            
         }
 
         .main_logo {
@@ -208,7 +207,7 @@
                                     <td>${m.email }</td>
                                     <td>${m.enrollDate }</td>
                                     <td>
-                                        <button class="stateChangeBtn"
+                                        <button class="stateChangeBtn" onclick="endYnChange(this)"
                                                 data="${m.userId }">${m.endYN }</button>
                                     </td>
                                 </tr>
@@ -257,34 +256,36 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
+<!-- jQuery 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>        
+        
+        
+        
 <!-- 탈퇴 버튼 변경 ajax -->
 <script>
-    $('.stateChangeBtn').click(function () {
-
-        var userId = $(this).attr('data');
-        var endYN = $(this).html();
-
-
-        $.ajax({
+	function endYnChange(element) {
+		var endYN = element.innerText;
+		$.ajax({
             url: "/admin/memberEndYNChange.do",
-            data: {"userId": userId, "endYN": endYN},
+            data: {
+            	"userId": element.getAttribute('data'), 
+            	"endYN": endYN
+            },
             type: "post",
-            context: this,
             success: function (result) {
-
-                if (result != 'false') {
-                    $(this).html(result);
-                } else {
-                    console.log("데이터 변경 실패");
-                }
-
+				if (result) {
+					element.innerText = (endYN == 'Y') ? 'N' : 'Y';
+				} else {
+					alert('문제발생');
+				}
             },
             error: function () {
                 console.log('ajax 통신 문제 발생');
             }
-        })
-
-    });
+        });
+	}
+    
 </script>
 
 

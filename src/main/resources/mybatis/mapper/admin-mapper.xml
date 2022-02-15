@@ -80,7 +80,8 @@
 			username as userName,
 			nick as nick,
 			email as email,
-			enrolldate as enrollDate
+			enrolldate as enrollDate,
+			end_yn as endYN
 		FROM
 			MEMBER
 	</select>
@@ -92,7 +93,7 @@
 		SET
 			end_yn = #{endYN}
 		WHERE
-			user_Id = #{userId}
+			userId = #{userId}
 	</update>
 	
 	<!-- 페이지 안에 들어갈 목록 갯수 -->
@@ -102,9 +103,9 @@
 			username as userName,
 			nick as nick,
 			email as email,
-			enrolldate as enrollDate
-	  	FROM MEMBER
-		WHERE END_YN='N' 
+			enrolldate as enrollDate,
+			end_yn as endYN
+	  	FROM MEMBER 
 		ORDER BY USERID ASC
 	  </select>
 	
