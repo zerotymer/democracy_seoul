@@ -185,9 +185,9 @@ public class DiscussController {
 							@RequestParam String content,
 							@RequestParam String thumbnailName,
 							@RequestParam String thumbnailPath) {
-		String userId=admin.getAdminId();
+		int adminNo=admin.getAdminNo();
 		
-		Discuss discuss=new Discuss(userId,title,content,thumbnailName,thumbnailPath);
+		Discuss discuss=new Discuss(adminNo,title,content,thumbnailName,thumbnailPath);
 		
 		int result=dService.write(discuss);
 		if(result>0) mav.setViewName("/discuss/link.do");
