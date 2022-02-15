@@ -21,25 +21,25 @@
     <style>
         .wrapper {
             width: 100%;
-            height: 750px;
+            height: 800px;
         }
 
         .menu {
             width: 200px;
-            height: 600px;
+            height: 780px;
             background-color: #3F51B5;
             float: left;
+            
         }
 
         .main_logo {
             width: 100%;
-            height: 100px;
+            height: 120px;
             display: block;
             margin: auto;
             text-align: center;
-            background-color: white;
             box-sizing: border-box;
-            padding: 7px;
+            padding: 20px;
             float: left;
         }
 
@@ -51,6 +51,7 @@
         }
 
         .menu_bar_inner {
+        	padding: 20px;
             width: 100%;
             height: 100px;
             color: white;
@@ -59,6 +60,10 @@
         .notice {
             width: 100%;
             height: 30px;
+            word-spacing: -0.8px;
+        }
+        .notice:hover {
+            cursor: pointer;
         }
 
         #content {
@@ -69,8 +74,8 @@
 
         .info {
             background-color: #3F51B5;
-            width: 100%;
-            height: 100px;
+            width: 1320px;
+            height: 80px;
             float: left;
             padding: 15px;
         }
@@ -84,11 +89,10 @@
         }
 
         .admin_info {
-            float: left;
-            width: 20%;
+            float: right;
+            width: 15%;
             height: 100%;
-            padding: 10px;
-            margin: 0px 0px 0px 590px;
+            margin: 0px auto;
             text-align: center;
             color: white;
         }
@@ -98,9 +102,10 @@
         }
 
         .admin_icon {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             float: left;
+            margin : 10px 0px 0px 0px;
         }
 
         .admin_icon > img {
@@ -109,13 +114,16 @@
         }
 		.admin_idarea{
 			display : inline-block;
+			margin : 15px;
+			float: left;
+			font-size : 1.2em;
 		}
         .board {
             background-color: #EAEAEA;
             padding: 10px;
             float: left;
-            width: 100%;
-            height: 500px;
+            width: 1320px;
+            height: 700px;
         }
 
         .board_content {
@@ -124,7 +132,13 @@
             height: 100%;
             padding: 20px;
         }
-        
+        a{
+        	text-decoration:none;
+        	color : white;
+        }
+        a:hover{
+        	color : white;
+        }
         .stateChangeBtn{
         	width: 100%;
             height: 100%;
@@ -187,9 +201,11 @@
         <div class="board">
             <div class="board_content">
 				<form action="/notice/noticeWrite.do" method="post">
-			 		<input type="text" name="noticeTitle" placeholder="제목을 작성하세요"/>
+			 		<input type="text" name="noticeTitle" placeholder="제목을 작성하세요" size="164"/>
+			 		<hr>
 			    	<textarea name="noticeContent" id="editor" placeholder="내용을 작성하세요"></textarea>
-			    	<input type="submit" value="작성"/>
+			    	<br>
+			    	<button type="submit" class="btn btn-outline-primary">작성</button>
 			    </form>
 			    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 			    <script>
