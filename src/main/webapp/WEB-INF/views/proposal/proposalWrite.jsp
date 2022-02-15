@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+     <link rel="stylesheet" href="/resources/style/header.css">
+    <link rel="stylesheet" href="/resources/style/footer.css">
     <link rel="stylesheet" href="/resources/style/content-frame.css">
     <link rel="stylesheet" href="/resources/style/proposal/post-write.css">
 
@@ -159,12 +161,7 @@
 			                console.error( error );
 			            });
 				    
-				  //글쓰기 폼으로 이동하게 하는 함수
-					$(document).ready(function(){    
-					        $("#btnWrite").click(function(){
-					            location.href="/allList.do";
-					        });
-					});
+				  
     		</script>
 </body>
 </html>
