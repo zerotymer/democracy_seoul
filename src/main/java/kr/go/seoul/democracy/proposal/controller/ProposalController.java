@@ -142,7 +142,7 @@ public class ProposalController {
 	@RequestMapping(value="/proposal/writeComment.do", method=RequestMethod.POST)
 	public void comment(@RequestParam int proposalNo,
 			@RequestParam String comment, 
-			
+			HttpSession session,
 			HttpServletResponse response) throws Exception{ 
 		
 		ProposalComment pcomment = new ProposalComment();

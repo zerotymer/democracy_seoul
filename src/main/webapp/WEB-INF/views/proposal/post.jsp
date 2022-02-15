@@ -152,10 +152,9 @@
         
          <!-- 댓글 목록 -->
         <div class="commentContainer" id="container">
-        
          
         	<c:forEach items="${commentList}" var="item">
-        	<div id=commentOne>
+        	<div class="commentOne">
 	         	<input type="hidden" name="proposalNo" class="proposalNo" value="${item.PROPOSALNO }" />
 	            <div class="userId">${item.USERID}</div>
 	            <div class="date">${item.REGDATE}</div> 
@@ -204,6 +203,7 @@
    	    	console.log(data);
    	    	
    	    	var div = document.createElement('div');
+   	    	div.classList.add('commentOne');
    	    	var input = document.createElement('input');
    	    	input.setAttribute('type','hidden');
    	    	input.name = 'proposalNo';
@@ -246,9 +246,9 @@
 	   	    			PROPOSALNO: proposalNo,
 	   	    			USERID: '작성자',
 	   	    			REGDATE: '2022-02-16',
-	   	    			CONTENT: comment
-	   	    		});
-  	    		}
+	   	    			CONTENT: comment 
+	   	    			});
+	   	    	}
    	    	});
    	    }
    	    

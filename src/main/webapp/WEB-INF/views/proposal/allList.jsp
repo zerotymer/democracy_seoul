@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -16,6 +13,7 @@
     <link rel="stylesheet" href="/resources/style/content-frame.css">
     <link rel="stylesheet" href="/resources/style/card-container.css">
     <link rel="stylesheet" href="/resources/style/list-frame.css">
+    <link rel="stylesheet" href="/resources/style/proposal/allList.css">
     <style>
         body {
             background-color: var(--COLOR-WHITE);
@@ -40,6 +38,8 @@
             min-height: 90vh;
             /* overflow: scroll; */
         }
+        
+        
     </style>
 </head>
 <body>
@@ -132,7 +132,7 @@
                 <!-- 글작성 버튼 위치 -->
                 <div class="contents--textarea">
                     <h2>서울시민에게 의견을 구합니다</h2>
-                    <span>ㅎㅏ..이팅..!</span>
+                    <span>살기좋은 서울</span>
                 </div>
                 <div class="contents--btns">
                 <c:if test="${ sessionScope.admin != null}">
@@ -192,49 +192,29 @@
                    		</a>
       				</div>
            		</c:forEach> 
-               
-                  <div id="page_wrap">
-                        <ul id="page_ul">
-                        <c:if test="${ preNavi > 0}">
-                           <li><a href='/proposal/allList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
-                        </c:if>
-                        <c:forEach items="${ navi }" var="i">
-                           <c:choose>
-                              <c:when test="${i==currentPage}">
-                                 <li><a id="page_active" href='/proposal/allList.do?currentPage=${i}'>${i}</a></li>
-                              </c:when>
-                              <c:otherwise>
-                                 <li><a id="page_inactive" href='/proposal/allList.do?currentPage=${i}'>${i}</a></li>
-                              </c:otherwise>
-                              </c:choose>
-                        </c:forEach>
-                        <c:if test="${ nextNavi } != 0">
-                           <li><a href='/proposal/allList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
-                        </c:if>
-                        </ul>
-                        
-                   </div>
-               
+
             </div>
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+        <div id="navi-container">
+             <ul class="navi--ul">
+             <c:if test="${ preNavi > 0}">
+                <li class="navibtn pre"><a href='/proposal/allList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+             </c:if>
+             <c:forEach items="${ navi }" var="i">
+                <c:choose>
+                   <c:when test="${i==currentPage}">
+                      <li class="navibtn"><a id="page_active" href='/proposal/allList.do?currentPage=${i}'>${i}</a></li>
+                   </c:when>
+                   <c:otherwise>
+                      <li class="navibtn"><a id="page_inactive" href='/proposal/allList.do?currentPage=${i}'>${i}</a></li>
+                   </c:otherwise>
+                   </c:choose>
+             </c:forEach>
+             <c:if test="${ nextNavi } != 0">
+                <li class="navibtn next"><a href='/proposal/allList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+             </c:if>
+             </ul> 
+        </div>
 						<script>
 						/* 	$(document).ready(function(){
 				    
@@ -265,25 +245,20 @@
 							});
 							 
 						</script>
-							
-							 
-	
+		
 	</div>
 	
 	
 	
 </section>
-        
-      
-        
-        
-        
-     
 
     <footer>
         <%@ include file="/includes/footer.jsp" %>
     </footer>
-    
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
     <script src="/resources/script/header.js"></script>
     <script src="/resources/script/content-frame.js"></script>
     <script src="/resources/script/card-container.js"></script>

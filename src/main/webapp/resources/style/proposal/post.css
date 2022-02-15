@@ -65,6 +65,7 @@
     min-height:700px;
     margin: 30px;
     border-bottom: 1px solid var(--COLOR-BORDER);
+	text-align: center; 
 }
 
  .image>img {
@@ -79,6 +80,7 @@
     border-radius: 12px;
     padding: 25px 100px ;
     border:0px; 
+    margin: 5% auto;
 }
 
 .sug{
@@ -119,13 +121,13 @@ padding :15px;
 
 } 
 
-#commentOne {
-	 	border:1px solid  var(--COLOR-BORDER);
-		min-height : 80px;
-		padding :30px;
+.commentOne {
+ 	border:1px solid var(--COLOR-BORDER);
+	min-height : 80px;
+	padding :30px;
 }
 
-.date {
+.commentOne .date {
 	margin-left: 0px;
 	margin-bottom: 10px;
 	font-size : 12px;
@@ -133,7 +135,7 @@ padding :15px;
 
 .more{
 	margin : 0 50%;
-	width : 80px;
+	width : 150px;
 	hight : 100px;
 	background-color: white;
 	
