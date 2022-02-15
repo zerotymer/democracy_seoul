@@ -115,11 +115,11 @@
         
         <div class="upload">
             <div class="thumbnail file">
-                <input id="thumbnail" class="uploadImg" name="discussThumbnailPath" type="file" accept="image/*"/>
+                <input id="thumbnail" class="uploadImg" name="thumbnailPath" type="file" accept="image/*"/>
                 <button type="button" class="uploadImg btnImg">썸네일 업로드</button>
                 <button type="button" class="uploadImg inputImg hidden">썸네일 수정</button>
             </div>
-            <input id="fileName" name="discussThumbnailName" type="hidden"/>
+            <input id="fileName" name="thumbnailName" type="hidden"/>
             <div class="iconWrap left">
                 <div class="icon">
                     <svg style="width:24px;height:24px" viewBox="0 0 24 24">

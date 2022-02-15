@@ -14,14 +14,35 @@
 </head>
 
 
+<!-- 최종 제출전 다향성 검사 -->
+<script>
 
+		 function Validation(){
+			 
+				var nRegExp= /^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,16}\$/;//nick 유효성 검사        
+
+		        var objNick = document.getElementById("nick"); //닉네임
+
+		        
+		        if(objNick.value ==''){
+		            alert("닉네임을 입력해주세요.");
+		            return false;
+		        }
+		        if(!nRegExp.test(objNick.value)){ //닉네임
+		            alert("닉네임을 2~16자의 숫자,한국어,영어,'_'로 입력해주세요.");        
+		            return false;
+		        }
+			 
+		 }
+
+		 </script>
 <body>
 	<div class="bg-color">
 		<div class="box-white">
 			<div class="tab-search">
 				<a href="/member/goMemberUpdateNick.do"><H1>닉네임 변경</H1></a>
 			</div>
-			<form action="/member/myPageUpdateNick.do" method="get">
+			<form action="/member/myPageUpdateNick.do" method="get" onsubmit="return Validation();" >
                 <input type="text" id="nick" class="input-style" name="nick" placeholder="변경하실 닉네임입력"><br>
 				<span id="nickCheck" class="check-msg"></span><br>
 				<input type="submit" id="updateNick" onclick="submitUpdateNick();" class="btn-searchId" value="변경">

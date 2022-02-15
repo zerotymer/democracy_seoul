@@ -16,14 +16,14 @@
 <style>
         .wrapper{
             width: 100%;
-            height: 740px;
+            height: 1000px;
             background-color: #3F51B5;
             box-sizing: border-box;
             display: flex;
         }
         .login_form{
             width: 400px;
-            height: 500px;
+            height: 700px;
             background-color: white;
             margin: auto;
             border-radius: 2em;
@@ -69,18 +69,70 @@
             </div>
             <div class="update">
                 <H3>정보수정</H3>
-                	관리자 등급 &nbsp; ${sessionScope.admin.adminGrade }<br>
+                	관리자 등급 &nbsp; ${sessionScope.admin.adminGrade} <br>
                 	ID &nbsp; ${sessionScope.admin.adminId }<br>
 					이름 &nbsp; ${sessionScope.admin.adminName }<br>
             </div>
             <div class="enter">
-		                비밀번호 <input type="password" size="12"/><br>
-		                비밀번호 재확인 <input type="password" size="12"/><br>
-		         <input type="reset" value="취소"/><input type="submit" value="완료"/><br>
+            
+            	<form id="myForm" action="/admin/adminUpdate.do" method="post"> 
+					<fieldset>
+						<H4>이메일 변경</H4>
+						<input type="text" name="email" placeholder="${sessionScope.admin.adminEmail }"/><br>
+						<input type="reset" value="취소"/><input type="submit" value="변경"/>
+					</fieldset>
+				</form>
+				
+				<div id="pass">
+					<fieldset>
+					<H4>비밀번호 변경</H4>
+						<input type="password" name="adminOriginalPass" placeholder="기존 비밀번호"/><br>
+						<input type="password" name="adminNewPass" placeholder="변경 비밀번호"/><br>
+						<input type="password" name="adminNewPass_re" placeholder="변경 비밀번호 재입력"/><br>
+						<input type="reset" value="취소"/><input type="button" id="adminPassChangeBtn" value="변경"/>
+					</fieldset>
+				</div>
+		         
+		         <button><a href="/admin/adminLogout.do">로그아웃</a></button><br>
 		         <input type="button" value="탈퇴" id="withDrawBtn"/>
             </div>
         </div>
     </div>
+    
+    
+    
+    
+    <!-- 비밀번호 변경 -->
+    <script>
+		$('#adminPassChangeBtn').click(function(){
+			
+			var adminOriginalPass = $('input[name=adminOriginalPass]').val();
+			var adminNewPass = $('input[name=adminNewPass]').val();
+			
+			$.ajax({
+				url : "/admin/adminPasswordChange.do",
+				data : {"adminOriginalPass" : adminOriginalPass, "adminNewPass" : adminNewPass},
+				type : "POST",
+				success : function(result){
+					if(result == 'true')
+					{
+						alert('비밀번호 변경 성공');
+					}else{
+						alert('비밀번호 변경 실패 -기존 비밀번호 재확인 바랍니다.');
+					}
+					$('#pass>input').val('');
+				},
+				error : function(){
+					console.log('ajax 통신 실패');
+				}
+			});
+			
+		});
+	</script>
+    
+    
+    
+    
     
     <!-- 탈퇴 버튼 활성화 -->
     <script>

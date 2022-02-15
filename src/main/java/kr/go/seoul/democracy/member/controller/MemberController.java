@@ -152,7 +152,10 @@ public class MemberController {
 		System.out.println("로그인 성공");
 		HttpSession session = request.getSession();
 		session.setAttribute("user",m);
-		return "redirect:/";
+		model.addAttribute("msg","로그인 성공하였습니다.");
+		model.addAttribute("location","redirect:/");
+		return "member/msg";
+		//return "redirect:/";
 		//return "member/memberLogin";
 		//return "redirect:/member/goMyPage.do";
 	}else {
@@ -192,7 +195,7 @@ public class MemberController {
 }
 	//이메일인증 메일 보내는 로직
 	@RequestMapping(value="/member/memberSendEmail.do")
-	public void memberSendEmail(HttpServletRequest request) {
+	public void memberSendEmail(@RequestParam String email, HttpServletRequest request) {
 		//인증번호 생성
 		Random random = new Random();
 		int count = 0;
@@ -212,7 +215,7 @@ public class MemberController {
 		String c =(String)session.getAttribute("checkNum");
 		System.out.println(c);
 		//메일 전송
-		String email = request.getParameter("email");
+		
 		boolean check = mss.sendEmail(checkNum, email);
 		if(check) {
 			System.out.println("이메일 송신 완료");
@@ -228,6 +231,7 @@ public class MemberController {
 	@ResponseBody
 	public String ajax(HttpServletRequest request) {
 
+		System.out.println("get.do 호출");
 	    HttpSession session = request.getSession();
 	    String c =(String)session.getAttribute("checkNum");
 		return c;
