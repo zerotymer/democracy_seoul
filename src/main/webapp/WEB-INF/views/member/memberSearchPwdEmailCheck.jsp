@@ -89,10 +89,10 @@
 				<a href="/member/goMemberSearchPwdEmailCheck.do">이메일인증 찾기</a>
 			</div>
 			<form action="/member/goMemberSearchPwdResult.do" onsubmit="return Validation();" method="post">
-					<span id="memberEmail">${sessionScope.user.email }</span>					 			
+					<span id="memberEmail">${email }</span>					 			
 					<label for="email" class="tit-label">으로 메일을 발송합니다.개인정보를 확인해주세요</label><br>
-				    <input type="text" class="input-style" id="userId" name="userId" value="${sessionScope.user.userId }" readonly/><br>					
-					<input type="email" id="email" class="input-style" name="email" value="${sessionScope.user.email }" readonly><button type="button" onclick='sendEmail()'>인증메일 발송하기</button><br>	
+				    <input type="text" class="input-style" id="userId" name="userId" value="${userId }" readonly/><br>					
+					<input type="email" id="email" class="input-style" name="email" value="${email }" readonly><button type="button" onclick='sendEmail()'>인증메일 발송하기</button><br>	
 				    <input type="text" class="input-style" id="emailRe" name="emailRe"   placeholder="이메일 인증번호"><br>
 				    <button type="button" onclick='checkNum()'>인증번호 확인</button><br>
 				    <input type="submit" class="btn-submit" value="인증완료">		

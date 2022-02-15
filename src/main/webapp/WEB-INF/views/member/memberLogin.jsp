@@ -17,8 +17,10 @@
 
 <c:choose>
 	<c:when test="${sessionScope.user != null }">
-			[<a href="/member/goMypage.do"">${sessionScope.user.userName }</a>]님 환영 합니다 <a href="/member/logout.do">로그아웃</a><br>
-		<a href="/">메인으로 이동</a><br>
+	  <div class="link-search">
+			안녕하세요. [<a href="/member/goMypage.do"">${sessionScope.user.userName }</a>]님 환영 합니다 <a href="/member/logout.do">로그아웃</a><br>
+		<a href="/">메인으로 이동</a>
+		</div>
     </c:when>
 	<c:otherwise>
 	<div class="bg-color">

@@ -52,7 +52,6 @@
 	</script>
 
 
-
 	<div id="wrap">
 		<div id="content">
 			<div class="user-info">
@@ -62,9 +61,9 @@
 				</div>
 				<form action="/member/MypageUpdatePassword.do" method="post" onsubmit="return passwordChange();">
 					<table class="info">
-						<tr>
-							<td>현재 비밀번호</td>
-							<td><input type="password" class="input-style" id="pwd" name="memberOriginalPass" placeholder="현재 비밀번호 입력"></td>
+	     		<tr>
+	                   <td>현재 비밀번호</td>
+	                   <td><input type="password" class="input-style" id="pwd" name="memberOriginalPass" placeholder="현재 비밀번호 입력"></td>
 						</tr>
 						<tr>
 							<td>새로운 비밀번호</td>
@@ -74,7 +73,7 @@
 							<td>새로운 비밀번호 재입력</td>
 							<td><input type="password" class="input-style" id="new_pwd_re" name="memberNewPass_re" placeholder="신규 비밀번호 재입력"></td>
 						</tr>
-						<tr>
+						<tr> 
 							<td colspan="2">
 								<input type="submit" class="btn-m" value="변경완료">
 							</td>
@@ -86,5 +85,7 @@
 	</div>
 		
 	
+	
+
 </body>
 </html>

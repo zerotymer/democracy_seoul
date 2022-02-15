@@ -43,6 +43,22 @@
 	
 	</select>
 	
+		<!-- ID 로 유저가져오기 -->
+	<select id="selectMemberById" resultType="member">
+		SELECT 
+			userid as userId,
+			userpwd as userPwd,
+			username as userName,
+			NICK as nick,
+			EMAIL as email,
+			enrollDate as enrollDate,
+			end_yn as endYN,
+			USERGRADE as userGrade
+		FROM 
+			MEMBER 
+		WHERE USERID = #{value}
+	
+	</select>
 	
 	
 		
@@ -181,9 +197,9 @@
 		UPDATE 
 			MEMBER 
 		SET 
-			userPwd=#{memberNewPass} 
+			USERPWD=#{userNewPass}
 		WHERE 
-			userId=#{userId} AND userPwd=#{memberOriginalPass}
+			USERID=#{userId} AND USERPWD=#{userOriginalPass}
 	</update>
 	
 	
