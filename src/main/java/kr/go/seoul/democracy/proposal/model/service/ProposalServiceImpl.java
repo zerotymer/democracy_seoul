@@ -25,9 +25,9 @@ public class ProposalServiceImpl implements ProposalService {
 	}
 	
 	@Override
-	public List<Proposal> selectAllList(int curPage, int recordCountPage) {
+	public ArrayList<Proposal> selectAllList(int currentPage, int recordCountPage) {
 		// TODO Auto-generated method stub
-		return pDAO.selectList(curPage,recordCountPage);
+		return pDAO.selectList(currentPage,recordCountPage);
 	}
 
 	@Override
@@ -63,6 +63,12 @@ public class ProposalServiceImpl implements ProposalService {
 	@Override
 	public int commentTotalCount(int proposalNo) {
 		return pDAO.commentTotalCount(proposalNo);
+	}
+
+	@Override
+	public int listTotalCount() {
+		// TODO Auto-generated method stub
+		return pDAO.listTotalCount();
 	}
 
 
