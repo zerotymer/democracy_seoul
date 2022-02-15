@@ -21,4 +21,31 @@
 		FROM SUGGESTION
 		WHERE suggest_no = #{suggestNo}
 	</select>
+	<select id="doneSuggestion" resultType="hashmap" >
+		SELECT
+			suggest_no as BOARDNO,
+			'suggest' as CATEGORY,
+			suggest_title as TITLE,
+			suggest_content as CONTENT,
+			TO_CHAR(suggest_start, 'YYYY-MM-DD') as STARTDATE,
+			TO_CHAR(suggest_end, 'YYYY-MM-DD') as ENDDATE,
+			NVL(HIT_COUNT, 0) as HITCOUNT,
+			NVL("COMMENTS", 0) as COMMENTCOUNT,
+			NVL("HEARTS", 0) as HEARTCOUNT,
+			'none' as THUMBNAIL
+		FROM SUGGESTION
+			LEFT JOIN SUGGEST_HITS ON (SUGGESTION.suggest_no = SUGGEST_HITS.board_no)
+			LEFT JOIN (
+				SELECT suggest_no, COUNT(*) AS "COMMENTS"
+				FROM SUGGEST_COMMENT
+				GROUP BY suggest_no) USING (suggest_no)
+			LEFT JOIN (
+				SELECT suggest_no, COUNT(*) AS "HEARTS"
+				FROM SUGGEST_COMMENT
+				WHERE comment_heart = 'Y'
+				GROUP BY suggest_no) USING (suggest_no)
+		WHERE suggest_del_yn = 'N'
+			AND SUGGEST_END <![CDATA[<]]> CURRENT_DATE
+		ORDER BY suggest_date DESC
+	</select>
 </mapper>

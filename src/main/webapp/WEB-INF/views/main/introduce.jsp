@@ -46,7 +46,7 @@
                                 <li class="menuitem">
                                     <a>결과보기</a>
                                     <ul class="submenu">
-                                        <li><a href="">제안결과</a></li>
+                                        <li><a href="/suggest2/listExpired.do">제안결과</a></li>
                                         <li><a href="">공론결과</a></li>
                                     </ul>
                                 </li>
@@ -61,7 +61,7 @@
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">서울시민회의</a>
+                                    <a>서울시민회의</a>
                                     <ul class="submenu">
                                         <li><a href="/main/introduce.do">서울시민회의 <wbr/>소개</a></li>
                                         <li><a href="/board/seoulNews.do">서울시민회의 <wbr/>소식</a></li>

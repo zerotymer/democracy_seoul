@@ -205,24 +205,20 @@ Content-Session: 글작성 버튼
     padding: 6px 18px;
 
 }
-
 .frame--header .contents--textarea {
     flex: 1 0 auto;
 }
-
 .frame--header .contents--btns {
     flex: 0 0 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
 .frame--header .contents--btns .btn {
     width: 180px;
     height: 46px;
     border-radius: 6px;
 }
-
 .frame--header .contents-tag {
     display: flex;
     flex-flow: row nowrap;
@@ -296,4 +292,11 @@ Content-Session: 글작성 버튼
 }
 
 
-
+.card-container .card-item {
+    height: 460px;
+}
+.card-container .card-item .icons {
+    position: absolute;
+    left: 0;
+    bottom: 88px;
+}

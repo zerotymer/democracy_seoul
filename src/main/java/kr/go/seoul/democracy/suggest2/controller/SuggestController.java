@@ -6,15 +6,14 @@ import kr.go.seoul.democracy.suggest2.model.vo.Suggest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 public class SuggestController {
@@ -28,6 +27,17 @@ public class SuggestController {
     }
 
     /// METHODs
+
+    /**
+     * 게시글(제안)을 작성하기 위한 페이지로 이동한다.
+     * @param response
+     * @param member 현재 로그인한 사용자 정보
+     * @param suggestNo 수정할 게시글 번호. 0(기본값) 일 경우 새로운 글을 작성한다.
+     * @param mav
+     * @return
+     * @throws IOException
+     * @author 신현진
+     */
     @RequestMapping(value="/suggest2/writePost.do", method=RequestMethod.GET)
     public ModelAndView moveNewPostPage(HttpServletResponse response,
                                         @SessionAttribute("user") Member member,
@@ -60,7 +70,15 @@ public class SuggestController {
         mav.setViewName("suggest2/suggestForm");
         return mav;
     }
-    
+
+    /**
+     * 게시글(제안)을 수정한다.
+     * @param response
+     * @param member 현재 로그인한 사용자 정보
+     * @param suggest 수정할 게시글 정보
+     * @throws IOException
+     * @author 신현진
+     */
     @RequestMapping(value="/suggest2/update.do", method=RequestMethod.POST)
     public void createPost(HttpServletResponse response,
                                    @SessionAttribute("user") Member member,
@@ -83,5 +101,46 @@ public class SuggestController {
         else out.println("<script>alert('저장에 실패하였습니다.'); history.back();</script>");
         out.close();
     }
+
+    /**
+     * 게시글 목록(제안-완료)을 조회한다.
+     * @param response
+     * @param mav
+     * @return
+     * @throws IOException
+     * @author 신현진
+     */
+    @RequestMapping(value="/suggest2/listExpired.do", method=RequestMethod.GET)
+    public ModelAndView moveDoneListPage(HttpServletResponse response,
+                                         @RequestParam(defaultValue = "1") int currentPage,
+                                         @RequestParam(defaultValue = "10") int pageSize,
+                                         ModelAndView mav) throws IOException {
+
+        mav.addObject("list", service.selectDonePost(currentPage, pageSize));
+        mav.addObject("currentPage", currentPage);
+        mav.addObject("pageSize", pageSize);
+        mav.setViewName("suggest2/suggestList");
+        return mav;
+    }
+
+    /**
+     * 게시글 목록(제안-완료)을 조회한다.
+     * @param response
+     * @param currentPage
+     * @param pageSize
+     * @param mav
+     * @return
+     * @throws IOException
+     * @author 신현진
+     */
+    @ResponseBody
+    @RequestMapping(value="/suggest2/listExpired.ajax", method=RequestMethod.GET)
+    public ArrayList<HashMap<String, Object>> moveDoneListPage(HttpServletResponse response,
+                                               @RequestParam(defaultValue = "1") int currentPage,
+                                               @RequestParam(defaultValue = "10") int pageSize) throws IOException {
+
+        return service.selectDonePost(currentPage, pageSize);
+    }
+
 
 }
