@@ -217,7 +217,7 @@
 						 console.log("success");
 						 const checkNum = data;
 						 const m= document.getElementById('emailRe').value;
-						 console.log(checkNum)
+						 console.log(checkNum);
 						 if(m==checkNum){
 							 val =true;
 							 alert("일치");
