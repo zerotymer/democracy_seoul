@@ -258,7 +258,7 @@
 					<label for="email" class="tit-label">이메일</label><br>
 					<input type="email" id="email" class="input-style" name="email" placeholder="이메일"><button type="button" onclick='sendEmail()'>인증하기</button><br>	
 					<span id="emailCheck" class="check-msg"></span><br>				
-				    <input type="text" class="input-style" id="emailRe" name="emailRe" onchange="emailCheck()"  placeholder="이메일 인증번호"><br>
+				    <input type="text" class="input-style" id="emailRe" name="emailRe"   placeholder="이메일 인증번호"><br>
 				    <button type="button" onclick='checkNum()'>인증번호 확인</button><br>		
 					
 		

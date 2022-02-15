@@ -152,7 +152,10 @@ public class MemberController {
 		System.out.println("로그인 성공");
 		HttpSession session = request.getSession();
 		session.setAttribute("user",m);
-		return "redirect:/";
+		model.addAttribute("msg","로그인 성공하였습니다.");
+		model.addAttribute("location","redirect:/");
+		return "member/msg";
+		//return "redirect:/";
 		//return "member/memberLogin";
 		//return "redirect:/member/goMyPage.do";
 	}else {
@@ -228,6 +231,7 @@ public class MemberController {
 	@ResponseBody
 	public String ajax(HttpServletRequest request) {
 
+		System.out.println("get.do 호출");
 	    HttpSession session = request.getSession();
 	    String c =(String)session.getAttribute("checkNum");
 		return c;
