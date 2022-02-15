@@ -43,16 +43,17 @@ public class AdminNoticeDAO {
 		return recordTotalCount;
 	}
 
-	public int insertNoticeWrite(AdminNotice adminNotice) {
+	public int insertNoticeWrite(AdminNotice an) {
 		
 		//HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		//map.put("noticeTitle", noticeTitle);
 		//map.put("noticeContent", noticeContent);
 		
-		System.out.println(adminNotice);
+		System.err.print(an);
+		System.out.println(an);
 		
-		return sqlSession.insert("notice.insertNoticeWrite", adminNotice);
+		return sqlSession.insert("notice.insertNoticeWrite", an);
 	}
 	
 

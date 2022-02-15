@@ -87,24 +87,27 @@ public class AdminNoticeController {
 	 * Description : 공지사항 글 작성 
 	 */
 	@RequestMapping(value="/notice/noticeWrite.do")
-	public ModelAndView noticeWrite(//@RequestParam String noticeContent,
-							  		//@RequestParam String noticeTitle,
-									AdminNotice adminNotice,
+	public ModelAndView noticeWrite(@RequestParam int noticeNo,
+									@RequestParam String noticeTitle,
+									@RequestParam String noticeContent,
 							  		ModelAndView mav)
 	{
-		int result = nService.insertNoticeWrite(adminNotice);
+		AdminNotice an = new AdminNotice();
+		an.setNoticeNo(noticeNo);
+		an.setNoticeTitle(noticeTitle);
+		an.setNoticeContent(noticeContent);
 		
-		String location = "notice/allMemberList.do";
+		int result = nService.insertNoticeWrite(an);
 		
 		if(result>0)
 		{
 			mav.addObject("noticeMsg", "작성이 완료되었습니다");
-			mav.addObject("location", location);
+			mav.addObject("location", "notice/noticeBoardPage");
 			
 		}else {
 			
 			mav.addObject("noticeMsg", "작성에 실패하였습니다");
-			mav.addObject("location", location);
+			mav.addObject("location", "notice/noticeBoardPage");
 		}
 		
 		mav.setViewName("notice/noticeMsg"); //return 대신
