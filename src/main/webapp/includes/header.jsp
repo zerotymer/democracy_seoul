@@ -70,7 +70,7 @@
                     <button class="btn invert logoutbtn" onclick="location.replace('/member/logout.do');"></button>
                 </li>
             </c:when>
-            <c:when test="${ sessionScope.admin == null }" >
+            <c:when test="${ sessionScope.admin != null }" >
                 <li class="logout">
                     <button class="btn admin logoutbtn" onclick="location.replace('/admin/adminLogout.do');"></button>
                 </li>
