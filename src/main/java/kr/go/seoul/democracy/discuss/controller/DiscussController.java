@@ -108,11 +108,12 @@ public class DiscussController {
 		
 		HttpSession session=request.getSession();
 		Member user=(Member)session.getAttribute("user");
+		HashMap<String, Object> comment=null;
 		if(user!=null) {
 			String userId=user.getUserId();
-			HashMap<String, Object> comment=dService.myComment(discussNo,userId);
-			if(comment!=null) mav.addObject("my",comment);
+			comment=dService.myComment(discussNo,userId);
 		}
+		if(comment!=null) mav.addObject("my",comment);
 		
 		if(discuss!=null) mav.setViewName("discuss/post"); //해당 게시글을 찾아 게시글 페이지로 이동
 		else mav.setViewName("discuss/error"); //해당 게시글을 찾지 못했을 경우 에러 페이지로 이동
@@ -149,12 +150,12 @@ public class DiscussController {
 	}
 	
 	//댓글 작성
-	@RequestMapping(value="/discuss/writeComment.do", method = RequestMethod.GET)
-	public ModelAndView writeComment(ModelAndView mav,
-									@SessionAttribute Member user,
-									@RequestParam int discussNo,
-									@RequestParam String commentContent,
-									@RequestParam String vote) {
+	@ResponseBody
+	@RequestMapping(value="/discuss/writeComment.ajax", method = RequestMethod.GET)
+	public int writeComment(@SessionAttribute Member user,
+							@RequestParam int discussNo,
+							@RequestParam String commentContent,
+							@RequestParam String vote) {
 		
 		String userId=user.getUserId();
 		char commentVote=vote.charAt(0);
@@ -164,13 +165,10 @@ public class DiscussController {
 		comment.put("userId",userId);
 		comment.put("commentContent",commentContent);
 		comment.put("commentVote",commentVote);
-		
+
 		int result=dService.writeComment(comment);
 		
-		if(result>0) mav.addObject("msg","댓글 작성 완료");
-		else mav.addObject("msg","댓글 작성 실패");
-		
-		return mav;
+		return result;
 	}
 	
 	//시민토론 게시글 작성 폼으로 이동(jsp)

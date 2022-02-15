@@ -84,6 +84,7 @@
 		on (userid=#{userId})
 		when matched then
 		    update set comment_content=#{commentContent},
+		    		   comment_vote=#{commentVote},
 		               comment_date=current_date
 		when not matched then
 		    insert (discuss_no,comment_no,userid,comment_content,comment_vote,comment_date)
