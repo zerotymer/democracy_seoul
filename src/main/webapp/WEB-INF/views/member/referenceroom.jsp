@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>공지사항</title>
+<title>자료실</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">    
@@ -29,21 +29,21 @@
       <!-- header -->
 
       <div id="content">
-         <div class="box-title">
+            <div class="box-title">
             <p class="tit-small"></p>
-            <p class="tit-big">공지사항</p>
+            <p class="tit-big">자료실</p>
          </div>
          
          <div class="notice-top">
-         	 <div class="box-button">
+         	    <div class="box-button">
 				<button class="btn-notice">
-					<a href="/board/goNoticeNewslist.do">공지사항</a>
+				<a href="/board/referenceList.do">자료실</a>
 				</button>
 			 </div>
 		 </div>
 		<div class="area-notice">
 			<div class="box-search">
-				<form action="/board/noticeNewsListSearch.do" method="get"><!--공지사항 검색기능-->
+				<form action="/board/referenceSearch.do" method="get"><!--공지사항 검색기능-->
 					<div class="select-search">
 						<select name="type">
 							<option value="subject">글제목</option>
@@ -73,9 +73,9 @@
 			       	 <c:forEach items="${requestScope.list}" var="item" varStatus="i">	       				
 			            <tr>
 			                <td>${i.count}</td>
-			                <td><div class="text-ellipsis subject"><a href="/board/goNoticeNewsDetail.do?noticeNo=${item.noticeNewsNo}&currentNo=${currentNo}">${ item.noticeNewsTitle }</a></div></td><!-- 누르면 이동하게 -->
+			                <td><div class="text-ellipsis subject"><a href="/board/referenceDetail.do?referNo=${item.referNo}&currentNo=${currentNo}">${ item.referTitle }</a></div></td><!-- 누르면 이동하게 -->
 			                <td>0</td>
-			                <td>${item.noticeNewsDate }</td>
+			                <td>${item.referDate }</td>
 			               
 			            </tr>
 			          </c:forEach>
@@ -86,17 +86,17 @@
                     <ul class="pagination justify-content-center">
                     	<c:if test="${ preNavi > 0 }">
 	                        <li class="page-item">
-	                            <a class="page-link" href="/board/goNoticeNews.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
+	                            <a class="page-link" href="/board/referenceList.do?currentPage=${ preNavi }" tabindex="-1" aria-disabled="true"><<</a> <!-- a href=안이 맞나 확인하기 -->
 	                        </li>
                         </c:if>
                         <c:forEach items="${ requestScope.navi }" var="m" varStatus="i">
 	                        <li class="page-item">
-	                        	<a class="page-link" href="/board/goNoticeNews.do?currentPage=${ m }">${ m }</a>
+	                        	<a class="page-link" href="/board/referenceList.do?currentPage=${ m }">${ m }</a>
 	                        </li>
                         </c:forEach>
                         <c:if test="${ nextNavi > 0 }">
 	                        <li class="page-item">
-	                            <a class="page-link" href="/board/goNoticeNews.do?currentPage=${ nextNavi }">>></a>
+	                            <a class="page-link" href="/board/referenceList.do?currentPage=${ nextNavi }">>></a>
 	                        </li>
                         </c:if>
                     </ul>
