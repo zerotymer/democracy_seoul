@@ -187,7 +187,6 @@
         <div class="board">
             <div class="board_content">
 				<form action="/notice/noticeWrite.do" method="post">
-					<input type="hidden" name="noticeNo"/>
 			 		<input type="text" name="noticeTitle" placeholder="제목을 작성하세요"/>
 			    	<textarea name="noticeContent" id="editor" placeholder="내용을 작성하세요"></textarea>
 			    	<input type="submit" value="작성"/>

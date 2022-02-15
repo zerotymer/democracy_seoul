@@ -189,8 +189,10 @@
 				<form action="/notice/noticeUpdate.do" method="post">
 					<input type="hidden" name="noticeNo" value="${requestScope.adminNotice.noticeNo }"/>
 			 		<input type="text" name="noticeTitle" value="${requestScope.adminNotice.noticeTitle}" size="124"/>
+			 		<hr>
 			    	<textarea name="noticeContent" id="editor">${requestScope.adminNotice.noticeContent}</textarea>
-			    	<input type="submit" value="수정"/> <a href="/notice/noticeDelete.do"><button>삭제</button></a>
+			    	<input type="submit" value="수정"/> 
+			    	<button type="button"><a href="/notice/noticeDelete.do?noticeNo=${ requestScope.adminNotice.noticeNo }">삭제</a></button>
 			    </form>
 			    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 			    <script>

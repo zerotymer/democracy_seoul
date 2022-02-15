@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.adminNotice.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -24,13 +25,7 @@ public class AdminNoticeController {
 	
 	@Autowired
 	private AdminNoticeService nService;
-	
-	//공지사항 작성한 목록들 보이게 = noticeList(boardList똑같)
-	//공지사항 작성 = boardWrite
-	//공지사항 수정 = boardUpdate
-	//(1차)공지사항 삭제 = boardDelete
-	//(2차)공지사항 체크해서 없애기(여러개 선택해서 삭제할 수 있도록)
-	//(3차)공지사항 검색
+	private String noticeTitle;
 	
 	/**
 	 * 작성자 : 김영주
@@ -87,13 +82,11 @@ public class AdminNoticeController {
 	 * Description : 공지사항 글 작성 
 	 */
 	@RequestMapping(value="/notice/noticeWrite.do")
-	public ModelAndView noticeWrite(@RequestParam int noticeNo,
-									@RequestParam String noticeTitle,
+	public ModelAndView noticeWrite(@RequestParam String noticeTitle,
 									@RequestParam String noticeContent,
 							  		ModelAndView mav)
 	{
 		AdminNotice an = new AdminNotice();
-		an.setNoticeNo(noticeNo);
 		an.setNoticeTitle(noticeTitle);
 		an.setNoticeContent(noticeContent);
 		
@@ -102,12 +95,12 @@ public class AdminNoticeController {
 		if(result>0)
 		{
 			mav.addObject("noticeMsg", "작성이 완료되었습니다");
-			mav.addObject("location", "notice/noticeBoardPage");
+			mav.addObject("location", "/notice/allMemberList.do");
 			
 		}else {
 			
 			mav.addObject("noticeMsg", "작성에 실패하였습니다");
-			mav.addObject("location", "notice/noticeBoardPage");
+			mav.addObject("location", "/notice/allMemberList.do");
 		}
 		
 		mav.setViewName("notice/noticeMsg"); //return 대신
@@ -129,7 +122,7 @@ public class AdminNoticeController {
 	/**
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.12
-	 * Description : 공지사항을 볼 수 있는 페이지
+	 * Description : 공지사항 view 페이지
 	 */
 	@RequestMapping(value="/notice/noticeViewPage.do")
 	public ModelAndView noticeViewPage(@RequestParam int noticeNo,
@@ -170,7 +163,7 @@ public class AdminNoticeController {
 		}
 		
 		
-		return "notice/noticeCkeditorView";
+		return "notice/noticeBoardPage";
 		
 	}
 	
@@ -179,48 +172,27 @@ public class AdminNoticeController {
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.14
 	 * Description : 공지사항 삭제 페이지
+	 * @throws IOException 
 	 */
-	@RequestMapping(value="/notice/noticeDelete.do", method = RequestMethod.POST)
-	public String noticeDelete(@RequestParam int noticeNo,
-				   			   @RequestParam String noticeTitle,
-				   			   @RequestParam String noticeContent,
-				   			   Model model)
+	@RequestMapping(value="/notice/noticeDelete.do", method = RequestMethod.GET)
+	public void noticeDelete(HttpServletResponse response,
+							  @RequestParam int noticeNo) throws IOException
 	{
+		
 		AdminNotice an = new AdminNotice();
 		an.setNoticeNo(noticeNo);
-		an.setNoticeTitle(noticeTitle);
-		an.setNoticeContent(noticeContent);
 		
 		int result = nService.noticeDelete(an);
+		response.setContentType("text/html;charset=UTF-8"); //인코딩
+		PrintWriter out = response.getWriter();
 		
 		if(result>0)
 		{
-			model.addAttribute("noticeMsg", noticeTitle+" 삭제 완료");
-		
+			out.println("<script>alert('공지사항 삭제 완료');location.replace('/notice/allMemberList.do');</script>");
 		}else {
-		
-			model.addAttribute("noticeMsg", noticeTitle+" 삭제 실패");
+			out.println("<script>alert('공지사항 삭제 실패');location.replace('/notice/allMemberList.do');</script>");
 		}
-		
-		
-		return "notice/noticeBoardPage";
-	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }

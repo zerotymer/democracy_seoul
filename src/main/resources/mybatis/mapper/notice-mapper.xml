@@ -65,14 +65,14 @@
 			notice_no = #{noticeNo}
 	</update>
 	
-	<!-- 공지사항 삭제 버튼 (한 개) -->
+	<!-- 공지사항 삭제 버튼 (view 안에 있는) -->
 	<update id="noticeDelete" parameterType="notice">
 		UPDATE
 			NOTICE
 		SET
 			notice_del_yn = 'Y'
 		WHERE 
-			notice_no = #{noticeNo} AND notice_title = #{noticeTitle} AND notice_content = #{noticeContent}
+			notice_no = #{noticeNo} 
 	</update>
 	
 </mapper>
