@@ -102,7 +102,20 @@
 .card-item .icons .auto-hidden+span {
     display: none;
 }
-
+.card-item.more {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.card-item.more .morebtn{
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    background-image: var(--IMAGE-URL-MORE);
+    background-color: white;
+    opacity: 0.3;
+}
 
 @media screen and (max-width: 1024px) {
     content {

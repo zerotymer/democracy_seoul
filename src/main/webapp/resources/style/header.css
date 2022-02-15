@@ -165,7 +165,7 @@ section {
 .gnb .submenu {
     display: none;
     position: relative;
-    margin-top: 28px;
+    margin-top: 20px;
     z-index: 99;
     overflow: visible;
     width: 160px;
