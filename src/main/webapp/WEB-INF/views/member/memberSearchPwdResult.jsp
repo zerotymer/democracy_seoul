@@ -55,7 +55,7 @@
 			<div class="box-result">
 				<p>비밀번호 재설정</p>
 				<form action="/member/memberUpdatePassword.do" onsubmit="return Validation();" method="post">
-				    <input type="text" class="input-style" id="userId" name="userId" value="${sessionScope.user.userId }" readonly/><br>					
+				    <input type="text" class="input-style" id="userId" name="userId" value="${userId }" readonly/><br>					
 					<input type="password" class="input-style" id="userPwd" name="userPwd" placeholder="비밀번호 입력"> <br>
 					<input type="password" class="input-style" id="userPwdRe" name="userPwdRe" placeholder="비밀번호 확인"> <br>
 					<input type="submit" class="btn-login" value="비밀번호 재설정">

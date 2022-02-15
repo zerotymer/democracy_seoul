@@ -59,7 +59,7 @@
 	<aop:config>
 		<!-- common Pointcut -->
 		<aop:pointcut id="allPointCut" 							expression="execution(* kr..*ServiceImpl.*(..))" />
-		<aop:pointcut id="allHashMapPointCut" 					expression="execution(* kr..service.*(java..HashMap))" />
+		<aop:pointcut id="allHashMapPointCut" 					expression="execution(* kr..service.*.*(java..HashMap))" />
 		<aop:pointcut id="testPointCut" 						expression="execution(* kr..service.TestServiceImpl.*(..))" />
 
 		<!-- user EncryptAdvice aspect -->

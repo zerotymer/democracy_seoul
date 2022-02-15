@@ -119,10 +119,11 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public int myPageUpdatePassword(Map<String, String> passwordMap) {
+	public int myPageUpdatePassword(HashMap<String, String> map) {
 		
-		
-		return mDAO.myPageUpdatePassword(passwordMap);
+		System.out.println("[MemberService] - memberUpdateEmail 메소드 호출"+map);
+
+		return mDAO.myPageUpdatePassword(map);
 
 	}
 
@@ -130,7 +131,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int updateMemberWithdraw(HashMap<String, Object> map) {
-		
 		
 		return mDAO.updateMemberWithdraw(map);
 
@@ -151,9 +151,17 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int memberUpdateEmail(Map<String, String> Map) {
-		System.out.println("[MemberService] - resetPassword 메소드 호출");
+		System.out.println("[MemberService] - memberUpdateEmail 메소드 호출");
 
 		return mDAO.memberUpdateEmail(Map);
+	}
+
+
+
+	@Override
+	public Member selectMemberById(String userId) {
+		// TODO Auto-generated method stub
+		return mDAO.selectMemberById(userId);
 	}
 
 

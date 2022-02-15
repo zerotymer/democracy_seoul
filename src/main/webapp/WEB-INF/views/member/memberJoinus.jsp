@@ -214,7 +214,7 @@
 						console.log("error");
 					},
 					success : function(data) {
-						console.log("success");
+						 console.log("success");
 						 const checkNum = data;
 						 const m= document.getElementById('emailRe').value;
 						 console.log(checkNum)

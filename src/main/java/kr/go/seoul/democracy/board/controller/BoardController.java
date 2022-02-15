@@ -38,7 +38,7 @@ public class BoardController {
 	@Autowired
 	private ReferService rService;
 	
-	//공지사항 목록으로 이동기능 
+	//공지사항 목록으로 이동기능 (남진구)
 	@RequestMapping(value="/board/goNoticeNews.do")
 	public ModelAndView noticeBoard(ModelAndView mv,@RequestParam(defaultValue="1") int currentPage) throws Exception {
 		System.out.println("목록 불러오기 정상구동");
@@ -49,15 +49,13 @@ public class BoardController {
 		System.out.println(pageTotalCount);
 		int startNavi = currentPage - (currentPage - 1) % naviSize;
 		int endNavi = startNavi + naviSize - 1;
-		System.out.println(startNavi);
-		System.out.println(endNavi);
 		endNavi = endNavi < pageTotalCount ? endNavi : pageTotalCount;
 		ArrayList<Integer> navi = new ArrayList<>();
 		for (int i = startNavi; i <= endNavi; i++) {
 			navi.add(i);
 		}
 		mv.addObject("list",list);
-		mv.addObject("currentNo",currentPage);
+		mv.addObject("currentNo",currentPage);//
 		mv.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
@@ -131,11 +129,14 @@ public class BoardController {
 			navi.add(i);
 		}
 		mv.addObject("list",list);
+		mv.addObject("keyword",keyword);
+		mv.addObject("type",type);
+		mv.addObject("currentNo",currentPage);//
 		mv.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/noticeNews");
+		mv.setViewName("board/noticeSerchNews");
 	
 		return mv;
 		
@@ -222,11 +223,14 @@ public class BoardController {
 				navi.add(i);
 			}
 			mv.addObject("list",list);
+			mv.addObject("keyword",keyword);
+			mv.addObject("type",type);
+			mv.addObject("currentNo",currentPage);//
 			mv.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
 			mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 			mv.addObject("navi", navi);
 			mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-			mv.setViewName("board/noticeCampaign");
+			mv.setViewName("board/noticeSearchCampaign");//
 		
 			return mv;
 			
@@ -317,11 +321,14 @@ public class BoardController {
 			navi.add(i);
 		}
 		mv.addObject("list",list);
+		mv.addObject("keyword",keyword);
+		mv.addObject("type",type);
+		mv.addObject("currentNo",currentPage);//
 		mv.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/seoulNews");
+		mv.setViewName("board/seoulSearchNews");
 	
 		return mv;
 		
@@ -413,11 +420,14 @@ public class BoardController {
 			navi.add(i);
 		}
 		mv.addObject("list",list);
+		mv.addObject("keyword",keyword);
+		mv.addObject("type",type);
+		mv.addObject("currentNo",currentPage);//
 		mv.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0); //0은 오류 생겼을 때, 
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/referenceroom");
+		mv.setViewName("board/referenceroomSearch");
 	
 		return mv;
 		
