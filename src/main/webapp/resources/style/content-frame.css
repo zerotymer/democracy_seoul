@@ -293,10 +293,16 @@ Content-Session: 글작성 버튼
 
 
 .card-container .card-item {
-    height: 460px;
+    height: 440px;
 }
 .card-container .card-item .icons {
     position: absolute;
     left: 0;
     bottom: 88px;
+}
+
+section .image {
+    max-width: 1024px;
+    width: 70vw;
+    margin: 0 auto;
 }
