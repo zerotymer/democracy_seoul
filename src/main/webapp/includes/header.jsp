@@ -61,20 +61,29 @@
         <li class="search">
             <button class="btn invert searchbtn" onclick="location.replace('/main/search.do');"></button>
         </li>
-        <c:if test="${ sessionScope.user == null }">
-            <li class="login">
-                <button class="btn invert loginbtn" onclick="location.replace('/member/goLogin.do');"></button>
-            </li>
-            <li>${ sessionScope.user }</li>
-        </c:if>
-        <c:if test="${ sessionScope.user != null}">
-            <li class="logout">
-                <button class="btn invert accountbtn" onclick="location.replace('/member/goMypage.do');"></button>
-            </li>
-            <li class="mypage">
-                <button class="btn invert logoutbtn" onclick="location.replace('/member/logout.do');"></button>
-            </li>
-        </c:if>
+        <c:choose>
+            <c:when test="${ sessionScope.user != null}" >
+                <li class="mypage">
+                    <button class="btn invert accountbtn" onclick="location.replace('/member/goMypage.do');"></button>
+                </li>
+                <li class="logout">
+                    <button class="btn invert logoutbtn" onclick="location.replace('/member/logout.do');"></button>
+                </li>
+            </c:when>
+            <c:when test="${ sessionScope.admin == null }" >
+                <li class="logout">
+                    <button class="btn admin logoutbtn" onclick="location.replace('/admin/adminLogout.do');"></button>
+                </li>
+                <li class="mypage">
+                    <button class="btn admin accountbtn" onclick="location.replace('/member/logout.do');"></button>
+                </li>
+            </c:when>
+            <c:otherwise>    
+                <li class="login">
+                    <button class="btn invert loginbtn" onclick="location.replace('/member/goLogin.do');"></button>
+                </li>
+            </c:otherwise>
+        </c:choose>
         <li class="menubtn">
             <button id="menubtn" class="btn invert menubtn"></button>
         </li>
