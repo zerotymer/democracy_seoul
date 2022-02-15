@@ -119,3 +119,22 @@ padding :15px;
 
 } 
 
+#commentOne {
+	 	border:1px solid  var(--COLOR-BORDER);
+		min-height : 80px;
+		padding :30px;
+}
+
+.date {
+	margin-left: 0px;
+	margin-bottom: 10px;
+	font-size : 12px;
+}
+
+.more{
+	margin : 0 50%;
+	width : 80px;
+	hight : 100px;
+	background-color: white;
+	
+}	

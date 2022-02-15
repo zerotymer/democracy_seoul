@@ -155,7 +155,7 @@
         
          
         	<c:forEach items="${commentList}" var="item">
-        	<div>
+        	<div id=commentOne>
 	         	<input type="hidden" name="proposalNo" class="proposalNo" value="${item.PROPOSALNO }" />
 	            <div class="userId">${item.USERID}</div>
 	            <div class="date">${item.REGDATE}</div> 
