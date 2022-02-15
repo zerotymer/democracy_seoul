@@ -65,7 +65,7 @@
 			NVL(HIT_COUNT, 0) as HITCOUNT,
 			NVL("COMMENTS", 0) as COMMENTCOUNT,
 			'0' as HEARTCOUNT,
-			proposal_thumbnail_path as THUMBNAIL
+			proposal_thumbnail as THUMBNAIL
 		FROM (
 			SELECT *
 			FROM PROPOSAL
