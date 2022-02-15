@@ -66,7 +66,7 @@ public class AdminController {
 					   @SessionAttribute Admin admin)
 	{
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/admin/adminLogin.do";
 	}
 	
 	
