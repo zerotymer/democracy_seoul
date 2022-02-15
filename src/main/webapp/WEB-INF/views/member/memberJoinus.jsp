@@ -345,7 +345,7 @@
 							$("#userId").val('');
 							return false;
 						}else{
-							$("#msg").html("중복되지 않는 아이디입니다.").css("color","blue");
+							$("#msg").html("사용 가능한 아이디입니다").css("color","blue");
 
 						}
 						
@@ -385,7 +385,7 @@
 							$("#nick").val('');
 							return false;
 						}else{
-							$("#nickCheck").html("중복되지 않는 닉네임입니다.").css("color","blue");
+							$("#nickCheck").html("사용 가능한  닉네임입니다.").css("color","blue");
 
 						}
 						
@@ -424,7 +424,7 @@
 							$("#email").val('');
 							return false;
 						}else{
-							$("#emailCheck").html("중복되지 않는 이메일입니다.").css("color","blue");
+							$("#emailCheck").html("사용 가능한  이메일입니다.").css("color","blue");
 
 						}
 						
