@@ -5,6 +5,8 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,10 +45,10 @@
     </style>
 </head>
 <body>
-  <header>
-		<%@ include file="/includes/header.jsp"%>
-	</header>
-  
+    <header>
+        <%@ include file="/includes/header.jsp" %>
+    </header>
+
     <section>
         <div class="content-frame">
             <div class="frame-image">
@@ -140,19 +142,7 @@
                <%--  </c:if> --%>
                 </div>
             </div>
-				<script>
-					 
-					//글쓰기 폼으로 이동하게 하는 함수
-					$(document).ready(function(){    
-					        $("#btnWrite").click(function(){
-					            location.href="/proposal/proposalWrite.do";
-					        });
-					});
-					 
-				</script>
-					 
-
-
+	
 
             <div class="contents-search">
                 <!-- 검색 위치 -->
@@ -190,7 +180,7 @@
 		                    <object class="icon calendar auto-hidden"></object>
 		                    <span> ${proposal.proposalStart } ~ ${proposal.proposalEnd }</span>
 	                    </div>
-	                    <a class="detail-btn" href="/proposal/post.do?proposalNo=${proposal.proposalNo}">
+	                    <a class="detail-btn" href="/proposal/post2.do?proposalNo=${proposal.proposalNo}">
                         			결과 보기 
                    		</a>
       				</div>
@@ -199,20 +189,20 @@
                   <div id="page_wrap">
                         <ul id="page_ul">
                         <c:if test="${ preNavi > 0}">
-                           <li><a href='/proposal/allList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                           <li><a href='/proposal/allList2.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
                         </c:if>
                         <c:forEach items="${ navi }" var="i">
                            <c:choose>
                               <c:when test="${i==currentPage}">
-                                 <li><a id="page_active" href='/proposal/allList.do?currentPage=${i}'>${i}</a></li>
+                                 <li><a id="page_active" href='/proposal/allList2.do?currentPage=${i}'>${i}</a></li>
                               </c:when>
                               <c:otherwise>
-                                 <li><a id="page_inactive" href='/proposal/allList.do?currentPage=${i}'>${i}</a></li>
+                                 <li><a id="page_inactive" href='/proposal/allList2.do?currentPage=${i}'>${i}</a></li>
                               </c:otherwise>
                               </c:choose>
                         </c:forEach>
                         <c:if test="${ nextNavi } != 0">
-                           <li><a href='/proposal/allList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                           <li><a href='/proposal/allList2.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
                         </c:if>
                         </ul>
                         
@@ -221,21 +211,7 @@
             </div>
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+       
             
             
 						<script>
@@ -259,14 +235,7 @@
 				    
 				}); */
 							
-							
-							//글쓰기 폼으로 이동하게 하는 함수
-							$(document).ready(function(){    
-							        $("#proposalTitle").click(function(){
-							            location.href="/proposal/post.do?proposalNo=${proposal.proposalNo}";
-							        });
-							});
-							 
+					
 						</script>
 							
 							 
@@ -283,9 +252,9 @@
         
      
 
-    <footer>
-        <%@ include file="/includes/footer.jsp" %>
-    </footer>
+<footer>
+		<%@ include file="/includes/footer.jsp"%>
+	</footer>
     
     <script src="/resources/script/header.js"></script>
     <script src="/resources/script/content-frame.js"></script>

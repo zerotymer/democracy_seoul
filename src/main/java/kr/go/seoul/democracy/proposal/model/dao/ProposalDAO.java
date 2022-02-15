@@ -23,10 +23,11 @@ public class ProposalDAO {
 	private SqlSessionTemplate sqlSession;//mybatis 사용을 위한 
 
 	//01. 게시글리스트 보기
-	public List<Proposal> selectList(int curPage, int recordCountPage) {
-		int offset = (curPage-1)*recordCountPage; 
-		RowBounds rows = new RowBounds(offset,recordCountPage);
-		return sqlSession.selectList("proposal.selectAllList",null,rows);
+	public ArrayList<Proposal> selectList(int currentPage, int recordCountPage) {
+		int start = (currentPage-1)*recordCountPage; 
+		int end = recordCountPage;
+		RowBounds rows = new RowBounds(start,recordCountPage);
+		return new ArrayList<Proposal>(sqlSession.selectList("proposal.selectAllList",null,rows));
 	}
 	
 	//02. 게시글 상세보기
@@ -69,6 +70,11 @@ public class ProposalDAO {
 	public ArrayList<HashMap<String, Object>> getComment(int proposalNo, int currentCommentPage, int pageSize) {
 		RowBounds rb = new RowBounds((currentCommentPage-1)*pageSize,pageSize);
 		return new ArrayList<HashMap<String,Object>>(sqlSession.selectList("proposal.commentAllList",proposalNo,rb));
+	}
+
+	public int listTotalCount() {
+		int listTotalCount = sqlSession.selectOne("proposal.listTotalCount");
+		return listTotalCount;
 	}
 	
 	 
