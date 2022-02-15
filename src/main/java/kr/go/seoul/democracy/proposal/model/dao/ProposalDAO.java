@@ -77,5 +77,17 @@ public class ProposalDAO {
 		return listTotalCount;
 	}
 	
+	
+	public ArrayList<HashMap<String,Object>> resultList(int currentPage, int recordCountPage) {
+		int start = (currentPage-1)*recordCountPage; 
+		int end = recordCountPage;
+		RowBounds rows = new RowBounds(start,recordCountPage);
+		return new ArrayList<HashMap<String, Object>>(sqlSession.selectList("proposal.resultList",null,rows));
+	}
+	
+	public int resultTotalCount() {
+		int listTotalCount = sqlSession.selectOne("proposal.resultListCount");
+		return listTotalCount;
+	}
 	 
 }
