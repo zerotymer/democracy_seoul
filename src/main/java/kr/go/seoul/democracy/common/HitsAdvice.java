@@ -39,7 +39,7 @@ public class HitsAdvice {
     @Pointcut("execution(kr..Sug kr..service.*.*(int))")
     public void suggestPointCut() {}
 
-    @After("suggestPointCut()")
+    @AfterReturning(pointcut = "suggestPointCut()", returning = "returnObj" )
     public void hitSuggest(Object returnObj) {
         if (!(returnObj instanceof Sug)) return;
 
