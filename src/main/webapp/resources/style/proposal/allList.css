@@ -1,0 +1,32 @@
+.navi-container {
+	width: 200px;
+	margin: 0 auto;
+}
+
+.navi-container .navi--ul {
+	display: flex;
+	flex-flow: row nowrap;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	justify-content: center;
+}
+
+.navi-container .navibtn {
+	width: 35px;
+	height: 35px;
+	border: 1px solid lightgray;
+	text-align: center;
+}
+.navi-container .navibtn a {
+	text-decoration: none;
+	font: 300 16px/35px "Noto Sans KR";
+	color: black;
+}
+.navi-container .navibtn.active {
+	background-color: #f5f5f5;
+}
+
+.navi-container .navibtn:hover {
+	background-color: lightblue;
+}

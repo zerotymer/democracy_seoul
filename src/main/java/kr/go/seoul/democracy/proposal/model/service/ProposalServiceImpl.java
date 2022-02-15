@@ -71,6 +71,16 @@ public class ProposalServiceImpl implements ProposalService {
 		return pDAO.listTotalCount();
 	}
 
+	@Override
+	public ArrayList<HashMap<String, Object>> resultList(int currentPage, int recordCountPage) {
+		return pDAO.resultList(currentPage,recordCountPage);
+	}
+
+	@Override
+	public int resultTotalCount() {
+		return pDAO.resultTotalCount();
+	}
+
 
 	
 
