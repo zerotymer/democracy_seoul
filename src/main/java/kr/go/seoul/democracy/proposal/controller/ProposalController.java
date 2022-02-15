@@ -61,25 +61,63 @@ public class ProposalController {
 	
 	//리스트 불러오기
 	@RequestMapping(value="/proposal/allList.do", method = RequestMethod.GET)
-	public ModelAndView allList(ModelAndView mav,
-			@RequestParam(required=false, defaultValue="1")int curPage
+	public ModelAndView allList(ModelAndView mav,HttpServletRequest request,
+			@RequestParam(required=false, defaultValue="1")int currentPage
 			) throws Exception{
 			
 		int recordCountPage = 9;
-		//int totalCount = pService.commentTotalCount();
+		int naviCountPerPage = 5;
+		int recordTotalCount = pService.listTotalCount();
 		
+		System.out.println(recordTotalCount);
 		
-		List<Proposal> list = pService.selectAllList(curPage,recordCountPage);
+		int pageTotalCount = (int)Math.ceil((double)recordTotalCount/recordCountPage); // 
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;  //5
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi; // 5 > 100 ? 100 : 5
+				
+		System.out.println("startNavi : " + startNavi);
+		System.out.println("endNavi : " + endNavi);
+		
+		ArrayList<Proposal> list = pService.selectAllList(currentPage, recordCountPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}		
+				
+		mav.addObject("recordTotalCount", recordTotalCount);
 		mav.addObject("list",list);
-		mav.addObject("recordCountPage",recordCountPage);
+		//mav.addObject("recordCountPage",recordCountPage);
 		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/recordCountPage));
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		System.out.println(mav);
 		mav.setViewName("proposal/allList");
-		
-		
-		return mav;
-		
-		
+
+		return mav;			
 	}
+	
+	
+	
+	
+	//댓글 리스트더보기
+		@RequestMapping(value="/proposal/getList.ajax", method = RequestMethod.GET)
+		@ResponseBody
+		public ArrayList<HashMap<String,Object>> getList(@RequestParam int proposalNo,
+		@RequestParam(defaultValue="1")int currentPage){
+			
+			int listPageSize=5;
+			ArrayList<HashMap<String, Object>> comment = pService.getComment(proposalNo,currentPage,listPageSize);
+			
+			
+			return comment;
+		}
+		
+		
+	
+	
 	// 게시글 불러오기  
 	@RequestMapping(value="/proposal/post.do", method = RequestMethod.GET)
 	public ModelAndView proposalview(		
@@ -100,20 +138,21 @@ public class ProposalController {
 		return mav;
 	}
 	
-	// 댓글전송
+	// 댓글전송                              
 	@RequestMapping(value="/proposal/writeComment.do", method=RequestMethod.POST)
 	public void comment(@RequestParam int proposalNo,
 			@RequestParam String comment, 
-			@SessionAttribute("user") Member member,
+			
 			HttpServletResponse response) throws Exception{ 
 		
 		ProposalComment pcomment = new ProposalComment();
 		pcomment.setProposalNo(proposalNo);
-		pcomment.setUserId(member.getUserId());
+		//pcomment.setUserId(member.getUserId());
 		pcomment.setCommentContent(comment);
 		System.out.println(pcomment);
 		response.getWriter().println(true);
-		pService.comWrite(pcomment);
+	//	pService.comWrite(pcomment);
+	
 	}
 	
 	//댓글더보기

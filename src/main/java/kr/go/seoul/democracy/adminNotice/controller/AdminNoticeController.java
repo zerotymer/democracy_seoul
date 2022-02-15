@@ -139,12 +139,14 @@ public class AdminNoticeController {
 	 * 작성자 : 김영주
 	 * 작성일 : 2022.02.14
 	 * Description : 공지사항 수정 페이지
+	 * @throws IOException 
 	 */
 	@RequestMapping(value="/notice/noticeUpdate.do", method = RequestMethod.POST)
-	public String noticeUpdate(@RequestParam int noticeNo,
+	public void noticeUpdate(HttpServletResponse response,
+							   @RequestParam int noticeNo,
 							   @RequestParam String noticeTitle,
 							   @RequestParam String noticeContent,
-							   Model model)
+							   Model model) throws IOException
 	{
 		AdminNotice an = new AdminNotice();
 		an.setNoticeNo(noticeNo);
@@ -153,17 +155,16 @@ public class AdminNoticeController {
 		
 		int result = nService.noticeUpdate(an);
 		
+		response.setContentType("text/html;charset=UTF-8"); //인코딩
+		PrintWriter out = response.getWriter();
+		
 		if(result>0)
 		{
-			model.addAttribute("noticeMsg","게시판(공지사항) 수정 완료");
-			
+			out.println("<script>alert('"+noticeTitle+" 게시글 수정 완료');location.replace('/notice/allMemberList.do');</script>");
 		}else {
-			
-			model.addAttribute("noticeMsg", "게시판(공지사항) 수정 실패");
+			out.println("<script>alert('"+noticeTitle+" 게시글 수정 실패');location.replace('/notice/allMemberList.do');</script>");
 		}
 		
-		
-		return "notice/noticeBoardPage";
 		
 	}
 	

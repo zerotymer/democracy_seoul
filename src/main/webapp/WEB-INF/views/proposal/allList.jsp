@@ -4,7 +4,7 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,10 +43,10 @@
     </style>
 </head>
 <body>
-    <header>
-        <%@ include file="/includes/header.jsp" %>
-    </header>
-
+  <header>
+		<%@ include file="/includes/header.jsp"%>
+	</header>
+  
     <section>
         <div class="content-frame">
             <div class="frame-image">
@@ -177,7 +177,7 @@
 		                	<a class="proposalTitle">${proposal.proposalTitle }</a>
 		                </div>
 		                <div class="content">${proposal.proposalContent }</div>
-		                <div class="thumnail">
+		                <div class="thumbnail">
 	                        <img src="${ proposal.proposalThumbnail }" alt="제목" />
 	                    </div>
 		                <div class="icons">
@@ -196,7 +196,48 @@
       				</div>
            		</c:forEach> 
                
+                  <div id="page_wrap">
+                        <ul id="page_ul">
+                        <c:if test="${ preNavi > 0}">
+                           <li><a href='/proposal/allList.do?currentPage=${ preNavi }'><i class='fas fa-chevron-left'></i></a></li>
+                        </c:if>
+                        <c:forEach items="${ navi }" var="i">
+                           <c:choose>
+                              <c:when test="${i==currentPage}">
+                                 <li><a id="page_active" href='/proposal/allList.do?currentPage=${i}'>${i}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a id="page_inactive" href='/proposal/allList.do?currentPage=${i}'>${i}</a></li>
+                              </c:otherwise>
+                              </c:choose>
+                        </c:forEach>
+                        <c:if test="${ nextNavi } != 0">
+                           <li><a href='/proposal/allList.do?currentPage=${ nextNavi }'><i class='fas fa-chevron-right'></i></a></li>
+                        </c:if>
+                        </ul>
+                        
+                   </div>
+               
             </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 						<script>
 						/* 	$(document).ready(function(){
 				    
@@ -227,12 +268,20 @@
 							});
 							 
 						</script>
+							
 							 
-				</script>
-						
-            <div class="contents-navbar"></div>
-        </div>
-    </section>
+	
+	</div>
+	
+	
+	
+</section>
+        
+      
+        
+        
+        
+     
 
     <footer>
         <%@ include file="/includes/footer.jsp" %>
