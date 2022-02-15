@@ -197,7 +197,6 @@
                         <table class="table">
                             <thead>
                             <tr>
-                            	<th scope="col"></th>
                                 <th scope="col">No</th>
                                 <th scope="col">제목</th>
                                 <th scope="col">등록일</th>
@@ -209,8 +208,7 @@
                             <tbody>
                             <c:forEach items="${requestScope.list }" var="n" varStatus="i">
                                 <tr>
-                                    <th scope="row">ㅁ</th>
-                                    <td>${(i.count) + (requestScope.countResult) }</td>
+                                    <td scope="row">${(i.count) + (requestScope.countResult) }</td>
                                     <td>
                                     	<a href="/notice/noticeViewPage.do?noticeNo=${ n.noticeNo }">${n.noticeTitle}</a>
                                     </td>

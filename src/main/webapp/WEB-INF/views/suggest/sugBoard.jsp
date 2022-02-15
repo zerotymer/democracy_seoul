@@ -130,7 +130,7 @@
                     <span>여러분의 의견은 제안해주세요</span>
                 </div>
                 <div class="contents--btns">
-                    <button class="btn suggest" onclick="location.href='suggestwrite.do' ">시민 제안하기</button>
+                    <button class="btn suggest" onclick="location.href='/suggest2/writePost.do' ">시민 제안하기</button>
                 </div>
             </div>
 
@@ -141,7 +141,7 @@
 
             <div class="contents-tag">
                 <!-- 태그 위치 -->
-                <a href="">#하기나에</a>
+                <a href="">#하기나해</a>
                 <a href="">#Summer Night</a>
                 <a href="">#꿈이 뭐야</a>
             </div>
@@ -156,9 +156,9 @@
 		            <div class="card-item survey">
 		                <div class="category"> 제안</div>
 		                <div class="title">
-		                	<a class="sugTitle">${suggest.suggestTitle }</a>
+		                	<a class="sugTitle">${sug.suggestTitle }</a>
 		                </div>
-		                <div class="content">${suggest.suggestContent }</div>
+		                <div class="content">${sug.suggestContent }</div>
 		                
 		                <div class="icons">
 		                    <object class="icon hits auto-hidden"></object>
@@ -168,9 +168,9 @@
 		                    <object class="icon comment"></object>
 		                    <span>10</span>
 		                    <object class="icon calendar auto-hidden"></object>
-		                    <span> ${suggest.suggestStart} ~ ${suggest.suggestEnd}</span>
+		                    <span> ${sug.suggestStart} ~ ${sug.suggestEnd}</span>
 	                    </div>
-	                    <a class="detail-btn" href="/suggest/suggestview.do?sugNum=${suggest.suggestNo}">
+	                    <a class="detail-btn" href="/suggest/suggestview.do?sugNum=${sug.suggestNo}">
                         			결과 보기 
                    		</a>
       				</div>

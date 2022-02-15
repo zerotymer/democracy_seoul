@@ -43,16 +43,17 @@ public class AdminNoticeDAO {
 		return recordTotalCount;
 	}
 
-	public int insertNoticeWrite(AdminNotice adminNotice) {
+	public int insertNoticeWrite(AdminNotice an) {
 		
 		//HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		//map.put("noticeTitle", noticeTitle);
 		//map.put("noticeContent", noticeContent);
 		
-		System.out.println(adminNotice);
+		System.err.print(an);
+		System.out.println(an);
 		
-		return sqlSession.insert("notice.insertNoticeWrite", adminNotice);
+		return sqlSession.insert("notice.insertNoticeWrite", an);
 	}
 	
 
@@ -67,13 +68,7 @@ public class AdminNoticeDAO {
 
 	public int noticeDelete(AdminNotice an) {
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("noticeNo", an.getNoticeNo());
-		map.put("noticeTitle", an.getNoticeTitle());
-		map.put("noticeContent", an.getNoticeContent());
-		
-		return sqlSession.update("notice.noticeDelete", map);
+		return sqlSession.update("notice.noticeDelete", an);
 	}
 
 
