@@ -14,7 +14,9 @@
     <link rel="stylesheet" type="text/css" href="fontawesome-free-5.15.1-web/css/fontawesome.min.css">
 </head>
 <body>
-
+<header>
+		<%@ include file="/includes/header.jsp"%>
+	</header>
 
 
 <div class="content-frame">
@@ -141,7 +143,8 @@
             <input type="hidden" name="proposalNo" class="proposalNo" />
             <div class="userNick" id="userId">${ requestScope.member.user }</div>
             <span class="today"> </span>
-            <textarea class="content" placeholder="댓글을 입력하세요." userId="${requestScope.member.user}" id="comment" style="resize : none; width: 99%; height: 80%; border:0;"></textarea>
+            <textarea class="content" placeholder="댓글을 입력하세요." userId="${requestScope.member.user}" id="comment" style="resize : none; width: 99%; height: 80%; border:0;">
+            </textarea>
             <div align="right">
             <button onclick="addComment();">등록</button>
             </div>
@@ -172,6 +175,10 @@
 	</div>
 </section>
         
+        
+    
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="/resources/script/content-frame.js"></script>
 <script>
@@ -192,11 +199,15 @@
    	    		data:{currentCommentPage: curPage,
    	    		proposalNo:proposalNo},
    	    		success: function(data){
+   	    		
    	    			for(const item of data) {
    	    				insertComment(item);
    	    			}
+   	    			
    	    		}
-   	    	});
+   	    	
+   	    	})
+   	    	
    	    };
    	    
    	    // 값을 data에 저장(for each안에 있는 모든 값들을) 암기하기!!!!! 
@@ -213,17 +224,17 @@
    	    	
    	    	var div2 = document.createElement('div');
    	    	div2.classList.add('userId');
-   	    	div2.innerText = data.USERID;
+   	    	div2.innerText=data.USERID;
    	    	div.appendChild(div2);
    	    	
    	    	var div3 = document.createElement('div');
    	    	div3.classList.add('date');
-   	    	div3.innerText = data.REGDATE;
+   	    	div3.innerText=data.REGDATE;
    	    	div.appendChild(div3);
    	    	
    	    	var div4 = document.createElement('div');
    	    	div4.classList.add('text');
-   	    	div4.innerText = data.CONTENT;
+   	    	div4.innerText=data.CONTENT;
    	    	div.appendChild(div4);
    	    	
    	    	document.getElementById('container').appendChild(div);
@@ -232,23 +243,27 @@
 
  		
    	    function addComment(){
-   	    	var comment = document.getElementById('comment').value;
+   	    	var comment = document.getElementById('comment');
+   	    	
+   	    	console.log(proposalNo);
+   	    	console.log(comment.innerHTML);
+   	    	
+   	    	
+   	    	
    	    	$.ajax({
-	   	    	type:'post',
-	   	    	url: "/proposal/writeComment.do",
-	   	    	data: {
-	   	    		proposalNo: proposalNo,
-	   	    		comment: comment
-	   	    	},
-	   	    	success: function(data) {
-	   	    		if(data) alert('댓글이 등록했습니다.');
-	   	    		insertComment({
-	   	    			PROPOSALNO: proposalNo,
-	   	    			USERID: '작성자',
-	   	    			REGDATE: '2022-02-16',
-	   	    			CONTENT: comment
-	   	    		});
-  	    		}
+   	    	type:'post',
+   	    	url: "/proposal/writeComment.do",
+   	    	data: {
+   	    		"proposalNo": proposalNo,
+   	    		"comment": comment.value
+   	    	},
+   	    	success : function(data){
+   	    		
+   	    		if(data) alert('댓글이 등록했습니다.');
+   	    		
+   	    	}
+   	    	
+   	    		
    	    	});
    	    }
    	    

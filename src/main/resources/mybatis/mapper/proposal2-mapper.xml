@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="proposal">
+<mapper namespace="proposal2">
 	<!-- SQL QUERYS -->
 	
 	<select id="selectAllList" parameterType="proposal" resultType="proposal">
@@ -16,6 +16,7 @@
 	FROM 
 		PROPOSAL
 	where proposal_del_YN ='N'
+	AND PROPOSAL_END <![CDATA[<]]>  CURRENT_DATE
  	ORDER BY 
             proposalNo desc
 	</select>
@@ -32,6 +33,7 @@
  	FROM
  		PROPOSAL
  	WHERE
+ 	AND PROPOSAL_END <![CDATA[<]]>  CURRENT_DATE
  		proposal_No = #{propsalNo}
 
 	
@@ -61,8 +63,6 @@
 		TO_CHAR(comment_date, 'YYYY-MM-DD') as REGDATE
 	FROM Proposal_Comment 
 	where proposal_No  = #{propsalNo}
-	order by
-	 comment_No desc
 	</select>
 	
 	

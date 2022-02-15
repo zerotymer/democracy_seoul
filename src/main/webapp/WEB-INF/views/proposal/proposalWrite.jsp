@@ -10,6 +10,12 @@
 
 </head>
 <body>
+	<header>
+		<%@ include file="/includes/header.jsp"%>
+	</header>
+
+
+
     <div class="content-frame">
         <div class="frame-image">
             <div class="inner">
