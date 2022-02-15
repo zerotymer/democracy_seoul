@@ -82,13 +82,18 @@ public class DiscussServiceImpl implements DiscussService {
 	}
 
 	@Override
-	public int fileUpload(String name, String path) {
-		return dDAO.fileUpload(name,path);
+	public ArrayList<Discuss> getList(int currentListPage, int pageSize) {
+		return dDAO.getList(currentListPage,pageSize);
 	}
 
 	@Override
-	public ArrayList<Discuss> getList(int currentListPage, int pageSize) {
-		return dDAO.getList(currentListPage,pageSize);
+	public int fileUpload(HashMap<String, Object> file) {
+		return dDAO.fileUpload(file);
+	}
+
+	@Override
+	public int fileUpdate(int discussNo, int fileNo) {
+		return dDAO.fileUpdate(discussNo,fileNo);
 	}
 
 }

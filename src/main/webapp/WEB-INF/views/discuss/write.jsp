@@ -54,7 +54,7 @@
             margin:auto;
             border:1px solid rgba(210, 210, 190);
             border-radius:5px;
-            background-color: rgba(230, 230, 220);
+            background-color: rgba(230, 230, 230);
             font-size:15px;
         }
         
@@ -97,6 +97,22 @@
             margin:auto;
         }
         
+        #uploadImg{
+        	border:1px solid rgba(210, 210, 190);
+        	border-radius:5px;
+        	padding:3px;
+        	padding-left:10px;
+        	padding-right:10px;
+        	background-color: rgba(250, 250, 250);
+        }
+        #uploadFile{
+        	border:1px solid rgba(210, 210, 190);
+        	border-radius:5px;
+        	padding:3px;
+        	padding-left:10px;
+        	padding-right:10px;
+        	background-color: rgba(250, 250, 250);
+        }
     </style>
 
 </head>
@@ -138,7 +154,8 @@
                     <path fill="currentColor" d="M14,2L20,8V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H14M18,20V9H13V4H6V20H18M12,12L16,16H13.5V19H10.5V16H8L12,12Z" />
                     </svg>
                 </div>
-                <button type="button">파일 업로드</button>
+                <button type="button" id="uploadFile">파일 업로드</button>
+                <input type="hidden" name="fileNo" id="fileNo">
             </div>
 	    </div>
         </div>
@@ -219,13 +236,10 @@
 		    contentType: false,
 			success: function(data){
 				var json = JSON.parse(data);
-				if(result>0){
-					$('#pdf').prop("type","hidden");
-					alert(json.originalName+" 업로드 성공");
-				}
-				else{
-					alert('업로드 실패 - 지속적인 문제 발생 시 관리자에게 문의 바랍니다.');
-				}
+				var fileNo=json.fileNo;
+				$('#fileNo').val(fileNo);
+				$('#pdf').prop("type","hidden");
+				alert(json.originalName+" 업로드 성공");
 			},
 			error : function(data){
 				alert("업로드 실패 - 지속적인 문제 발생 시 관리자에게 문의 바랍니다.");
