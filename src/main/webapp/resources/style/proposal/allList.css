@@ -1,6 +1,7 @@
 .navi-container {
 	width: 200px;
 	margin: 0 auto;
+	margin-top: 10px;
 }
 
 .navi-container .navi--ul {
