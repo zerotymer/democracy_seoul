@@ -51,12 +51,12 @@
 		<div class="box-white">
 			<div class="tab-search">
 				<a href="/member/goMemberSearchPwdResult.do">비밀번호 변경</a>
-			</div>/
+			</div>
 			<div class="box-result">
 				<p>비밀번호 재설정</p>
 				<form action="/member/memberUpdatePassword.do" onsubmit="return Validation();" method="post">
 				    <input type="text" class="input-style" id="userId" name="userId" value="${userId }" readonly/><br>					
-					<input type="password" class="input-style" id="userPwd" name="userPwd" placeholder="비밀번호 입력"> <br>
+					<input type="password" class="input-style" id="userPwd" name="userPwd" placeholder="새로운 비밀번호 입력"> <br>
 					<input type="password" class="input-style" id="userPwdRe" name="userPwdRe" placeholder="비밀번호 확인"> <br>
 					<input type="submit" class="btn-login" value="비밀번호 재설정">
 				</form>
