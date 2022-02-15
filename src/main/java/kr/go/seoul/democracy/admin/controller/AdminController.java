@@ -61,12 +61,11 @@ public class AdminController {
 	 * 작성일 : 2022.02.04
 	 * Description : 관리자 로그아웃 시 사용하는 메소드
 	 */
-	@RequestMapping(value="/admin/adminLogout.do", method = RequestMethod.GET)
-	public String logout(HttpSession session,
-					   @SessionAttribute Admin admin)
+	@RequestMapping(value="/admin/adminLogout.do")
+	public String logout(HttpSession session)
 	{
 		session.invalidate();
-		return "redirect:/admin/adminLogin.do";
+		return "admin/adminLoginPage";
 	}
 	
 	
@@ -138,7 +137,7 @@ public class AdminController {
 			
 		}else {
 			String adminMsg = "정보 변경 실패";
-			String location = "/";
+			String location = "admin/adminUpdatePage";
 			model.addAttribute("adminMsg", adminMsg);
 			model.addAttribute("location", location);
 		}
