@@ -1,7 +1,7 @@
 var surveyCount = 0;
 
 function insertSurvey() {
-    (++surveyCount >= 10) return;
+    (++surveyCount >= 10) && return 1;
     let select = document.getElementById("selectType");
     console.log(select.value);
 

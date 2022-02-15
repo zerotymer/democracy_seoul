@@ -150,9 +150,6 @@
 					});
 					 
 				</script>
-					 
-
-
 
             <div class="contents-search">
                 <!-- 검색 위치 -->
