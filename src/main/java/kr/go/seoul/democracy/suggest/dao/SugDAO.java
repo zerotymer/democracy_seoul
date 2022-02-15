@@ -18,7 +18,7 @@ public class SugDAO {
 	private SqlSessionTemplate sqlSession;
 
 	// @@미완성
-	public List<Sug> selectList(int recordCountPage, int curPage) {
+	public List<Sug> selectList(int curPage, int recordCountPage) {
 		int offset = (curPage - 1) * recordCountPage;
 		RowBounds rows = new RowBounds(offset, recordCountPage);
 		return sqlSession.selectList("suggest.selectAllList", null, rows);
