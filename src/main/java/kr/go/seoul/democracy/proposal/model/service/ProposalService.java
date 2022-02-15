@@ -32,8 +32,9 @@ public interface ProposalService {
 
 	int listTotalCount();
 
+	ArrayList<HashMap<String,Object>> resultList(int currentPage, int recordCountPage);
 	
-
+	public int resultTotalCount();
 
 
 

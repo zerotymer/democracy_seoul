@@ -1,0 +1,39 @@
+	
+	
+	#page_wrap {
+	  width: 100%;
+	}
+	#page_wrap .page_ul {
+	  display: table;
+	  margin: 0 auto;
+	}
+	#page_wrap .page_ul li {
+	  display: block;
+	  width: 35px;
+	  height: 35px;
+	  float: left;
+	  text-align: center;
+	  margin: 0 5px;
+	  line-height: 15.5px;
+	  font-size: 16px;
+	  color: black;
+	}
+	
+	#page_wrap .page_ul li a {
+	  display: block;
+	  font-size: 16px;
+	  color: white;
+	  padding: 10px;
+
+	}
+	
+	#page_wrap .page_ul li a.page_active {
+	  background-color: #fff;
+	  color: #808080;
+	}
+	
+.navi-container {
+	width: 200px;
+	margin: 0 auto;
+	background-color: red;
+}

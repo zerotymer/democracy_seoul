@@ -3,7 +3,7 @@
 <mapper namespace="proposal">
 	<!-- SQL QUERYS -->
 	
-	<select id="selectAllList" parameterType="proposal" resultType="proposal">
+	<select id="selectAllList" resultType="proposal">
 	SELECT 
 			proposal_no as proposalNo,
  		 	proposal_title as proposalTitle,
@@ -17,7 +17,7 @@
 		PROPOSAL
 	where proposal_del_YN ='N'
  	ORDER BY 
-            proposalNo desc
+            proposal_No desc
 	</select>
 	
 	<select id="proposalView" resultType="proposal">
@@ -121,5 +121,35 @@
 		 #{commentContent},
 		 current_date)
 	</insert>
+	
+	<select id="resultList" resultType="hashMap">
+	SELECT 
+			proposal_no as PRONO,
+ 		 	proposal_title as TITLE,
+ 		 	proposal_content as CONTENT,
+ 		 	proposal_date as PRODATE,
+ 		 	proposal_start as PROSTART,
+ 		 	proposal_end as PROEND,
+ 		 	proposal_Thumbnail as THUMBNAIL
+	FROM 
+		PROPOSAL
+	WHERE PROPOSAL_DEL_YN ='N'
+		AND PROPOSAL_END <![CDATA[<]]> CURRENT_DATE
+ 	ORDER BY 
+            proposal_No desc
+	</select>
+	
+	
+	<select id="resultListCount" resultType="int">
+	SELECT 
+			COUNT(*)
+	FROM 
+		PROPOSAL
+	WHERE proposal_del_YN ='N'
+		AND PROPOSAL_END <![CDATA[<]]> CURRENT_DATE
+ 	ORDER BY 
+            proposal_No desc
+	</select>
+	
 </mapper>
 	
