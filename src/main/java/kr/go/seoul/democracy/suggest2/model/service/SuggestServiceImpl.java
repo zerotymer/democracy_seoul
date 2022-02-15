@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service("suggestService")
@@ -34,4 +35,8 @@ public class SuggestServiceImpl implements SuggestService {
     public Suggest selectPost(int suggestNo) {
         return sDAO.selectPost(suggestNo);
     }
+
+    @Override
+    public ArrayList<HashMap<String, Object>> selectDonePost(int currentPage, int pageSize) {
+        return sDAO.selectDonePost(currentPage, pageSize); }
 }

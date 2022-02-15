@@ -45,12 +45,12 @@
                                 <li class="menuitem">
                                     <a>결과보기</a>
                                     <ul class="submenu">
-                                        <li><a href="">제안결과</a></li>
+                                        <li><a href="/suggest2/listExpired.do">제안결과</a></li>
                                         <li><a href="">공론결과</a></li>
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">알아보기</a>
+                                    <a>알아보기</a>
                                     <ul class="submenu">
                                         <li><a href="/main/introduce.do">민주주의 서울 <wbr/>소개</a></li>
                                         <li><a href="/board/seoulNews.do" style="font-size: 13px;">민주주의 서울 <wbr/>이야기</a></li>
@@ -60,7 +60,7 @@
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">서울시민회의</a>
+                                    <a>서울시민회의</a>
                                     <ul class="submenu">
                                         <li><a href="/main/introduce.do">서울시민회의 <wbr/>소개</a></li>
                                         <li><a href="/board/seoulNews.do">서울시민회의 <wbr/>소식</a></li>

@@ -5,6 +5,7 @@
     --IMAGE-URL-LOGOUT:     url('/resources/icons/account-lock.svg');
     --IMAGE-URL-SEARCH:     url('/resources/icons/archive-search.svg');   
     --IMAGE-URL-ACCOUNT:    url('/resources/icons/account-details.svg');
+    --IMAGE-URL-MORE:       url('/resources/icons/more.svg')
 }
 
 .icon.heart {
