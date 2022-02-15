@@ -1,4 +1,4 @@
-package kr.go.seoul.democracy.member.model.dao;
+package kr.go.seoul.democracy.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -153,8 +153,8 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.setAttribute("user",m);
 		model.addAttribute("msg","로그인 성공하였습니다.");
-		model.addAttribute("location","redirect:/");
-		return "member/msg";
+		
+		return "member/memberLogin";
 		//return "redirect:/";
 		//return "member/memberLogin";
 		//return "redirect:/member/goMyPage.do";
@@ -348,14 +348,16 @@ public class MemberController {
 			Member m = mService.searchPwd(member);
 			
 			
+			
 			if(m!=null)
 			{   //이메일과 아이디가 일치한다면 인증코드를 비밀번호에 보내준다.
 				System.out.println("아이디와 이메일 찾기 일치");
+				System.out.println(m);
 				model.addAttribute("msg","아이디와 이메일 일치.");
 				model.addAttribute("userId",m.getUserId());
 				model.addAttribute("email",m.getEmail());
 				
-				return "redirect:/member/goMemberSearchPwdResult.do";
+				return "member/memberSearchPwdEmailCheck";
 			}else {//아이디 찾기 실패할시
 				model.addAttribute("msg","비밀번호 찾기 실패하였습니다.이메일과 이름을 확인해주세요.");
 				model.addAttribute("location","/member/goMemberSearchPwd.do");

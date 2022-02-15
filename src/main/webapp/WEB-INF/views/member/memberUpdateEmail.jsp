@@ -125,7 +125,7 @@
 							$("#email").val('');
 							return false;
 						}else{
-							$("#emailCheck").html("중복되지 않는 이메일입니다.").css("color","blue");
+							$("#emailCheck").html("사용 가능한 이메일입니다.").css("color","blue");
 
 						}
 						
