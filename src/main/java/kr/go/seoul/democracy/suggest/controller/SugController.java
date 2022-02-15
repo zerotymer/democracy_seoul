@@ -3,6 +3,7 @@ package kr.go.seoul.democracy.suggest.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -43,33 +44,37 @@ public class SugController {
 	 * System.out.println("SugController - sug() end"); return "index"; }
 	 */
 	
+	// 작성한 글을 볼수있는곳
+  @RequestMapping("/suggest/suggestview.do")
+  public String sug2() {
+      return "suggest/sugView";
+  }
 	
 	
-	
-	
-    //글의 리스트를 보는 게시판
-    @RequestMapping("/suggest/suggest.do")
-    public String sug() {
-    	System.out.println("/////////////////////////////////");
-        return "suggest/sugBoard";
-    }
-    //글을 작성하는곳
-    @RequestMapping("/suggest/suggestwrite.do")
-    public String sug1() {
-        return "suggest/sugWrite";
-    }
-    // 작성한 글을 볼수있는곳
-    @RequestMapping("/suggest/suggestview.do")
-    public String sug2() {
-        return "suggest/sugView";
-    } 
-    // 테스트
-    @RequestMapping("/suggest/suggestest.do")
-    public String sug3() {
-        return "suggest/sugTest";
-    }
-    
-    
+//	
+//    //글의 리스트를 보는 게시판
+//    @RequestMapping("/suggest/suggest.do")
+//    public String sug() {
+//    	System.out.println("/////////////////////////////////");
+//        return "suggest/sugBoard";
+//    }
+//    //글을 작성하는곳
+//    @RequestMapping("/suggest/suggestwrite.do")
+//    public String sug1() {
+//        return "suggest/sugWrite";
+//    }
+//    // 작성한 글을 볼수있는곳
+//    @RequestMapping("/suggest/suggestview.do")
+//    public String sug2() {
+//        return "suggest/sugView";
+//    } 
+//    // 테스트
+//    @RequestMapping("/suggest/suggestest.do")
+//    public String sug3() {
+//        return "suggest/sugTest";
+//    }
+//    
+//    
     
     
     
@@ -113,7 +118,11 @@ public class SugController {
 		return "redirect:/suggest/sugView?userId="+member.getUserId();
 	}
 	
-	
+ 	//게시글 작성화면 
+ 		@RequestMapping(value="/suggest2/writePost.do")
+ 		public String suggestForm(HttpSession session, HttpServletResponse write)throws Exception {
+ 			return "suggest2/suggestForm";
+	}
     
     
     
