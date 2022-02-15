@@ -6,8 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>민주주의 서울 - 설문지 폼 작성</title>
+	
+	<link rel="stylesheet" href="/resources/style/header.css">
+    <link rel="stylesheet" href="/resources/style/footer.css">
+	
 	<style>
 		form{
 			width:70%;
@@ -32,7 +35,7 @@
 			padding:20px;
 			min-height:450px;
 			margin:auto;
-			border:1px solid rgba(200, 200, 180);
+			/* border:1px solid rgba(200, 200, 180); */
 		}
 		
 		.contentQ{
@@ -41,12 +44,15 @@
 		
 		.one-survey button{
 			margin-top:3px;
+			margin-bottom:5px;
 			background-color:rgba(204, 229, 255);
 			border-color:rgba(204, 219, 255);
 		}
 		
 		.content{
 			margin-left:20px;
+			margin-bottom:3px;
+			font-size:15px;
 		}
 		
 		#submit{
@@ -59,6 +65,11 @@
 
 </head>
 <body>
+
+	<header>
+        <%@ include file="/includes/header.jsp" %>
+    </header>
+
 	<form name="surveyWriteForm" method="post" action="/survey/adminWrite.do">
 		<button type="button" class="survey-plus-btn">설문 추가</button>
 	    <button type="button" class="survey-delete-btn">설문 삭제</button>
@@ -82,6 +93,10 @@
 	    
 	    <div id="submit"><button type="submit" class="survey-submit-btn">설문 작성 완료</button></div>
     </form>
+    
+    <footer>
+        <%@ include file="/includes/footer.jsp" %>
+    </footer>
     
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script>
@@ -111,7 +126,7 @@
                 	//$(this).parent().siblings(".question").val(qNo-1);
                 	//var result=$(this).parent().siblings(".question").val();
 
-                	$(this).text('추가');
+                	$(this).text('중복선택 추가');
                 	$(this).siblings('.radio').css('display','none');
                 	$(this).siblings('.text').css('display','none');
                 	$(this).siblings('.textarea').css('display','none');
@@ -134,7 +149,7 @@
                 	//qNo번 질문의 문항 내용 저장
                 	//$(this).parent().next(".question").val(qNo+'/'+content+'/');
                 	
-                	$(this).text('추가');
+                	$(this).text('단일선택 추가');
                 	$(this).siblings('.checkbox').css('display','none');
                 	$(this).siblings('.text').css('display','none');
                 	$(this).siblings('.textarea').css('display','none');
@@ -147,6 +162,7 @@
                 	$(this).parent().next(".input_type").val(qNo-1+'/'+3);
                 	
                 	$(this).siblings('.checkbox').css('display','none');
+                	$(this).siblings('.radio').css('display','none');
                 	$(this).siblings('.textarea').css('display','none');
                 	$(this).siblings('.change').css('display','inline-block');
                 });
@@ -157,6 +173,7 @@
                 	$(this).parent().next(".input_type").val(qNo-1+'/'+4);
                 	
                 	$(this).siblings('.checkbox').css('display','none');
+                	$(this).siblings('.radio').css('display','none');
                 	$(this).siblings('.text').css('display','none');
                 	$(this).siblings('.change').css('display','inline-block');
                 });
