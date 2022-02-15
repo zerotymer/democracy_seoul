@@ -6,6 +6,8 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +16,9 @@
 <title>관리자 로그인</title>
 
 <style>
+		*{
+			text-decoration-line : none;
+		}
         .wrapper{
             width: 100%;
             height: 750px;
@@ -86,8 +91,8 @@
             
             <div class="enter">
                 <form id="adminLoginForm" action="/admin/adminLogin.do" method="post">
-                	아이디 <input type="text" name="adminId" size="15"/><br>
-               		비밀번호 <input type="password" name="adminPwd"/><br>
+                	아이디 <input type="text" name="adminId" size="12"/><br>
+               		비밀번호 <input type="password" name="adminPwd" size="12"/><br>
             		<input type="submit" value="로그인"/>
             	</form>
             	

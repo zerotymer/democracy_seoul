@@ -31,6 +31,15 @@ public class AdminController {
 	private AdminService aService;
 	
 	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.15
+	 * Description : 관리자 메인
+	 */
+    @RequestMapping("/admin/adminMain.do")
+    public String test() {
+        return "admin/adminLoginPage";
+    }
 	
 	
 	/**
@@ -92,7 +101,7 @@ public class AdminController {
 			if(a != null)
 			{
 				session.setAttribute("admin", a);
-				return "admin/adminMyPage";
+				return "admin/adminUpdatePage";
 			}else {
 				return "admin/adminMyPageLoadFail";
 			}
@@ -214,7 +223,7 @@ public class AdminController {
 		{
 			session.invalidate();
 			model.addAttribute("adminMsg", "정상 탈퇴처리 되었습니다.");
-			model.addAttribute("location", "/");
+			model.addAttribute("location", "/admin/adminMain.do");
 		}else {
 			model.addAttribute("adminMsg", "비밀번호가 일치하지 않습니다. 재확인해주세요.");
 			model.addAttribute("location", "/admin/adminWithDraw.do");
@@ -342,18 +351,12 @@ public class AdminController {
 								  @RequestParam char endYN, 
 								  HttpServletResponse response) throws IOException
 	{
-		
 		endYN = endYN=='Y'?'N':'Y';
 		
 		int result = aService.updateMemberEndYNChange(userId, endYN);
 		
-		if(result>0)
-		{
-			response.getWriter().print(endYN);
-		}else {
-			response.getWriter().print(false);
-		}
-		
+		response.getWriter().print(result>0);
+
 		
 	}
 	
