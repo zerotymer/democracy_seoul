@@ -177,7 +177,7 @@
 		                	<a class="proposalTitle">${proposal.proposalTitle }</a>
 		                </div>
 		                <div class="content">${proposal.proposalContent }</div>
-		                <div class="thumnail">
+		                <div class="thumbnail">
 	                        <img src="${ proposal.proposalThumbnail }" alt="제목" />
 	                    </div>
 		                <div class="icons">
