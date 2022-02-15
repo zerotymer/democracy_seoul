@@ -8,7 +8,7 @@
 	<!-- 파일 전송을 위한 공용 템플릿 -->
 	<bean id="fileTransferTemplate" class="kr.go.seoul.common.FileTransferTemplate">
 		<constructor-arg index="0" ref="servletContext" />
-		<constructor-arg index="1" value="52428800" /> <!-- 50MB -->
+		<constructor-arg index="1" value="524288000" /> <!-- 50MB -->
 		<constructor-arg index="2" value="UTF-8" />
 		<constructor-arg index="3" value="temp\file" />
 	</bean>
@@ -77,7 +77,7 @@
 	<!-- 설문형 이미지 템플릿 -->
 	<bean id="proposalImageTemplate" class="kr.go.seoul.common.ImageResizeTemplate">
 		<constructor-arg index="0" ref="servletContext" />
-		<constructor-arg index="1" value="52428800" /> <!-- 50MB -->
+		<constructor-arg index="1" value="524288000" /> <!-- 50MB -->
 		<constructor-arg index="2" value="UTF-8" />
 		<constructor-arg index="3" value="temp\proposal" />
 		<constructor-arg index="4" ref="maxSize" />

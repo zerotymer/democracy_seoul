@@ -40,21 +40,35 @@
 		        }			 
 		 }
 		  
+		 
 		 function sendEmail(){
 			 //alert('확인');
+			 
+			 console.log('aa');
 			
 			 const m= document.getElementById('email').value;//이메일 가져오고
-			 fetch("http://localhost/member/memberSendEmail.do?email="+m).then((response)=>
-					console.log(response)		 
+			 console.log(m);
+			 $.ajax({
+					type : "get",
+					url : "/member/memberSendEmail.do",
+					data : {"email":m},
+					error : function(error) {
+						console.log("error");
+					},
+					success : function() {
+						
+					}
+				});
 			 
-			 );
+			 
 			 alert('인증 이메일이 전송되었습니다.');
 			 
 			 
 		 }
 		 
+		 
 		 function checkNum(){
-			  //alert('확인')
+			 //alert('확인')
 			  $.ajax({
 					type : "GET",
 					url : "get.do",
@@ -65,10 +79,10 @@
 						console.log("error");
 					},
 					success : function(data) {
-						console.log("success");
+						 console.log("success");
 						 const checkNum = data;
 						 const m= document.getElementById('emailRe').value;
-						 console.log(checkNum)
+						 console.log(checkNum);
 						 if(m==checkNum){
 							 val =true;
 							 alert("일치");
@@ -89,9 +103,9 @@
 				<a href="/member/goMemberSearchPwdEmailCheck.do">이메일인증 찾기</a>
 			</div>
 			<form action="/member/goMemberSearchPwdResult.do" onsubmit="return Validation();" method="post">
-					<span id="memberEmail">${email }</span>					 			
+					<span id="memberEmail">${email}</span>					 			
 					<label for="email" class="tit-label">으로 메일을 발송합니다.개인정보를 확인해주세요</label><br>
-				    <input type="text" class="input-style" id="userId" name="userId" value="${userId }" readonly/><br>					
+				    <input type="text" class="input-style" id="userId" name="userId" value="${userId}" readonly/><br>					
 					<input type="email" id="email" class="input-style" name="email" value="${email }" readonly><button type="button" onclick='sendEmail()'>인증메일 발송하기</button><br>	
 				    <input type="text" class="input-style" id="emailRe" name="emailRe"   placeholder="이메일 인증번호"><br>
 				    <button type="button" onclick='checkNum()'>인증번호 확인</button><br>

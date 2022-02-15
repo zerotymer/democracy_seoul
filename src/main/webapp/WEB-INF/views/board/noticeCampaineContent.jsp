@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/resources/style/member/default.css">
 <link rel="stylesheet" href="/resources/style/member/common.css">
 <link rel="stylesheet" href="/resources/style/member/noticeNewsContent.css">
+<link rel="stylesheet" href="/resources/style/member/noticeCampaineContent.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="/resources/CKEditor/member/ui.js"></script>
 </head>

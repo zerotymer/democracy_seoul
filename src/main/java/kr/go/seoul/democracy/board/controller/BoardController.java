@@ -117,7 +117,7 @@ public class BoardController {
 			pageTotalCount = (int)Math.ceil(bService.totalSerchCount(boardNotice)/(double)recordCountPerPage); //notice에서 변경해야 할 부분
 		}
 		else {
-			list=bService.noticeNewsListSearch(recordCountPerPage, currentPage,boardNotice);//
+			list=bService.noticeNewsListSearchContent(recordCountPerPage, currentPage,boardNotice);//
 			pageTotalCount = (int)Math.ceil(bService.totalSearchContentCount(boardNotice)/(double)recordCountPerPage);
 			
 		}

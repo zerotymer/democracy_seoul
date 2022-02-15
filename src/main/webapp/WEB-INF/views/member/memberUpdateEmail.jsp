@@ -43,18 +43,30 @@
 		 function sendEmail(){
 			 //alert('확인');
 			
+			 console.log('aa');
+				
 			 const m= document.getElementById('email').value;//이메일 가져오고
-			 fetch("http://localhost/member/memberSendEmail.do?email="+m).then((response)=>
-					console.log(response)		 
+			 console.log(m);
+			 $.ajax({
+					type : "get",
+					url : "/member/memberSendEmail.do",
+					data : {"email":m},
+					error : function(error) {
+						console.log("error");
+					},
+					success : function() {
+						
+					}
+				});
 			 
-			 );
+			 
 			 alert('인증 이메일이 전송되었습니다.');
 			 
 			 
 		 }
 		 
 		 function checkNum(){
-			  //alert('확인')
+			 //alert('확인')
 			  $.ajax({
 					type : "GET",
 					url : "get.do",
@@ -65,10 +77,10 @@
 						console.log("error");
 					},
 					success : function(data) {
-						console.log("success");
+						 console.log("success");
 						 const checkNum = data;
 						 const m= document.getElementById('emailRe').value;
-						 console.log(checkNum)
+						 console.log(checkNum);
 						 if(m==checkNum){
 							 val =true;
 							 alert("일치");
@@ -125,7 +137,7 @@
 							$("#email").val('');
 							return false;
 						}else{
-							$("#emailCheck").html("중복되지 않는 이메일입니다.").css("color","blue");
+							$("#emailCheck").html("사용 가능한 이메일입니다.").css("color","blue");
 
 						}
 						
