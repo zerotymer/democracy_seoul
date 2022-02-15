@@ -37,9 +37,24 @@
 	
 	</select>
 	
-	<select id="proposalCnt" parameterType="proposal" resultType="int">
-	SELECT COUNT (*) FROM Proposal WHERE proposal_del_YN='n'
+	<!-- 특정 게시물 모든 댓글갯수 -->
+	<select id="commentTotalCount" parameterType="int" resultType="int">
+	SELECT COUNT (*) FROM Proposal_Comment 
+	where proposal_No  = #{propsalNo}
 	</select>
+	
+<!-- 	특정게시글 모든 댓글 -->
+	<select id="commentAllList" parameterType="int" resultType="hashmap">
+	SELECT
+		proposal_No as PROPOSALNO,
+		comment_no as COMMENTNO,	
+		userId as USERID,
+		comment_content as CONTENT,
+		TO_CHAR(comment_date, 'YYYY-MM-DD') as REGDATE
+	FROM Proposal_Comment 
+	where proposal_No  = #{propsalNo}
+	</select>
+	
 	
 	<!-- 게시판글쓰기 -->
 	<insert id="insert" parameterType="proposal">
@@ -81,19 +96,20 @@
 			userId as userId,
 			comment_content as commentContent,
 			comment_date as commnetDate
-		from proposalComment
+		from proposal_Comment
 		where proposal_No = #{proposalNo}
 	</select>		
 	
 	<!-- 댓글작성 -->
 	<insert id="commentWrite" parameterType="kr.go.seoul.democracy.proposal.model.vo.ProposalComment">
 		insert into
-		 proposalComment(proposlNo,commentNo,userId,commentContent)
+		 proposal_comment
 		 values(
-		 proposalComment_SEQ.NEXTVAL,
 		 #{proposalNo},
+		 PROPOSAL_COMMENT_SEQ.NEXTVAL,
 		 #{userId},
-		 #{commentContent})
+		 #{commentContent},
+		 current_date)
 	</insert>
 </mapper>
 	

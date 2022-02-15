@@ -53,7 +53,7 @@
                                     <a href="">알아보기</a>
                                     <ul class="submenu">
                                         <li><a href="/main/introduce.do">민주주의 서울 <wbr/>소개</a></li>
-                                        <li><a href="" style="font-size: 13px;">민주주의 서울 <wbr/>이야기</a></li>
+                                        <li><a href="/board/seoulNews.do" style="font-size: 13px;">민주주의 서울 <wbr/>이야기</a></li>
                                         <li><a href="/board/goNoticeNews.do">공지사항</a></li>
                                         <li><a href="/board/referenceList.do">자료실</a></li>
                                         <li><a href="/board/noticeCampaign.do">행사일정</a></li>
@@ -67,7 +67,7 @@
                                     </ul>
                                 </li>
                                 <li class="menuitem">
-                                    <a href="">시민참여예산</a>
+                                    <a href="/main/budget.go">시민참여예산</a>
                                 </li>
                             </ul>
                         </li>    

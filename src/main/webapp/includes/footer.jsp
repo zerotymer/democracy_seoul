@@ -11,7 +11,7 @@
 <div class="content">
     <ul>
         <li class="logo">
-            <img src="/resources/images/foot_logo.png" alt="서울로고">
+            <img src="/resources/images/h1_foot_logo.png" alt="서울로고">
         </li>
         <li class="address">
             (04514) 서울특별시 중구 서소문로 124 씨티스퀘어빌딩 10층<br>

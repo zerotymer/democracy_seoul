@@ -38,6 +38,11 @@ public class MainController {
     	return "main/search";
     }
 
+    @RequestMapping(value="/main/budget.go", method = RequestMethod.GET)
+    public String moveBudget() {
+        return "main/budget";
+    }
+
     @RequestMapping("/main/list.do")
     public ModelAndView getList(ModelAndView mav) {
         ArrayList<HashMap<String, Object>> list = service.selectLatestSuggest(4);
@@ -48,6 +53,10 @@ public class MainController {
         return mav;
     }
 
+    /**
+     *
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/main/list.ajax")
     public ArrayList<HashMap<String, Object>> getListAjax() {
@@ -57,6 +66,15 @@ public class MainController {
         return list;
     }
 
+    /**
+     * 검색기능
+     * @param mav
+     * @param keyword 키워드
+     * @param currentPage 현재 페이지 번호
+     * @param pageSize 페이지 크기
+     * @return
+     * @author 신현진
+     */
     @RequestMapping(value="/main/search.do", method = RequestMethod.GET)
     public ModelAndView getSearch(ModelAndView mav,
                                   @RequestParam (defaultValue="") String keyword,
@@ -99,6 +117,15 @@ public class MainController {
     	return mav;
     }
 
+    /**
+     *
+     * @param keyword
+     * @param currentPage
+     * @param pageSize
+     * @param keywordType
+     * @return
+     * @author
+     */
     @ResponseBody
     @RequestMapping("/main/search.ajax")
     public ArrayList<HashMap<String, Object>> getSearchAjax(

@@ -69,7 +69,7 @@
     font-weight: 400;
     overflow-y: hidden;
 }
-.card-item .thumnail {
+.card-item .thumbnail {
     display: none;
 }
 .card-item .icons {
@@ -151,11 +151,9 @@
     }
 }
 
-/* Suggest */
-
 /* SURVEY */
-.card-item.discussion .thumnail,
-.card-item.survey .thumnail {
+.card-item.discussion .thumbnail,
+.card-item.survey .thumbnail {
     display: block;
     width: 200px;
     height: 200px;

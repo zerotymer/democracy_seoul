@@ -67,6 +67,10 @@ public class MemberDAO {
 		System.out.println(m);
 		return m;
 	}
+	
+	public Member selectMemberById(String userId) {
+		return sqlSession.selectOne("member.selectMemberById",userId);
+	}
 
 
 
@@ -106,9 +110,14 @@ public class MemberDAO {
 
 
 
-	public int myPageUpdatePassword(Map<String, String> Map) {
-		System.out.println(Map);
-		return sqlSession.update("member.myPageUpdatePassword",Map);
+	public int myPageUpdatePassword(Map<String, String> map) {
+		//Member m = sqlSession.selectOne("member.searchPwd",member);
+		//System.out.println(m);
+		//return m;
+		int m = sqlSession.update("member.myPageUpdatePassword",map);
+		System.out.println("비번변경 DAO:"+map);
+		return m;
+		//return sqlSession.update("member.myPageUpdatePassword",map);
 
 	}
 

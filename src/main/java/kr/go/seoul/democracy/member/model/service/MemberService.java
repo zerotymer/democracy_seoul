@@ -35,9 +35,10 @@ public interface MemberService {
 	//Mypage에서 이메일 인증 후 이메일 주소 변경
 	int memberUpdateEmail(Map<String, String> Map);
 	//MyPage에서 비밀번호 변경
-	int myPageUpdatePassword(Map<String, String> Map);
+	int myPageUpdatePassword(HashMap<String, String> map);
 	//MyPage에서 삭제로직
 	int updateMemberWithdraw(HashMap<String, Object> map);
 	//MyPage에서 닉네임 변경로직
 	int myPageUpdateNick(Map<String, String> map);
+	Member selectMemberById(String userId);
 }

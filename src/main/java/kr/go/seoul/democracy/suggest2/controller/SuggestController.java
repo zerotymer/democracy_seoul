@@ -60,6 +60,7 @@ public class SuggestController {
         mav.setViewName("suggest2/suggestForm");
         return mav;
     }
+    
     @RequestMapping(value="/suggest2/update.do", method=RequestMethod.POST)
     public void createPost(HttpServletResponse response,
                                    @SessionAttribute("user") Member member,
