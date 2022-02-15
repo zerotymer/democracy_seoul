@@ -60,7 +60,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/noticeNews");
+		mv.setViewName("board/notice");
 	
 		return mv;
 	}
@@ -136,7 +136,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/noticeSerchNews");
+		mv.setViewName("board/noticeSearch");
 	
 		return mv;
 		
@@ -165,7 +165,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/noticeCampaign");
+		mv.setViewName("board/noticeEvent");
 		return mv;
 	}
 	
@@ -230,7 +230,7 @@ public class BoardController {
 			mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 			mv.addObject("navi", navi);
 			mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-			mv.setViewName("board/noticeSearchCampaign");//
+			mv.setViewName("board/noticeSearchEvent");//
 		
 			return mv;
 			
@@ -260,7 +260,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/seoulNews");
+		mv.setViewName("board/seoulCityNews");
 		return mv;
 	}
 	
@@ -328,7 +328,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/seoulSearchNews");
+		mv.setViewName("board/seoulCitySearchNews");
 	
 		return mv;
 		
@@ -359,7 +359,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/referenceroom");
+		mv.setViewName("board/reference");
 		return mv;
 	}
 	
@@ -427,7 +427,7 @@ public class BoardController {
 		mv.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0);
 		mv.addObject("navi", navi);
 		mv.addObject("countResult", (currentPage-1) * recordCountPerPage);
-		mv.setViewName("board/referenceroomSearch");
+		mv.setViewName("board/referenceSearch");
 	
 		return mv;
 		
