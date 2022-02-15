@@ -120,6 +120,13 @@
 						</td>
 					</tr>
 				</table>
+				<table class="sec">
+					<tr>
+						<td><button class="btn-m">
+								<a href="/">메인 페이지로 이동</a>
+							</button>
+						</td>
+					</tr>
 			</div>
 		</div>
 	

@@ -82,7 +82,7 @@
 							$("#nick").val('');
 							return false;
 						}else{
-							$("#nickCheck").html("중복되지 않는 닉네임입니다.").css("color","blue");
+							$("#nickCheck").html("사용 가능한 닉네임입니다.").css("color","blue");
 
 						}
 						

@@ -36,13 +36,15 @@
 	         		<div class="box-subject">
 	         			<p>${ seoulNews.seoulTitle }</p>
 	         		</div>
+	         	    <div class="box-notice-info">
+	         			   <div class="box-gray">조회수</div>
+	         		    	<span>0</span>
+	         		</div>
+	         		<div class="box-notice-info">
+	         			<div class="box-gray">작성일</div>
+	         			<span>${seoulNews.seoulDate }</span>
+	         		</div>
 	         	</div>
-	         	<div class="box-content">
-	         		<p class= "file-add">
-	         			<img src="/resources/icons/book-open.svg" alt="첨부파일">
-	         			<a href="" title="첨부파일로 이동">"파일제목.pdf"</a>
-	         			<span class="file-size">(크기MB)</span>
-	         	   </p>
 	         	   <div class="box-content">
 	         		<p>${seoulNews.seoulContent}</p>
 	         	</div>
