@@ -87,8 +87,6 @@ public class ProposalController {
 				
 		mav.addObject("recordTotalCount", recordTotalCount);
 		mav.addObject("list",list);
-		//mav.addObject("recordCountPage",recordCountPage);
-		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/recordCountPage));
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("navi", navi);
 		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
@@ -110,7 +108,6 @@ public class ProposalController {
 			
 			int listPageSize=5;
 			ArrayList<HashMap<String, Object>> comment = pService.getComment(proposalNo,currentPage,listPageSize);
-			
 			
 			return comment;
 		}
@@ -142,17 +139,16 @@ public class ProposalController {
 	@RequestMapping(value="/proposal/writeComment.do", method=RequestMethod.POST)
 	public void comment(@RequestParam int proposalNo,
 			@RequestParam String comment, 
-			HttpSession session,
+			@SessionAttribute Member member,
 			HttpServletResponse response) throws Exception{ 
 		
 		ProposalComment pcomment = new ProposalComment();
 		pcomment.setProposalNo(proposalNo);
-		//pcomment.setUserId(member.getUserId());
+		pcomment.setUserId(member.getUserId());
 		pcomment.setCommentContent(comment);
 		System.out.println(pcomment);
 		response.getWriter().println(true);
-	//	pService.comWrite(pcomment);
-	
+		pService.comWrite(pcomment);
 	}
 	
 	//댓글더보기
@@ -160,10 +156,8 @@ public class ProposalController {
 	@ResponseBody
 	public ArrayList<HashMap<String,Object>> getComment(@RequestParam int proposalNo,
 	@RequestParam(defaultValue="1")int currentCommentPage){
-		
 		int pageSize=3;
 		ArrayList<HashMap<String, Object>> comment = pService.getComment(proposalNo,currentCommentPage,pageSize);
-		
 		
 		return comment;
 	}
@@ -174,16 +168,15 @@ public class ProposalController {
 	@RequestMapping(value="/proposal/proposalWrite.do")
 	public String proposalEnroll(HttpSession session, HttpServletResponse write)throws Exception {
 		
-		/*
-		 * String adminId = (String)session.getAttribute("adminId");
-		 * 
-		 * if(adminId==null) { write.setContentType("text/html; charset=UTF-8");
-		 * PrintWriter out_write = write.getWriter();
-		 * out_write.println("<script>alert('로그인이 되어있지 않습니다. 로그인을 먼저 해주세요.');</script>"
-		 * ); out_write.flush();
-		 * 
-		 * return ""; }else {
-		 */
+		String adminId = (String)session.getAttribute("adminId");
+
+		if (adminId==null) {
+			write.setContentType("text/html; charset=UTF-8");
+			PrintWriter out_write = write.getWriter();
+			out_write.println("<script>alert('로그인이 되어있지 않습니다. 로그인을 먼저 해주세요.');</script>");
+			out_write.flush();
+			return "";
+		}
 		 
 		return "proposal/proposalWrite";
 //	}
@@ -214,37 +207,38 @@ public class ProposalController {
 	//페이지 수정뷰
 	@RequestMapping(value="/proposal/modify.do", method=RequestMethod.GET)
 	public String modify(@RequestParam(defaultValue="1") int proposalNo,Model model,HttpSession session) throws Exception{
-		/*
-		 * //세션확인 Admin admin = (Admin)session.getAttribute("admin"); if(admin== null)
-		 * return "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
-		 * admin.getAdminGrade() != '1') return "proposal/allList"; //비지니스로직
-		 */		Proposal proposal = pService.proposalView(proposalNo);
+
+		Admin admin = (Admin)session.getAttribute("admin");
+		if (admin== null) return "redirect:/proposal/allList.do";
+		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList"; //비지니스로직
+		Proposal proposal = pService.proposalView(proposalNo);
 		model.addAttribute("proposal",proposal);
 		return "proposal/modify";
 	}
 	
 	//페이지 수정
 	@RequestMapping(value="/proposal/update.do", method=RequestMethod.POST)
-	public String postModify(Proposal proposal,RedirectAttributes rttr,HttpSession session) throws Exception {
+	public String postModify(Proposal proposal,
+							 RedirectAttributes rttr,
+							 HttpSession session) throws Exception {
 		
-		/*
-		 * Admin admin = (Admin)session.getAttribute("admin"); if(admin== null) return
-		 * "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
-		 * admin.getAdminGrade() != '1') return "proposal/allList";
-		 */
+		Admin admin = (Admin)session.getAttribute("admin");
+		if (admin== null) return "redirect:/proposal/allList.do";
+		if (admin.getAdminGrade() != '0' &&	admin.getAdminGrade() != '1') return "proposal/allList";
+
 		pService.modify(proposal);
-		//rttr.addFlashAttribute("result","modify success");
+		rttr.addFlashAttribute("result","modify success");
 		return "redirect:/proposal/post.do?proposalNo="+proposal.getProposalNo();	
 	}
 	
 	//게시글삭제하기 
 	@RequestMapping(value="/proposal/delete.do", method=RequestMethod.GET)
 	public String delete(@RequestParam(defaultValue="1") int proposalNo,HttpSession session) throws Exception {
-		/*
-		 * Admin admin = (Admin)session.getAttribute("admin"); if(admin== null) return
-		 * "redirect:/proposal/allList.do"; if (admin.getAdminGrade() != '0' &&
-		 * admin.getAdminGrade() != '1') return "proposal/allList";
-		 */
+
+		Admin admin = (Admin)session.getAttribute("admin");
+		if(admin== null) return "redirect:/proposal/allList.do";
+		if (admin.getAdminGrade() != '0' && admin.getAdminGrade() != '1') return "proposal/allList";
+
 		pService.delete(proposalNo);
 		System.out.println(proposalNo);
 		return "redirect:/proposal/allList.do";
@@ -278,8 +272,6 @@ public class ProposalController {
 				
 		mav.addObject("recordTotalCount", recordTotalCount);
 		mav.addObject("list",list);
-		//mav.addObject("recordCountPage",recordCountPage);
-		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/recordCountPage));
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("navi", navi);
 		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
