@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Discuss {
 	private int discussNo;
 	private String discussTitle;
-    private String userId;
+    private int adminNo;
     private String discussContent;
     private Date discussDate;
     private Date discussStart;
@@ -17,7 +17,7 @@ public class Discuss {
     
 	@Override
 	public String toString() {
-		return "Discuss [discussNo=" + discussNo + ", discussTitle=" + discussTitle + ", userId=" + userId
+		return "Discuss [discussNo=" + discussNo + ", discussTitle=" + discussTitle + ", adminNo=" + adminNo
 				+ ", discussContent=" + discussContent + ", discussDate=" + discussDate + ", discussStart="
 				+ discussStart + ", discussEnd=" + discussEnd + ", discussDelYN=" + discussDelYN
 				+ ", discussThumbnailName=" + discussThumbnailName + ", discussThumbnailPath=" + discussThumbnailPath
@@ -28,13 +28,13 @@ public class Discuss {
 	public Discuss() {
 		super();
 	}
-	public Discuss(int discussNo, String discussTitle, String userId, String discussContent, Date discussDate,
+	public Discuss(int discussNo, String discussTitle, int adminNo, String discussContent, Date discussDate,
 			Date discussStart, Date discussEnd, char discussDelYN, String discussThumbnailName,
 			String discussThumbnailPath) {
 		super();
 		this.discussNo = discussNo;
 		this.discussTitle = discussTitle;
-		this.userId = userId;
+		this.adminNo = adminNo;
 		this.discussContent = discussContent;
 		this.discussDate = discussDate;
 		this.discussStart = discussStart;
@@ -45,9 +45,9 @@ public class Discuss {
 	}
 
 
-	public Discuss(String userId, String discussTitle, String discussContent, String discussThumbnailName, String discussThumbnailPath) {
+	public Discuss(int adminNo, String discussTitle, String discussContent, String discussThumbnailName, String discussThumbnailPath) {
 		this.discussTitle = discussTitle;
-		this.userId = userId;
+		this.adminNo = adminNo;
 		this.discussContent = discussContent;
 		this.discussThumbnailName = discussThumbnailName;
 		this.discussThumbnailPath = discussThumbnailPath;
@@ -66,11 +66,11 @@ public class Discuss {
 	public void setDiscussTitle(String discussTitle) {
 		this.discussTitle = discussTitle;
 	}
-	public String getUserId() {
-		return userId;
+	public int getAdminNo() {
+		return adminNo;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setAdminNo(int adminNo) {
+		this.adminNo = adminNo;
 	}
 	public String getDiscussContent() {
 		return discussContent;
