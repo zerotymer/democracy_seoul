@@ -7,9 +7,62 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<style>
+		form{
+			width:70%;
+			min-height:500px;
+			margin:auto;
+			padding:20px;
+			border:1px solid rgba(200, 200, 180);
+			border-radius:10px;
+		}
+		button{
+			margin-right:2px;
+			padding:5px;
+			padding-left:10px;
+			padding-right:10px;
+			border-radius:5px;
+			border:1px solid rgba(200, 200, 180);
+			background-color:rgba(250, 250, 250);
+		}
+		
+		#surveyWrap{
+			width:94%;
+			padding:20px;
+			min-height:450px;
+			margin:auto;
+			border:1px solid rgba(200, 200, 180);
+		}
+		
+		.contentQ{
+			font-size:20px;
+		}
+		
+		.one-survey button{
+			margin-top:3px;
+			background-color:rgba(204, 229, 255);
+			border-color:rgba(204, 219, 255);
+		}
+		
+		.content{
+			margin-left:20px;
+		}
+		
+		#submit{
+			margin-top:10px;
+			display:flex;
+			align-items:center;
+            justify-content:center;
+		}
+	</style>
+
 </head>
 <body>
-	<form>
+	<form name="surveyWriteForm" method="post" action="/survey/adminWrite.do">
+		<button type="button" class="survey-plus-btn">설문 추가</button>
+	    <button type="button" class="survey-delete-btn">설문 삭제</button>
+	    
 		<div id="surveyWrap">
 		<!--
 	        <div class="one-survey">
@@ -26,8 +79,8 @@
 	        </div>
 		-->
 	    </div>
-	    <button type="button" class="survey-plus-btn">설문 추가</button>
-	    <button type="button" class="survey-delete-btn">설문 삭제</button>
+	    
+	    <div id="submit"><button type="submit" class="survey-submit-btn">설문 작성 완료</button></div>
     </form>
     
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -38,7 +91,7 @@
         	
         	//질s문 10개까지 제한
         	if(qNo<11){
-                var oneSurvey = "<div class='one-survey'>"+qNo+". <input class='contentQ' type='text'><div class='box-btn'><button type='button' class='checkbox'>중복선택</button><button type='button' class='radio'>단일선택</button><button type='button' class='text'>단답식</button><button type='button' class='textarea'>서술형</button><button type='button' class='delete'>삭제</button><button type='button' class='change' style='display:none;'>변경</button><button type='button' class='complete'>완료</button></div><input class='input_type' name='question_input_type' type='hidden'/><input class='question' name='question_content' type='hidden'/></div><br>"
+                var oneSurvey = "<div class='one-survey'>"+qNo+". <textarea class='contentQ' name='contentQ'></textarea><div class='box-btn'><button type='button' class='checkbox'>중복선택</button><button type='button' class='radio'>단일선택</button><button type='button' class='text'>단답식</button><button type='button' class='textarea'>서술형</button><button type='button' class='delete'>삭제</button><button type='button' class='change' style='display:none;'>변경</button><button type='button' class='complete'>완료</button></div><input class='input_type' name='questionInputType' type='hidden'/><input class='question' name='questionContent' type='hidden'/></div><br>"
                 qNo++;
                 
                 //질문폼 생성
@@ -55,56 +108,22 @@
                 	$(this).parent().parent('.one-survey').append(content);
                 	
                 	//qNo번 질문의 문항 내용 저장
-                	$(this).parent().siblings(".question").val(qNo-1);
-                	var result=$(this).parent().siblings(".question").val();
+                	//$(this).parent().siblings(".question").val(qNo-1);
+                	//var result=$(this).parent().siblings(".question").val();
 
                 	$(this).text('추가');
                 	$(this).siblings('.radio').css('display','none');
                 	$(this).siblings('.text').css('display','none');
                 	$(this).siblings('.textarea').css('display','none');
                 	$(this).siblings('.change').css('display','inline-block');
-                	
-                	
-              
-                	
-                	
                 });
               	
-                $('.complete').click(function(){
-            		
-            		
-            		
-            		var $content = $(this).parent().siblings('.content');
-            		
-            		var str = "";
-            		 $content.each(function(index,item){
-            			
-            			 var data = $(item).val();
-            			 str += data+"/";
-            			 
-            		});
-            		 
-            		 console.log(str);
-            	
-            		//입력폼에 입력한 내용
-            		/* var content=$(this).parent().siblings('.content').val(); */
-            		
-            		
-            		/* var result=$(this).siblings('.question').val();
-            		
-            		$(this).siblings('.question').val(result+'/'+content);
-            		var re=$(this).siblings('.question').val();
-            		console.log(re); */
-            		$(this).text('수정');
-            	});
-              	
-
               	//문항타입 단일선택 선택 시
                 $(".radio").click(function(){
 					var content="<input type='text' class='content'/><br>";
                 	
                 	//qNo번 질문의 답변 타입 저장
-                	$(this).parent().next(".input_type").val(qNo+'/'+2);
+                	$(this).parent().next(".input_type").val(qNo-1+'/'+2);
                 	
                 	//qNo번 질문의 문항 내용 입력폼 생성
                 	$(this).parent().parent('.one-survey').append(content);
@@ -113,7 +132,7 @@
                 	var content=$(this).parent().parent('.one-survey').children('.content').last().val();
 
                 	//qNo번 질문의 문항 내용 저장
-                	$(this).parent().next(".question").val(qNo+'/'+content+'/');
+                	//$(this).parent().next(".question").val(qNo+'/'+content+'/');
                 	
                 	$(this).text('추가');
                 	$(this).siblings('.checkbox').css('display','none');
@@ -125,11 +144,9 @@
               	//문항타입 단답식 선택 시
                 $(".text").click(function(){
                 	//qNo번 질문의 답변 타입 저장
-                	$(this).parent().next(".input_type").val(qNo+'/'+3);
+                	$(this).parent().next(".input_type").val(qNo-1+'/'+3);
                 	
-                	$(this).css('display','none');
                 	$(this).siblings('.checkbox').css('display','none');
-                	$(this).siblings('.text').css('display','none');
                 	$(this).siblings('.textarea').css('display','none');
                 	$(this).siblings('.change').css('display','inline-block');
                 });
@@ -137,12 +154,10 @@
               	//문항타입 서술형 선택 시
                 $(".textarea").click(function(){
                 	//qNo번 질문의 답변 타입 저장
-                	$(this).parent().next(".input_type").val(qNo+'/'+4);
+                	$(this).parent().next(".input_type").val(qNo-1+'/'+4);
                 	
-                	$(this).css('display','none');
                 	$(this).siblings('.checkbox').css('display','none');
                 	$(this).siblings('.text').css('display','none');
-                	$(this).siblings('.textarea').css('display','none');
                 	$(this).siblings('.change').css('display','inline-block');
                 });
                 
@@ -176,16 +191,30 @@
                 	$(this).siblings('.textarea').css('display','inline-block');
                 	$(this).css('display','none');
                 	$(this).parent().siblings('.content').remove();
+                	$(this).parent().siblings('br').remove();
                 });
                 
                 $('.delete').click(function(){
                 	$(this).parents('.one-survey').children('.content').last().remove();
                 	$(this).parents('.one-survey').children('.complete').last().remove();
-                	var no=$("input[class='content']").length;
+                	$(this).parents('.one-survey').children('br').last().remove();
+                	/* var no=$("input[class='content']").length;
                 	var qnoContent=$(this).parent().next('.question').val();
-                	console.log(qnoContent);
-                	var content=qnoContent.split('/')[no-1];
+                	var content=qnoContent.split('/')[no-1]; */
                 })
+                
+                //입력한 내용 취합
+                $('.complete').click(function(){
+                	
+            		var $content = $(this).parent().siblings('.content');
+            		var str = qNo-1;
+            		 $content.each(function(index,item){
+            			 var data = $(item).val();
+            			 str +="/"+data;
+            		});
+            		$(this).parent().siblings('.question').val(str);
+            		$(this).text('수정');
+            	});
         	}
         	else{
         		alert('더이상 문항을 추가할 수 없습니다.');
