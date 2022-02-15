@@ -19,6 +19,8 @@
 }
 .logo-user>a>img {
 	height: 40px;
+    margin-bottom: 50px;
+	
 }
 
 .input-login {
@@ -76,4 +78,21 @@
 }
 .link-search>a:first-child {
 	margin-bottom: 20px;
+}
+
+.txt-welcome {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 30px;
+	color: #2A2A2A;
+	margin-bottom: 30px;
+}
+.txt-welcome>span {
+	font-weight: 500;
+}
+
+.txt-welcomeInfo {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	color: #2A2A2A;
+	margin-bottom: 30px;
 }

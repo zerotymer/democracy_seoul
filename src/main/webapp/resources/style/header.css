@@ -9,7 +9,6 @@
     --HEIGHT-HEADER: 140px;
     --HEIGHT-HEADER-SMALL: 80px;
     --HEIGHT-GAP: 20px;
-    --HEIGHT-GNB: 92px;
 
     --TABLET-SCREEN: 1024px;
     --MOBILE-SCREEN: 768px;
@@ -109,9 +108,10 @@ section {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    height: var(--HEIGHT-GNB);
-    min-height: 8vh;
+    justify-content: space-between;
+    /* height: 92px; */
+    /* min-height: 8vh; */
+    line-height: 92px;
     padding: 0 20px;
 }
 .gnb ul {
@@ -127,6 +127,7 @@ section {
         justify-content: space-between;
         height: 80px;
         margin: 0;
+        line-height: 80px;
     }
     .gnb .logo {
         flex: 1 0 auto;
@@ -140,8 +141,8 @@ section {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
-    width: 800px;
-    margin: auto;
+    width: 740px;
+    /* margin: auto; */
     
     z-index: 10;
 }
@@ -165,7 +166,7 @@ section {
 .gnb .submenu {
     display: none;
     position: relative;
-    margin-top: 20px;
+    margin-top: 28px;
     z-index: 99;
     overflow: visible;
     width: 160px;
@@ -263,10 +264,10 @@ section {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     position: relative;
     width: 120px;
-    margin: 4px;
+    line-height: 92px;
 }
 .gnb .icons li {
     display: inline-block;
@@ -279,6 +280,7 @@ section {
 @media screen and (max-width: 1024px) {
     .gnb .icons {
         flex: 0 0 120px;
+        line-height: 80px;
     }
     .gnb .icons li > .menubtn {
         display: inline-block;
@@ -292,11 +294,14 @@ section {
     width: 24px;
     height: 24px;
     background-color: gray;
-
+    vertical-align: middle;
     cursor: pointer;
 }
 .btn.invert {
     filter: invert(100%);
+}
+.btn.admin {
+    filter: invert(60%);
 }
 .btn.searchbtn {
     background: var(--IMAGE-URL-SEARCH);

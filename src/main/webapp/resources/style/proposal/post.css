@@ -17,6 +17,7 @@
 }
 
 .inner {
+	
     max-width: 1180px;
     width: 100%;
 }
@@ -60,10 +61,16 @@
 }
 
 .view_content{
-    height:700px;
+	
+    min-height:700px;
     margin: 30px;
     border-bottom: 1px solid var(--COLOR-BORDER);
 }
+
+ .image>img {
+ 	width: 100%; 
+ 	height:100%
+ }
 
 .survey{
     text-align: center;
@@ -80,13 +87,12 @@
 }
 
  .comment{   
-width: 95%;
+width: 90%;
 height: 140px;
-margin:0 auto; 
 box-sizing: border-box; 
 border: 1px solid var(--COLOR-BORDER);
 box-shadow: 4px 4px 4px rgba(236, 240, 241, 0.5);
-margin-bottom: 20px;
+margin: 0 auto 20px;
 padding :15px;
 
 } 
@@ -113,3 +119,22 @@ padding :15px;
 
 } 
 
+#commentOne {
+	 	border:1px solid  var(--COLOR-BORDER);
+		min-height : 80px;
+		padding :30px;
+}
+
+.date {
+	margin-left: 0px;
+	margin-bottom: 10px;
+	font-size : 12px;
+}
+
+.more{
+	margin : 0 50%;
+	width : 80px;
+	hight : 100px;
+	background-color: white;
+	
+}	

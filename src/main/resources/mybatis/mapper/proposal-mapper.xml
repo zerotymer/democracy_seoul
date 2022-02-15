@@ -37,6 +37,14 @@
 	
 	</select>
 	
+	<!--  모든 리스트갯수 -->
+	<select id="listTotalCount"  resultType="int">
+	SELECT COUNT (*) FROM Proposal
+	
+	</select>
+	
+	
+	
 	<!-- 특정 게시물 모든 댓글갯수 -->
 	<select id="commentTotalCount" parameterType="int" resultType="int">
 	SELECT COUNT (*) FROM Proposal_Comment 
@@ -53,6 +61,8 @@
 		TO_CHAR(comment_date, 'YYYY-MM-DD') as REGDATE
 	FROM Proposal_Comment 
 	where proposal_No  = #{propsalNo}
+	order by
+	 comment_No desc
 	</select>
 	
 	

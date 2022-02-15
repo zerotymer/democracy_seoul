@@ -43,7 +43,9 @@ public class SuggestController {
                                         @SessionAttribute("user") Member member,
                                         @RequestParam(defaultValue = "0") int suggestNo,
                                         ModelAndView mav) throws IOException {
+
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 
         if (member == null) {
             PrintWriter out = response.getWriter();
