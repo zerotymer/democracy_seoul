@@ -36,7 +36,7 @@
     	
         $(".survey-plus-btn").click(function(){
         	
-        	//질문 10개까지 제한
+        	//질s문 10개까지 제한
         	if(qNo<11){
                 var oneSurvey = "<div class='one-survey'>"+qNo+". <input class='contentQ' type='text'><div class='box-btn'><button type='button' class='checkbox'>중복선택</button><button type='button' class='radio'>단일선택</button><button type='button' class='text'>단답식</button><button type='button' class='textarea'>서술형</button><button type='button' class='delete'>삭제</button><button type='button' class='change' style='display:none;'>변경</button><button type='button' class='complete'>완료</button></div><input class='input_type' name='question_input_type' type='hidden'/><input class='question' name='question_content' type='hidden'/></div><br>"
                 qNo++;
@@ -64,27 +64,40 @@
                 	$(this).siblings('.textarea').css('display','none');
                 	$(this).siblings('.change').css('display','inline-block');
                 	
-                	$('.complete').click(function(){
-                		
-                		$(this).parent().siblings('.content').each(function(index){
-                			var content=$(this).parent().siblings('.content').val();
-                		});
-                		$('body').on('load','.content',function(event){
-                			var content=$()
-                		});
-                		console.log(content);
-                		//입력폼에 입력한 내용
-                		/* var content=$(this).parent().siblings('.content').val(); */
-                		
-                		
-                		/* var result=$(this).siblings('.question').val();
-                		
-                		$(this).siblings('.question').val(result+'/'+content);
-                		var re=$(this).siblings('.question').val();
-                		console.log(re); */
-                		$(this).text('수정');
-                	});
+                	
+              
+                	
+                	
                 });
+              	
+                $('.complete').click(function(){
+            		
+            		
+            		
+            		var $content = $(this).parent().siblings('.content');
+            		
+            		var str = "";
+            		 $content.each(function(index,item){
+            			
+            			 var data = $(item).val();
+            			 str += data+"/";
+            			 
+            		});
+            		 
+            		 console.log(str);
+            	
+            		//입력폼에 입력한 내용
+            		/* var content=$(this).parent().siblings('.content').val(); */
+            		
+            		
+            		/* var result=$(this).siblings('.question').val();
+            		
+            		$(this).siblings('.question').val(result+'/'+content);
+            		var re=$(this).siblings('.question').val();
+            		console.log(re); */
+            		$(this).text('수정');
+            	});
+              	
 
               	//문항타입 단일선택 선택 시
                 $(".radio").click(function(){
