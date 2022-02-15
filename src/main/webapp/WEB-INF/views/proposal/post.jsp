@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
   
-    <title>Insert title here</title>
+    <title>서울시가 제안합니다</title>
     <link rel="stylesheet" href="/resources/style/content-frame.css">
      <link rel="stylesheet" href="/resources/style/proposal/post.css">
     <link rel="stylesheet" type="text/css" href="fontawesome-free-5.15.1-web/css/fontawesome.min.css">

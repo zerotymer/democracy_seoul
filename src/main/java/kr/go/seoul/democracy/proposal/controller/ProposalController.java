@@ -250,6 +250,45 @@ public class ProposalController {
 		return "redirect:/proposal/allList.do";
 	}
 	
+	//리스트 불러오기
+	@RequestMapping(value="/proposal/resultList.do", method = RequestMethod.GET)
+	public ModelAndView resultList(ModelAndView mav,HttpServletRequest request,
+			@RequestParam(required=false, defaultValue="1")int currentPage
+			) throws Exception{
+			
+		int recordCountPage = 9;
+		int naviCountPerPage = 5;
+		int recordTotalCount = pService.resultTotalCount();
+		
+		System.out.println(recordTotalCount);
+		
+		int pageTotalCount = (int)Math.ceil((double)recordTotalCount/recordCountPage); // 
+		int startNavi = currentPage - (currentPage - 1) % naviCountPerPage;
+		int endNavi = startNavi + naviCountPerPage - 1;  //5
+		endNavi = endNavi > pageTotalCount ? pageTotalCount : endNavi; // 5 > 100 ? 100 : 5
+				
+		System.out.println("startNavi : " + startNavi);
+		System.out.println("endNavi : " + endNavi);
+		
+		ArrayList<HashMap<String,Object>> list = pService.resultList(currentPage, recordCountPage);
+		ArrayList<Integer> navi = new ArrayList<>();
+		for (int i = startNavi; i <= endNavi; i++) {
+			navi.add(i);
+		}		
+				
+		mav.addObject("recordTotalCount", recordTotalCount);
+		mav.addObject("list",list);
+		//mav.addObject("recordCountPage",recordCountPage);
+		//mav.addObject("pageCount",(int)Math.ceil((double)totalCount/recordCountPage));
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("navi", navi);
+		mav.addObject("preNavi", startNavi > 1 ? startNavi - 1 : 0 );
+		mav.addObject("nextNavi", pageTotalCount > endNavi ? endNavi + 1 : 0 );
+		System.out.println(mav);
+		mav.setViewName("proposal/result");
+
+		return mav;			
+	}
 	
 	
 	
