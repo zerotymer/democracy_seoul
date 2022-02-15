@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.go.seoul.democracy.adminNotice.model.service.AdminNoticeService;
@@ -45,9 +48,8 @@ public class AdminNoticeController {
 		
 		
 		//페이지 목록 10개씩 끊는 로직
-		ArrayList<AdminNotice> list = nService.selectAllNoticeList(currentPage, recordCountPerPage); //notice에서 변경해야 할 부분
-		
-		int pageTotalCount = (int)Math.ceil(nService.noticeTotalCount()/(double)recordCountPerPage); //notice에서 변경해야 할 부분
+		ArrayList<AdminNotice> list = nService.selectAllNoticeList(currentPage, recordCountPerPage); 
+		int pageTotalCount = (int)Math.ceil(nService.noticeTotalCount()/(double)recordCountPerPage); 
 
 		int startNavi = currentPage - (currentPage - 1) % naviSize;
 		int endNavi = startNavi + naviSize - 1;
@@ -67,5 +69,155 @@ public class AdminNoticeController {
 		
 		return mav;
 	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.12
+	 * Description : 공지사항 글 작성 페이지로 이동
+	 */
+	@RequestMapping(value="/notice/noticeWritePageMove.do")
+	public String noticeWritePageMove()
+	{
+		return "notice/noticeCkeditorWrite";
+	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.12
+	 * Description : 공지사항 글 작성 
+	 */
+	@RequestMapping(value="/notice/noticeWrite.do")
+	public ModelAndView noticeWrite(//@RequestParam String noticeContent,
+							  		//@RequestParam String noticeTitle,
+									AdminNotice adminNotice,
+							  		ModelAndView mav)
+	{
+		int result = nService.insertNoticeWrite(adminNotice);
+		
+		String location = "notice/allMemberList.do";
+		
+		if(result>0)
+		{
+			mav.addObject("noticeMsg", "작성이 완료되었습니다");
+			mav.addObject("location", location);
+			
+		}else {
+			
+			mav.addObject("noticeMsg", "작성에 실패하였습니다");
+			mav.addObject("location", location);
+		}
+		
+		mav.setViewName("notice/noticeMsg"); //return 대신
+		
+		return mav;
+	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.12
+	 * Description : 공지사항을 볼 수 있는 페이지로 이동
+	 */
+	@RequestMapping(value="/notice/noticeViewPageMove.do")
+	public String noticeViewPageMove()
+	{
+		return "notice/noticeCkeditorView";
+	}
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.12
+	 * Description : 공지사항을 볼 수 있는 페이지
+	 */
+	@RequestMapping(value="/notice/noticeViewPage.do")
+	public ModelAndView noticeViewPage(@RequestParam int noticeNo,
+									   ModelAndView mav)
+	{
+		AdminNotice notice = nService.selectOneNotice(noticeNo);
+		mav.addObject("adminNotice", notice);
+		mav.setViewName("notice/noticeCkeditorView");
+		return mav;
+	}
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.14
+	 * Description : 공지사항 수정 페이지
+	 */
+	@RequestMapping(value="/notice/noticeUpdate.do", method = RequestMethod.POST)
+	public String noticeUpdate(@RequestParam int noticeNo,
+							   @RequestParam String noticeTitle,
+							   @RequestParam String noticeContent,
+							   Model model)
+	{
+		AdminNotice an = new AdminNotice();
+		an.setNoticeNo(noticeNo);
+		an.setNoticeTitle(noticeTitle);
+		an.setNoticeContent(noticeContent);
+		
+		int result = nService.noticeUpdate(an);
+		
+		if(result>0)
+		{
+			model.addAttribute("noticeMsg","게시판(공지사항) 수정 완료");
+			
+		}else {
+			
+			model.addAttribute("noticeMsg", "게시판(공지사항) 수정 실패");
+		}
+		
+		
+		return "notice/noticeCkeditorView";
+		
+	}
+	
+	
+	/**
+	 * 작성자 : 김영주
+	 * 작성일 : 2022.02.14
+	 * Description : 공지사항 삭제 페이지
+	 */
+	@RequestMapping(value="/notice/noticeDelete.do", method = RequestMethod.POST)
+	public String noticeDelete(@RequestParam int noticeNo,
+				   			   @RequestParam String noticeTitle,
+				   			   @RequestParam String noticeContent,
+				   			   Model model)
+	{
+		AdminNotice an = new AdminNotice();
+		an.setNoticeNo(noticeNo);
+		an.setNoticeTitle(noticeTitle);
+		an.setNoticeContent(noticeContent);
+		
+		int result = nService.noticeDelete(an);
+		
+		if(result>0)
+		{
+			model.addAttribute("noticeMsg", noticeTitle+" 삭제 완료");
+		
+		}else {
+		
+			model.addAttribute("noticeMsg", noticeTitle+" 삭제 실패");
+		}
+		
+		
+		return "notice/noticeBoardPage";
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

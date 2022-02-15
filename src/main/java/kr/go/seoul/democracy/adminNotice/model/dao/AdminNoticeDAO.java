@@ -1,6 +1,7 @@
 package kr.go.seoul.democracy.adminNotice.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -27,7 +28,7 @@ public class AdminNoticeDAO {
 		int offset = ((currentPage-1) * recordCountPerPage);
 		int limit = recordCountPerPage;
 		RowBounds rb = new RowBounds(offset, limit);
-		return new ArrayList<AdminNotice>(sqlSession.selectList("admin.selectAllNoticeList", null, rb));
+		return new ArrayList<AdminNotice>(sqlSession.selectList("notice.selectAllNoticeList", null, rb));
 	}
 	
 	/**
@@ -41,5 +42,39 @@ public class AdminNoticeDAO {
 		
 		return recordTotalCount;
 	}
+
+	public int insertNoticeWrite(AdminNotice adminNotice) {
+		
+		//HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//map.put("noticeTitle", noticeTitle);
+		//map.put("noticeContent", noticeContent);
+		
+		System.out.println(adminNotice);
+		
+		return sqlSession.insert("notice.insertNoticeWrite", adminNotice);
+	}
+	
+
+	public AdminNotice selectOneNotice(int noticeNo) {
+		return sqlSession.selectOne("notice.selectOneNotice", noticeNo);
+	}
+
+	public int noticeUpdate(AdminNotice an) {
+		
+		return sqlSession.update("notice.noticeUpdate",an);
+	}
+
+	public int noticeDelete(AdminNotice an) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("noticeNo", an.getNoticeNo());
+		map.put("noticeTitle", an.getNoticeTitle());
+		map.put("noticeContent", an.getNoticeContent());
+		
+		return sqlSession.update("notice.noticeDelete", map);
+	}
+
 
 }

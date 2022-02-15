@@ -26,7 +26,6 @@
     }
 }
 
-
 header {
     display: block;
     position: fixed;
@@ -60,13 +59,44 @@ section {
     }
 }
 
+.inner {
+    max-width: 1180px;
+    margin: 0 auto;
+}
 
 /* NOTICE BAR */
 .noticebar {
 /*    display: none;*/
     height: 48px;
     background-color: var(--COLOR-BLUE);
+    font: 200 14px/48px 'Noto Sans KR', sans-serif;
 }
+.noticebar .inner {
+    display: flex;
+    flex-flow: row nowrap;
+    max-width: 1180px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.noticebar ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+}
+.noticebar li {
+    text-decoration: none;
+    margin-right: 8px;
+}
+.noticebar li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+
 
 @media screen and (max-width: 1024px) {
     .noticebar {
@@ -235,7 +265,7 @@ section {
     align-items: center;
     justify-content: space-around;
     position: relative;
-    width: 80px;
+    width: 120px;
     margin: 4px;
 }
 .gnb .icons li {
@@ -259,8 +289,8 @@ section {
 /* Common - BTN */
 .btn {
     border: none;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     background-color: gray;
 
     cursor: pointer;
@@ -274,8 +304,11 @@ section {
 .btn.loginbtn {
     background: var(--IMAGE-URL-LOGIN);
 }
-.btn.logout {
+.btn.logoutbtn {
     background: var(--IMAGE-URL-LOGOUT);
+}
+.btn.accountbtn {
+    background: var(--IMAGE-URL-ACCOUNT);
 }
 .btn.menubtn {
     background: var(--IMAGE-URL-MENU);

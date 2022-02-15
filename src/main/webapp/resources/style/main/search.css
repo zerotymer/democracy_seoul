@@ -22,9 +22,14 @@
     line-height: 36px;
     border: 4px solid #CCC;
 }
-.search--container .search-bar button {
-    margin-left: 5px;
+.search--container .search-bar .searchBtn {
+    width: 100px;
+    height: 34px;
+    background-color: var(--COLOR-DARK);
+    font: 300 16px/34px 'Noto Sans KR', sans-serif;
+    color: white;
 }
+
 
 .search--container .search-msg {
     font: 200 20px/1.5 'Nanum Gothic', sans-serif;
