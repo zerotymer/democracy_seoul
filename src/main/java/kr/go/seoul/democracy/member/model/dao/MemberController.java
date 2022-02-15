@@ -1,4 +1,4 @@
-package kr.go.seoul.democracy.member.controller;
+package kr.go.seoul.democracy.member.model.dao;
 
 import java.io.IOException;
 import java.util.ArrayList;
