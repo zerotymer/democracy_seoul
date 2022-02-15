@@ -1,19 +1,22 @@
 package kr.go.seoul.democracy.common;
 
-import kr.go.seoul.democracy.adminNotice.model.vo.AdminNotice;
-import kr.go.seoul.democracy.board.model.vo.BoardNotice;
-import kr.go.seoul.democracy.common.model.service.HitsService;
-import kr.go.seoul.democracy.common.model.service.HitsServiceImpl;
-import kr.go.seoul.democracy.discuss.model.vo.Discuss;
-import kr.go.seoul.democracy.proposal.model.vo.Proposal;
-import kr.go.seoul.democracy.suggest.vo.Sug;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import kr.go.seoul.democracy.board.model.vo.BoardNotice;
+import kr.go.seoul.democracy.board.model.vo.Event;
+import kr.go.seoul.democracy.board.model.vo.Referenceroom;
+import kr.go.seoul.democracy.board.model.vo.SeoulNews;
+import kr.go.seoul.democracy.common.model.service.HitsService;
+import kr.go.seoul.democracy.common.model.service.HitsServiceImpl;
+import kr.go.seoul.democracy.discuss.model.vo.Discuss;
+import kr.go.seoul.democracy.proposal.model.vo.Proposal;
+import kr.go.seoul.democracy.suggest.vo.Sug;
 
 /**
  * 조회수 처리를 위한 Advice
@@ -33,60 +36,100 @@ public class HitsAdvice {
 
     /// POINTCUT & Weaver
     // Suggest
-    @Pointcut("execution(kr..Sug kr..service.*.*(..))")
+    @Pointcut("execution(kr..Sug kr..service.*.*(int))")
     public void suggestPointCut() {}
 
     @After("suggestPointCut()")
-    public void hitSuggest(JoinPoint jp) {
-        if (!(jp.getArgs()[0] instanceof Sug)) return;
+    public void hitSuggest(Object returnObj) {
+        if (!(returnObj instanceof Sug)) return;
 
-        Sug value = (Sug) jp.getArgs()[0];
+        Sug value = (Sug) returnObj;
         if (value == null) return;
 
-        //hService.addCountHitsTable("SUGGEST_HITS", 1);                                                  // TODO: REVISE
+        hService.addCountHitsTable("SUGGEST_HITS", value.getSuggestNo());
     }
 
     // Discuss
-    @Pointcut("execution(kr..Discuss kr..service.*.*(..))")
+    @Pointcut("execution(kr..Discuss kr..service.*.*(int))")
     public void discussPointCut() {}
 
-    @After("discussPointCut()")
-    public void hitDiscuss(JoinPoint jp) {
-        if (!(jp.getArgs()[0] instanceof Discuss)) return;
-
-        Discuss value = (Discuss) jp.getArgs()[0];
+    @AfterReturning(pointcut = "discussPointCut()", returning = "returnObj")
+    public void hitDiscuss(Object returnObj) {
+        if (!(returnObj instanceof Discuss)) return;
+        
+        Discuss value = (Discuss) returnObj;
         if (value == null) return;
-
+        
         hService.addCountHitsTable("DISCUSSION_HITS", value.getDiscussNo());
     }
 
     // Proposal
-    @Pointcut("execution(kr..Proposal kr..service.*.*(..))")      // TODO: model
+    @Pointcut("execution(kr..Proposal kr..service.*.*(int))")      // TODO: model
     public void proposalPointCut() {}
 
-    @After("proposalPointCut()")
-    public void hitProposal(JoinPoint jp) {
-        if (!(jp.getArgs()[0] instanceof Proposal)) return;
+    @AfterReturning(pointcut = "proposalPointCut()", returning = "returnObj")
+    public void hitProposal(Object returnObj) {
+        if (!(returnObj instanceof Proposal)) return;
 
-        Proposal value = (Proposal) jp.getArgs()[0];
+        Proposal value = (Proposal) returnObj;
         if (value == null) return;
 
         hService.addCountHitsTable("PROPOSAL_HITS", value.getProposalNo());
     }
 
     // Notice
-    @Pointcut("execution(kr..BoardNotice kr..service.*.*(..))")
+    @Pointcut("execution(kr..BoardNotice kr..service.*.*(int))")
     public void noticePointCut() {}
 
-    @After("noticePointCut()")
-    public void hitNotice(JoinPoint jp) {
-        if (!(jp.getArgs()[0] instanceof BoardNotice)) return;
+    @AfterReturning(pointcut = "noticePointCut()", returning = "returnObj")
+    public void hitNotice(Object returnObj) {
+        if (!(returnObj instanceof BoardNotice)) return;
 
-        BoardNotice value = (BoardNotice) jp.getArgs()[0];
+        BoardNotice value = (BoardNotice) returnObj;
         if (value == null) return;
 
         hService.addCountHitsTable("NOTICE_HITS", value.getNoticeNewsNo());
     }
 
     // NEWS
+    @Pointcut("execution(kr..SeoulNews kr..service.*.*(int))")
+    public void newsPointCut() {}
+    
+    @AfterReturning(pointcut = "newsPointCut()", returning = "returnObj")
+    public void hitNews(Object returnObj) {
+    	if (!(returnObj instanceof SeoulNews)) return;
+
+    	SeoulNews value = (SeoulNews) returnObj;
+        if (value == null) return;
+
+        hService.addCountHitsTable("NEWS_HITS", value.getSeoulNewsNo());
+    }
+    
+    // Event
+    @Pointcut("execution(kr..Event kr..service.*.*(int))")
+    public void eventPointCut() {}
+    
+    @AfterReturning(pointcut = "eventPointCut()", returning = "returnObj")
+    public void hitEvent(Object returnObj) {
+    	if (!(returnObj instanceof Event)) return;
+
+    	Event value = (Event) returnObj;
+        if (value == null) return;
+
+        hService.addCountHitsTable("EVENT_HITS", value.getEventNo());
+    }
+    
+    // Referenceroom
+    @Pointcut("execution(kr..Referenceroom kr..service.*.*(int))")
+    public void referencePointCut() {}
+    
+    @AfterReturning(pointcut = "referencePointCut()", returning = "returnObj")
+    public void referenceEvent(Object returnObj) {
+    	if (!(returnObj instanceof Referenceroom)) return;
+
+    	Referenceroom value = (Referenceroom) returnObj;
+        if (value == null) return;
+
+        hService.addCountHitsTable("REFERENCEROOM_HITS", value.getReferNo());
+    }
 }
