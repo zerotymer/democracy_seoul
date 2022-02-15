@@ -184,14 +184,26 @@ public class DiscussController {
 							@RequestParam String title,
 							@RequestParam String content,
 							@RequestParam String thumbnailName,
-							@RequestParam String thumbnailPath) {
+							@RequestParam String thumbnailPath,
+							@RequestParam int fileNo) {
 		int adminNo=admin.getAdminNo();
 		
-		Discuss discuss=new Discuss(adminNo,title,content,thumbnailName,thumbnailPath);
+		Discuss discuss=new Discuss();
+		discuss.setAdminNo(adminNo);
+		discuss.setDiscussTitle(title);
+		discuss.setDiscussContent(content);
+		discuss.setDiscussThumbnailName(thumbnailName);
+		discuss.setDiscussThumbnailPath(thumbnailPath);
 		
 		int result=dService.write(discuss);
-		if(result>0) mav.setViewName("/discuss/link.do");
-		else mav.setViewName("/discuss/error");
+		
+		if(result>0) {
+			int discussNo=discuss.getDiscussNo();
+			int fileUpdate=dService.fileUpdate(discussNo,fileNo);
+			if(fileUpdate>0) mav.setViewName("discuss/board");
+			else mav.setViewName("discuss/error");
+		}
+		else mav.setViewName("discuss/error");
 		
 		return mav;
 	}
@@ -228,9 +240,21 @@ public class DiscussController {
         String name=info.getFileName();
         String path=info.getAbsolutePath();
         String originalName=info.getOriginalFileName();
-        int result=dService.fileUpload(name,path);
+        int fileNo=0;
+        
+        HashMap<String,Object> file=new HashMap<String,Object>();
+        file.put("fileName", name);
+        file.put("filePath", path);
+        file.put("fileNo", fileNo);
+        
+        int result=dService.fileUpload(file);
+        
+        fileNo=(int) file.get("fileNo");
+        System.out.println(fileNo);
+        
         JsonObject json = new JsonObject();
         json.addProperty("result",result);
+        json.addProperty("fileNo",fileNo);
         json.addProperty("originalName",originalName);
 		new Gson().toJson(json,response.getWriter());
     }

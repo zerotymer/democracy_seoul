@@ -77,16 +77,20 @@ public class DiscussDAO {
 		return sqlSession.selectOne("discuss.getVote", discussNo);
 	}
 
-	public int fileUpload(String name, String path) {
-		HashMap<String,Object> map=new HashMap<String,Object>();
-		map.put("fileName", name);
-		map.put("filePath", path);
-		return sqlSession.update("discuss.fileUpload", map);
-	}
-
 	public ArrayList<Discuss> getList(int currentListPage, int pageSize) {
 		RowBounds rb=new RowBounds((currentListPage-1)*pageSize,pageSize);
 	    return new ArrayList<Discuss>(sqlSession.selectList("discuss.getList",null,rb));
+	}
+
+	public int fileUpload(HashMap<String, Object> file) {
+		return sqlSession.update("discuss.fileUpload", file);
+	}
+	
+	public int fileUpdate(int discussNo, int fileNo) {
+		HashMap<String,Integer> map=new HashMap<String,Integer>();
+		map.put("discussNo", discussNo);
+		map.put("fileNo", fileNo);
+		return sqlSession.update("discuss.fileUpdate", map);
 	}
 
 }
