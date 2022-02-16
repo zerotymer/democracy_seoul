@@ -249,7 +249,7 @@
                             </svg>
                         </div>
                         <button type="button" id="uploadFile">파일 업로드</button>
-                        <input type="hidden" name="fileNo" id="fileNo">
+                        <input type="hidden" name="fileNo" id="fileNo" value=0>
                     </div>
                 </div>
             </div>
@@ -265,9 +265,9 @@
     </div>
 </section>
 
-<footer>
-    <%@ include file="/includes/footer.jsp" %>
-</footer>
+	<footer>
+	    <%@ include file="/includes/footer.jsp" %>
+	</footer>
 
 <!-- JQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

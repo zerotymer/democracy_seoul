@@ -25,7 +25,7 @@ public class SurveyController {
 		return "survey/adminWriteForm";
 	}
 	
-	@RequestMapping(value="/survey/adminWrite.do", method = RequestMethod.POST)
+	/*@RequestMapping(value="/survey/adminWrite.do", method = RequestMethod.POST)
 	public void adminWrite(ModelAndView mav,
 							//@RequestParam int proposalNo,
 							@RequestParam String title, //설문지 제목
@@ -54,7 +54,7 @@ public class SurveyController {
 			inputTypeArray[i]=qinputType[1];
 		}*/
 		
-		String question_content[]=questionContent.split(",");
+		/*String question_content[]=questionContent.split(",");
 		for(int i=0;i<question_content.length;i++) {
 			String qContent[]=question_content[i].split("/");
 			
@@ -85,5 +85,5 @@ public class SurveyController {
 		System.out.println(questionContent);
 		System.out.println(questionInputType);
 		System.out.println(contentQValue);
-	}
+	}*/
 }
