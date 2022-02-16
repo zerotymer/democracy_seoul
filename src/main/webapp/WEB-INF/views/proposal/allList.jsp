@@ -142,20 +142,11 @@
             </div>
             <div class="contents--btns">
                 <c:if test="${ sessionScope.admin != null}">
-                    <button class="btn suggest" id="btnWrite">서울 제안 작성하기</button>
+                    <button class="btn suggest" onclick="location.replace('/proposal/proposalWrite.do');">서울 제안 작성하기</button>
                 </c:if>
             </div>
         </div>
-        <script>
 
-            //글쓰기 폼으로 이동하게 하는 함수
-            $(document).ready(function () {
-                $("#btnWrite").click(function () {
-                    location.href = "/proposal/proposalWrite.do";
-                });
-            });
-
-        </script>
 
         <div class="contents-search">
             <!-- 검색 위치 -->
@@ -239,34 +230,5 @@
 <script src="/resources/script/header.js"></script>
 <script src="/resources/script/content-frame.js"></script>
 <script src="/resources/script/card-container.js"></script>
-<script>
-    /* 	$(document).ready(function(){
-
-            let result = '<c:out value="${result}"/>';
-
-							   	 checkAlert(result);
-
-							    	function checkAlert(result){
-
-							        	if(result === ''){
-							            return;
-							        }
-
-							       	 if(result === "enrol success"){
-							            alert("등록이 완료되었습니다.");
-							        }
-
-				    }
-
-				}); */
-
-    //글쓰기 폼으로 이동하게 하는 함수
-    $(document).ready(function(){
-        $("#proposalTitle").click(function(){
-            location.href="/proposal/post.do?proposalNo=${proposal.proposalNo}";
-        });
-    });
-
-</script>
 </body>
 </html>

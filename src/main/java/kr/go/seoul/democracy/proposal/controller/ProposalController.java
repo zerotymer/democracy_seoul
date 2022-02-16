@@ -168,9 +168,9 @@ public class ProposalController {
 	@RequestMapping(value="/proposal/proposalWrite.do")
 	public String proposalEnroll(HttpSession session, HttpServletResponse write)throws Exception {
 		
-		String adminId = (String)session.getAttribute("adminId");
+		Admin admin = (Admin)session.getAttribute("admin");
 
-		if (adminId==null) {
+		if (admin==null) {
 			write.setContentType("text/html; charset=UTF-8");
 			PrintWriter out_write = write.getWriter();
 			out_write.println("<script>alert('로그인이 되어있지 않습니다. 로그인을 먼저 해주세요.');</script>");
