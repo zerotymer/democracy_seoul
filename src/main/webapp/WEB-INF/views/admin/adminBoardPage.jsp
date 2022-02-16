@@ -23,8 +23,8 @@
         }
 
         .menu {
-            width: 250px;
-            height: 650px;
+            width: 200px;
+            height: 780px;
             background-color: #3F51B5;
             float: left;
             
@@ -32,13 +32,12 @@
 
         .main_logo {
             width: 100%;
-            height: 100px;
+            height: 120px;
             display: block;
             margin: auto;
             text-align: center;
-            background-color: white;
             box-sizing: border-box;
-            padding: 7px;
+            padding: 20px;
             float: left;
         }
 
@@ -50,6 +49,7 @@
         }
 
         .menu_bar_inner {
+        	padding: 20px;
             width: 100%;
             height: 100px;
             color: white;
@@ -58,6 +58,7 @@
         .notice {
             width: 100%;
             height: 30px;
+            word-spacing: -0.8px;
         }
         .notice:hover {
             cursor: pointer;
@@ -71,8 +72,8 @@
 
         .info {
             background-color: #3F51B5;
-            width: 100%;
-            height: 100px;
+            width: 1320px;
+            height: 80px;
             float: left;
             padding: 15px;
         }
@@ -86,11 +87,10 @@
         }
 
         .admin_info {
-            float: left;
-            width: 20%;
+            float: right;
+            width: 15%;
             height: 100%;
-            padding: 10px;
-            margin: 0px 0px 0px 590px;
+            margin: 0px auto;
             text-align: center;
             color: white;
         }
@@ -100,9 +100,10 @@
         }
 
         .admin_icon {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             float: left;
+            margin : 10px 0px 0px 0px;
         }
 
         .admin_icon > img {
@@ -111,13 +112,16 @@
         }
 		.admin_idarea{
 			display : inline-block;
+			margin : 15px;
+			float: left;
+			font-size : 1.2em;
 		}
         .board {
             background-color: #EAEAEA;
             padding: 10px;
             float: left;
-            width: 100%;
-            height: 500px;
+            width: 1320px;
+            height: 700px;
         }
 
         .board_content {
@@ -132,6 +136,16 @@
             height: 25px;
             margin : 0px;
         }
+        .size{
+			word-spacing: -0.8px;
+		}
+		a{
+        	text-decoration:none;
+        	color : white;
+        }
+        a:hover{
+        	color : white;
+        }
     </style>
 
 </head>
@@ -144,10 +158,11 @@
         </div>
         <div class="menu_bar">
             <div class="menu_bar_memberMNGM">
+            	<br>
                 <div class="menu_bar_inner">
                     MEMBER<br>
                     <a href="/admin/allMemberList.do">
-                		- 회원관리
+                		<div class="size">- 회원관리</div>
                 	</a>
                 </div>
                 <div class="menu_bar_inner">
@@ -207,7 +222,7 @@
                                     <td>${m.email }</td>
                                     <td>${m.enrollDate }</td>
                                     <td>
-                                        <button class="stateChangeBtn" onclick="endYnChange(this)"
+                                    	<button type="button" class="btn btn-secondary gap-2 col-6 mx-auto" onclick="endYnChange(this)"
                                                 data="${m.userId }">${m.endYN }</button>
                                     </td>
                                 </tr>
