@@ -15,6 +15,7 @@
 			discuss_thumbnail_path as discussThumbnailPath
 		from discussion
 		where discuss_del_yn='N'
+		order by discuss_date desc
 	</select>
 	
 	<select id="discussTotalCount" resultType="int">
@@ -150,6 +151,7 @@
 			discuss_thumbnail_path as discussThumbnailPath
 		from discussion
 		where discuss_del_yn='N'
+		order by discuss_date desc
 	</select>
 	
 </mapper>
