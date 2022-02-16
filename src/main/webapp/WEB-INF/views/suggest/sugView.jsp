@@ -127,7 +127,7 @@ section {
                 			<br>
             
 			            <div class="listlist">
-				            	<button clsss="editBtn" id="editBtn">수정</button>
+				            	<button clsss="editBtn" id="editBtn" onclick="location.replace('/suggest2/writePost.do?suggestNo=${suggest.suggestNo}');">수정</button>
 				            	<button clsss="delBtn" id="delBtn">삭제</button>
 				            	<button clsss="listBtn" id="listBtn">목록</button>
 						</div>
