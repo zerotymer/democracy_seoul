@@ -21,25 +21,25 @@
     <style>
         .wrapper {
             width: 100%;
-            height: 750px;
+            height: 800px;
         }
 
         .menu {
             width: 200px;
-            height: 600px;
+            height: 780px;
             background-color: #3F51B5;
             float: left;
+            
         }
 
         .main_logo {
             width: 100%;
-            height: 100px;
+            height: 120px;
             display: block;
             margin: auto;
             text-align: center;
-            background-color: white;
             box-sizing: border-box;
-            padding: 7px;
+            padding: 20px;
             float: left;
         }
 
@@ -51,6 +51,7 @@
         }
 
         .menu_bar_inner {
+        	padding: 20px;
             width: 100%;
             height: 100px;
             color: white;
@@ -59,6 +60,10 @@
         .notice {
             width: 100%;
             height: 30px;
+            word-spacing: -0.8px;
+        }
+        .notice:hover {
+            cursor: pointer;
         }
 
         #content {
@@ -69,8 +74,8 @@
 
         .info {
             background-color: #3F51B5;
-            width: 100%;
-            height: 100px;
+            width: 1320px;
+            height: 80px;
             float: left;
             padding: 15px;
         }
@@ -84,11 +89,10 @@
         }
 
         .admin_info {
-            float: left;
-            width: 20%;
+            float: right;
+            width: 15%;
             height: 100%;
-            padding: 10px;
-            margin: 0px 0px 0px 590px;
+            margin: 0px auto;
             text-align: center;
             color: white;
         }
@@ -98,9 +102,10 @@
         }
 
         .admin_icon {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             float: left;
+            margin : 10px 0px 0px 0px;
         }
 
         .admin_icon > img {
@@ -109,13 +114,16 @@
         }
 		.admin_idarea{
 			display : inline-block;
+			margin : 15px;
+			float: left;
+			font-size : 1.2em;
 		}
         .board {
             background-color: #EAEAEA;
             padding: 10px;
             float: left;
-            width: 100%;
-            height: 500px;
+            width: 1320px;
+            height: 700px;
         }
 
         .board_content {
@@ -124,14 +132,16 @@
             height: 100%;
             padding: 20px;
         }
-        
-        .stateChangeBtn{
-        	width: 100%;
-            height: 100%;
-        }
         .writeBtn{
-        	width: 30px;
+        	width: 100px;
             height: 30px;
+        }
+        a:not(href){
+        	text-decoration:none;
+        	color : white;
+        }
+        a:hover{
+        	color : white;
         }
     </style>
 
@@ -147,6 +157,7 @@
         <!-- 사이드 메뉴바 -->
         <div class="menu_bar">
             <div class="menu_bar_memberMNGM">
+            	<br>
                 <div class="menu_bar_inner">
                     MEMBER<br>
                     <a href="/admin/allMemberList.do">
@@ -167,7 +178,7 @@
     <div id="content">
         <div class="info">
             <div class="menu_info">
-                MEMBER > 회원관리
+                BOARD > 공지사항
             </div>
             <div class="admin_info">
                 <a href="/admin/adminUpdatePageMove.do">
@@ -188,9 +199,10 @@
             <div class="board_content">
 				<div class="writeBtn">
             		<a href="/notice/noticeWritePageMove.do">
-            			<button>글 작성</button>
+            			<button type="button" class="btn btn-outline-dark">작성</button>
             		</a>
             	</div>
+            	<br>
                 <c:choose>
                     <c:when test="${!requestScope.list.isEmpty() }">
 
@@ -213,7 +225,7 @@
                                     	<a href="/notice/noticeViewPage.do?noticeNo=${ n.noticeNo }">${n.noticeTitle}</a>
                                     </td>
                                     <td>${n.noticeDate }</td>
-                                    <td>${n.noticeDelYN }</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;${n.noticeDelYN }</td>
                                 </tr>
                             </c:forEach>
                             </tbody>

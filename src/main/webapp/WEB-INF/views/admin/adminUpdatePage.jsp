@@ -25,7 +25,7 @@
             display: flex;
         }
         .login_form{
-            width: 400px;
+            width: 350px;
             height: 700px;
             background-color: white;
             margin: auto;
@@ -36,7 +36,7 @@
         .image{
             width : 250px;
             height: 100px;
-            margin: 30px 100px 200px 100px;
+            margin: 30px 50px 200px 50px;
             text-align: center;
         }
         .image>img{
