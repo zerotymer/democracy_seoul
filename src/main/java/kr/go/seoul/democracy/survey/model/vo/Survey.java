@@ -3,7 +3,7 @@ package kr.go.seoul.democracy.survey.model.vo;
 public class Survey {
 	private int surveyNo;
 	private int proposalNo;
-	private String SurveyTitle;
+	private String surveyTitle;
 	
 	
 	
@@ -17,7 +17,7 @@ public class Survey {
 		super();
 		this.surveyNo = surveyNo;
 		this.proposalNo = proposalNo;
-		SurveyTitle = surveyTitle;
+		this.surveyTitle = surveyTitle;
 	}
 
 	
@@ -44,18 +44,18 @@ public class Survey {
 
 
 	public String getSurveyTitle() {
-		return SurveyTitle;
+		return surveyTitle;
 	}
 
 
 	public void setSurveyTitle(String surveyTitle) {
-		SurveyTitle = surveyTitle;
+		this.surveyTitle = surveyTitle;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Survey [surveyNo=" + surveyNo + ", proposalNo=" + proposalNo + ", SurveyTitle=" + SurveyTitle + "]";
+		return "Survey [surveyNo=" + surveyNo + ", proposalNo=" + proposalNo + ", surveyTitle=" + surveyTitle + "]";
 	}
 	
 	
