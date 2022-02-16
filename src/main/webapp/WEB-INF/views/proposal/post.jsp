@@ -181,16 +181,14 @@
     <%@ include file="/includes/footer.jsp" %>
 </footer>
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="/resources/script/header.js"></script>
-<script src="/resources/script/content-frame.js"></script>
-<script>
-    var proposalNo = ${ proposal.proposalNo };
-    var bLogin = ${ sessionScope.user != null };
-    var totalCount = ${commentCount};
-    var curPage = 1;
-    
-
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="/resources/script/header.js"></script>
+    <script src="/resources/script/content-frame.js"></script>
+    <script>
+        var proposalNo = ${ proposal.proposalNo };
+        var bLogin = ${ sessionScope.user != null };
+        var totalCount = ${commentCount};
+        var curPage = 1;
    		
    		function getList(){
    	    	if(totalCount <= curPage * 5) return ; // 이미 모든값을 가져와서 가져올 필요가 없음 
@@ -207,7 +205,7 @@
    	    			}
    	    		}
    	    	});
-   	    };
+   	    }
    	    
    	    // 값을 data에 저장(for each안에 있는 모든 값들을) 암기하기!!!!! 
    	    function insertComment(data) {
@@ -243,7 +241,8 @@
 
  		
    	    function addComment(){
-   	    	var comment = document.getElementById('comment').value;
+   	    	let comment = document.getElementById('comment').value;
+               console.log(comment);
    	    	$.ajax({
 	   	    	type:'post',
 	   	    	url: "/proposal/writeComment.do",
@@ -258,13 +257,10 @@
 	   	    			USERID: '작성자',
 	   	    			REGDATE: '2022-02-16',
 	   	    			CONTENT: comment 
-	   	    			});
+                    });
 	   	    	}
    	    	});
    	    }
-   	    
-    
     </script>
-
 </body>
 </html>
