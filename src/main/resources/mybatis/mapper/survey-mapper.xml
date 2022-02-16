@@ -34,6 +34,9 @@
 
 <!-- 4-1 데이터넣기-->
 <insert id="addSurvey" parameterType="kr.go.seoul.democracy.survey.model.vo.Survey" >
+	<selectKey resultType="int" keyProperty="surveyNo" order="AFTER">
+		select max(survey_no) from survey
+	</selectKey>
 	
 	insert into survey  
 	values (SURVEY_SEQ.NEXTVAL, #{proposalNo}, #{surveyTitle} )
@@ -55,11 +58,11 @@
 
 
 <!-- 4-3 -->	
-<insert id="addQuestion" parameterType="kr.go.seoul.democracy.survey.model.vo.Survey">
-
-	insert into survey_q
-	values (SURVEY_Q_SEQ.NEXTVAL, #{surveyNo},#{question},#{inputType},#{content},#{content_q})
-
+<insert id="addQuestion" parameterType="arraylist">
+	<foreach collection="list" item="kr.go.seoul.democracy.survey.model.vo.SurveyQ">
+		insert into survey_q
+		values (SURVEY_Q_SEQ.NEXTVAL, #{surveyNo},#{question},#{inputType},#{content},#{contentQ})
+	</foreach>
 </insert>	
 
 </mapper>

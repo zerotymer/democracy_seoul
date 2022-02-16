@@ -25,6 +25,16 @@ public class SurveyQ {
 		this.contentQ = contentQ;
 	}
 	
+
+	public SurveyQ(int surveyNo, int question, char inputType, String content, String contentQ) {
+		super();
+		this.surveyNo = surveyNo;
+		this.question = question;
+		this.inputType = inputType;
+		this.content = content;
+		this.contentQ = contentQ;
+	}
+
 	public int getSurveyQno() {
 		return surveyQno;
 	}
