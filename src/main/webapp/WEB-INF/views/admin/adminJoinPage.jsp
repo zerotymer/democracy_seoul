@@ -18,24 +18,28 @@
 <style>
         .wrapper{
             width: 100%;
-            height: 900px;
+            height: 1000px;
             background-color: #3F51B5;
             box-sizing: border-box;
             display: flex;
         }
         .login_form{
             width: 500px;
-            height: 800px;
+            height: 950px;
             background-color: white;
             margin: auto;
             border-radius: 2em;
             box-shadow: 7px 7px 2px 1px rgba(0, 0, 0, .2);
             display: flex;
         }
+        #joinform{
+        	 width: 305px;
+            height: 591px;
+        }
         .image{
-            width : 200px;
-            height: 85px;
-            margin: 30px 200px 200px 200px;
+            width : 250px;
+            height: 90px;
+            margin: 30px 125px 200px 125px;
             text-align: center;
         }
         .image>img{
@@ -46,18 +50,18 @@
             width: 70px;
             height: 70px;
             position: absolute;
-            margin: 140px 210px 200px 210px;
+            margin: 145px 215px 200px 215px;
         }
         .img_admin_icon>img{
             width: 100%;
             height: 100%;
         }
         .text{
-            width: 120px;
+            width: 150px;
             height: 40px;
             text-align: center;
             position: absolute;
-            margin: 200px 200px 50px 200px;
+            margin: 210px 175px 50px 175px;
             color: #8C8C8C;
         }
         .enter{
@@ -68,6 +72,17 @@
         }
         .enter>input{
             text-align: center;
+        }
+        a{
+        	text-decoration:none;
+        	color : white;
+        }
+        a:hover{
+        	color : white;
+        }
+        .button{
+        	width: 305px;
+        	text-align: center;
         }
     </style>
 
@@ -83,33 +98,37 @@
             <img src="/resources/icons/admin_icon.png">
             </div>
             <div class="text">
-            <H3>관리자 로그인</H3>
+            <H5>관리자 로그인</H5>
             </div>
             
             
             <div class="enter">
                 <form action="/admin/adminJoin.do" method="post" id="joinForm" onsubmit="return mustHave();">
-						아이디  <input type="text" name="adminId" id="adminId" placeholder="아이디"/><input type="button" id="adminIdCheckBtn" value="중복체크"/><br>
-							<p style="font-size: 0.9em; color: darkgray;">아이디는 영문 소문자,숫자 8~10 글자 이내로 입력하세요.</p>
-							<span id = "msg" type="hidden"></span><br>
+						아이디 <input class="form-control form-control-sm" type="text"  name="adminId" id="adminId" placeholder="아이디" maxlength="12" >
+							<p style="font-size: 0.8em; color: darkgray;">아이디는 영문 소문자,숫자 8~10 글자 이내로 입력하세요.</p>
+							<button type="button" class="btn btn-outline-primary col-12 mx-auto"" id="adminIdCheckBtn">중복체크</button><br><br>
 							
-						비밀번호  <input type="password" name="adminPwd" id="adminPwd" placeholder="비밀번호"/><br>
-							<p style="font-size: 0.9em; color: darkgray;">소문자,대문자,숫자를 포함한 8~12 글자 이내로 입력하세요.</p><br>
+						비밀번호  <input class="form-control form-control-sm" type="password"  name="adminPwd" id="adminPwd" placeholder="비밀번호" maxlength="12" >
+							<p style="font-size: 0.8em; color: darkgray;">소문자,대문자,숫자를 포함한 8~12 글자 이내로 입력하세요.</p>
 							
-						비밀번호 재입력  <input type="password" name="adminPwd_re" id="adminPwd_re" placeholder="비밀번호 재입력"/><br>
-							<p style="font-size: 0.9em; color: darkgray;">동일한 비밀번호를 한 번 더 입력하세요.</p>
+						비밀번호 재입력  <input class="form-control form-control-sm" type="password" name="adminPwd_re" id="adminPwd_re" placeholder="비밀번호 재입력" maxlength="12" >
+							<p style="font-size: 0.8em; color: darkgray;">동일한 비밀번호를 한 번 더 입력하세요.</p>
 							
-						이름  <input type="text" name="adminName" id="adminName" maxlength="5"/><br>
+						이름  <input class="form-control form-control-sm" type="text" name="adminName" id="adminName" placeholder="이름 입력" maxlength="5" ><br>
 							
-						이메일  <input type="text" name="adminEmail" id="adminEmail"/><br><br>
+						이메일  <input class="form-control form-control-sm" type="text" name="adminEmail" id="adminEmail" placeholder="이메일 입력" maxlength="40" ><br>
 						
-						<span id="message"></span><br><br>
+						<span id="message" style="font-size: 0.8em;"></span><br>
 						
-						<input type="reset" value="취소" id="reset"/> <input type="submit" value="가입"/>
-						
+						<div class="button">
+							<button type="reset" class="btn btn-outline-warning col-5 mx-auto" id="reset">취소</button>
+							<button type="submit" class="btn btn-outline-primary col-5 mx-auto" id="reset">가입</button>
+						</div>
 				</form>
 				
-				<a href="/admin/adminMain.do">메인 페이지</a>
+				<div class="button">
+					<button class="btn btn-primary col-12 mx-auto" type="submit"><a href="/admin/adminMain.do">메인 페이지</a></button>
+				</div>
             </div>
 			
             
@@ -129,10 +148,8 @@
 					if(result == "true")
 					{
 						alert('[' + adminId + ']사용 불가능한 아이디');
-						$('#msg').html("사용 불가능한 아이디 입니다.").css('color','red');
 					}else{
 						alert('[' + adminId + ']사용 가능한 아이디');
-						$('#msg').html("사용 가능한 아이디 입니다.").css('color','blue');
 					}
 				},
 				error : function(){
