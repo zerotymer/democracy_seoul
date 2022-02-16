@@ -179,13 +179,13 @@ public class DiscussController {
 	
 	//시민토론 게시글 작성
 	@RequestMapping(value="/discuss/write.do")
-	public ModelAndView write(ModelAndView mav,
+	public void write(HttpServletRequest request, HttpServletResponse response,
 							@SessionAttribute Admin admin,
 							@RequestParam String title,
 							@RequestParam String content,
 							@RequestParam String thumbnailName,
-							@RequestParam String thumbnailPath,
-							@RequestParam int fileNo) {
+							@RequestParam String thumbnailPath
+							) throws IOException {
 		int adminNo=admin.getAdminNo();
 		
 		Discuss discuss=new Discuss();
@@ -196,16 +196,22 @@ public class DiscussController {
 		discuss.setDiscussThumbnailPath(thumbnailPath);
 		
 		int result=dService.write(discuss);
-		
-		if(result>0) {
+		String msg="게시글 작성 성공";
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		int fileNo=Integer.parseInt(request.getParameter("fileNo"));
+		if(result>0&&fileNo!=0) {
 			int discussNo=discuss.getDiscussNo();
 			int fileUpdate=dService.fileUpdate(discussNo,fileNo);
-			if(fileUpdate>0) mav.setViewName("discuss/board");
-			else mav.setViewName("discuss/error");
+			if(fileUpdate>0) {
+				response.getWriter().println("<script>alert('게시글 작성 완료');location.replace('/discuss/list.do');</script>");
+			}
+			else response.sendRedirect("discuss/error");
 		}
-		else mav.setViewName("discuss/error");
-		
-		return mav;
+		else if(result>0&&fileNo<=0) {
+			response.getWriter().println("<script>alert('게시글 작성 완료');location.replace('/discuss/list.do');</script>");
+		}
+		else response.sendRedirect("discuss/error");
 	}
 	
 	//게시글  작성 시 이미지 불러오기
