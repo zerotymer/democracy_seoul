@@ -25,8 +25,8 @@
             display: flex;
         }
         .login_form{
-            width: 350px;
-            height: 700px;
+            width: 400px;
+            height: 650px;
             background-color: white;
             margin: auto;
             border-radius: 2em;
@@ -36,7 +36,7 @@
         .image{
             width : 250px;
             height: 100px;
-            margin: 30px 50px 200px 50px;
+            margin: 35px 75px 200px 75px;
             text-align: center;
         }
         .image>img{
@@ -44,21 +44,32 @@
             margin: auto;
         }
         .update{
-            width: 200px;
+            width: 300px;
             height: 150px;
             position: absolute;
-            margin: 115px 140px 0px 140px;
+            margin: 140px 0px 0px 65px;
             color: #8C8C8C;
+            padding : 0px 0px 0px 70px;
         }
         .enter{
             width: 280px;
             height: 280px;
             position: absolute;
-            margin: 250px 0px 50px 60px;
-            padding: 30px 0px 0px 30px;
+            margin: 230px 0px 50px 60px;
+            padding: 10px 0px 0px 20px;
         }
-        .enter>input{
-            
+        fieldset{
+        	text-align: center;
+        }
+        a{
+        	text-decoration:none;
+        	color : white;
+        }
+        a:hover{
+        	color : white;
+        }
+        .button{
+        	text-align: center;
         }
     </style>
 
@@ -71,33 +82,28 @@
             <img src="/resources/images/admin/adminmain_logo.png"> 
             </div>
             <div class="update">
-                <H3>정보수정</H3>
-                	관리자 등급 &nbsp; ${sessionScope.admin.adminGrade} <br>
+                	등급 &nbsp; ${sessionScope.admin.adminGrade = '1' ? "최고 관리자" : "일반 관리자"} <br>
                 	ID &nbsp; ${sessionScope.admin.adminId }<br>
 					이름 &nbsp; ${sessionScope.admin.adminName }<br>
             </div>
             <div class="enter">
-            
-            	<form id="myForm" action="/admin/adminUpdate.do" method="post"> 
-					<fieldset>
-						<H4>이메일 변경</H4>
-						<input type="text" name="email" placeholder="${sessionScope.admin.adminEmail }"/><br>
-						<input type="reset" value="취소"/><input type="submit" value="변경"/>
-					</fieldset>
-				</form>
 				
 				<div id="pass">
 					<fieldset>
-					<H4>비밀번호 변경</H4>
-						<input type="password" name="adminOriginalPass" placeholder="기존 비밀번호"/><br>
-						<input type="password" name="adminNewPass" placeholder="변경 비밀번호"/><br>
-						<input type="password" name="adminNewPass_re" placeholder="변경 비밀번호 재입력"/><br>
-						<input type="reset" value="취소"/><input type="button" id="adminPassChangeBtn" value="변경"/>
+					<H5>비밀번호 변경</H5>
+						<input class="form-control form-control-sm" type="password"  name="adminOriginalPass" placeholder="기존 비밀번호" maxlength="12" ><br>
+						<input class="form-control form-control-sm" type="password"  name="adminNewPass" placeholder="변경 비밀번호" maxlength="12" ><br>
+						<input class="form-control form-control-sm" type="password"  name="adminNewPass_re" placeholder="변경 비밀번호 재입력" maxlength="12" ><br>
+						<button type="reset" class="btn btn-outline-warning col-5 mx-auto">취소</button> <button type="button" id="adminPassChangeBtn" class="btn btn-outline-primary col-5 mx-auto">변경</button>
 					</fieldset>
 				</div>
 		         
-		         <button><a href="/admin/adminLogout.do">로그아웃</a></button><br>
-		         <input type="button" value="탈퇴" id="withDrawBtn"/>
+		         <br>
+			         <div class="button">
+				         <button class="btn btn-primary col-12 mx-auto" type="button"><a href="/admin/adminLogout.do">로그아웃</a></button><br>
+				         <button type="button" id="withDrawBtn" class="btn btn-dark col-12 mx-auto">탈퇴</button>
+				      </div>
+		         </div>
             </div>
         </div>
     </div>
