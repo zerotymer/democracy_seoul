@@ -180,7 +180,7 @@
                     <div class="category">토론</div>
                     <div class="title">${list.discussTitle }</div>
                     <div class="content">내용</div>
-                    <div class="thumnail">
+                    <div class="thumbnail">
                         <img src="${list.discussThumbnailPath }" alt="제목" />
                     </div>
                     <div class="icons">
