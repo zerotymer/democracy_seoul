@@ -136,13 +136,14 @@
         	width: 100px;
             height: 30px;
         }
-        a:not(href){
-        	text-decoration:none;
+        
+        .menu_bar_inner>a{
+        	text-decoration: none;
         	color : white;
         }
-        a:hover{
-        	color : white;
-        }
+       
+       
+        
     </style>
 
 </head>
@@ -221,9 +222,11 @@
                             <c:forEach items="${requestScope.list }" var="n" varStatus="i">
                                 <tr>
                                     <td scope="row">${(i.count) + (requestScope.countResult) }</td>
-                                    <td>
-                                    	<a href="/notice/noticeViewPage.do?noticeNo=${ n.noticeNo }">${n.noticeTitle}</a>
-                                    </td>
+                                    <div class="title">
+	                                    <td>
+	                                    	<a href="/notice/noticeViewPage.do?noticeNo=${ n.noticeNo }">${n.noticeTitle}</a>
+	                                    </td>
+                                    </div>
                                     <td>${n.noticeDate }</td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;${n.noticeDelYN }</td>
                                 </tr>
